@@ -629,14 +629,16 @@ body {
 /* Skills Section con efectos 3D mejorados */
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .skill-card {
     background: white;
-    padding: 2.5rem 2rem;
-    border-radius: 1.25rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 1rem;
     box-shadow: var(--shadow-md);
     text-align: center;
     transition: all var(--transition-slow);
@@ -665,18 +667,18 @@ body {
 }
 
 .skill-card:hover {
-    transform: translateY(-12px) rotateY(5deg) rotateX(5deg);
-    box-shadow: var(--shadow-2xl), var(--shadow-glow);
+    transform: translateY(-8px) rotateY(3deg) rotateX(3deg);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
     border-color: var(--accent-color);
 }
 
 .skill-card i {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     background: var(--accent-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
     transition: transform var(--transition-bounce);
     display: block;
     position: relative;
@@ -684,12 +686,12 @@ body {
 }
 
 .skill-card:hover i {
-    transform: scale(1.2) rotate(360deg);
+    transform: scale(1.15) rotate(360deg);
 }
 
 .skill-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
     color: var(--text-primary);
     font-weight: 700;
     position: relative;
@@ -698,7 +700,8 @@ body {
 
 .skill-card p {
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.5;
+    font-size: 0.9rem;
     position: relative;
     z-index: 1;
 }
@@ -1389,6 +1392,11 @@ body {
     .about-stats {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
     }
 
     .chat-container {
