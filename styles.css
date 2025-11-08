@@ -125,6 +125,7 @@ body {
     gap: 2rem;
 }
 
+
 .nav-links a {
     text-decoration: none;
     color: var(--text-secondary);
