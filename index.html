@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignacio Diago Valeta - Portfolio | Ingeniero Informático | IA y Optimización</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>Portfolio</h1>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#sobre-mi">Sobre Mí</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#chat">Chat IA</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2 class="hero-title">Hola, soy <span class="highlight">Ignacio Diago Valeta</span></h2>
+                <p class="hero-subtitle">Ingeniero Informático | Especialista en IA y Optimización</p>
+                <p class="hero-description">
+                    Estudiante de Ingeniería Informática en la UPV, especializado en Inteligencia Artificial, 
+                    Sistemas Multi-Agente y Optimización. Diseño y construyo sistemas inteligentes que resuelven 
+                    desafíos del mundo real con eficiencia y rigor analítico.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
+                    <a href="#chat" class="btn btn-secondary">Chatear con IA</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="avatar-placeholder">
+                    <img src="images/foto-perfil.jpg" alt="Ignacio Diago Valeta" class="profile-photo" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>';">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section id="sobre-mi" class="section">
+        <div class="container">
+            <h2 class="section-title">Sobre Mí</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Soy un Ingeniero Informático especializado en Inteligencia Artificial y Optimización, 
+                        actualmente estudiante en la Universitat Politècnica de València (UPV). Mi pasión se centra 
+                        en diseñar y construir sistemas inteligentes que resuelvan problemas complejos del mundo real 
+                        utilizando lógica, eficiencia y análisis de datos.
+                    </p>
+                    <p>
+                        Actualmente trabajo como Back End Developer en CEU Educational Group, donde me enfoco en el 
+                        desarrollo con LLM's, Azure, Python y APIs. También tengo experiencia como profesor y tallerista, 
+                        lo que me ha permitido desarrollar sólidas habilidades de comunicación y enseñanza.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>3+</h3>
+                            <p>Años de Experiencia</p>
+                        </div>
+                        <div class="stat">
+                            <h3>12+</h3>
+                            <p>Proyectos en GitHub</p>
+                        </div>
+                        <div class="stat">
+                            <h3>6</h3>
+                            <p>Certificaciones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Habilidades -->
+    <section id="habilidades" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Habilidades</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Inteligencia Artificial</h3>
+                    <p>Machine Learning, Deep Learning, LLM's, Sistemas Multi-Agente</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Python</h3>
+                    <p>Backend, APIs, Azure, Data Science</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Optimización</h3>
+                    <p>Algoritmos de optimización, Análisis de datos, Eficiencia</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Bases de Datos</h3>
+                    <p>SQL, NoSQL, MySQL, SQLite, MongoDB</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-microsoft"></i>
+                    <h3>Azure</h3>
+                    <p>Cloud Computing, Infraestructura, APIs</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Desarrollo</h3>
+                    <p>Git, GitHub, Linux, Docker, R</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="proyectos" class="section">
+        <div class="container">
+            <h2 class="section-title">Proyectos Destacados</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>GPT-CEU</h3>
+                        <p>Chatbot integrado en la infraestructura del CEU. Ayuda a los alumnos a estudiar, 
+                        automatiza trámites, envía recordatorios y más, usando modelos de lenguaje avanzados.</p>
+                        <div class="project-tags">
+                            <span class="tag">LLM's</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Azure</span>
+                        </div>
+                        <a href="https://github.com/iDiagoValeta" target="_blank" class="project-link">Ver en GitHub <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Reconocimiento de Lenguaje de Signos</h3>
+                        <p>Traduce lenguaje de signos a texto usando una webcam en tiempo real, 
+                        mejorando la accesibilidad y comunicación.</p>
+                        <div class="project-tags">
+                            <span class="tag">TensorFlow</span>
+                            <span class="tag">MediaPipe</span>
+                            <span class="tag">Python</span>
+                        </div>
+                        <a href="https://github.com/iDiagoValeta/ASL-Hand-Gesture-Recognition" target="_blank" class="project-link">Ver en GitHub <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Proyectos de Investigación en IA</h3>
+                        <p>Diversos proyectos en Jupyter Notebooks centrados en la aplicación de 
+                        Inteligencia Artificial en la vida real, incluyendo sistemas multi-agente y optimización.</p>
+                        <div class="project-tags">
+                            <span class="tag">IA</span>
+                            <span class="tag">Machine Learning</span>
+                            <span class="tag">Python</span>
+                        </div>
+                        <a href="https://github.com/iDiagoValeta" target="_blank" class="project-link">Ver en GitHub <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Section -->
+    <section id="chat" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Pregúntame Cualquier Cosa</h2>
+            <p class="section-subtitle">Usa el chat de IA para conocer más sobre mi experiencia, proyectos y habilidades</p>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-header-info">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h3>Asistente IA</h3>
+                            <p class="chat-status" id="chatStatus">Listo para chatear</p>
+                        </div>
+                    </div>
+                    <button class="btn-clear" id="clearChat" title="Limpiar chat">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message message-bot">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>¡Hola! Soy un asistente de IA que conoce información sobre este portfolio. ¿Qué te gustaría saber? Puedes preguntarme sobre experiencia, proyectos, habilidades o cualquier otra cosa relacionada.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <input 
+                            type="text" 
+                            id="chatInput" 
+                            class="chat-input" 
+                            placeholder="Escribe tu pregunta aquí..."
+                            autocomplete="off"
+                        >
+                        <button id="sendButton" class="btn-send">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <p class="chat-hint">
+                        <i class="fas fa-info-circle"></i>
+                        Necesitas configurar tu API key de Gemini en el archivo config.js
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="section">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <div class="contact-content">
+                <p class="contact-description">
+                    ¿Interesado en trabajar juntos? ¡No dudes en contactarme!
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:nadiva1243@gmail.com" class="contact-link" aria-label="Enviar email">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ignacio-diago-valeta/" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Perfil de LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Perfil de GitHub">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="tel:+34645987021" class="contact-link" aria-label="Llamar por teléfono">
+                        <i class="fas fa-phone"></i>
+                        <span>Teléfono</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ignacio Diago Valeta. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
+
