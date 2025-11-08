@@ -517,7 +517,7 @@ function initializeEventListeners() {
     }
 }
 
-// Función para inicializar smooth scroll (se ejecuta después de que el DOM esté listo)
+// Función para inicializar smooth scroll mejorado tipo HONOR
 function initializeSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -527,17 +527,87 @@ function initializeSmoothScroll() {
             
             const target = document.querySelector(href);
             if (target) {
+                // Scroll ultra suave con duración personalizada
                 target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
+                
                 // Cerrar menú móvil si está abierto
                 const nav = document.querySelector('.nav');
                 if (nav) {
                     nav.classList.remove('nav-open');
+                    const navToggle = document.getElementById('navToggle');
+                    if (navToggle) {
+                        navToggle.classList.remove('active');
+                    }
+                }
+                
+                // Actualizar estado activo en navegación
+                updateActiveNavLink(href);
+            }
+        });
+    });
+}
+
+// Función para actualizar el enlace activo en la navegación
+function updateActiveNavLink(href) {
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === href) {
+            link.classList.add('active');
+        }
+    });
+}
+
+// Función mejorada para scroll reveal tipo HONOR con crossfade
+function initializeScrollReveal() {
+    // Todas las secciones excepto hero
+    const sections = document.querySelectorAll('.section');
+    
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -10% 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Añadir clase visible con retraso escalonado para elementos hijos
+                entry.target.classList.add('visible');
+                
+                // Animar elementos internos con stagger
+                const children = entry.target.querySelectorAll('.stat, .skill-card, .project-card, .contact-link');
+                children.forEach((child, index) => {
+                    setTimeout(() => {
+                        child.style.opacity = '1';
+                        child.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }
+        });
+    }, observerOptions);
+    
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+    
+    // Observador para actualizar navegación activa según scroll
+    const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                if (id) {
+                    updateActiveNavLink('#' + id);
                 }
             }
         });
+    }, {
+        threshold: 0.5
+    });
+    
+    document.querySelectorAll('section[id]').forEach(section => {
+        navObserver.observe(section);
     });
 }
 
@@ -548,6 +618,7 @@ if (document.readyState === 'loading') {
             initializeEventListeners();
             initializeSmoothScroll();
             initializeScrollReveal();
+            initializeHeaderEffects();
             // Solo hacer focus si hay un hash en la URL que apunte al chat
             if (window.location.hash === '#chat') {
                 chatInput.focus();
@@ -563,6 +634,7 @@ if (document.readyState === 'loading') {
         initializeEventListeners();
         initializeSmoothScroll();
         initializeScrollReveal();
+        initializeHeaderEffects();
         // Solo hacer focus si hay un hash en la URL que apunte al chat
         if (window.location.hash === '#chat') {
             chatInput.focus();
@@ -579,42 +651,40 @@ window.addEventListener('load', () => {
     if (!window.location.hash) {
         window.scrollTo(0, 0);
     }
-    
-    // Inicializar scroll reveal
-    initializeScrollReveal();
-    
-    // Efecto de scroll en el header
-    const header = document.querySelector('.header');
-    if (header) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-    }
 });
 
-// Función para inicializar scroll reveal
-function initializeScrollReveal() {
-    // Excluir la sección hero del scroll reveal
-    const sections = document.querySelectorAll('.section:not(.hero)');
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
+// Función para efectos del header
+function initializeHeaderEffects() {
+    const header = document.querySelector('.header');
+    if (!header) return;
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
+    let lastScroll = 0;
+    let ticking = false;
     
-    sections.forEach(section => {
-        observer.observe(section);
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const currentScroll = window.pageYOffset;
+                
+                // Añadir clase scrolled
+                if (currentScroll > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                // Auto-hide header al hacer scroll hacia abajo
+                if (currentScroll > lastScroll && currentScroll > 100) {
+                    header.classList.add('hide');
+                } else {
+                    header.classList.remove('hide');
+                }
+                
+                lastScroll = currentScroll;
+                ticking = false;
+            });
+            
+            ticking = true;
+        }
     });
 }
-
