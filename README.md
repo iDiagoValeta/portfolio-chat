@@ -1,142 +1,131 @@
-# Portfolio Personal con Chat IA
+# Portfolio Personal con Chat IA (Gemini 2.5 Flash)
 
-Un portfolio personal moderno y elegante con integración de chat usando la API de Gemini de Google, diseñado para que los reclutadores puedan hacer preguntas sobre tu experiencia y habilidades.
+Un portfolio web interactivo, moderno y profesional diseñado para impresionar a reclutadores. Este proyecto no solo muestra tu perfil y proyectos, sino que incluye un **chatbot inteligente** integrado con la API de Google Gemini, capaz de responder preguntas sobre tu experiencia, habilidades y trayectoria.
 
-## 🚀 Características
-
-- **Diseño Moderno**: Interfaz limpia y profesional con animaciones suaves
-- **Responsive**: Se adapta perfectamente a dispositivos móviles, tablets y escritorio
-- **Chat con IA**: Integración con Google Gemini API para responder preguntas sobre tu perfil
-- **Secciones Completas**: Sobre mí, habilidades, proyectos y contacto
-- **Fácil Personalización**: Todo el contenido es fácil de modificar
-
-## 📋 Requisitos Previos
-
-- Python 3.x (para el servidor proxy)
-- Un navegador web moderno
-- Una API key de Google Gemini (gratuita)
-
-## 🔧 Configuración
-
-### 1. Obtener API Key de Gemini
-
-1. Ve a [Google AI Studio](https://makersuite.google.com/app/apikey)
-2. Inicia sesión con tu cuenta de Google
-3. Haz clic en "Create API Key"
-4. Copia tu API key
-
-### 2. Configurar el Proyecto
-
-1. Abre el archivo `config.js`
-2. Reemplaza `'TU_API_KEY_AQUI'` con tu API key real:
-
-```javascript
-export const GEMINI_API_KEY = 'tu-api-key-aqui';
-```
-
-3. Personaliza la información en `PORTFOLIO_INFO` con tus datos reales:
-   - Nombre
-   - Título profesional
-   - Experiencia
-   - Habilidades
-   - Proyectos destacados
-   - Cualquier otra información relevante
-
-### 3. Personalizar el Portfolio
-
-Edita el archivo `index.html` para personalizar:
-- Tu nombre y título
-- Descripción personal
-- Estadísticas (años de experiencia, proyectos, etc.)
-- Habilidades y tecnologías
-- Proyectos destacados
-- Enlaces de contacto (email, LinkedIn, GitHub, etc.)
-
-## 🎨 Personalización de Estilos
-
-El archivo `styles.css` contiene todas las variables CSS que puedes modificar fácilmente:
-
-```css
-:root {
-    --primary-color: #6366f1;
-    --secondary-color: #8b5cf6;
-    /* ... más variables */
-}
-```
-
-## 🚀 Uso
-
-### Servidor Proxy Python (Recomendado y Requerido)
-
-El proyecto incluye un servidor proxy en Python que evita problemas de CORS y mantiene tu API key segura. **Este es el método recomendado y necesario para que el chat funcione correctamente.**
-
-1. **Inicia el servidor proxy:**
-```bash
-python server.py
-```
-
-O si quieres usar un puerto diferente:
-```bash
-python server.py 8080
-```
-
-2. **Abre tu navegador** en `http://localhost:8000` (o el puerto que hayas especificado)
-
-3. **El servidor:**
-   - Sirve los archivos estáticos (HTML, CSS, JS)
-   - Actúa como proxy para las llamadas a la API de Gemini
-   - Lee la API key automáticamente de `config.js`
-   - Evita problemas de CORS
-
-### Nota sobre CORS
-
-Si intentas usar un servidor HTTP simple (como `python -m http.server`), el chat **no funcionará** debido a las políticas CORS de la API de Gemini. El servidor proxy (`server.py`) es necesario para que el chat funcione correctamente.
-
-## 📝 Estructura del Proyecto
-
-```
-portfolio-chat/
-│
-├── index.html          # Página principal del portfolio
-├── styles.css          # Estilos y diseño
-├── app.js              # Lógica del chat y funcionalidades
-├── config.js           # Configuración de API key e información personal
-├── server.py           # Servidor proxy Python (requerido para el chat)
-└── README.md           # Este archivo
-```
-
-## 🔒 Seguridad
-
-⚠️ **IMPORTANTE**: No subas tu API key a repositorios públicos.
-
-- El archivo `config.js` contiene tu API key
-- Si vas a subir el proyecto a GitHub, agrega `config.js` al `.gitignore`
-- El servidor proxy (`server.py`) mantiene la API key en el servidor, no se expone directamente al cliente
-- En producción, considera usar variables de entorno o un backend más robusto para manejar la API key de forma segura
-
-## 🎯 Próximos Pasos
-
-- [ ] Personalizar toda la información con tus datos reales
-- [ ] Agregar tus proyectos reales con imágenes y enlaces
-- [ ] Configurar tus enlaces de redes sociales
-- [ ] Ajustar los colores y estilos según tu preferencia
-- [ ] Agregar más secciones si lo deseas (certificaciones, educación, etc.)
-
-## 📚 Recursos
-
-- [Documentación de Gemini API](https://ai.google.dev/docs)
-- [Google AI Studio](https://makersuite.google.com/)
-- [Font Awesome Icons](https://fontawesome.com/icons)
-
-## 🤝 Contribuciones
-
-Este es un proyecto personal, pero siéntete libre de usarlo como base para tu propio portfolio.
-
-## 📄 Licencia
-
-Este proyecto es de código abierto y está disponible para uso personal y comercial.
+El proyecto está construido con un diseño *premium* que incluye animaciones avanzadas, efectos de *glassmorphism* y una arquitectura segura que protege tu API key.
 
 ---
 
-¡Buena suerte con tu portfolio! 🎉
+## 🚀 Características Principales
 
+Este proyecto va más allá de un portfolio estático. Estas son sus características clave:
+
+* **Chat Interactivo con IA:** Integración directa con **Google Gemini** (usando el modelo `gemini-2.5-flash-preview-09-2025`). El chat se alimenta de un contexto detallado que proporcionas en `config.js`, permitiéndole actuar como tu asistente personal.
+* **Backend Proxy Seguro:** Incluye un servidor proxy en **Python** (`server.py`) que gestiona todas las llamadas a la API de Gemini. Este servidor lee la API key desde `config.js` en el *servidor*, evitando que se exponga públicamente en el código del navegador.
+* **Diseño Premium Moderno:** Interfaz limpia y profesional con una paleta de colores moderna, tipografía cuidada, efectos de *glassmorphism* en el header y el chat, y gradientes animados.
+* **Animaciones Avanzadas:**
+    * Efectos de *scroll reveal* que animan las secciones a medida que aparecen.
+    * Transiciones "ultra-suaves" para la navegación y efectos *hover*.
+    * Header inteligente que se oculta al hacer scroll hacia abajo y reaparece al subir.
+* **Renderizado de Markdown:** El chat soporta respuestas en Markdown (negritas, cursivas, listas, tablas) y las renderiza automáticamente como HTML para una lectura fácil.
+* **Fácilmente Personalizable:** Toda la información personal, el contexto de la IA y los enlaces se centralizan en `config.js` y `index.html` para una edición rápida.
+* **Totalmente Responsive:** Diseño adaptativo que funciona perfectamente en escritorio, tablets y dispositivos móviles.
+
+---
+
+## 🏗️ Estructura del Proyecto
+
+portfolio-chat/ 
+│
+├── index.html # (HTML) La estructura de todas las secciones del portfolio 
+├── styles.css # (CSS) Estilos, animaciones, diseño responsive y variables de color 
+├── app.js # (JS) Lógica del chat, renderizado de markdown, animaciones de scroll 
+├── config.js # (JS) ¡Archivo crítico! Contiene tu API key y el prompt/contexto de la IA 
+├── server.py # (Python) Servidor proxy para servir archivos y proteger la API key 
+├── images/ │ └── foto-perfil.jpg # (Imagen) Tu foto de perfil 
+│ └── README.md # (Markdown) Este archivo
+
+---
+
+## 🔧 Configuración (Paso a Paso)
+
+Sigue estos 4 pasos para tener el portfolio funcionando con tu información.
+
+### 1. Obtener API Key de Gemini
+1.  Ve a [Google AI Studio](https://makersuite.google.com/app/apikey).
+2.  Inicia sesión con tu cuenta de Google.
+3.  Haz clic en "**Create API Key**".
+4.  Copia tu API key.
+
+### 2. Configurar la API Key
+1.  Abre el archivo `config.js`.
+2.  Reemplaza `'TU_API_KEY_AQUI'` con tu API key real:
+    ```javascript
+    export const GEMINI_API_KEY = 'AIzaSy...tu-key-aqui';
+    ```
+
+### 3. Personalizar el Contexto de la IA (¡El paso más importante!)
+El chatbot no sabe nada de ti por defecto. Debes "enseñarle" dándole un contexto.
+
+1.  En el mismo archivo `config.js`, edita la constante `PORTFOLIO_INFO`.
+2.  Este es el "cerebro" de tu asistente. Rellena **con el mayor detalle posible** tu resumen profesional, experiencia, educación, habilidades, proyectos, etc. Cuanto mejor sea este contexto, mejores serán las respuestas del chat.
+
+### 4. Personalizar el Contenido Web
+1.  Abre `index.html`.
+2.  Actualiza el contenido estático en las diferentes secciones:
+    * `#inicio`: Tu nombre y título.
+    * `#sobre-mi`: Tu descripción y estadísticas.
+    * `#habilidades`: Tus habilidades principales.
+    * `#proyectos`: Tus proyectos destacados (actualiza los enlaces a GitHub, etc.).
+    * `#contacto`: Tus enlaces a Email, LinkedIn, GitHub y Teléfono.
+3.  Reemplaza `images/foto-perfil.jpg` con tu propia foto.
+
+---
+
+## 🚀 Uso (Cómo ejecutar el proyecto)
+
+Este proyecto **no funcionará** simplemente abriendo `index.html` en tu navegador. Requiere el servidor proxy de Python para gestionar las llamadas a la API de forma segura y evitar problemas de CORS.
+
+1.  Asegúrate de tener **Python 3.x** instalado.
+2.  Abre tu terminal o línea de comandos.
+3.  Navega hasta la carpeta del proyecto.
+4.  Ejecuta el servidor:
+    ```bash
+    python server.py
+    ```
+5.  Si deseas usar un puerto diferente (por defecto es 8000), puedes especificarlo:
+    ```bash
+    python server.py 8080
+    ```
+6.  ¡Abre tu navegador y ve a `http://localhost:8000`! El chat debería estar funcionando.
+
+---
+
+## 🎨 Personalización de Estilos
+
+Puedes cambiar fácilmente la paleta de colores completa del sitio.
+
+1.  Abre `styles.css`.
+2.  Modifica las **variables CSS** dentro del bloque `:root` al principio del archivo.
+    ```css
+    :root {
+        --primary-color: #0f172a; /* Color de fondo principal (oscuro) */
+        --accent-color: #3b82f6;  /* Color de acento (azul) */
+        --text-primary: #0f172a; /* Texto principal sobre fondos claros */
+        /* ...y más variables */
+    }
+    ```
+
+---
+
+## 🔒 Seguridad ⚠️
+
+**¡IMPORTANTE!** El archivo `config.js` contiene tu API key secreta.
+
+* **NUNCA** subas este archivo a un repositorio público (como GitHub) con tu API key visible.
+* El servidor `server.py` está diseñado para leer esta clave en el backend, por lo que nunca se expone al navegador del usuario.
+* Si vas a usar Git, **asegúrate de añadir `config.js` a tu archivo `.gitignore`** para evitar publicarla por accidente.
+
+.gitignore
+config.js
+
+---
+
+## 📚 Tecnologías Utilizadas
+
+* **Google Gemini API:** Para la funcionalidad del chatbot.
+* **Python:** Para el servidor proxy de backend (`http.server`).
+* **HTML5:** Para la estructura semántica.
+* **CSS3:** Para estilos, animaciones, variables CSS y diseño responsive.
+* **JavaScript (ES6+):** Para la lógica del chat (Fetch API, async/await), manipulación del DOM y animaciones de scroll.
+* **Font Awesome:** Para los iconos.
