@@ -304,29 +304,20 @@ async function sendMessageToGemini(userMessage) {
         // Construir el contenido para la API
         // Si es el primer mensaje, incluir el contexto del portfolio
         // Si no, usar el historial de conversación
-        let contents = [];
-        
-        if (conversationHistory.length === 1) {
-            // Primer mensaje: incluir el contexto del portfolio
-            const systemPrompt = PORTFOLIO_INFO + '\n\nINSTRUCCIONES IMPORTANTES:\n' +
-                '- NO te presentes cada vez que respondas. Solo preséntate en el PRIMER mensaje.\n' +
-                '- Mantén una conversación fluida y natural.\n' +
-                '- Responde directamente a las preguntas sin repetir presentaciones.\n' +
-                '- Usa formato markdown para mejorar la legibilidad (negritas, listas, etc.).\n\n' +
-                'Ahora responde la siguiente pregunta del reclutador:';
-            
-            contents.push({
+        const contents = [
+            // 1. El prompt del sistema (las instrucciones de config.js)
+            {
                 role: 'user',
-                parts: [{ text: systemPrompt + '\n\n' + userMessage }]
-            });
-        } else {
-            // Mensajes siguientes: usar el historial completo
-            // Convertir el historial al formato de la API
-            contents = conversationHistory.map(msg => ({
-                role: msg.role,
-                parts: msg.parts
-            }));
-        }
+                parts: [{ text: PORTFOLIO_INFO }]
+            },
+            // 2. Una respuesta ficticia para que el modelo "active" su rol
+            {
+                role: 'model',
+                parts: [{ text: 'Entendido. Estoy listo para actuar como el asistente de Ignacio.' }]
+            },
+            // 3. El historial de conversación real
+            ...conversationHistory
+        ];
         
         // Preparar el contenido para la API
         const requestBody = {
@@ -335,7 +326,7 @@ async function sendMessageToGemini(userMessage) {
                 temperature: 0.7,
                 topK: 40,
                 topP: 0.95,
-                maxOutputTokens: 2048,
+                maxOutputTokens: 1024,
             }
         };
         
