@@ -10,21 +10,15 @@ import urllib.request
 import urllib.parse
 import os
 from pathlib import Path
+import os
 
-# Leer la API key del archivo config.js
+# Obtener la API key desde una variable de entorno
 def get_api_key():
-    config_path = Path(__file__).parent / 'config.js'
-    try:
-        with open(config_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-            # Buscar la API key en el archivo
-            import re
-            match = re.search(r"GEMINI_API_KEY\s*=\s*['\"]([^'\"]+)['\"]", content)
-            if match:
-                return match.group(1)
-    except Exception as e:
-        print(f"Error leyendo config.js: {e}")
-    return None
+    """Lee la API key desde una variable de entorno"""
+    api_key = os.environ.get('GEMINI_API_KEY')
+    if not api_key:
+        print("Error: La variable de entorno GEMINI_API_KEY no está configurada.")
+    return api_key
 
 API_KEY = get_api_key()
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent"
