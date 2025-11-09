@@ -2,7 +2,7 @@
 // IMPORTANTE: Obtén tu API key en https://makersuite.google.com/app/apikey
 // y reemplaza 'TU_API_KEY_AQUI' con tu clave real
 
-export const GEMINI_API_KEY = 'AIzaSyCH9Q0SjBEN5w4iBYKHvHFXSOY5yH_yI5w';
+// export const GEMINI_API_KEY = '';
 
 // Información sobre ti para el contexto del chat
 // Personaliza esta información según tus datos reales
