@@ -25,17 +25,17 @@ Este proyecto va más allá de un portfolio estático. Estas son sus caracterís
 
 ## 🏗️ Estructura del Proyecto
 
-portfolio-chat/
-│
-├── index.html     # (HTML) La estructura de todas las secciones del portfolio
-├── styles.css     # (CSS) Estilos, animaciones, diseño responsive y variables de color
-├── app.js         # (JS) Lógica del chat, renderizado de markdown, animaciones de scroll
-├── config.js      # (JS) ¡Archivo crítico! Contiene el prompt/contexto de la IA (La API key YA NO se guarda aquí)
-├── server.py      # (Python) Servidor proxy para servir archivos y proteger la API key
-├── images/
-│   └── foto-perfil.jpg # (Imagen) Tu foto de perfil
-│
-└── README.md      # (Markdown) Este archivo
+portfolio-chat/   
+│   
+├── index.html     # (HTML) La estructura de todas las secciones del portfolio   
+├── styles.css     # (CSS) Estilos, animaciones, diseño responsive y variables de color   
+├── app.js         # (JS) Lógica del chat, renderizado de markdown, animaciones de scroll   
+├── config.js      # (JS) ¡Archivo crítico! Contiene el prompt/contexto de la IA (La API key YA NO se guarda aquí)   
+├── server.py      # (Python) Servidor proxy para servir archivos y proteger la API key   
+├── images/   
+│   └── foto-perfil.jpg # (Imagen) Tu foto de perfil   
+│   
+└── README.md      # (Markdown) Este archivo   
 
 ---
 
