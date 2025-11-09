@@ -331,7 +331,7 @@ async function sendMessageToGemini(userMessage) {
         };
         
         // Apuntar directamente al Web Service de Render
-        let apiPath = 'https://portfolio-web-636o.onrender.com/api/gemini';
+        let apiPath = 'https://portfolio-logic.onrender.com';
         
         const response = await fetch(
             apiPath,
