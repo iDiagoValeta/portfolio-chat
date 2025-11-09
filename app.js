@@ -330,8 +330,16 @@ async function sendMessageToGemini(userMessage) {
             }
         };
         
-        // Apuntar directamente al Web Service de Render
-        let apiPath = 'https://portfolio-logic.onrender.com';
+        // Llamar a la API de Gemini a través del servidor proxy (evita problemas de CORS)
+        // El servidor proxy está en server.py y lee la API key de config.js
+        // Usar ruta relativa para que funcione desde cualquier subdirectorio
+        let apiPath = '/api/gemini';
+        
+        // Si estamos en un subdirectorio, ajustar la ruta
+        const pathname = window.location.pathname;
+        if (pathname.includes('/portfolio-chat/')) {
+            apiPath = '/portfolio-chat/api/gemini';
+        }
         
         const response = await fetch(
             apiPath,
