@@ -11,7 +11,7 @@ El proyecto está construido con un diseño *premium* que incluye animaciones av
 Este proyecto va más allá de un portfolio estático. Estas son sus características clave:
 
 * **Chat Interactivo con IA:** Integración directa con **Google Gemini** (usando el modelo `gemini-2.5-flash-preview-09-2025`). El chat se alimenta de un contexto detallado que proporcionas en `config.js`, permitiéndole actuar como tu asistente personal.
-* **Backend Proxy Seguro:** Incluye un servidor proxy en **Python** (`server.py`) que gestiona todas las llamadas a la API de Gemini. Este servidor lee la API key desde `config.js` en el *servidor*, evitando que se exponga públicamente en el código del navegador.
+* **Backend Proxy Seguro:** Incluye un servidor proxy en **Python** (`server.py`) que gestiona todas las llamadas a la API de Gemini. Este servidor lee la API key de forma segura desde una **variable de entorno** del sistema, evitando que se exponga públicamente en el código.
 * **Diseño Premium Moderno:** Interfaz limpia y profesional con una paleta de colores moderna, tipografía cuidada, efectos de *glassmorphism* en el header y el chat, y gradientes animados.
 * **Animaciones Avanzadas:**
     * Efectos de *scroll reveal* que animan las secciones a medida que aparecen.
@@ -25,23 +25,17 @@ Este proyecto va más allá de un portfolio estático. Estas son sus caracterís
 
 ## 🏗️ Estructura del Proyecto
 
-portfolio-chat/ 
-
+portfolio-chat/
 │
-
-├── index.html # (HTML) La estructura de todas las secciones del portfolio 
-
-├── styles.css # (CSS) Estilos, animaciones, diseño responsive y variables de color 
-
-├── app.js # (JS) Lógica del chat, renderizado de markdown, animaciones de scroll 
-
-├── config.js # (JS) ¡Archivo crítico! Contiene tu API key y el prompt/contexto de la IA 
-
-├── server.py # (Python) Servidor proxy para servir archivos y proteger la API key 
-
-├── images/ │└── foto-perfil.jpg # (Imagen) Tu foto de perfil 
-
-│└── README.md # (Markdown) Este archivo
+├── index.html     # (HTML) La estructura de todas las secciones del portfolio
+├── styles.css     # (CSS) Estilos, animaciones, diseño responsive y variables de color
+├── app.js         # (JS) Lógica del chat, renderizado de markdown, animaciones de scroll
+├── config.js      # (JS) ¡Archivo crítico! Contiene el prompt/contexto de la IA (La API key YA NO se guarda aquí)
+├── server.py      # (Python) Servidor proxy para servir archivos y proteger la API key
+├── images/
+│   └── foto-perfil.jpg # (Imagen) Tu foto de perfil
+│
+└── README.md      # (Markdown) Este archivo
 
 ---
 
@@ -55,18 +49,19 @@ Sigue estos 4 pasos para tener el portfolio funcionando con tu información.
 3.  Haz clic en "**Create API Key**".
 4.  Copia tu API key.
 
-### 2. Configurar la API Key
-1.  Abre el archivo `config.js`.
-2.  Reemplaza `'TU_API_KEY_AQUI'` con tu API key real:
-    ```javascript
-    export const GEMINI_API_KEY = 'AIzaSy...tu-key-aqui';
-    ```
+### 2. Configurar la API Key (¡Nuevo método!)
+Para proteger tu clave, el servidor `server.py` la lee desde una **variable de entorno** llamada `GEMINI_API_KEY`.
+
+**NO** debes pegar tu clave en `config.js`. El proyecto está diseñado para no hacerlo.
+
+La forma de configurar la variable de entorno se explica en el siguiente paso de "Uso", ya que debes configurarla cada vez que inicies el servidor (o configurarla permanentemente en tu sistema).
 
 ### 3. Personalizar el Contexto de la IA (¡El paso más importante!)
 El chatbot no sabe nada de ti por defecto. Debes "enseñarle" dándole un contexto.
 
-1.  En el mismo archivo `config.js`, edita la constante `PORTFOLIO_INFO`.
-2.  Este es el "cerebro" de tu asistente. Rellena **con el mayor detalle posible** tu resumen profesional, experiencia, educación, habilidades, proyectos, etc. Cuanto mejor sea este contexto, mejores serán las respuestas del chat.
+1.  Abre el archivo `config.js`.
+2.  Edita la constante `PORTFOLIO_INFO`.
+3.  Este es el "cerebro" de tu asistente. Rellena **con el mayor detalle posible** tu resumen profesional, experiencia, educación, habilidades, proyectos, etc. Cuanto mejor sea este contexto, mejores serán las respuestas del chat.
 
 ### 4. Personalizar el Contenido Web
 1.  Abre `index.html`.
@@ -82,17 +77,34 @@ El chatbot no sabe nada de ti por defecto. Debes "enseñarle" dándole un contex
 
 ## 🚀 Uso (Cómo ejecutar el proyecto)
 
-Este proyecto **no funcionará** simplemente abriendo `index.html` en tu navegador. Requiere el servidor proxy de Python para gestionar las llamadas a la API de forma segura y evitar problemas de CORS.
+Este proyecto **no funcionará** simplemente abriendo `index.html` en tu navegador. Requiere el servidor proxy de Python (`server.py`) para gestionar las llamadas a la API de forma segura y evitar problemas de CORS.
 
 1.  Asegúrate de tener **Python 3.x** instalado.
 2.  Abre tu terminal o línea de comandos.
 3.  Navega hasta la carpeta del proyecto.
-4.  Ejecuta el servidor:
+4.  **Configura la variable de entorno y ejecuta el servidor:**
+
+    **En macOS / Linux:**
     ```bash
+    export GEMINI_API_KEY='TU_API_KEY_AQUI'
+    python server.py
+    ```
+
+    **En Windows (CMD):**
+    ```bash
+    set GEMINI_API_KEY=TU_API_KEY_AQUI
+    python server.py
+    ```
+
+    **En Windows (PowerShell):**
+    ```bash
+    $env:GEMINI_API_KEY='TU_API_KEY_AQUI'
     python server.py
     ```
 5.  Si deseas usar un puerto diferente (por defecto es 8000), puedes especificarlo:
     ```bash
+    # Ejemplo en macOS/Linux
+    export GEMINI_API_KEY='TU_API_KEY_AQUI'
     python server.py 8080
     ```
 6.  ¡Abre tu navegador y ve a `http://localhost:8000`! El chat debería estar funcionando.
@@ -118,14 +130,11 @@ Puedes cambiar fácilmente la paleta de colores completa del sitio.
 
 ## 🔒 Seguridad ⚠️
 
-**¡IMPORTANTE!** El archivo `config.js` contiene tu API key secreta.
+**¡IMPORTANTE!** Gracias al uso de variables de entorno, tu API key secreta ya no se escribe en ningún archivo del proyecto.
 
-* **NUNCA** subas este archivo a un repositorio público (como GitHub) con tu API key visible.
-* El servidor `server.py` está diseñado para leer esta clave en el backend, por lo que nunca se expone al navegador del usuario.
-* Si vas a usar Git, **asegúrate de añadir `config.js` a tu archivo `.gitignore`** para evitar publicarla por accidente.
-
-.gitignore
-config.js
+* El servidor `server.py` la lee directamente de las variables de entorno de tu sistema.
+* Esto significa que **es seguro subir `config.js` a un repositorio público (como GitHub)**, ya que ahora solo contiene el texto de tu portfolio (`PORTFOLIO_INFO`) y no tu clave secreta.
+* **NUNCA** escribas tu API key directamente en `server.py` o cualquier otro archivo que vayas a subir a un repositorio.
 
 ---
 
