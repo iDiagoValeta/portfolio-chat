@@ -120,12 +120,14 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
             # Si hay algún error, simplemente no loguear
             pass
 
-def run_server(port=8000):
-    server_address = ('', port)
+def run_server(port=None):
+    if port is None:
+        port = int(os.environ.get('PORT', 8000))
+    
+    server_address = ('0.0.0.0', port)  # Escuchar en todas las interfaces
     httpd = HTTPServer(server_address, CORSRequestHandler)
-    print(f"Servidor iniciado en http://localhost:{port}")
-    print(f"API Key configurada: {'Sí' if API_KEY else 'No (verifica config.js)'}")
-    print("Presiona Ctrl+C para detener el servidor")
+    print(f"Servidor iniciado en puerto {port}")
+    print(f"API Key configurada: {'Sí' if API_KEY else 'No'}")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
@@ -133,7 +135,6 @@ def run_server(port=8000):
         httpd.shutdown()
 
 if __name__ == '__main__':
-    import sys
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 8000
+    port = int(os.environ.get('PORT', 8000))
     run_server(port)
 
