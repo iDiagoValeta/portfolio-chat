@@ -1,9 +1,3 @@
-// Configuración de la API de Gemini
-// IMPORTANTE: Obtén tu API key en https://makersuite.google.com/app/apikey
-// y reemplaza 'TU_API_KEY_AQUI' con tu clave real
-
-// export const GEMINI_API_KEY = '';
-
 // Información sobre ti para el contexto del chat
 // Personaliza esta información según tus datos reales
 export const PORTFOLIO_INFO = `
