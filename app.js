@@ -1,4 +1,4 @@
-import { GEMINI_API_KEY, PORTFOLIO_INFO } from './config.js';
+import { PORTFOLIO_INFO } from './config.js';
 
 // Estado del chat
 let isProcessing = false;
@@ -21,13 +21,10 @@ function initializeElements() {
         return false;
     }
     
-    // Verificar si la API key está configurada
-    if (GEMINI_API_KEY === 'TU_API_KEY_AQUI' || !GEMINI_API_KEY) {
-        chatStatus.textContent = '⚠️ API Key no configurada';
-        chatStatus.style.color = '#fbbf24';
-        sendButton.disabled = true;
-        chatInput.placeholder = 'Configura tu API key en config.js primero';
-    }
+    // [CAMBIO APLICADO]
+    // Se eliminó el bloque que verificaba GEMINI_API_KEY en el cliente.
+    // El chat está listo para usarse, asumiendo que el servidor proxy
+    // tiene la clave API configurada.
     
     return true;
 }
@@ -333,13 +330,11 @@ async function sendMessageToGemini(userMessage) {
         // Llamar a la API de Gemini a través del servidor proxy (evita problemas de CORS)
         // El servidor proxy está en server.py y lee la API key de config.js
         // Usar ruta relativa para que funcione desde cualquier subdirectorio
-        let apiPath = '/api/gemini';
         
-        // Si estamos en un subdirectorio, ajustar la ruta
-        const pathname = window.location.pathname;
-        if (pathname.includes('/portfolio-chat/')) {
-            apiPath = '/portfolio-chat/api/gemini';
-        }
+        // [CAMBIO APLICADO]
+        // Ruta de API simplificada. El servidor python (server.py)
+        // ya maneja las rutas '/api/gemini' y '/portfolio-chat/api/gemini'.
+        const apiPath = '/api/gemini';
         
         const response = await fetch(
             apiPath,
@@ -424,10 +419,14 @@ async function handleSendMessage() {
         return;
     }
     
+    // [CAMBIO APLICADO]
+    // Se eliminó la comprobación de la API key en el cliente.
+    /*
     if (GEMINI_API_KEY === 'TU_API_KEY_AQUI' || !GEMINI_API_KEY) {
         addMessage('Por favor, configura tu API key de Gemini en el archivo config.js primero.', false);
         return;
     }
+    */
     
     // Agregar mensaje del usuario
     addMessage(message, true);
