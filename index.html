@@ -3,29 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ignacio Diago Valeta</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Ignacio Diago Valeta - Ingeniero Informático | Especialista en IA y Optimización</title>
+    <meta name="description" content="Portfolio de Ignacio Diago Valeta, Ingeniero Informático especializado en Inteligencia Artificial, Optimización y Back-End Development. Experiencia en Azure, Python, LLMs y sistemas escalables.">
+    <meta name="keywords" content="Ingeniero Informático, Inteligencia Artificial, IA, Machine Learning, Python, Azure, Back-End Developer, Optimización, Portfolio">
+    <meta name="author" content="Ignacio Diago Valeta">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://idiagovaleta.github.io/portfolio-chat/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://idiagovaleta.github.io/portfolio-chat/">
+    <meta property="og:title" content="Ignacio Diago Valeta - Ingeniero Informático | Especialista en IA">
+    <meta property="og:description" content="Portfolio interactivo con chat IA. Ingeniero Informático especializado en Inteligencia Artificial, Optimización y Back-End Development.">
+    <meta property="og:image" content="https://idiagovaleta.github.io/portfolio-chat/images/foto-perfil.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://idiagovaleta.github.io/portfolio-chat/">
+    <meta property="twitter:title" content="Ignacio Diago Valeta - Ingeniero Informático | Especialista en IA">
+    <meta property="twitter:description" content="Portfolio interactivo con chat IA. Ingeniero Informático especializado en Inteligencia Artificial, Optimización y Back-End Development.">
+    <meta property="twitter:image" content="https://idiagovaleta.github.io/portfolio-chat/images/foto-perfil.jpg">
+    
+    <!-- Preload de fuentes críticas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ignacio Diago Valeta",
+        "jobTitle": "Ingeniero Informático | Especialista en IA y Optimización | Back-End Developer",
+        "url": "https://idiagovaleta.github.io/portfolio-chat/",
+        "sameAs": [
+            "https://github.com/iDiagoValeta",
+            "https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Vinalesa",
+            "addressRegion": "Comunidad Valenciana",
+            "addressCountry": "ES"
+        },
+        "email": "nadiva1243@gmail.com",
+        "telephone": "+34645987021"
+    }
+    </script>
 </head>
 <body>
+    <!-- Indicador de progreso de scroll -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
     <header class="header">
         <nav class="nav">
             <div class="nav-brand">
                 <h1>Portfolio Interactivo</h1>
             </div>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#sobre-mi">Sobre Mí</a></li>
-                <li><a href="#habilidades">Habilidades</a></li>
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#chat">Gemini 2.5 Flash</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+            <div class="nav-actions">
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Activar modo oscuro" title="Cambiar tema">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <ul class="nav-links" id="navLinks" role="menubar">
+                <li role="none"><a href="#inicio" role="menuitem">Inicio</a></li>
+                <li role="none"><a href="#sobre-mi" role="menuitem">Sobre Mí</a></li>
+                <li role="none"><a href="#habilidades" role="menuitem">Habilidades</a></li>
+                <li role="none"><a href="#proyectos" role="menuitem">Proyectos</a></li>
+                <li role="none"><a href="#chat" role="menuitem">Gemini 2.5 Flash</a></li>
+                <li role="none"><a href="#contacto" role="menuitem">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -33,10 +90,10 @@
     <section id="inicio" class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <h2 class="hero-title">Hola, soy <span class="highlight">Nacho</span></h2>
-                <p class="hero-subtitle">Ingeniero Informático centrado en IA y Optimización</p>
+                <h2 class="hero-title">Hola, soy <span class="highlight">Ignacio</span></h2>
+                <p class="hero-subtitle">Ingeniero Informático | Especialista en IA y Optimización | Back-End Developer</p>
                 <p class="hero-description">
-                    He creado esta página web para mostrar mi experiencia, habilidades y proyectos de una manera innovadora.
+                    Especializado en integración de LLMs en entornos empresariales, desarrollo backend escalable y soluciones de inteligencia artificial. Combino excelencia técnica con experiencia práctica en Azure, Python y arquitecturas cloud modernas.
                 </p>
                 <div class="hero-buttons">
                     <a href="#proyectos" class="btn btn-primary">Proyectos</a>
@@ -45,7 +102,7 @@
             </div>
             <div class="hero-image">
                 <div class="avatar-placeholder">
-                    <img src="images/foto-perfil.jpg" alt="Ignacio Diago Valeta" class="profile-photo" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>';">
+                    <img src="images/foto-perfil.jpg" alt="Ignacio Diago Valeta - Ingeniero Informático especializado en IA y Optimización" class="profile-photo" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>';">
                 </div>
             </div>
         </div>
@@ -57,13 +114,14 @@
             <div class="about-content">
                 <div class="about-text">
                     <p>
-                        Soy Ingeniero Informático estudiante en la Universitat Politècnica de València (UPV), especializado en Computación.
-                        Me apasiona la Inteligencia Artificial, los Sistemas Multi-Agente, la Optimización y el Análisis de Datos.
+                        Ingeniero Informático con formación en la Universitat Politècnica de València (UPV), especializado en Inteligencia Artificial y Optimización. 
+                        Mi trayectoria combina rigor académico con experiencia práctica temprana, desarrollando competencias excepcionales en gestión del tiempo, 
+                        priorización estratégica y ejecución bajo presión.
                     </p>
                     <p>
-                        Soy una persona proactiva, analítica y con gran capacidad de aprendizaje. Actualmente trabajo como Back End Developer en CEU Educational Group, 
-                        enfocándome en el desarrollo con LLM's, Azure y Python, y busco activamente oportunidades en el sector tecnológico 
-                        para seguir desarrollándome y aportar valor.
+                        Actualmente trabajo como Back-End Developer en CEU Educational Group, especializándome en la integración de LLMs en sistemas empresariales, 
+                        desarrollo de infraestructura backend robusta y escalable con Python y Azure. Mi portfolio incluye 15+ proyectos activos en GitHub, 
+                        desde soluciones en producción hasta investigación académica, demostrando un compromiso constante con el aprendizaje y la mejora continua.
                     </p>
                     <div class="about-stats">
                         <div class="stat">
@@ -72,7 +130,7 @@
                         </div>
                         <div class="stat">
                             <h3>15+</h3>
-                            <p>Proyectos en GitHub</p>
+                            <p>Repositorios en GitHub</p>
                         </div>
                         <div class="stat">
                             <h3>7+</h3>
@@ -132,12 +190,14 @@
                     </div>
                     <div class="project-content">
                         <h3>GPT-CEU</h3>
-                        <p>Chatbot integrado en la infraestructura del CEU. Ayuda a los alumnos a estudiar, 
-                        automatiza trámites, envía recordatorios y más, usando modelos de lenguaje avanzados.</p>
+                        <p>Sistema de inteligencia artificial integrado en infraestructura educativa del CEU Educational Group. 
+                        Automatiza procesos administrativos, proporciona asistencia académica personalizada mediante LLMs y optimiza 
+                        flujos de trabajo educativos. Proyecto en producción activa.</p>
                         <div class="project-tags">
                             <span class="tag">LLM's</span>
                             <span class="tag">Python</span>
                             <span class="tag">Azure</span>
+                            <span class="tag">APIs RESTful</span>
                         </div>
                         <a href="https://medios.uchceu.es/actualidad-ceu/se-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceuse-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceu/" target="_blank" class="project-link">Ver en la Web <i class="fas fa-arrow-right"></i></a>
                     </div>
@@ -148,12 +208,14 @@
                     </div>
                     <div class="project-content">
                         <h3>Reconocimiento de Lenguaje de Signos</h3>
-                        <p>Traduce lenguaje de signos a texto usando una webcam en tiempo real, 
-                        mejorando la accesibilidad y comunicación.</p>
+                        <p>Sistema de traducción automática de lenguaje de signos americano (ASL) a texto mediante visión por computador. 
+                        Procesamiento de video en tiempo real con webcam, detección y clasificación de gestos con modelos de deep learning. 
+                        Proyecto enfocado en accesibilidad e inclusión tecnológica.</p>
                         <div class="project-tags">
                             <span class="tag">TensorFlow</span>
                             <span class="tag">MediaPipe</span>
                             <span class="tag">Python</span>
+                            <span class="tag">Computer Vision</span>
                         </div>
                         <a href="https://github.com/iDiagoValeta/ASL-Hand-Gesture-Recognition" target="_blank" class="project-link">Ver en GitHub <i class="fas fa-arrow-right"></i></a>
                     </div>
@@ -163,12 +225,14 @@
                         <i class="fas fa-brain"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Proyectos de Investigación en IA</h3>
-                        <p>Diversos proyectos en Jupyter Notebooks centrados en la aplicación de 
-                        Inteligencia Artificial en la vida real, incluyendo sistemas multi-agente y optimización.</p>
+                        <h3>Portfolio de Proyectos en IA</h3>
+                        <p>Colección de 15+ proyectos activos en GitHub que demuestran evolución técnica desde nivel académico hasta producción. 
+                        Incluye proyectos de Machine Learning, Computer Vision, Sistemas Multi-Agente, análisis de datos y desarrollo backend. 
+                        Todos los repositorios están disponibles para exploración del código.</p>
                         <div class="project-tags">
-                            <span class="tag">Image Recognition</span>
-                            <span class="tag">NLP</span>
+                            <span class="tag">Machine Learning</span>
+                            <span class="tag">Computer Vision</span>
+                            <span class="tag">Sistemas Multi-Agente</span>
                             <span class="tag">Python</span>
                         </div>
                         <a href="https://github.com/iDiagoValeta?tab=repositories" target="_blank" class="project-link">Ver en GitHub <i class="fas fa-arrow-right"></i></a>
@@ -191,9 +255,14 @@
                             <p class="chat-status" id="chatStatus">Listo para chatear</p>
                         </div>
                     </div>
-                    <button class="btn-clear" id="clearChat" title="Limpiar chat">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                    <div class="chat-header-actions">
+                        <button class="btn-export" id="exportChat" title="Exportar conversación" aria-label="Exportar conversación del chat">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="btn-clear" id="clearChat" title="Limpiar chat" aria-label="Limpiar historial del chat">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="message message-bot">
@@ -213,8 +282,10 @@
                             class="chat-input" 
                             placeholder="Escribe tu pregunta aquí..."
                             autocomplete="off"
+                            aria-label="Campo de entrada para preguntas al asistente"
+                            maxlength="2000"
                         >
-                        <button id="sendButton" class="btn-send">
+                        <button id="sendButton" class="btn-send" aria-label="Enviar mensaje" title="Enviar mensaje (Enter)">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
@@ -257,6 +328,11 @@
             <p>&copy; Si te ha gustado puedes replicar mi página en GitHub, ¡A programar!.</p>
         </div>
     </footer>
+
+    <!-- Botón Scroll to Top -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Volver arriba" title="Volver al inicio">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script type="module" src="app.js"></script>
 </body>

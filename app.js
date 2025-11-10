@@ -7,6 +7,153 @@ let conversationHistory = [];
 // Elementos del DOM (se inicializarán cuando el DOM esté listo)
 let chatInput, sendButton, chatMessages, clearChatButton, chatStatus;
 
+// Constantes
+const STORAGE_KEY = 'portfolio_chat_history';
+const CHAT_TIMEOUT = 30000; // 30 segundos
+const MAX_REQUEST_SIZE = 100000; // 100KB
+
+// Función para sanitizar HTML (prevenir XSS)
+function sanitizeHtml(html) {
+    if (!html) return '';
+    
+    // Lista de tags permitidos
+    const allowedTags = ['p', 'br', 'strong', 'em', 'code', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'hr', 'table', 'thead', 'tbody', 'tr', 'th', 'td'];
+    
+    // Crear un elemento temporal para parsear
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
+    
+    // Obtener todos los elementos
+    const allElements = temp.querySelectorAll('*');
+    
+    // Remover scripts y eventos peligrosos
+    allElements.forEach(el => {
+        // Remover atributos de eventos
+        Array.from(el.attributes).forEach(attr => {
+            if (attr.name.startsWith('on')) {
+                el.removeAttribute(attr.name);
+            }
+        });
+        
+        // Si el tag no está permitido, reemplazar por su contenido
+        if (!allowedTags.includes(el.tagName.toLowerCase())) {
+            const parent = el.parentNode;
+            while (el.firstChild) {
+                parent.insertBefore(el.firstChild, el);
+            }
+            parent.removeChild(el);
+        }
+    });
+    
+    // Escapar contenido de texto para prevenir inyección
+    const walker = document.createTreeWalker(
+        temp,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+    );
+    
+    const textNodes = [];
+    let node;
+    while (node = walker.nextNode()) {
+        textNodes.push(node);
+    }
+    
+    textNodes.forEach(textNode => {
+        const text = textNode.textContent;
+        const escaped = text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#x27;');
+        
+        // Pero permitir los tags que ya procesamos
+        const temp2 = document.createElement('div');
+        temp2.innerHTML = escaped;
+        if (temp2.textContent === text) {
+            textNode.textContent = text; // No había HTML, mantener original
+        } else {
+            // Había HTML, pero ya fue procesado, usar el texto escapado y luego desescapar tags permitidos
+            const final = escaped
+                .replace(/&lt;(\/?)(p|br|strong|em|code|ul|ol|li|h[1-4]|hr|table|thead|tbody|tr|th|td)(\s[^&]*?)?&gt;/gi, '<$1$2$3>');
+            textNode.textContent = final;
+        }
+    });
+    
+    return temp.innerHTML;
+}
+
+// Función para guardar historial en localStorage
+function saveChatHistory() {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
+    } catch (e) {
+        console.warn('No se pudo guardar el historial:', e);
+    }
+}
+
+// Función para cargar historial desde localStorage
+function loadChatHistory() {
+    try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed)) {
+                conversationHistory = parsed;
+                return true;
+            }
+        }
+    } catch (e) {
+        console.warn('No se pudo cargar el historial:', e);
+    }
+    return false;
+}
+
+// Función para restaurar mensajes del historial
+function restoreChatMessages() {
+    if (conversationHistory.length === 0) return;
+    
+    // Limpiar mensajes actuales excepto el inicial
+    const initialMessage = chatMessages.querySelector('.message-bot:first-child');
+    chatMessages.innerHTML = '';
+    if (initialMessage) {
+        chatMessages.appendChild(initialMessage);
+    }
+    
+    // Restaurar mensajes del historial
+    conversationHistory.forEach(msg => {
+        if (msg.role === 'user' && msg.parts && msg.parts[0] && msg.parts[0].text) {
+            addMessage(msg.parts[0].text, true);
+        } else if (msg.role === 'model' && msg.parts && msg.parts[0] && msg.parts[0].text) {
+            addMessage(msg.parts[0].text, false);
+        }
+    });
+}
+
+// Función para exportar conversación
+function exportConversation() {
+    let text = 'Conversación del Portfolio Chat\n';
+    text += '================================\n\n';
+    
+    conversationHistory.forEach((msg, index) => {
+        const role = msg.role === 'user' ? 'Usuario' : 'Asistente';
+        const content = msg.parts && msg.parts[0] && msg.parts[0].text ? msg.parts[0].text : '';
+        text += `${index + 1}. ${role}:\n${content}\n\n`;
+    });
+    
+    // Crear blob y descargar
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `conversacion-portfolio-${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
 // Función para inicializar los elementos del DOM
 function initializeElements() {
     chatInput = document.getElementById('chatInput');
@@ -231,7 +378,7 @@ function addMessage(content, isUser = false) {
     
     const avatar = document.createElement('div');
     avatar.className = 'message-avatar';
-    avatar.innerHTML = isUser ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
+    avatar.innerHTML = isUser ? '<span style="font-size: 1.2em;">🐵</span>' : '<i class="fas fa-robot"></i>';
     
     const messageContent = document.createElement('div');
     messageContent.className = 'message-content';
@@ -242,7 +389,9 @@ function addMessage(content, isUser = false) {
         p.textContent = content;
         messageContent.appendChild(p);
     } else {
-        messageContent.innerHTML = markdownToHtml(content);
+        // Sanitizar HTML antes de insertar
+        const html = markdownToHtml(content);
+        messageContent.innerHTML = sanitizeHtml(html);
     }
     
     messageDiv.appendChild(avatar);
@@ -298,6 +447,9 @@ async function sendMessageToGemini(userMessage) {
             parts: [{ text: userMessage }]
         });
         
+        // Guardar historial
+        saveChatHistory();
+        
         // Construir el contenido para la API
         // Si es el primer mensaje, incluir el contexto del portfolio
         // Si no, usar el historial de conversación
@@ -336,52 +488,65 @@ async function sendMessageToGemini(userMessage) {
         // ya maneja las rutas '/api/gemini' y '/portfolio-chat/api/gemini'.
         const apiPath = '/api/gemini';
         
-        const response = await fetch(
-            apiPath,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestBody)
+        // Crear AbortController para timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), CHAT_TIMEOUT);
+        
+        try {
+            const response = await fetch(
+                apiPath,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody),
+                    signal: controller.signal
+                }
+            );
+            
+            if (!response.ok) {
+                let errorMessage = 'Error al conectar con la API';
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.error?.message || errorMessage;
+                    console.error('Error de API:', errorData);
+                } catch (e) {
+                    console.error('Error al parsear respuesta:', e);
+                    errorMessage = `Error HTTP ${response.status}: ${response.statusText}`;
+                }
+                throw new Error(errorMessage);
             }
-        );
-        
-        if (!response.ok) {
-            let errorMessage = 'Error al conectar con la API';
-            try {
-                const errorData = await response.json();
-                errorMessage = errorData.error?.message || errorMessage;
-                console.error('Error de API:', errorData);
-            } catch (e) {
-                console.error('Error al parsear respuesta:', e);
-                errorMessage = `Error HTTP ${response.status}: ${response.statusText}`;
+            
+            const data = await response.json();
+            
+            // Verificar si hay candidatos en la respuesta
+            if (!data.candidates || data.candidates.length === 0) {
+                console.error('Respuesta sin candidatos:', data);
+                throw new Error('La API no devolvió ninguna respuesta');
             }
-            throw new Error(errorMessage);
+            
+            // Extraer la respuesta
+            const botResponse = data.candidates[0]?.content?.parts[0]?.text || 
+                              'Lo siento, no pude generar una respuesta. Por favor, intenta de nuevo.';
+            
+            // Agregar respuesta al historial
+            conversationHistory.push({
+                role: 'model',
+                parts: [{ text: botResponse }]
+            });
+            
+            // Guardar historial
+            saveChatHistory();
+            
+            chatStatus.textContent = 'Listo para chatear';
+            chatStatus.style.color = '#10b981';
+            
+            return botResponse;
+        } catch (fetchError) {
+            clearTimeout(timeoutId);
+            throw fetchError;
         }
-        
-        const data = await response.json();
-        
-        // Verificar si hay candidatos en la respuesta
-        if (!data.candidates || data.candidates.length === 0) {
-            console.error('Respuesta sin candidatos:', data);
-            throw new Error('La API no devolvió ninguna respuesta');
-        }
-        
-        // Extraer la respuesta
-        const botResponse = data.candidates[0]?.content?.parts[0]?.text || 
-                          'Lo siento, no pude generar una respuesta. Por favor, intenta de nuevo.';
-        
-        // Agregar respuesta al historial
-        conversationHistory.push({
-            role: 'model',
-            parts: [{ text: botResponse }]
-        });
-        
-        chatStatus.textContent = 'Listo para chatear';
-        chatStatus.style.color = '#10b981';
-        
-        return botResponse;
         
     } catch (error) {
         console.error('Error completo:', error);
@@ -392,8 +557,10 @@ async function sendMessageToGemini(userMessage) {
         // Mensajes de error más específicos
         const errorMsg = error.message || String(error);
         
-        if (errorMsg.includes('API_KEY') || errorMsg.includes('API key') || errorMsg.includes('401')) {
-            return 'Error: La API key no es válida o ha expirado. Por favor, verifica tu configuración en config.js y obtén una nueva key en https://makersuite.google.com/app/apikey';
+        if (error.name === 'AbortError' || errorMsg.includes('timeout') || errorMsg.includes('aborted')) {
+            return 'Error: La solicitud tardó demasiado tiempo. Por favor, intenta de nuevo.';
+        } else if (errorMsg.includes('API_KEY') || errorMsg.includes('API key') || errorMsg.includes('401')) {
+            return 'Error: La API key no es válida o ha expirado. Por favor, verifica tu configuración y obtén una nueva key en https://makersuite.google.com/app/apikey';
         } else if (errorMsg.includes('quota') || errorMsg.includes('429')) {
             return 'Error: Se ha excedido la cuota de la API. Por favor, intenta más tarde o verifica tu plan de Google AI Studio.';
         } else if (errorMsg.includes('CORS') || errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError')) {
@@ -413,8 +580,15 @@ async function handleSendMessage() {
     // Validación de entrada
     if (!message || isProcessing) return;
     
+    // Sanitizar entrada del usuario (remover caracteres peligrosos)
+    const sanitizedMessage = message
+        .replace(/[<>]/g, '') // Remover < y >
+        .trim();
+    
+    if (!sanitizedMessage) return;
+    
     // Validar longitud del mensaje
-    if (message.length > 2000) {
+    if (sanitizedMessage.length > 2000) {
         addMessage('El mensaje es demasiado largo. Por favor, limita tu mensaje a 2000 caracteres.', false);
         return;
     }
@@ -428,8 +602,8 @@ async function handleSendMessage() {
     }
     */
     
-    // Agregar mensaje del usuario
-    addMessage(message, true);
+    // Agregar mensaje del usuario (usar mensaje sanitizado)
+    addMessage(sanitizedMessage, true);
     chatInput.value = '';
     sendButton.disabled = true;
     isProcessing = true;
@@ -480,9 +654,27 @@ function initializeEventListeners() {
             chatMessages.appendChild(initialMessage);
         }
         conversationHistory = [];
+        // Limpiar localStorage
+        try {
+            localStorage.removeItem(STORAGE_KEY);
+        } catch (e) {
+            console.warn('No se pudo limpiar el historial:', e);
+        }
         chatStatus.textContent = 'Listo para chatear';
         chatStatus.style.color = '#10b981';
     });
+    
+    // Botón exportar conversación
+    const exportChatButton = document.getElementById('exportChat');
+    if (exportChatButton) {
+        exportChatButton.addEventListener('click', () => {
+            if (conversationHistory.length === 0) {
+                addMessage('No hay conversación para exportar.', false);
+                return;
+            }
+            exportConversation();
+        });
+    }
     
     // Event Listener para el menú hamburguesa
     const navToggle = document.getElementById('navToggle');
@@ -491,8 +683,10 @@ function initializeEventListeners() {
     
     if (navToggle && navLinks) {
         navToggle.addEventListener('click', () => {
+            const isOpen = nav.classList.contains('nav-open');
             nav.classList.toggle('nav-open');
             navToggle.classList.toggle('active');
+            navToggle.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
         });
         
         // Cerrar menú al hacer clic fuera
@@ -605,43 +799,61 @@ function initializeScrollReveal() {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         if (initializeElements()) {
+            // Cargar historial guardado
+            if (loadChatHistory()) {
+                restoreChatMessages();
+            }
+            
             initializeEventListeners();
             initializeSmoothScroll();
             initializeScrollReveal();
             initializeHeaderEffects();
-            // Solo hacer focus si hay un hash en la URL que apunte al chat
-            if (window.location.hash === '#chat') {
-                chatInput.focus();
-            } else {
-                // Si no hay hash, ir arriba de la página
-                window.scrollTo(0, 0);
-            }
+            initializeScrollToTop();
+            initializeDarkMode();
+            updateScrollProgress();
+            
+            // Siempre volver al inicio al cargar
+            window.scrollTo(0, 0);
         }
     });
 } else {
     // El DOM ya está listo
     if (initializeElements()) {
+        // Cargar historial guardado
+        if (loadChatHistory()) {
+            restoreChatMessages();
+        }
+        
         initializeEventListeners();
         initializeSmoothScroll();
         initializeScrollReveal();
         initializeHeaderEffects();
-        // Solo hacer focus si hay un hash en la URL que apunte al chat
-        if (window.location.hash === '#chat') {
-            chatInput.focus();
-        } else {
-            // Si no hay hash, ir arriba de la página
-            window.scrollTo(0, 0);
-        }
+        initializeScrollToTop();
+        initializeDarkMode();
+        updateScrollProgress();
+        
+        // Siempre volver al inicio al cargar
+        window.scrollTo(0, 0);
     }
 }
 
-// Prevenir scroll automático al hash si se recarga la página sin hash
+// Exportar función para uso externo
+window.exportConversation = exportConversation;
+
+// Volver al inicio al recargar la página
 window.addEventListener('load', () => {
-    // Si no hay hash en la URL, asegurarse de estar arriba
-    if (!window.location.hash) {
+    // Siempre volver al inicio al recargar
+    setTimeout(() => {
         window.scrollTo(0, 0);
-    }
+    }, 0);
 });
+
+// También ejecutar cuando el DOM esté listo
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(() => {
+        window.scrollTo(0, 0);
+    }, 0);
+}
 
 // Función para efectos del header
 function initializeHeaderEffects() {
@@ -670,11 +882,90 @@ function initializeHeaderEffects() {
                     header.classList.remove('hide');
                 }
                 
+                // Actualizar indicador de progreso de scroll
+                updateScrollProgress();
+                
+                // Mostrar/ocultar botón scroll to top
+                updateScrollToTopButton();
+                
                 lastScroll = currentScroll;
                 ticking = false;
             });
             
             ticking = true;
+        }
+    });
+}
+
+// Función para actualizar indicador de progreso de scroll
+function updateScrollProgress() {
+    const progressBar = document.getElementById('scrollProgress');
+    if (!progressBar) return;
+    
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.pageYOffset / windowHeight) * 100;
+    progressBar.style.transform = `scaleX(${scrolled / 100})`;
+}
+
+// Función para actualizar botón scroll to top
+function updateScrollToTopButton() {
+    const scrollBtn = document.getElementById('scrollToTop');
+    if (!scrollBtn) return;
+    
+    if (window.pageYOffset > 300) {
+        scrollBtn.classList.add('visible');
+    } else {
+        scrollBtn.classList.remove('visible');
+    }
+}
+
+// Función para inicializar botón scroll to top
+function initializeScrollToTop() {
+    const scrollBtn = document.getElementById('scrollToTop');
+    if (scrollBtn) {
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+}
+
+// Función para inicializar modo oscuro
+function initializeDarkMode() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    if (!darkModeToggle) return;
+    
+    // Cargar preferencia guardada
+    const savedTheme = localStorage.getItem('portfolio_theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    
+    if (isDark) {
+        document.documentElement.classList.add('dark-mode');
+        darkModeToggle.setAttribute('aria-label', 'Activar modo claro');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+        document.documentElement.classList.remove('dark-mode');
+        darkModeToggle.setAttribute('aria-label', 'Activar modo oscuro');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+    
+    // Toggle al hacer clic
+    darkModeToggle.addEventListener('click', () => {
+        const isDarkMode = document.documentElement.classList.contains('dark-mode');
+        
+        if (isDarkMode) {
+            document.documentElement.classList.remove('dark-mode');
+            localStorage.setItem('portfolio_theme', 'light');
+            darkModeToggle.setAttribute('aria-label', 'Activar modo oscuro');
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            document.documentElement.classList.add('dark-mode');
+            localStorage.setItem('portfolio_theme', 'dark');
+            darkModeToggle.setAttribute('aria-label', 'Activar modo claro');
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         }
     });
 }
