@@ -612,24 +612,41 @@ body {
     transform: translateY(0);
 }
 
-/* About Section mejorado */
+/* About Section mejorado con mejor chunking */
 .about-content {
     max-width: 850px;
     margin: 0 auto;
+    /* Mejor agrupación visual según Laws of UX */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-text {
+    /* Mejor chunking: agrupar párrafos visualmente */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .about-text p {
     font-size: 1.125rem;
     color: var(--text-secondary);
-    margin-bottom: 1.75rem;
+    margin-bottom: 0;
     line-height: 1.9;
+    /* Mejor legibilidad con espaciado optimizado */
+    text-align: justify;
+    hyphens: auto;
 }
 
 .about-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2.5rem;
-    margin-top: 3.5rem;
+    margin-top: 2rem;
+    /* Mejor chunking: separación visual clara del contenido anterior */
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-color);
 }
 
 .stat {
@@ -686,18 +703,20 @@ body {
     z-index: 1;
 }
 
-/* Skills Section con efectos 3D mejorados */
+/* Skills Section con efectos 3D mejorados y mejor chunking */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.75rem;
     max-width: 900px;
     margin: 0 auto;
+    /* Mejor agrupación visual: más espacio entre grupos */
+    padding: 1rem 0;
 }
 
 .skill-card {
     background: white;
-    padding: 1.5rem 1.25rem;
+    padding: 2rem 1.5rem;
     border-radius: 1rem;
     box-shadow: var(--shadow-md);
     text-align: center;
@@ -707,6 +726,11 @@ body {
     perspective: 1000px;
     position: relative;
     overflow: hidden;
+    /* Mejor chunking: más espacio interno para mejor legibilidad */
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .skill-card::before {
@@ -763,17 +787,21 @@ body {
 
 .skill-card p {
     color: var(--text-secondary);
-    line-height: 1.5;
-    font-size: 0.9rem;
+    line-height: 1.7;
+    font-size: 0.95rem;
     position: relative;
     z-index: 1;
+    /* Mejor legibilidad: más espacio entre líneas */
+    margin-top: 0.5rem;
 }
 
-/* Projects Section con efectos reveal mejorados */
+/* Projects Section con efectos reveal mejorados y mejor chunking */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2.5rem;
+    /* Mejor agrupación visual: padding para separación clara */
+    padding: 1rem 0;
 }
 
 .project-card {
@@ -866,7 +894,10 @@ body {
 .project-content p {
     color: var(--text-secondary);
     margin-bottom: 1.75rem;
-    line-height: 1.7;
+    line-height: 1.8;
+    /* Mejor legibilidad: texto justificado con mejor espaciado */
+    text-align: justify;
+    hyphens: auto;
 }
 
 .project-tags {
@@ -1070,7 +1101,7 @@ body {
 }
 
 .message-user .message-avatar {
-    background: var(--text-primary);
+    background: var(--accent-gradient);
     color: white;
 }
 
@@ -1317,6 +1348,8 @@ body {
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
+    /* Mejor chunking: agrupación visual clara */
+    padding: 1rem 0;
 }
 
 .contact-link {
@@ -1640,17 +1673,28 @@ body {
     color: #93c5fd;
 }
 
-/* Mejoras de accesibilidad - Focus visible */
+/* Mejoras de accesibilidad - Focus visible mejorado */
 *:focus-visible {
-    outline: 2px solid var(--accent-color);
-    outline-offset: 2px;
-    border-radius: 2px;
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+    border-radius: 4px;
+    /* Mejor visibilidad del focus según mejores prácticas */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
 button:focus-visible,
 a:focus-visible {
-    outline: 2px solid var(--accent-color);
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+    /* Mejor contraste para accesibilidad */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--accent-color);
     outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 @media (max-width: 768px) {
