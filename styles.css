@@ -659,6 +659,12 @@ body {
     border: 2px solid transparent;
     position: relative;
     overflow: hidden;
+    /* Asegurar altura mínima y alineación consistente */
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .stat::before {
@@ -690,10 +696,12 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.5rem 0;
     font-weight: 800;
     position: relative;
     z-index: 1;
+    text-align: center;
+    line-height: 1.2;
 }
 
 .stat p {
@@ -701,6 +709,10 @@ body {
     font-weight: 500;
     position: relative;
     z-index: 1;
+    /* Asegurar alineación consistente del texto */
+    margin: 0;
+    line-height: 1.5;
+    text-align: center;
 }
 
 /* Skills Section con efectos 3D mejorados y mejor chunking */
