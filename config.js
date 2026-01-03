@@ -13,7 +13,7 @@ INFORMACIÓN DEL CANDIDATO:
 - **Perfil Público:** Portfolio interactivo con chat IA integrado
 
 **Resumen Ejecutivo:**
-Ingeniero Informático con perfil técnico sólido y experiencia práctica en desarrollo backend, inteligencia artificial y optimización de sistemas. Especializado en la integración de LLMs en entornos empresariales, con dominio avanzado de Python, Azure y arquitecturas cloud modernas. Combina excelencia técnica con habilidades excepcionales de comunicación, desarrolladas a través de experiencia docente y roles de liderazgo técnico. Orientado a resultados, con historial demostrable de transformar conceptos complejos en soluciones escalables que generan valor empresarial real.
+Ingeniero Informático con perfil técnico sólido y experiencia práctica en desarrollo backend, inteligencia artificial y optimización de sistemas. Se enfoca en cerrar la brecha entre los modelos de IA teóricos y su utilidad en el mundo real, combinando ingeniería de software sólida con técnicas avanzadas de Machine Learning para construir sistemas eficientes y escalables. Especializado en la integración y fine-tuning de LLMs en entornos empresariales, con dominio avanzado de Python, Azure y arquitecturas cloud modernas. Combina excelencia técnica con habilidades excepcionales de comunicación, desarrolladas a través de experiencia docente y roles de liderazgo técnico. Orientado a resultados, con historial demostrable de transformar conceptos complejos en soluciones escalables que generan valor empresarial real.
 
 **Trayectoria y Contexto Profesional:**
 Perfil de ingeniero con formación en la Universitat Politècnica de València (2022-2026) y trayectoria caracterizada por la excelencia académica y el crecimiento profesional continuo. La experiencia de compatibilizar estudios superiores con trabajo activo ha desarrollado competencias excepcionales en gestión del tiempo, priorización estratégica y ejecución bajo presión. Esta combinación de rigor académico y experiencia práctica temprana ha resultado en un profesional con capacidad probada para entregar resultados de calidad en entornos exigentes, manteniendo altos estándares técnicos mientras gestiona múltiples responsabilidades. Esta experiencia ha fortalecido la resiliencia, adaptabilidad y proactividad, cualidades que se reflejan directamente en la calidad del trabajo técnico y la capacidad de liderazgo. El portfolio de GitHub (14+ repositorios activos) evidencia un compromiso constante con el aprendizaje, la experimentación y la mejora continua, mostrando evolución técnica desde proyectos académicos hasta soluciones en producción.
@@ -62,11 +62,11 @@ HABILIDADES TÉCNICAS:
 - **DevOps:** Docker, Git/GitHub, CI/CD, metodologías ágiles (Scrum)
 
 **Inteligencia Artificial y Machine Learning:**
-- **LLMs y NLP:** Integración de modelos de lenguaje (GPT, Azure OpenAI), prompt engineering
+- **LLMs y NLP:** Fine-tuning de LLMs (Llama 3, Qwen) usando técnicas PEFT y QLoRA, pipelines RAG (Retrieval-Augmented Generation), integración de modelos de lenguaje (GPT, Azure OpenAI), prompt engineering
 - **Frameworks IA:** TensorFlow, PyTorch, scikit-learn, aplicación práctica de ML
 - **MLOps:** Despliegue de modelos, monitorización, automatización de pipelines
 - **Especialidades:** Sistemas Multi-Agente, algoritmos de optimización, análisis de datos
-- **Computer Vision:** Reconocimiento de imágenes, procesamiento en tiempo real (OpenCV)
+- **Computer Vision:** Transfer Learning con Vision Transformers (ViT), reconocimiento de imágenes y gestos en tiempo real (OpenCV, MediaPipe)
 
 **Otras Tecnologías:**
 - **Sistemas Operativos:** Linux (administración, scripting bash)
@@ -96,39 +96,48 @@ PORTFOLIO DE PROYECTOS EN GITHUB (github.com/iDiagoValeta):
 
 **Proyectos de Inteligencia Artificial y Machine Learning:**
 
-3.  **ASL-Hand-Gesture-Recognition - Reconocimiento de Lenguaje de Signos en Tiempo Real**
+3.  **transfer-learning-llm-vision - Transfer Learning Avanzado**
+    * Colección exhaustiva de notebooks Jupyter que demuestran técnicas avanzadas de Transfer Learning
+    * Cubre Vision Transformers (ViT) para clasificación de imágenes y fine-tuning de modelos Llama 3
+    * Implementación de pipelines RAG (Retrieval-Augmented Generation) y técnicas PEFT/QLoRA para ajuste fino eficiente
+    * **Stack técnico:** Python, PyTorch, TensorFlow, Hugging Face Transformers, Vision Transformers, LLMs
+    * **Valor técnico:** Demostración completa de técnicas state-of-the-art en Transfer Learning para visión y lenguaje
+    * **Estado:** Repositorio activo con múltiples notebooks educativos y ejemplos prácticos
+
+4.  **ASL-Hand-Gesture-Recognition - Reconocimiento de Lenguaje de Signos en Tiempo Real**
     * Sistema de traducción automática de lenguaje de signos americano (ASL) a texto mediante visión por computador
     * Procesamiento de video en tiempo real con webcam, detección y clasificación de gestos con modelos de deep learning
     * **Stack técnico:** Python, MediaPipe, TensorFlow/Keras, Computer Vision, procesamiento de video en tiempo real
     * **Impacto social:** Solución práctica para mejorar la accesibilidad y comunicación de personas con discapacidad auditiva
     * **Estado:** Proyecto completo con pipeline de datos, entrenamiento de modelos y aplicación funcional
 
-4.  **Oxford-IIIT Pet Dataset Classification**
+5.  **Oxford-IIIT Pet Dataset Classification**
     * Sistema completo de clasificación de razas de mascotas usando fine-tuning de MobileNetV2
     * Demostración de workflow end-to-end de machine learning: preprocesamiento, entrenamiento, evaluación y visualización
+    * Incluye data augmentation y estrategia de entrenamiento en dos fases para optimización de resultados
     * **Stack técnico:** Python, TensorFlow/Keras, Jupyter Notebooks, transfer learning, data augmentation
     * **Valor técnico:** Ejemplo de aplicación práctica de transfer learning y optimización de modelos de visión por computador
 
-5.  **VGG11-CIFAR-10 Transfer Learning**
+6.  **VGG11-CIFAR-10 Transfer Learning**
     * Implementación de transfer learning con VGG11 en CIFAR-10 usando PyTorch
     * Incluye customización de modelos, preprocesamiento de datos, learning rate finder, fine-tuning y evaluación completa
     * **Stack técnico:** PyTorch, Python, Jupyter Notebooks, transfer learning, optimización de hiperparámetros
     * **Valor técnico:** Demostración de dominio de PyTorch y técnicas avanzadas de deep learning
 
-6.  **GTZAN Music Genre Classification**
+7.  **GTZAN Music Genre Classification**
     * Red neuronal convolucional para clasificación de géneros musicales del dataset GTZAN
     * Procesamiento de señales de audio y extracción de características para clasificación
     * **Stack técnico:** Python, TensorFlow/Keras, Jupyter Notebooks, procesamiento de audio, CNNs
     * **Valor técnico:** Aplicación de deep learning a dominio de audio y procesamiento de señales
 
-7.  **MNIST Handwritten Number Classification**
+8.  **MNIST Handwritten Number Classification**
     * Red neuronal de 2 capas para clasificación de dígitos manuscritos del dataset MNIST
     * Proyecto educativo que demuestra fundamentos de redes neuronales y deep learning
     * **Stack técnico:** Python, TensorFlow/Keras, Jupyter Notebooks, redes neuronales básicas
 
 **Proyectos de Análisis de Datos y Estadística:**
 
-8.  **Titanic Survival Prediction with R**
+9.  **Titanic Survival Prediction with R**
     * Predicción de supervivencia de pasajeros del Titanic usando Random Forest (paquete ranger de R)
     * Análisis estadístico completo y participación en competencia de Kaggle
     * **Stack técnico:** R, Random Forest, análisis estadístico, visualización de datos
@@ -136,14 +145,14 @@ PORTFOLIO DE PROYECTOS EN GITHUB (github.com/iDiagoValeta):
 
 **Proyectos de Sistemas Multi-Agente e Inteligencia Artificial:**
 
-9.  **pyGOMAS Team - Coordinated Intelligent Agents**
+10. **pyGOMAS Team - Coordinated Intelligent Agents**
     * Sistema de agentes inteligentes coordinados para el juego Capture The Flag (equipo 'IDIAVAL')
     * Implementación de estrategias avanzadas: formaciones en arco, prevención de fuego amigo, soporte sincronizado
     * Roles especializados: Captain, Soldiers, Medic, FieldOp con coordinación inteligente
     * **Stack técnico:** Python, sistemas multi-agente, algoritmos de coordinación, inteligencia artificial
     * **Valor técnico:** Demostración de diseño e implementación de sistemas multi-agente complejos
 
-10. **crewAI Automated Document Pipeline**
+11. **crewAI Automated Document Pipeline**
     * Sistema multi-agente con CrewAI que automatiza la creación de reportes PDF
     * Flujo de trabajo con agentes especializados: investigación, análisis, verificación y generación de contenido
     * **Stack técnico:** Python, CrewAI, multi-agent systems, automatización de documentos, HTML/PDF
@@ -151,17 +160,23 @@ PORTFOLIO DE PROYECTOS EN GITHUB (github.com/iDiagoValeta):
 
 **Proyectos Académicos y de Investigación:**
 
-11. **Computational Perception Jupyter Notebooks**
+12. **MiniC-Compiler - Compilador Funcional para Mini-C**
+    * Compilador completo para un subconjunto del lenguaje C (Mini-C)
+    * Realiza análisis léxico, sintáctico y validación semántica, generando código intermedio
+    * **Stack técnico:** Python, teoría de compiladores, análisis sintáctico, generación de código
+    * **Valor técnico:** Demostración de comprensión profunda de fundamentos de ciencias de la computación y lenguajes de programación
+
+13. **Computational Perception Jupyter Notebooks**
     * Colección de notebooks Jupyter para el curso de Percepción Computacional (UPV)
     * Cubre temas avanzados de visión por computador, procesamiento de imágenes y reconocimiento de patrones
     * **Stack técnico:** Python, Jupyter Notebooks, OpenCV, procesamiento de imágenes, algoritmos de visión
 
-12. **Computability and Complexity Wolfram Notebooks**
+14. **Computability and Complexity Wolfram Notebooks**
     * Notebooks de Wolfram Mathematica para el curso de Computabilidad y Complejidad (UPV)
     * Análisis teórico de algoritmos, complejidad computacional y teoría de la computación
     * **Stack técnico:** Wolfram Mathematica, teoría de la computación, análisis de algoritmos
 
-13. **Algorítmica - Trabajo de Asignatura**
+15. **Algorítmica - Trabajo de Asignatura**
     * Proyecto académico de la asignatura "Algorítmica" demostrando dominio de algoritmos y estructuras de datos
     * **Stack técnico:** Python, algoritmos, estructuras de datos, optimización
 
@@ -175,8 +190,10 @@ PORTFOLIO DE PROYECTOS EN GITHUB (github.com/iDiagoValeta):
 
 CERTIFICACIONES Y FORMACIÓN CONTINUA:
 
-- **B2 (Inglés)** - Cambridge University Press & Assessment
-- **SQL** - edX
+- **B2 (Inglés)** - Cambridge University Press & Assessment (Sep 2025)
+- **Fundamentals of Mechanics** - edX (Sep 2025)
+- **Mathematical Foundations** - edX (Sep 2025)
+- **SQL** - edX (Sep 2025)
 - **Linux** - edX
 - **Machine Learning and Data Science** - edX
 - **Python** - edX
@@ -209,9 +226,9 @@ PERSONALIDAD Y MOTIVACIONES:
 
 **¿Qué me impulsa?**
 - **Curiosidad técnica insaciable:** Mi motor es entender el 'por qué' profundo de las tecnologías, no solo el 'cómo' superficial
-- **Transformación de complejidad en valor:** Disfruto convirtiendo algoritmos sofisticados en herramientas tangibles que resuelven problemas reales (como mi proyecto de lenguaje de signos o GPT-CEU)
+- **Transformación de complejidad en valor:** Disfruto cerrando la brecha entre algoritmos sofisticados de IA y su utilidad práctica en el mundo real, convirtiendo modelos teóricos en herramientas tangibles que resuelven problemas concretos (como transfer learning para visión, fine-tuning de LLMs, o reconocimiento de lenguaje de signos)
 - **Mentalidad autodidacta:** No espero asignaciones pasivas; busco activamente desafíos técnicos y adquiero las habilidades necesarias para superarlos
-- **Pasión por la optimización:** Aplico principios de eficiencia no solo al código, sino a procesos, arquitecturas y formas de trabajo
+- **Pasión por la optimización:** Aplico principios de eficiencia no solo al código, sino a procesos, arquitecturas y formas de trabajo, buscando siempre la mejor solución matemática y práctica
 
 **¿Qué me distingue?**
 - **Visión de negocio:** Entiendo que el código es un medio, no un fin. Me interesa el impacto empresarial y cómo mi trabajo se alinea con objetivos estratégicos
@@ -233,10 +250,11 @@ VALORES PROFESIONALES:
 ¿QUÉ BUSCO EN MI PRÓXIMA OPORTUNIDAD?
 
 - Entorno que valore la innovación técnica y el aprendizaje continuo
-- Proyectos desafiantes en IA, optimización de sistemas o arquitecturas backend complejas
+- Proyectos desafiantes en IA (especialmente fine-tuning de LLMs, pipelines RAG, visión por computador), optimización de sistemas o arquitecturas backend complejas
 - Equipo colaborativo donde pueda aportar y aprender de profesionales senior
 - Cultura empresarial que equilibre excelencia técnica con bienestar del equipo
 - Oportunidades de crecimiento profesional y desarrollo de habilidades de liderazgo técnico
+- Aplicación de optimización matemática e Inteligencia Artificial para resolver problemas de alto impacto empresarial y social
 
 ---
 
