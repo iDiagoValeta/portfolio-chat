@@ -3,48 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- SEO Meta Tags -->
-    <title>Ignacio Diago Valeta - Ingeniero Informático | Especialista en IA y Optimización</title>
-    <meta name="description" content="Portfolio de Ignacio Diago Valeta, Ingeniero Informático especializado en Inteligencia Artificial, Optimización y Back-End Development. Experiencia en Azure, Python, LLMs y sistemas escalables.">
-    <meta name="keywords" content="Ingeniero Informático, Inteligencia Artificial, IA, Machine Learning, Python, Azure, Back-End Developer, Optimización, Portfolio">
+    <title>Ignacio Diago Valeta – AI Engineer | LLM Fine-tuning & Computer Vision</title>
+    <meta name="description" content="Portfolio de Ignacio Diago Valeta, AI Engineer especializado en LLM Fine-tuning (PEFT/QLoRA), RAG Pipelines, Computer Vision con Vision Transformers y sistemas Multi-Agente.">
+    <meta name="keywords" content="AI Engineer, LLM Fine-tuning, QLoRA, RAG, Computer Vision, Vision Transformers, PyTorch, HuggingFace, Multi-Agent, Python, Machine Learning">
     <meta name="author" content="Ignacio Diago Valeta">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://idiagovaleta.github.io/portfolio-chat/">
-    
-    <!-- Open Graph / Facebook -->
+    <link rel="canonical" href="https://portfolio-chat-aouj.onrender.com/">
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://idiagovaleta.github.io/portfolio-chat/">
-    <meta property="og:title" content="Ignacio Diago Valeta - Ingeniero Informático | Especialista en IA">
-    <meta property="og:description" content="Portfolio interactivo con chat IA. Ingeniero Informático especializado en Inteligencia Artificial, Optimización y Back-End Development.">
-    <meta property="og:image" content="https://idiagovaleta.github.io/portfolio-chat/images/image.png">
-    
+    <meta property="og:url" content="https://portfolio-chat-aouj.onrender.com/">
+    <meta property="og:title" content="Ignacio Diago Valeta – AI Engineer | LLM Fine-tuning & Computer Vision">
+    <meta property="og:description" content="Portfolio interactivo con chat IA. Especialista en fine-tuning de LLMs, RAG pipelines y Computer Vision con ViT.">
+    <meta property="og:image" content="https://portfolio-chat-aouj.onrender.com/images/image.png">
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://idiagovaleta.github.io/portfolio-chat/">
-    <meta property="twitter:title" content="Ignacio Diago Valeta - Ingeniero Informático | Especialista en IA">
-    <meta property="twitter:description" content="Portfolio interactivo con chat IA. Ingeniero Informático especializado en Inteligencia Artificial, Optimización y Back-End Development.">
-    <meta property="twitter:image" content="https://idiagovaleta.github.io/portfolio-chat/images/image.png">
-    
-    <!-- Preload de fuentes críticas -->
+    <meta property="twitter:url" content="https://portfolio-chat-aouj.onrender.com/">
+    <meta property="twitter:title" content="Ignacio Diago Valeta – AI Engineer | LLM Fine-tuning & Computer Vision">
+    <meta property="twitter:description" content="Portfolio interactivo con chat IA. Especialista en fine-tuning de LLMs, RAG pipelines y Computer Vision con ViT.">
+    <meta property="twitter:image" content="https://portfolio-chat-aouj.onrender.com/images/image.png">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Structured Data (JSON-LD) -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Ignacio Diago Valeta",
-        "jobTitle": "Ingeniero Informático | Especialista en IA y Optimización | Back-End Developer",
-        "url": "https://idiagovaleta.github.io/portfolio-chat/",
+        "jobTitle": "AI Engineer · LLM Fine-tuning & Computer Vision",
+        "url": "https://portfolio-chat-aouj.onrender.com/",
         "sameAs": [
             "https://github.com/iDiagoValeta",
-            "https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/"
+            "https://www.linkedin.com/in/ignacio-diago/"
         ],
         "address": {
             "@type": "PostalAddress",
@@ -52,82 +51,119 @@
             "addressRegion": "Comunidad Valenciana",
             "addressCountry": "ES"
         },
-        "email": "nadiva1243@gmail.com",
-        "telephone": "+34645987021"
+        "email": "nadiva1243@gmail.com"
     }
     </script>
 </head>
 <body>
-    <!-- Indicador de progreso de scroll -->
+    <!-- Scroll Progress -->
     <div class="scroll-progress" id="scrollProgress"></div>
-    
+
     <header class="header">
         <nav class="nav">
             <div class="nav-brand">
-                <h1>Portfolio Interactivo</h1>
+                <h1>Ignacio Diago</h1>
             </div>
             <div class="nav-actions">
-                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Activar modo oscuro" title="Cambiar tema">
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Cambiar tema" title="Cambiar tema">
                     <i class="fas fa-moon"></i>
                 </button>
-                <button class="nav-toggle" id="navToggle" aria-label="Abrir menú de navegación" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
             <ul class="nav-links" id="navLinks" role="menubar">
-                <li role="none"><a href="#inicio" role="menuitem">Inicio</a></li>
-                <li role="none"><a href="#sobre-mi" role="menuitem">Sobre Mí</a></li>
-                <li role="none"><a href="#habilidades" role="menuitem">Habilidades</a></li>
-                <li role="none"><a href="#proyectos" role="menuitem">Proyectos</a></li>
-                <li role="none"><a href="#chat" role="menuitem">Gemini 2.5 Flash</a></li>
-                <li role="none"><a href="#contacto" role="menuitem">Contacto</a></li>
+                <li role="none"><a href="#inicio"     role="menuitem">Inicio</a></li>
+                <li role="none"><a href="#sobre-mi"   role="menuitem">Sobre Mí</a></li>
+                <li role="none"><a href="#habilidades"role="menuitem">Habilidades</a></li>
+                <li role="none"><a href="#proyectos"  role="menuitem">Proyectos</a></li>
+                <li role="none"><a href="#chat"       role="menuitem">Chat IA</a></li>
+                <li role="none"><a href="#contacto"   role="menuitem">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- ===== HERO ===== -->
     <section id="inicio" class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <h2 class="hero-title">Hola, soy <span class="highlight">Ignacio</span></h2>
-                <p class="hero-subtitle">Ingeniero Informático | Back-End Developer</p>
+                <div class="hero-badge">
+                    <i class="fas fa-circle-dot"></i>
+                    Available for opportunities
+                </div>
+                <h2 class="hero-title">
+                    Hola, soy<br><span class="highlight">Ignacio Diago</span>
+                </h2>
+                <p class="hero-subtitle">AI Engineer · Neural Network Optimization</p>
+                <div class="hero-chips">
+                    <span class="hero-chip cyan">LLM Fine-tuning · PEFT/QLoRA</span>
+                    <span class="hero-chip violet">Computer Vision · ViT</span>
+                    <span class="hero-chip green">Multi-Agent Systems</span>
+                </div>
                 <p class="hero-description">
-                    Me enfoco en cerrar la brecha entre modelos de IA teóricos y su utilidad en el mundo real, desarrollando soluciones de backend escalable con Python, Azure y técnicas avanzadas de Machine Learning.
+                    Ingeniero Informático especializado en cerrar la brecha entre modelos de IA generales y sistemas listos para producción.
+                    Experiencia práctica fine-tuning LLMs con PEFT/QLoRA, construcción de pipelines RAG end-to-end y despliegue de Computer Vision con Vision Transformers.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#proyectos" class="btn btn-primary">Proyectos</a>
-                    <a href="#chat" class="btn btn-secondary">Gemini 2.5 Flash</a>
+                    <a href="#proyectos" class="btn btn-primary">
+                        <i class="fas fa-code-branch"></i> Proyectos
+                    </a>
+                    <a href="#chat" class="btn btn-secondary">
+                        <i class="fas fa-robot"></i> Chat IA
+                    </a>
                 </div>
             </div>
             <div class="hero-image">
                 <div class="avatar-placeholder">
-                    <img src="images/image.png" alt="Ignacio Diago Valeta - Ingeniero Informático especializado en IA y Optimización" class="profile-photo" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\'></i>';">
+                    <img src="images/foto-perfil.jpg"
+                         alt="Ignacio Diago Valeta – AI Engineer"
+                         class="profile-photo" loading="lazy"
+                         onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\' style=\'font-size:5rem;color:rgba(0,212,255,0.5);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)\'></i>';">
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ===== SOBRE MÍ ===== -->
     <section id="sobre-mi" class="section">
         <div class="container">
             <h2 class="section-title">Sobre Mí</h2>
             <div class="about-content">
                 <div class="about-text">
                     <p>
-                        Ingeniero Informático con formación en la Universitat Politècnica de València (UPV), especializado en Inteligencia Artificial y Optimización. 
-                        Mi enfoque combina ingeniería de software sólida con técnicas avanzadas de Machine Learning para construir sistemas eficientes y escalables, 
-                        cerrando la brecha entre modelos de IA teóricos y su utilidad práctica en el mundo real.
+                        Ingeniero Informático por la <strong>Universitat Politècnica de València (UPV)</strong> especializado en IA aplicada.
+                        Mi trabajo se centra en adaptar Redes Neuronales —tanto LLMs como sistemas de Computer Vision— para resolver problemas concretos
+                        mediante fine-tuning y optimización arquitectural.
                     </p>
                     <p>
-                        Actualmente trabajo como Back-End Developer en CEU Educational Group, especializándome en fine-tuning de LLMs (Llama 3, Qwen), 
-                        pipelines RAG, integración de modelos en sistemas empresariales, y desarrollo de infraestructura backend robusta con Python y Azure. 
-                        Mi portfolio incluye 15+ proyectos activos en GitHub, desde soluciones en producción hasta investigación académica en Transfer Learning 
-                        con Vision Transformers y técnicas avanzadas de optimización.
+                        Actualmente trabajo como <strong>AI &amp; Back-End Developer en CEU Educational Group</strong>, donde he desarrollado y desplegado
+                        <strong>GPT-CEU</strong>, un asistente de IA personalizado con OpenAI API y RAG pipelines, optimizando flujos académicos y administrativos
+                        de toda la universidad.
                     </p>
+
+                    <!-- Current focus -->
+                    <div class="focus-grid">
+                        <div class="focus-item">
+                            <i class="fas fa-brain"></i>
+                            <h4>LLM Specialization</h4>
+                            <p>Fine-tuning con PEFT/QLoRA y RAG pipelines para precisión domain-specific</p>
+                        </div>
+                        <div class="focus-item">
+                            <i class="fas fa-eye"></i>
+                            <h4>Computer Vision</h4>
+                            <p>Transfer Learning en Vision Transformers (ViT) y reconocimiento de gestos en tiempo real</p>
+                        </div>
+                        <div class="focus-item">
+                            <i class="fas fa-network-wired"></i>
+                            <h4>Multi-Agent Systems</h4>
+                            <p>Orquestación de agentes autónomos para workflows complejos con LangChain / CrewAI</p>
+                        </div>
+                    </div>
+
                     <div class="about-stats">
                         <div class="stat">
                             <h3>1+</h3>
-                            <p>Años de Experiencia</p>
+                            <p>Años en producción</p>
                         </div>
                         <div class="stat">
                             <h3>15+</h3>
@@ -135,7 +171,7 @@
                         </div>
                         <div class="stat">
                             <h3>8+</h3>
-                            <p>Certificaciones Profesionales</p>
+                            <p>Certificaciones</p>
                         </div>
                     </div>
                 </div>
@@ -143,150 +179,163 @@
         </div>
     </section>
 
+    <!-- ===== HABILIDADES ===== -->
     <section id="habilidades" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Habilidades</h2>
             <div class="skills-grid">
-                <div class="skill-card">
+                <div class="skill-card reveal">
                     <i class="fas fa-brain"></i>
-                    <h3>Inteligencia Artificial</h3>
-                    <p>Fine-tuning de LLMs (Llama 3, Qwen), PEFT/QLoRA, pipelines RAG, Vision Transformers (ViT), TensorFlow, PyTorch</p>
+                    <h3>LLMs &amp; NLP</h3>
+                    <p>Fine-tuning con PEFT/QLoRA · RAG Pipelines · Llama 3 · OpenAI API · LangChain · LlamaIndex · Prompt Engineering · HuggingFace Transformers</p>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-cogs"></i>
-                    <h3>Optimización y Algoritmia</h3>
-                    <p>Google OR-Tools, LINGO, Análisis de algoritmos y modelado de problemas complejos</p>
+                <div class="skill-card reveal">
+                    <i class="fas fa-eye"></i>
+                    <h3>Computer Vision</h3>
+                    <p>Vision Transformers (ViT) · Transfer Learning · Reconocimiento de gestos en tiempo real · OpenCV · MediaPipe · MobileNetV2</p>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card reveal">
+                    <i class="fas fa-fire"></i>
+                    <h3>ML Frameworks</h3>
+                    <p>PyTorch · TensorFlow · Scikit-learn · Keras · Optimización de hiperparámetros · Weights &amp; Biases</p>
+                </div>
+                <div class="skill-card reveal">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>MLOps &amp; Tools</h3>
+                    <p>Git · Linux · HuggingFace Hub · Docker · Weights &amp; Biases · Azure (Functions, OpenAI, Storage) · APIs RESTful</p>
+                </div>
+                <div class="skill-card reveal">
                     <i class="fab fa-python"></i>
-                    <h3>Lenguajes (Python / Java)</h3>
-                    <p>Desarrollo backend robusto y análisis de datos de alto rendimiento</p>
+                    <h3>Programación</h3>
+                    <p>Python (avanzado) · SQL · R · C · JavaScript — backend robusto, análisis de datos y automatización de pipelines</p>
                 </div>
-                <div class="skill-card">
-                    <i class="fas fa-database"></i>
-                    <h3>Bases de Datos</h3>
-                    <p>SQL (MySQL, SQLite) y NoSQL (MongoDB), modelado y gestión de datos</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fab fa-linux"></i>
-                    <h3>Cloud y Desarrollo</h3>
-                    <p>Azure (Functions, OpenAI, Storage), Linux, Git, GitHub, Docker, APIs RESTful, MLOps</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Otras Tecnologías</h3>
-                    <p>JavaScript, C, C#, Haskell, PROLOG, Mathematica, R</p>
+                <div class="skill-card reveal">
+                    <i class="fas fa-chart-scatter"></i>
+                    <h3>Data Science</h3>
+                    <p>NumPy · Pandas · Data Mining · Feature Engineering · Análisis estadístico · Visualización de datos</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ===== PROYECTOS ===== -->
     <section id="proyectos" class="section">
         <div class="container">
             <h2 class="section-title">Proyectos Destacados</h2>
             <div class="projects-grid">
-                <div class="project-card">
+
+                <div class="project-card reveal">
                     <div class="project-image">
                         <i class="fas fa-robot"></i>
                     </div>
                     <div class="project-content">
                         <h3>GPT-CEU</h3>
-                        <p>Sistema de inteligencia artificial integrado en infraestructura educativa del CEU Educational Group. 
-                        Automatiza procesos administrativos, proporciona asistencia académica personalizada mediante LLMs y optimiza 
-                        flujos de trabajo educativos. Proyecto en producción activa.</p>
+                        <p>Asistente de IA generativa desplegado en producción para el CEU Educational Group.
+                           Integra OpenAI API con RAG pipelines conectados a fuentes de datos institucionales,
+                           automatizando flujos académicos y administrativos para toda la comunidad universitaria.</p>
                         <div class="project-tags">
-                            <span class="tag">LLM's</span>
-                            <span class="tag">Python</span>
+                            <span class="tag">RAG Pipeline</span>
+                            <span class="tag">OpenAI API</span>
                             <span class="tag">Azure</span>
-                            <span class="tag">APIs RESTful</span>
+                            <span class="tag">Python</span>
                         </div>
-                        <a href="https://medios.uchceu.es/actualidad-ceu/se-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceuse-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceu/" target="_blank" class="project-link">Ver en la Web <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://medios.uchceu.es/actualidad-ceu/se-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceuse-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceu/"
+                           target="_blank" rel="noopener" class="project-link">
+                            Ver en la Web <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="project-card">
+
+                <div class="project-card reveal">
                     <div class="project-image">
                         <i class="fas fa-hands"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Reconocimiento de Lenguaje de Signos</h3>
-                        <p>Sistema de traducción automática de lenguaje de signos americano (ASL) a texto mediante visión por computador y MediaPipe. 
-                        Procesamiento de video en tiempo real con webcam, detección y clasificación de gestos con modelos de deep learning. 
-                        Proyecto completo con pipeline de datos, entrenamiento de modelos y aplicación funcional enfocada en accesibilidad e inclusión tecnológica.</p>
+                        <h3>Real-Time Gesture Recognition</h3>
+                        <p>Pipeline de Transfer Learning sobre Vision Transformers (ViT) para clasificación de gestos
+                           en lenguaje de signos americano (ASL). Inferencia en tiempo real con webcam usando OpenCV y MediaPipe,
+                           con foco en accesibilidad e inclusión tecnológica.</p>
                         <div class="project-tags">
-                            <span class="tag">TensorFlow</span>
+                            <span class="tag">Vision Transformers</span>
+                            <span class="tag">Transfer Learning</span>
+                            <span class="tag">OpenCV</span>
                             <span class="tag">MediaPipe</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Computer Vision</span>
                         </div>
-                        <a href="https://github.com/iDiagoValeta/ASL-Hand-Gesture-Recognition" target="_blank" class="project-link">Ver en GitHub <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://github.com/iDiagoValeta/ASL-Hand-Gesture-Recognition"
+                           target="_blank" rel="noopener" class="project-link">
+                            Ver en GitHub <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="project-card">
+
+                <div class="project-card reveal">
                     <div class="project-image">
-                        <i class="fas fa-brain"></i>
+                        <i class="fas fa-sitemap"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Portfolio de Proyectos en IA</h3>
-                        <p>Colección de 15+ proyectos activos en GitHub que demuestran evolución técnica desde nivel académico hasta producción. 
-                        Incluye Transfer Learning con Vision Transformers, fine-tuning de LLMs, Sistemas Multi-Agente, compiladores funcionales, 
-                        análisis de datos y desarrollo backend. Todos los repositorios están disponibles para exploración del código.</p>
+                        <h3>Multi-Agent Automation Framework</h3>
+                        <p>Orquestación de agentes autónomos con LangChain y CrewAI para automatizar workflows multi-step
+                           complejos con mínima intervención humana. Incluye pipelines LLM fine-tuning con PEFT/QLoRA sobre Llama 3
+                           y benchmarking de precisión.</p>
                         <div class="project-tags">
-                            <span class="tag">Transfer Learning</span>
-                            <span class="tag">Vision Transformers</span>
-                            <span class="tag">Fine-tuning LLMs</span>
-                            <span class="tag">Python</span>
+                            <span class="tag">LangChain</span>
+                            <span class="tag">CrewAI</span>
+                            <span class="tag">PEFT/QLoRA</span>
+                            <span class="tag">Llama 3</span>
                         </div>
-                        <a href="https://github.com/iDiagoValeta?tab=repositories" target="_blank" class="project-link">Ver en GitHub <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://github.com/iDiagoValeta?tab=repositories"
+                           target="_blank" rel="noopener" class="project-link">
+                            Ver en GitHub <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
+    <!-- ===== CHAT ===== -->
     <section id="chat" class="section section-alt">
         <div class="container">
-            <h2 class="section-title">Pregúntale Cualquier Cosa</h2>
-            <p class="section-subtitle">Usa este chat como una extensión mía. ¡Lo he programado yo!</p>
+            <h2 class="section-title">Pregúntale al Asistente</h2>
+            <p class="section-subtitle">
+                Un chat con contexto completo sobre mi perfil. ¡Lo he programado yo con Gemini 2.0 Flash!
+            </p>
             <div class="chat-container">
                 <div class="chat-header">
                     <div class="chat-header-info">
                         <i class="fas fa-robot"></i>
                         <div>
-                            <h3>Asistente basado en Gemini 2.5 Flash</h3>
+                            <h3>Asistente IA · Gemini 2.0 Flash</h3>
                             <p class="chat-status" id="chatStatus">Listo para chatear</p>
                         </div>
                     </div>
                     <div class="chat-header-actions">
-                        <button class="btn-export" id="exportChat" title="Exportar conversación" aria-label="Exportar conversación del chat">
+                        <button class="btn-export" id="exportChat" title="Exportar conversación" aria-label="Exportar conversación">
                             <i class="fas fa-download"></i>
                         </button>
-                        <button class="btn-clear" id="clearChat" title="Limpiar chat" aria-label="Limpiar historial del chat">
+                        <button class="btn-clear" id="clearChat" title="Limpiar chat" aria-label="Limpiar historial">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 </div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="message message-bot">
-                        <div class="message-avatar">
-                            <i class="fas fa-robot"></i>
-                        </div>
+                        <div class="message-avatar"><i class="fas fa-robot"></i></div>
                         <div class="message-content">
-                            <p>Soy un asistente que conoce información sobre este portfolio y sobre Ignacio en general. ¿Qué te gustaría saber? Puedes preguntarme sobre experiencia, proyectos, habilidades o cualquier otra cosa relacionada.</p>
+                            <p>Hola, soy el asistente de Ignacio. Tengo contexto completo sobre su experiencia, proyectos y habilidades. ¿Qué te gustaría saber?</p>
                         </div>
                     </div>
                 </div>
                 <div class="chat-input-container">
                     <div class="chat-input-wrapper">
-                        <input 
-                            type="text" 
-                            id="chatInput" 
-                            class="chat-input" 
-                            placeholder="Escribe tu pregunta aquí..."
+                        <input
+                            type="text" id="chatInput" class="chat-input"
+                            placeholder="Pregunta sobre experiencia, proyectos, habilidades..."
                             autocomplete="off"
-                            aria-label="Campo de entrada para preguntas al asistente"
-                            maxlength="2000"
-                        >
-                        <button id="sendButton" class="btn-send" aria-label="Enviar mensaje" title="Enviar mensaje (Enter)">
+                            aria-label="Pregunta al asistente"
+                            maxlength="2000">
+                        <button id="sendButton" class="btn-send" aria-label="Enviar" title="Enviar (Enter)">
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
@@ -295,29 +344,26 @@
         </div>
     </section>
 
+    <!-- ===== CONTACTO ===== -->
     <section id="contacto" class="section">
         <div class="container">
             <h2 class="section-title">Contacto</h2>
             <div class="contact-content">
                 <p class="contact-description">
-                    ¿Interesado en trabajar juntos? ¡No dudes en contactarme!
+                    ¿Interesado en colaborar o conocer más? No dudes en escribirme.
                 </p>
                 <div class="contact-links">
-                    <a href="mailto:nadiva1243@gmail.com" class="contact-link" aria-label="Enviar email">
+                    <a href="mailto:nadiva1243@gmail.com" class="contact-link" aria-label="Email">
                         <i class="fas fa-envelope"></i>
                         <span>Email</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Perfil de LinkedIn">
+                    <a href="https://www.linkedin.com/in/ignacio-diago/" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="LinkedIn">
                         <i class="fab fa-linkedin"></i>
                         <span>LinkedIn</span>
                     </a>
-                    <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="Perfil de GitHub">
+                    <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="GitHub">
                         <i class="fab fa-github"></i>
                         <span>GitHub</span>
-                    </a>
-                    <a href="tel:+34645987021" class="contact-link" aria-label="Llamar por teléfono">
-                        <i class="fas fa-phone"></i>
-                        <span>Teléfono</span>
                     </a>
                 </div>
             </div>
@@ -326,12 +372,11 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; Si te ha gustado puedes replicar mi página en GitHub, ¡A programar!.</p>
+            <p>&copy; 2025 Ignacio Diago Valeta · AI Engineer · Construido con Python + Gemini API</p>
         </div>
     </footer>
 
-    <!-- Botón Scroll to Top -->
-    <button class="scroll-to-top" id="scrollToTop" aria-label="Volver arriba" title="Volver al inicio">
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Volver arriba">
         <i class="fas fa-arrow-up"></i>
     </button>
 

@@ -23,7 +23,7 @@ def get_api_key():
     return api_key
 
 API_KEY = get_api_key()
-GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent"
+GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
 
 # Configuración de seguridad
 REQUEST_TIMEOUT = 30  # segundos
