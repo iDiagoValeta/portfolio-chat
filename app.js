@@ -561,12 +561,12 @@ async function sendMessageToGemini(userMessage) {
             return 'Error: La solicitud tardó demasiado tiempo. Por favor, intenta de nuevo.';
         } else if (errorMsg.includes('API_KEY') || errorMsg.includes('API key') || errorMsg.includes('401')) {
             return 'Error: La API key no es válida o ha expirado. Por favor, verifica tu configuración y obtén una nueva key en https://makersuite.google.com/app/apikey';
-        } else if (errorMsg.includes('quota') || errorMsg.includes('429')) {
-            return 'Error: Se ha excedido la cuota de la API. Por favor, intenta más tarde o verifica tu plan de Google AI Studio.';
+        } else if (errorMsg.includes('RESOURCE_EXHAUSTED') || errorMsg.includes('quota') || errorMsg.includes('429')) {
+            return 'Límite de peticiones alcanzado. Espera unos segundos e inténtalo de nuevo.';
         } else if (errorMsg.includes('CORS') || errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError')) {
-            return 'Error de conexión: No se pudo conectar con el servidor proxy. Asegúrate de que el servidor Python (server.py) esté ejecutándose en el puerto 8000.';
+            return 'Error de conexión con el servidor. Por favor, inténtalo de nuevo en unos momentos.';
         } else if (errorMsg.includes('403')) {
-            return 'Error: Acceso denegado. Verifica que tu API key tenga los permisos necesarios y que el modelo gemini-2.5-flash-preview-09-2025 esté disponible en tu región.';
+            return 'Acceso denegado. Verifica que la API key tenga los permisos necesarios.';
         } else {
             return `Error: ${errorMsg}. Por favor, verifica tu conexión a internet, tu API key y que el modelo esté disponible. Revisa la consola del navegador (F12) para más detalles.`;
         }
