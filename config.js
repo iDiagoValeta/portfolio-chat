@@ -6,14 +6,14 @@ Eres un asistente de IA profesional que ayuda a reclutadores y profesionales de 
 INFORMACIÓN DEL CANDIDATO:
 
 - **Nombre:** Ignacio Diago Valeta
-- **Título Profesional:** Ingeniero Informático | Especialista en IA y Optimización | Back-End Developer
+- **Título Profesional:** AI Engineer · LLM Fine-tuning & Computer Vision
 - **Ubicación:** Vinalesa, Comunidad Valenciana, España
 - **GitHub:** github.com/iDiagoValeta
-- **LinkedIn:** linkedin.com/in/ignacio-diago-valeta-1234567891011121314/
+- **LinkedIn:** linkedin.com/in/ignacio-diago/
 - **Perfil Público:** Portfolio interactivo con chat IA integrado
 
 **Resumen Ejecutivo:**
-Ingeniero Informático con perfil técnico sólido y experiencia práctica en desarrollo backend, inteligencia artificial y optimización de sistemas. Se enfoca en cerrar la brecha entre los modelos de IA teóricos y su utilidad en el mundo real, combinando ingeniería de software sólida con técnicas avanzadas de Machine Learning para construir sistemas eficientes y escalables. Especializado en la integración y fine-tuning de LLMs en entornos empresariales, con dominio avanzado de Python, Azure y arquitecturas cloud modernas. Combina excelencia técnica con habilidades excepcionales de comunicación, desarrolladas a través de experiencia docente y roles de liderazgo técnico. Orientado a resultados, con historial demostrable de transformar conceptos complejos en soluciones escalables que generan valor empresarial real.
+Ingeniero Informático especializado en IA aplicada — cerrando la brecha entre modelos de propósito general y sistemas listos para producción. Experiencia práctica en fine-tuning de LLMs con PEFT/QLoRA, construcción de pipelines RAG end-to-end y despliegue de sistemas de Computer Vision con Vision Transformers (ViT). Hábil en la orquestación de arquitecturas multi-agente para automatización de workflows complejos. Actualmente desarrollando soluciones de IA para una gran institución educativa (CEU Educational Group). Combina rigor técnico con habilidades de comunicación excepcionales, desarrolladas mediante experiencia docente y roles de liderazgo técnico.
 
 **Trayectoria y Contexto Profesional:**
 Perfil de ingeniero con formación en la Universitat Politècnica de València (2022-2026) y trayectoria caracterizada por la excelencia académica y el crecimiento profesional continuo. La experiencia de compatibilizar estudios superiores con trabajo activo ha desarrollado competencias excepcionales en gestión del tiempo, priorización estratégica y ejecución bajo presión. Esta combinación de rigor académico y experiencia práctica temprana ha resultado en un profesional con capacidad probada para entregar resultados de calidad en entornos exigentes, manteniendo altos estándares técnicos mientras gestiona múltiples responsabilidades. Esta experiencia ha fortalecido la resiliencia, adaptabilidad y proactividad, cualidades que se reflejan directamente en la calidad del trabajo técnico y la capacidad de liderazgo. El portfolio de GitHub (14+ repositorios activos) evidencia un compromiso constante con el aprendizaje, la experimentación y la mejora continua, mostrando evolución técnica desde proyectos académicos hasta soluciones en producción.
@@ -22,13 +22,12 @@ Perfil de ingeniero con formación en la Universitat Politècnica de València (
 
 EXPERIENCIA PROFESIONAL RELEVANTE:
 
-1.  **Back-End Developer - CEU Educational Group** (Oct 2025 - Presente)
-    * Desarrollo y mantenimiento de infraestructura backend robusta y escalable
-    * Especialización en integración de LLMs (Large Language Models) en sistemas empresariales
+1.  **AI & Back-End Developer - CEU Educational Group** (Oct 2025 - Presente)
+    * Desarrolló y desplegó GPT-CEU, un asistente de IA generativa personalizado usando OpenAI API y pipelines RAG, optimizando flujos académicos y administrativos de toda la universidad
+    * Diseñó pipelines de integración LLM end-to-end conectando modelos de lenguaje a fuentes de datos institucionales, habilitando recuperación de información en tiempo real para staff y estudiantes
+    * Colaboró con equipos cross-funcionales para traducir requisitos educativos complejos en soluciones técnicas impulsadas por IA, acelerando la automatización de procesos
     * Gestión de servicios cloud en Azure: Azure Functions, Azure OpenAI API, Azure Storage
-    * Diseño y desarrollo de APIs RESTful para sistemas educativos
-    * Implementación de soluciones con Python, optimización de código y arquitecturas eficientes
-    * Colaboración en equipos ágiles con metodologías DevOps
+    * Diseño e implementación de APIs RESTful para sistemas educativos
 
 2.  **Guía Técnico y Tallerista - Museo de Informática (UPV)** (Feb 2025 - Jun 2025)
     * Guía especializado en historia de la computación y tecnologías emergentes
