@@ -82,6 +82,22 @@ html.dark-mode {
     --shadow-card-hover:0 8px 36px rgba(255,255,255,0.08), 0 0 0 1px rgba(255,255,255,0.12);
 }
 
+/* Fondo fijo con textura de puntos en modo oscuro (cubre toda la página) */
+html.dark-mode body {
+    background-color: #000000;
+    background-image:
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,0.07) 1px, transparent 0),
+        linear-gradient(160deg, #000000 0%, #0d0d0d 50%, #1a1a1a 100%);
+    background-size: 44px 44px, 100% 100%;
+    background-attachment: fixed;
+    background-repeat: repeat, no-repeat;
+}
+
+html.dark-mode .hero         { background: transparent; }
+html.dark-mode .hero::before { display: none; }
+html.dark-mode .section-alt  { background: transparent; }
+html.dark-mode .footer       { background: transparent; }
+
 /* --- Base ------------------------------------------------- */
 html { scroll-behavior: smooth; }
 

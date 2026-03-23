@@ -9,7 +9,7 @@ let chatInput, sendButton, chatMessages, clearChatButton, chatStatus;
 
 // Constantes
 const STORAGE_KEY = 'portfolio_chat_history';
-const CHAT_TIMEOUT = 30000; // 30 segundos
+const CHAT_TIMEOUT = 60000; // 60 segundos (margen para reintentos)
 const MAX_REQUEST_SIZE = 100000; // 100KB
 
 // Función para sanitizar HTML (prevenir XSS)
@@ -435,40 +435,42 @@ function scrollToBottom() {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+// Muestra cuenta regresiva en el status y resuelve al terminar
+async function countdownRetry(seconds) {
+    for (let i = seconds; i > 0; i--) {
+        chatStatus.textContent = `Cuota alcanzada. Reintentando en ${i}s...`;
+        chatStatus.style.color = '#f59e0b';
+        await new Promise(r => setTimeout(r, 1000));
+    }
+    chatStatus.textContent = 'Reintentando...';
+    chatStatus.style.color = '#6366f1';
+}
+
 // Función para enviar mensaje a Gemini API
 async function sendMessageToGemini(userMessage) {
     try {
         chatStatus.textContent = 'Pensando...';
         chatStatus.style.color = '#6366f1';
-        
-        // Agregar mensaje del usuario al historial
+
+        // Agregar mensaje del usuario al historial (provisional; se revierte si hay error)
         conversationHistory.push({
             role: 'user',
             parts: [{ text: userMessage }]
         });
-        
-        // Guardar historial
-        saveChatHistory();
-        
-        // Construir el contenido para la API
-        // Si es el primer mensaje, incluir el contexto del portfolio
-        // Si no, usar el historial de conversación
+
+        // Construir contenidos con contexto del portfolio
         const contents = [
-            // 1. El prompt del sistema (las instrucciones de config.js)
             {
                 role: 'user',
                 parts: [{ text: PORTFOLIO_INFO }]
             },
-            // 2. Una respuesta ficticia para que el modelo "active" su rol
             {
                 role: 'model',
                 parts: [{ text: 'Entendido. Estoy listo para actuar como el asistente de Ignacio.' }]
             },
-            // 3. El historial de conversación real
             ...conversationHistory
         ];
-        
-        // Preparar el contenido para la API
+
         const requestBody = {
             contents: contents,
             generationConfig: {
@@ -478,97 +480,96 @@ async function sendMessageToGemini(userMessage) {
                 maxOutputTokens: 1024,
             }
         };
-        
-        // Llamar a la API de Gemini a través del servidor proxy (evita problemas de CORS)
-        // El servidor proxy está en server.py y lee la API key de config.js
-        // Usar ruta relativa para que funcione desde cualquier subdirectorio
-        
-        // [CAMBIO APLICADO]
-        // Ruta de API simplificada. El servidor python (server.py)
-        // ya maneja las rutas '/api/gemini' y '/portfolio-chat/api/gemini'.
+
         const apiPath = '/api/gemini';
-        
-        // Crear AbortController para timeout
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), CHAT_TIMEOUT);
-        
-        try {
-            const response = await fetch(
-                apiPath,
-                {
+
+        // Fetch con un reintento automático si se alcanza el límite de cuota (429)
+        let response;
+        for (let attempt = 0; attempt < 2; attempt++) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), CHAT_TIMEOUT);
+            try {
+                response = await fetch(apiPath, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(requestBody),
                     signal: controller.signal
-                }
-            );
-            
-            if (!response.ok) {
-                let errorMessage = 'Error al conectar con la API';
-                try {
-                    const errorData = await response.json();
-                    errorMessage = errorData.error?.message || errorMessage;
-                    console.error('Error de API:', errorData);
-                } catch (e) {
-                    console.error('Error al parsear respuesta:', e);
-                    errorMessage = `Error HTTP ${response.status}: ${response.statusText}`;
-                }
-                throw new Error(errorMessage);
+                });
+                clearTimeout(timeoutId);
+            } catch (e) {
+                clearTimeout(timeoutId);
+                throw e;
             }
-            
-            const data = await response.json();
-            
-            // Verificar si hay candidatos en la respuesta
-            if (!data.candidates || data.candidates.length === 0) {
-                console.error('Respuesta sin candidatos:', data);
-                throw new Error('La API no devolvió ninguna respuesta');
+
+            // Si es 429 y aún queda un intento, esperar y reintentar
+            if (response.status === 429 && attempt === 0) {
+                await countdownRetry(20);
+                continue;
             }
-            
-            // Extraer la respuesta
-            const botResponse = data.candidates[0]?.content?.parts[0]?.text || 
-                              'Lo siento, no pude generar una respuesta. Por favor, intenta de nuevo.';
-            
-            // Agregar respuesta al historial
-            conversationHistory.push({
-                role: 'model',
-                parts: [{ text: botResponse }]
-            });
-            
-            // Guardar historial
-            saveChatHistory();
-            
-            chatStatus.textContent = 'Listo para chatear';
-            chatStatus.style.color = '#10b981';
-            
-            return botResponse;
-        } catch (fetchError) {
-            clearTimeout(timeoutId);
-            throw fetchError;
+            break;
         }
-        
+
+        if (!response.ok) {
+            let errorMessage = 'Error al conectar con la API';
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.error?.message || errorMessage;
+                console.error('Error de API:', errorData);
+            } catch (e) {
+                errorMessage = `Error HTTP ${response.status}: ${response.statusText}`;
+            }
+            throw new Error(errorMessage);
+        }
+
+        const data = await response.json();
+
+        if (!data.candidates || data.candidates.length === 0) {
+            console.error('Respuesta sin candidatos:', data);
+            throw new Error('La API no devolvió ninguna respuesta');
+        }
+
+        const botResponse = data.candidates[0]?.content?.parts[0]?.text ||
+                            'Lo siento, no pude generar una respuesta. Por favor, intenta de nuevo.';
+
+        // Éxito: guardar historial con usuario + respuesta
+        saveChatHistory();
+        conversationHistory.push({
+            role: 'model',
+            parts: [{ text: botResponse }]
+        });
+        saveChatHistory();
+
+        chatStatus.textContent = 'Listo para chatear';
+        chatStatus.style.color = '#10b981';
+
+        return botResponse;
+
     } catch (error) {
+        // Revertir el mensaje del usuario del historial para no dejar intercambios incompletos
+        if (conversationHistory.length > 0 &&
+            conversationHistory[conversationHistory.length - 1].role === 'user') {
+            conversationHistory.pop();
+            saveChatHistory();
+        }
+
         console.error('Error completo:', error);
-        console.error('Stack trace:', error.stack);
         chatStatus.textContent = 'Error de conexión';
         chatStatus.style.color = '#ef4444';
-        
-        // Mensajes de error más específicos
+
         const errorMsg = error.message || String(error);
-        
+
         if (error.name === 'AbortError' || errorMsg.includes('timeout') || errorMsg.includes('aborted')) {
             return 'Error: La solicitud tardó demasiado tiempo. Por favor, intenta de nuevo.';
         } else if (errorMsg.includes('API_KEY') || errorMsg.includes('API key') || errorMsg.includes('401')) {
-            return 'Error: La API key no es válida o ha expirado. Por favor, verifica tu configuración y obtén una nueva key en https://makersuite.google.com/app/apikey';
+            return 'Error: La API key no es válida o ha expirado.';
         } else if (errorMsg.includes('RESOURCE_EXHAUSTED') || errorMsg.includes('quota') || errorMsg.includes('429')) {
-            return 'Límite de peticiones alcanzado. Espera unos segundos e inténtalo de nuevo.';
+            return 'Límite de cuota de Gemini alcanzado. El chat reintentó automáticamente sin éxito. Espera ~1 minuto e inténtalo de nuevo.';
         } else if (errorMsg.includes('CORS') || errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError')) {
             return 'Error de conexión con el servidor. Por favor, inténtalo de nuevo en unos momentos.';
         } else if (errorMsg.includes('403')) {
             return 'Acceso denegado. Verifica que la API key tenga los permisos necesarios.';
         } else {
-            return `Error: ${errorMsg}. Por favor, verifica tu conexión a internet, tu API key y que el modelo esté disponible. Revisa la consola del navegador (F12) para más detalles.`;
+            return `Error: ${errorMsg}. Por favor, verifica tu conexión a internet.`;
         }
     }
 }
@@ -937,10 +938,9 @@ function initializeDarkMode() {
     const darkModeToggle = document.getElementById('darkModeToggle');
     if (!darkModeToggle) return;
     
-    // Cargar preferencia guardada
+    // Cargar preferencia guardada (modo oscuro por defecto)
     const savedTheme = localStorage.getItem('portfolio_theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    const isDark = savedTheme !== 'light';
     
     if (isDark) {
         document.documentElement.classList.add('dark-mode');
