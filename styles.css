@@ -139,10 +139,16 @@ html:not(.dark-mode) .avatar-placeholder {
 }
 
 /* --- Base ------------------------------------------------- */
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+    min-height: 100%;
+    background-color: #f8f8f8;
+}
+html.dark-mode { background-color: #000000; }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
     background-color: #f8f8f8;
     background-image:
         radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0),
@@ -184,6 +190,11 @@ html.dark-mode .header {
 
 .header.scrolled { box-shadow: var(--shadow-md); }
 .header.hide     { transform: translateY(-100%); }
+
+/* Separación sutil entre secciones en modo oscuro */
+html.dark-mode .section-alt {
+    background: rgba(255,255,255,0.018) !important;
+}
 
 .nav {
     max-width: 1180px; margin: 0 auto;
@@ -590,6 +601,12 @@ html.dark-mode .header {
     padding: 0.2rem 0.7rem;
     font-size: 0.75rem; font-weight: 500;
 }
+/* Tags con mayor contraste en modo claro */
+html:not(.dark-mode) .tag {
+    background: #e8e8e8;
+    border-color: #c0c0c0;
+    color: #333333;
+}
 
 .project-link {
     display: inline-flex; align-items: center; gap: 0.5rem;
@@ -615,6 +632,14 @@ html.dark-mode .header {
     display: flex; justify-content: space-between; align-items: center;
     border-bottom: 1px solid rgba(255,255,255,0.08);
 }
+html:not(.dark-mode) .chat-header {
+    background: linear-gradient(135deg, #2a2a2a 0%, #444444 100%);
+    border-bottom-color: rgba(255,255,255,0.08);
+}
+html:not(.dark-mode) .chat-header-info h3 { color: #e8e8e8; }
+html:not(.dark-mode) .chat-status { color: #999999; }
+html:not(.dark-mode) .chat-status::before { background: #6fcf97; }
+html:not(.dark-mode) .chat-header-info > i { color: rgba(255,255,255,0.75); }
 
 .chat-header-info {
     display: flex; align-items: center; gap: 1rem;
