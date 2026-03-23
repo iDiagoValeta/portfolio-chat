@@ -98,6 +98,40 @@ html.dark-mode .hero::before { display: none; }
 html.dark-mode .section-alt  { background: transparent; }
 html.dark-mode .footer       { background: transparent; }
 
+/* ---- Hero en modo claro: fondo blanco con texto oscuro ---- */
+html:not(.dark-mode) .hero         { background: transparent; color: var(--text-primary); }
+html:not(.dark-mode) .hero::before,
+html:not(.dark-mode) .hero::after  { display: none; }
+
+html:not(.dark-mode) .hero-badge {
+    background: rgba(0,0,0,0.04);
+    border-color: rgba(0,0,0,0.12);
+    color: var(--text-secondary);
+}
+html:not(.dark-mode) .hero-badge i { color: var(--text-muted); }
+
+html:not(.dark-mode) .hero-subtitle    { color: var(--text-secondary); }
+html:not(.dark-mode) .hero-description { color: var(--text-secondary); }
+
+html:not(.dark-mode) .hero-chip        { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1);  color: var(--text-secondary); }
+html:not(.dark-mode) .hero-chip.dark   { border-color: rgba(0,0,0,0.2);  color: var(--text-primary); }
+html:not(.dark-mode) .hero-chip.mid    { border-color: rgba(0,0,0,0.14); color: var(--text-secondary); }
+html:not(.dark-mode) .hero-chip.light  { border-color: rgba(0,0,0,0.08); color: var(--text-muted); }
+
+html:not(.dark-mode) .highlight { background: var(--grad-main); }
+
+html:not(.dark-mode) .btn-primary       { background: var(--text-primary); color: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+html:not(.dark-mode) .btn-primary:hover { background: #333333; box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+
+html:not(.dark-mode) .btn-secondary       { background: rgba(0,0,0,0.05); color: var(--text-primary); border-color: rgba(0,0,0,0.15); }
+html:not(.dark-mode) .btn-secondary:hover { background: rgba(0,0,0,0.1);  border-color: rgba(0,0,0,0.3); }
+
+html:not(.dark-mode) .avatar-placeholder {
+    border-color: rgba(0,0,0,0.1);
+    background: #e8e8e8;
+    box-shadow: 0 0 0 6px rgba(0,0,0,0.03), 0 20px 60px rgba(0,0,0,0.12);
+}
+
 /* --- Base ------------------------------------------------- */
 html { scroll-behavior: smooth; }
 
