@@ -118,7 +118,13 @@ html:not(.dark-mode) .hero-chip.dark   { border-color: rgba(0,0,0,0.2);  color: 
 html:not(.dark-mode) .hero-chip.mid    { border-color: rgba(0,0,0,0.14); color: var(--text-secondary); }
 html:not(.dark-mode) .hero-chip.light  { border-color: rgba(0,0,0,0.08); color: var(--text-muted); }
 
-html:not(.dark-mode) .highlight { background: var(--grad-main); }
+html:not(.dark-mode) .highlight {
+    background-image: var(--grad-main);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
 html:not(.dark-mode) .btn-primary       { background: var(--text-primary); color: #ffffff; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
 html:not(.dark-mode) .btn-primary:hover { background: #333333; box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
