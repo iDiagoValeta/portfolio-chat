@@ -1,5 +1,10 @@
 import { PORTFOLIO_INFO } from './config.js';
 
+// ── Pixel-art SVGs (Nothing Design) ─────────────────────────────
+const SVG_BOT = `<svg width="18" height="18" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block"><rect x="1" y="0" width="6" height="1" fill="currentColor"/><rect x="1" y="1" width="1" height="1" fill="currentColor"/><rect x="6" y="1" width="1" height="1" fill="currentColor"/><rect x="1" y="2" width="1" height="1" fill="currentColor"/><rect x="3" y="2" width="2" height="1" fill="currentColor"/><rect x="6" y="2" width="1" height="1" fill="currentColor"/><rect x="1" y="3" width="1" height="1" fill="currentColor"/><rect x="6" y="3" width="1" height="1" fill="currentColor"/><rect x="1" y="4" width="1" height="1" fill="currentColor"/><rect x="3" y="4" width="2" height="1" fill="currentColor"/><rect x="6" y="4" width="1" height="1" fill="currentColor"/><rect x="1" y="5" width="2" height="1" fill="currentColor"/><rect x="5" y="5" width="2" height="1" fill="currentColor"/><rect x="2" y="6" width="4" height="1" fill="currentColor"/><rect x="2" y="7" width="1" height="1" fill="currentColor"/><rect x="5" y="7" width="1" height="1" fill="currentColor"/></svg>`;
+
+const SVG_USER = `<svg width="18" height="18" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block"><rect x="2" y="0" width="4" height="1" fill="currentColor"/><rect x="2" y="1" width="1" height="1" fill="currentColor"/><rect x="5" y="1" width="1" height="1" fill="currentColor"/><rect x="2" y="2" width="4" height="1" fill="currentColor"/><rect x="3" y="3" width="2" height="1" fill="currentColor"/><rect x="1" y="4" width="6" height="1" fill="currentColor"/><rect x="1" y="5" width="1" height="1" fill="currentColor"/><rect x="6" y="5" width="1" height="1" fill="currentColor"/><rect x="1" y="6" width="1" height="1" fill="currentColor"/><rect x="6" y="6" width="1" height="1" fill="currentColor"/><rect x="1" y="7" width="2" height="1" fill="currentColor"/><rect x="5" y="7" width="2" height="1" fill="currentColor"/></svg>`;
+
 // Estado del chat
 let isProcessing = false;
 let conversationHistory = [];
@@ -378,7 +383,7 @@ function addMessage(content, isUser = false) {
     
     const avatar = document.createElement('div');
     avatar.className = 'message-avatar';
-    avatar.innerHTML = isUser ? '<span style="font-size: 1.2em;">🐵</span>' : '<i class="fas fa-robot"></i>';
+    avatar.innerHTML = isUser ? SVG_USER : SVG_BOT;
     
     const messageContent = document.createElement('div');
     messageContent.className = 'message-content';
@@ -409,8 +414,8 @@ function addLoadingMessage() {
     
     const avatar = document.createElement('div');
     avatar.className = 'message-avatar';
-    avatar.innerHTML = '<i class="fas fa-robot"></i>';
-    
+    avatar.innerHTML = SVG_BOT;
+
     const messageContent = document.createElement('div');
     messageContent.className = 'message-loading';
     messageContent.innerHTML = '<span></span><span></span><span></span>';
@@ -1005,38 +1010,51 @@ function initializeScrollToTop() {
 }
 
 // Función para inicializar modo oscuro
+// — toggle principal: pixel art en hero (escritorio)
+// — fallback: botón nav (móvil)
 function initializeDarkMode() {
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    if (!darkModeToggle) return;
-    
-    // Cargar preferencia guardada (modo oscuro por defecto)
+    const heroToggle = document.getElementById('pixelThemeToggle');
+    const navToggle  = document.getElementById('darkModeToggle');
+
     const savedTheme = localStorage.getItem('portfolio_theme');
     const isDark = savedTheme !== 'light';
-    
+
     if (isDark) {
         document.documentElement.classList.add('dark-mode');
-        darkModeToggle.setAttribute('aria-label', 'Activar modo claro');
-        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        if (navToggle) navToggle.innerHTML = '<i class="fas fa-sun"></i>';
     } else {
         document.documentElement.classList.remove('dark-mode');
-        darkModeToggle.setAttribute('aria-label', 'Activar modo oscuro');
-        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        if (navToggle) navToggle.innerHTML = '<i class="fas fa-moon"></i>';
     }
-    
-    // Toggle al hacer clic
-    darkModeToggle.addEventListener('click', () => {
-        const isDarkMode = document.documentElement.classList.contains('dark-mode');
-        
-        if (isDarkMode) {
+
+    function doToggle() {
+        const dark = document.documentElement.classList.contains('dark-mode');
+        if (dark) {
             document.documentElement.classList.remove('dark-mode');
             localStorage.setItem('portfolio_theme', 'light');
-            darkModeToggle.setAttribute('aria-label', 'Activar modo oscuro');
-            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            if (navToggle) navToggle.innerHTML = '<i class="fas fa-moon"></i>';
         } else {
             document.documentElement.classList.add('dark-mode');
             localStorage.setItem('portfolio_theme', 'dark');
-            darkModeToggle.setAttribute('aria-label', 'Activar modo claro');
-            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            if (navToggle) navToggle.innerHTML = '<i class="fas fa-sun"></i>';
         }
-    });
+    }
+
+    // Hero toggle con animación de escáner (easter egg)
+    if (heroToggle) {
+        heroToggle.addEventListener('click', () => {
+            if (heroToggle.classList.contains('scanning')) return;
+            heroToggle.classList.add('scanning');
+            setTimeout(doToggle, 200);
+            setTimeout(() => heroToggle.classList.remove('scanning'), 500);
+        });
+        heroToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); heroToggle.click(); }
+        });
+    }
+
+    // Fallback móvil (botón nav)
+    if (navToggle) {
+        navToggle.addEventListener('click', doToggle);
+    }
 }

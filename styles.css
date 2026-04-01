@@ -132,7 +132,6 @@ html:not(.dark-mode) .btn-secondary:hover { background: rgba(0,0,0,0.1);  border
 html:not(.dark-mode) .avatar-placeholder {
     border-color: rgba(0,0,0,0.1);
     background: #e8e8e8;
-    box-shadow: 0 0 0 6px rgba(0,0,0,0.03), 0 20px 60px rgba(0,0,0,0.12);
 }
 
 /* --- Base ------------------------------------------------- */
@@ -205,21 +204,25 @@ html.dark-mode .header {
 
 .nav-actions { display: flex; align-items: center; gap: 0.75rem; }
 
+/* Toggle principal reemplazado por pixel art en hero; este botón solo actúa de fallback en móvil */
 .dark-mode-toggle {
+    display: none; /* oculto en escritorio */
     background: none;
-    border: 1.5px solid var(--border);
+    border: 1px solid var(--border);
     color: var(--text-secondary);
-    width: 38px; height: 38px;
-    border-radius: var(--r-full);
+    width: 34px; height: 34px;
+    border-radius: 4px;
     cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    transition: all var(--t-base);
-    font-size: 1rem;
+    align-items: center; justify-content: center;
+    transition: all var(--t-fast);
+    font-size: 0.9rem;
 }
 .dark-mode-toggle:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-dim);
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+@media (max-width: 900px) {
+    .dark-mode-toggle { display: flex; }
 }
 
 .nav-links { display: flex; list-style: none; gap: 1.75rem; }
@@ -377,12 +380,9 @@ html.dark-mode .header {
 
 .avatar-placeholder {
     width: 240px; height: 240px;
-    border-radius: var(--r-full);
+    border-radius: 6px;
     overflow: hidden;
-    border: 2px solid rgba(255,255,255,0.2);
-    box-shadow:
-        0 0 0 6px rgba(255,255,255,0.04),
-        0 20px 60px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.15);
     background: #1a1a1a;
     position: relative; flex-shrink: 0;
 }
@@ -645,12 +645,14 @@ html:not(.dark-mode) .chat-header-info > i { color: rgba(255,255,255,0.75); }
     font-size: 0.95rem; font-weight: 700; color: #e0e0e0;
 }
 .chat-status {
-    font-size: 0.75rem; color: #aaaaaa;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem; color: #777777;
+    letter-spacing: 0.04em;
     display: flex; align-items: center; gap: 0.4rem;
 }
 .chat-status::before {
-    content: ''; width: 6px; height: 6px;
-    border-radius: 50%; background: #aaaaaa;
+    content: ''; width: 5px; height: 5px;
+    border-radius: 0; background: #555555;
     animation: pulse 2s ease infinite;
 }
 @keyframes pulse {
@@ -689,10 +691,9 @@ html:not(.dark-mode) .chat-header-info > i { color: rgba(255,255,255,0.75); }
 }
 
 .message-avatar {
-    width: 34px; height: 34px; border-radius: var(--r-full);
+    width: 32px; height: 32px; border-radius: 4px;
     flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.85rem;
 }
 .message-bot .message-avatar {
     background: #1a1a1a;
@@ -734,7 +735,7 @@ html:not(.dark-mode) .chat-header-info > i { color: rgba(255,255,255,0.75); }
 /* Indicador de escritura */
 .typing-indicator, .message-loading { display: flex; gap: 4px; padding: 0.5rem 0; }
 .typing-indicator span, .message-loading span {
-    width: 6px; height: 6px; border-radius: 50%;
+    width: 5px; height: 5px; border-radius: 0;
     background: var(--text-muted); opacity: 0.5;
     animation: typingDot 1.2s ease infinite;
 }
@@ -931,6 +932,82 @@ html:not(.dark-mode) .skill-bar-track:hover .segment.filled { background: #55555
     line-height: 1.7;
 }
 
+/* --- Pixel Art SVG icons ---------------------------------- */
+.pixel-art {
+    display: block;
+    flex-shrink: 0;
+    image-rendering: pixelated;
+}
+.focus-item .pixel-art  { color: var(--text-secondary); margin-bottom: 0.6rem; transition: color var(--t-fast); }
+.focus-item:hover .pixel-art { color: var(--text-primary); }
+.project-image .pixel-art { color: rgba(255,255,255,0.65); position: relative; z-index: 1; }
+
+/* --- Pixel Theme Toggle (Nothing Design easter egg) ------- */
+.pixel-theme-toggle {
+    position: absolute;
+    bottom: 3.5rem;
+    left: 3rem;
+    cursor: pointer;
+    z-index: 2;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+    user-select: none;
+    outline: none;
+}
+.pixel-theme-toggle:focus-visible .toggle-icon-wrap {
+    outline: 1px solid rgba(255,255,255,0.4);
+    outline-offset: 4px;
+}
+
+.toggle-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.3);
+    display: block;
+    margin-bottom: 8px;
+}
+html:not(.dark-mode) .toggle-label { color: var(--text-muted); }
+
+.toggle-icon-wrap {
+    position: relative;
+    width: 40px; height: 40px;
+    overflow: hidden;
+}
+
+.pixel-icon {
+    display: block;
+    color: rgba(255,255,255,0.75);
+    transition: opacity 150ms ease-out;
+    image-rendering: pixelated;
+}
+html:not(.dark-mode) .pixel-icon { color: var(--text-secondary); }
+.pixel-theme-toggle:hover .pixel-icon { opacity: 0.5; }
+
+/* Luna visible en modo oscuro, sol en modo claro */
+html.dark-mode .pixel-sun       { display: none; }
+html.dark-mode .pixel-moon      { display: block; }
+html:not(.dark-mode) .pixel-sun { display: block; }
+html:not(.dark-mode) .pixel-moon{ display: none; }
+
+/* Animación escáner (easter egg) */
+.pixel-theme-toggle.scanning .toggle-icon-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: rgba(255,255,255,0.9);
+    pointer-events: none;
+    animation: pixelScan 500ms ease-in-out forwards;
+}
+html:not(.dark-mode) .pixel-theme-toggle.scanning .toggle-icon-wrap::after {
+    background: rgba(0,0,0,0.6);
+}
+@keyframes pixelScan {
+    0%   { top: 0;    opacity: 1; }
+    80%  { opacity: 0.8; }
+    100% { top: 100%; opacity: 0; }
+}
+
 /* --- Clock Widget (Nothing Design) ----------------------- */
 .hero-clock {
     position: absolute;
@@ -974,6 +1051,7 @@ html:not(.dark-mode) .clock-date { color: var(--text-muted); }
 /* --- Responsive ------------------------------------------- */
 @media (max-width: 900px) {
     .hero-clock { display: none; }
+    .pixel-theme-toggle { display: none; }
     .hero-content { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
     .hero-chips   { justify-content: center; }
     .hero-description { max-width: 100%; margin: 0 auto 2rem; }
