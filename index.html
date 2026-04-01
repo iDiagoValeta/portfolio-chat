@@ -29,9 +29,9 @@
     <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=9">
 
     <!-- Datos estructurados -->
     <script type="application/ld+json">
@@ -122,6 +122,11 @@
                 </div>
             </div>
         </div>
+        <div class="hero-clock">
+            <span class="clock-label">// HORA LOCAL</span>
+            <span class="clock-time" id="clockDisplay">--:--:--</span>
+            <span class="clock-date" id="clockDate">--- -- ---</span>
+        </div>
     </section>
 
     <!-- ===== SOBRE MÍ ===== -->
@@ -184,36 +189,54 @@
     <section id="habilidades" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Habilidades</h2>
-            <div class="skills-grid">
-                <div class="skill-card reveal">
-                    <i class="fas fa-brain"></i>
-                    <h3>LLMs y NLP</h3>
-                    <p>Fine-tuning con PEFT/QLoRA · RAG Pipelines · Llama 3 · OpenAI API · LangChain · LlamaIndex · Prompt Engineering · HuggingFace Transformers</p>
+            <div class="skills-bars">
+                <div class="skill-bar-item" data-level="92">
+                    <div class="skill-bar-header">
+                        <span class="skill-bar-name">LLMs Y NLP</span>
+                        <span class="skill-bar-pct">92%</span>
+                    </div>
+                    <div class="skill-bar-track"></div>
+                    <p class="skill-bar-tags">Fine-tuning PEFT/QLoRA · RAG Pipelines · LangChain · LlamaIndex · HuggingFace Transformers · OpenAI API</p>
                 </div>
-                <div class="skill-card reveal">
-                    <i class="fas fa-eye"></i>
-                    <h3>Computer Vision</h3>
-                    <p>Vision Transformers (ViT) · Transfer Learning · Reconocimiento de gestos en tiempo real · OpenCV · MediaPipe · MobileNetV2</p>
+                <div class="skill-bar-item" data-level="85">
+                    <div class="skill-bar-header">
+                        <span class="skill-bar-name">COMPUTER VISION</span>
+                        <span class="skill-bar-pct">85%</span>
+                    </div>
+                    <div class="skill-bar-track"></div>
+                    <p class="skill-bar-tags">Vision Transformers (ViT) · Transfer Learning · Reconocimiento de gestos en tiempo real · OpenCV · MediaPipe</p>
                 </div>
-                <div class="skill-card reveal">
-                    <i class="fas fa-fire"></i>
-                    <h3>Frameworks de ML</h3>
-                    <p>PyTorch · TensorFlow · Scikit-learn · Keras · Optimización de hiperparámetros · Weights &amp; Biases</p>
+                <div class="skill-bar-item" data-level="88">
+                    <div class="skill-bar-header">
+                        <span class="skill-bar-name">FRAMEWORKS ML</span>
+                        <span class="skill-bar-pct">88%</span>
+                    </div>
+                    <div class="skill-bar-track"></div>
+                    <p class="skill-bar-tags">PyTorch · TensorFlow · Scikit-learn · Keras · Optimización de hiperparámetros · Weights &amp; Biases</p>
                 </div>
-                <div class="skill-card reveal">
-                    <i class="fas fa-layer-group"></i>
-                    <h3>MLOps y Herramientas</h3>
-                    <p>Git · Linux · HuggingFace Hub · Docker · Azure (Functions, OpenAI, Storage) · APIs RESTful</p>
+                <div class="skill-bar-item" data-level="78">
+                    <div class="skill-bar-header">
+                        <span class="skill-bar-name">MLOPS Y HERRAMIENTAS</span>
+                        <span class="skill-bar-pct">78%</span>
+                    </div>
+                    <div class="skill-bar-track"></div>
+                    <p class="skill-bar-tags">Git · Linux · Docker · Azure (Functions, OpenAI, Storage) · HuggingFace Hub · APIs RESTful</p>
                 </div>
-                <div class="skill-card reveal">
-                    <i class="fab fa-python"></i>
-                    <h3>Programación</h3>
-                    <p>Python (avanzado) · SQL · R · C · JavaScript · Backend robusto y automatización de pipelines</p>
+                <div class="skill-bar-item" data-level="90">
+                    <div class="skill-bar-header">
+                        <span class="skill-bar-name">PROGRAMACIÓN</span>
+                        <span class="skill-bar-pct">90%</span>
+                    </div>
+                    <div class="skill-bar-track"></div>
+                    <p class="skill-bar-tags">Python (avanzado) · SQL · R · C · JavaScript · Backend robusto y automatización de pipelines</p>
                 </div>
-                <div class="skill-card reveal">
-                    <i class="fas fa-chart-bar"></i>
-                    <h3>Ciencia de Datos</h3>
-                    <p>NumPy · Pandas · Data Mining · Feature Engineering · Análisis estadístico · Visualización de datos</p>
+                <div class="skill-bar-item" data-level="82">
+                    <div class="skill-bar-header">
+                        <span class="skill-bar-name">CIENCIA DE DATOS</span>
+                        <span class="skill-bar-pct">82%</span>
+                    </div>
+                    <div class="skill-bar-track"></div>
+                    <p class="skill-bar-tags">NumPy · Pandas · Data Mining · Feature Engineering · Análisis estadístico · Visualización de datos</p>
                 </div>
             </div>
         </div>
