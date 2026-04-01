@@ -796,6 +796,73 @@ function initializeScrollReveal() {
     });
 }
 
+// Función para el reloj en tiempo real (Nothing Design)
+function initializeClock() {
+    const clockDisplay = document.getElementById('clockDisplay');
+    const clockDate    = document.getElementById('clockDate');
+    if (!clockDisplay) return;
+
+    const days   = ['DOM','LUN','MAR','MIÉ','JUE','VIE','SÁB'];
+    const months = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+
+    function tick() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        clockDisplay.textContent = `${h}:${m}:${s}`;
+        if (clockDate) {
+            const day   = days[now.getDay()];
+            const date  = String(now.getDate()).padStart(2, '0');
+            const month = months[now.getMonth()];
+            clockDate.textContent = `${day} ${date} ${month}`;
+        }
+    }
+
+    tick();
+    setInterval(tick, 1000);
+}
+
+// Función para barras de habilidades segmentadas (Nothing Design)
+function initializeSkillBars() {
+    const bars = document.querySelectorAll('.skill-bar-item');
+    if (!bars.length) return;
+
+    const TOTAL_SEGMENTS = 20;
+
+    bars.forEach(bar => {
+        const track = bar.querySelector('.skill-bar-track');
+        if (!track) return;
+        for (let i = 0; i < TOTAL_SEGMENTS; i++) {
+            const seg = document.createElement('span');
+            seg.className = 'segment';
+            track.appendChild(seg);
+        }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const bar      = entry.target;
+            const level    = parseInt(bar.dataset.level, 10) || 0;
+            const segments = bar.querySelectorAll('.segment');
+            const filled   = Math.round((level / 100) * TOTAL_SEGMENTS);
+
+            bar.classList.add('visible');
+
+            segments.forEach((seg, i) => {
+                setTimeout(() => {
+                    if (i < filled) seg.classList.add('filled');
+                }, i * 45);
+            });
+
+            observer.unobserve(bar);
+        });
+    }, { threshold: 0.25 });
+
+    bars.forEach(bar => observer.observe(bar));
+}
+
 // Inicializar cuando el DOM esté listo
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
@@ -812,6 +879,8 @@ if (document.readyState === 'loading') {
             initializeScrollToTop();
             initializeDarkMode();
             updateScrollProgress();
+            initializeClock();
+            initializeSkillBars();
             
             // Siempre volver al inicio al cargar
             window.scrollTo(0, 0);
@@ -832,7 +901,9 @@ if (document.readyState === 'loading') {
         initializeScrollToTop();
         initializeDarkMode();
         updateScrollProgress();
-        
+        initializeClock();
+        initializeSkillBars();
+
         // Siempre volver al inicio al cargar
         window.scrollTo(0, 0);
     }
