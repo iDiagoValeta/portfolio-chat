@@ -31,7 +31,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=11">
+    <link rel="stylesheet" href="styles.css?v=12">
 
     <!-- Datos estructurados -->
     <script type="application/ld+json">
@@ -66,7 +66,7 @@
             </div>
             <div class="nav-actions">
                 <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Cambiar tema" title="Cambiar tema">
-                    <i class="fas fa-moon"></i>
+                    <svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="3" y="0" width="3" height="1"/><rect x="2" y="1" width="5" height="1"/><rect x="1" y="2" width="3" height="1"/><rect x="0" y="3" width="3" height="2"/><rect x="1" y="5" width="3" height="1"/><rect x="2" y="6" width="5" height="1"/><rect x="3" y="7" width="3" height="1"/></svg>
                 </button>
                 <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
                     <span></span><span></span><span></span>
@@ -102,10 +102,10 @@
                 </p>
                 <div class="hero-buttons">
                     <a href="#proyectos" class="btn btn-primary">
-                        <i class="fas fa-code-branch"></i> Ver proyectos
+                        <svg width="12" height="12" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="fill:currentColor;display:inline-block;vertical-align:middle"><rect x="0" y="3" width="5" height="2"/><rect x="3" y="1" width="2" height="2"/><rect x="3" y="5" width="2" height="2"/><rect x="4" y="0" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg> Ver proyectos
                     </a>
                     <a href="#chat" class="btn btn-secondary">
-                        <i class="fas fa-robot"></i> Chat IA
+                        <svg width="14" height="14" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="fill:currentColor;display:inline-block;vertical-align:middle"><rect x="1" y="0" width="6" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="2" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="2" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="2" height="1"/><rect x="5" y="5" width="2" height="1"/><rect x="2" y="6" width="4" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg> Chat IA
                     </a>
                 </div>
             </div>
@@ -210,55 +210,21 @@
     <section id="habilidades" class="section section-alt">
         <div class="container">
             <h2 class="section-title">Habilidades</h2>
-            <div class="skills-bars">
-                <div class="skill-bar-item" data-level="92">
-                    <div class="skill-bar-header">
-                        <span class="skill-bar-name">LLMs Y NLP</span>
-                        <span class="skill-bar-pct">92%</span>
-                    </div>
-                    <div class="skill-bar-track"></div>
-                    <p class="skill-bar-tags">Fine-tuning PEFT/QLoRA · RAG Pipelines · LangChain · LlamaIndex · HuggingFace Transformers · OpenAI API</p>
+            <div class="skill-slider-wrap">
+                <div class="skill-active-header">
+                    <span class="skill-active-name" id="skillName">LLMs Y NLP</span>
+                    <span class="skill-active-pct" id="skillPct">92%</span>
                 </div>
-                <div class="skill-bar-item" data-level="85">
-                    <div class="skill-bar-header">
-                        <span class="skill-bar-name">COMPUTER VISION</span>
-                        <span class="skill-bar-pct">85%</span>
-                    </div>
-                    <div class="skill-bar-track"></div>
-                    <p class="skill-bar-tags">Vision Transformers (ViT) · Transfer Learning · Reconocimiento de gestos en tiempo real · OpenCV · MediaPipe</p>
+                <div class="skill-segs" id="skillSegs" tabindex="0" role="slider" aria-label="Navegador de habilidades" aria-valuenow="0" aria-valuemin="0" aria-valuemax="4"></div>
+                <div class="skill-zone-labels">
+                    <span>LLMs</span>
+                    <span>C.Vision</span>
+                    <span>Frameworks</span>
+                    <span>MLOps</span>
+                    <span>Prog</span>
                 </div>
-                <div class="skill-bar-item" data-level="88">
-                    <div class="skill-bar-header">
-                        <span class="skill-bar-name">FRAMEWORKS ML</span>
-                        <span class="skill-bar-pct">88%</span>
-                    </div>
-                    <div class="skill-bar-track"></div>
-                    <p class="skill-bar-tags">PyTorch · TensorFlow · Scikit-learn · Keras · Optimización de hiperparámetros · Weights &amp; Biases</p>
-                </div>
-                <div class="skill-bar-item" data-level="78">
-                    <div class="skill-bar-header">
-                        <span class="skill-bar-name">MLOPS Y HERRAMIENTAS</span>
-                        <span class="skill-bar-pct">78%</span>
-                    </div>
-                    <div class="skill-bar-track"></div>
-                    <p class="skill-bar-tags">Git · Linux · Docker · Azure (Functions, OpenAI, Storage) · HuggingFace Hub · APIs RESTful</p>
-                </div>
-                <div class="skill-bar-item" data-level="90">
-                    <div class="skill-bar-header">
-                        <span class="skill-bar-name">PROGRAMACIÓN</span>
-                        <span class="skill-bar-pct">90%</span>
-                    </div>
-                    <div class="skill-bar-track"></div>
-                    <p class="skill-bar-tags">Python (avanzado) · SQL · R · C · JavaScript · Backend robusto y automatización de pipelines</p>
-                </div>
-                <div class="skill-bar-item" data-level="82">
-                    <div class="skill-bar-header">
-                        <span class="skill-bar-name">CIENCIA DE DATOS</span>
-                        <span class="skill-bar-pct">82%</span>
-                    </div>
-                    <div class="skill-bar-track"></div>
-                    <p class="skill-bar-tags">NumPy · Pandas · Data Mining · Feature Engineering · Análisis estadístico · Visualización de datos</p>
-                </div>
+                <p class="skill-active-tags" id="skillTags">Fine-tuning PEFT/QLoRA · RAG Pipelines · LangChain · LlamaIndex · HuggingFace Transformers · OpenAI API</p>
+                <p class="skill-hint">// Arrastra o usa ← →</p>
             </div>
         </div>
     </section>
@@ -286,7 +252,7 @@
                         </div>
                         <a href="https://medios.uchceu.es/actualidad-ceu/se-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceuse-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceu/"
                            target="_blank" rel="noopener" class="project-link">
-                            Ver en la web <i class="fas fa-arrow-right"></i>
+                            Ver en la web <svg width="10" height="10" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="fill:currentColor;display:inline-block;vertical-align:middle"><rect x="0" y="3" width="5" height="2"/><rect x="3" y="1" width="2" height="2"/><rect x="3" y="5" width="2" height="2"/><rect x="4" y="0" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg>
                         </a>
                     </div>
                 </div>
@@ -308,7 +274,7 @@
                         </div>
                         <a href="https://github.com/iDiagoValeta/ASL-Hand-Gesture-Recognition"
                            target="_blank" rel="noopener" class="project-link">
-                            Ver en GitHub <i class="fas fa-arrow-right"></i>
+                            Ver en GitHub <svg width="10" height="10" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="fill:currentColor;display:inline-block;vertical-align:middle"><rect x="0" y="3" width="5" height="2"/><rect x="3" y="1" width="2" height="2"/><rect x="3" y="5" width="2" height="2"/><rect x="4" y="0" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg>
                         </a>
                     </div>
                 </div>
@@ -330,7 +296,7 @@
                         </div>
                         <a href="https://github.com/iDiagoValeta?tab=repositories"
                            target="_blank" rel="noopener" class="project-link">
-                            Ver en GitHub <i class="fas fa-arrow-right"></i>
+                            Ver en GitHub <svg width="10" height="10" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="fill:currentColor;display:inline-block;vertical-align:middle"><rect x="0" y="3" width="5" height="2"/><rect x="3" y="1" width="2" height="2"/><rect x="3" y="5" width="2" height="2"/><rect x="4" y="0" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg>
                         </a>
                     </div>
                 </div>
@@ -357,16 +323,16 @@
                     </div>
                     <div class="chat-header-actions">
                         <button class="btn-export" id="exportChat" title="Exportar conversación" aria-label="Exportar conversación">
-                            <i class="fas fa-download"></i>
+                            <svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="3" y="0" width="2" height="3"/><rect x="1" y="3" width="6" height="1"/><rect x="2" y="4" width="4" height="1"/><rect x="3" y="5" width="2" height="1"/><rect x="0" y="7" width="8" height="1"/></svg>
                         </button>
                         <button class="btn-clear" id="clearChat" title="Limpiar chat" aria-label="Limpiar historial">
-                            <i class="fas fa-trash"></i>
+                            <svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="2" y="0" width="4" height="1"/><rect x="1" y="1" width="6" height="1"/><rect x="0" y="2" width="8" height="1"/><rect x="0" y="3" width="1" height="4"/><rect x="7" y="3" width="1" height="4"/><rect x="0" y="7" width="8" height="1"/><rect x="2" y="3" width="1" height="4"/><rect x="5" y="3" width="1" height="4"/></svg>
                         </button>
                     </div>
                 </div>
                 <div class="chat-messages" id="chatMessages">
                     <div class="message message-bot">
-                        <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="message-avatar"><svg width="18" height="18" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block"><rect x="1" y="0" width="6" height="1" fill="currentColor"/><rect x="1" y="1" width="1" height="1" fill="currentColor"/><rect x="6" y="1" width="1" height="1" fill="currentColor"/><rect x="1" y="2" width="1" height="1" fill="currentColor"/><rect x="3" y="2" width="2" height="1" fill="currentColor"/><rect x="6" y="2" width="1" height="1" fill="currentColor"/><rect x="1" y="3" width="1" height="1" fill="currentColor"/><rect x="6" y="3" width="1" height="1" fill="currentColor"/><rect x="1" y="4" width="1" height="1" fill="currentColor"/><rect x="3" y="4" width="2" height="1" fill="currentColor"/><rect x="6" y="4" width="1" height="1" fill="currentColor"/><rect x="1" y="5" width="2" height="1" fill="currentColor"/><rect x="5" y="5" width="2" height="1" fill="currentColor"/><rect x="2" y="6" width="4" height="1" fill="currentColor"/><rect x="2" y="7" width="1" height="1" fill="currentColor"/><rect x="5" y="7" width="1" height="1" fill="currentColor"/></svg></div>
                         <div class="message-content">
                             <p>Hola, soy el asistente de Ignacio. Tengo contexto completo sobre su experiencia, proyectos y habilidades. ¿Qué te gustaría saber?</p>
                         </div>
@@ -381,7 +347,7 @@
                             aria-label="Pregunta al asistente"
                             maxlength="2000">
                         <button id="sendButton" class="btn-send" aria-label="Enviar" title="Enviar (Enter)">
-                            <i class="fas fa-paper-plane"></i>
+                            <svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="1" y="0" width="1" height="8"/><rect x="2" y="1" width="1" height="6"/><rect x="3" y="2" width="1" height="4"/><rect x="4" y="3" width="1" height="2"/></svg>
                         </button>
                     </div>
                 </div>
@@ -399,15 +365,15 @@
                 </p>
                 <div class="contact-links">
                     <a href="mailto:nadiva1243@gmail.com" class="contact-link" aria-label="Email">
-                        <i class="fas fa-envelope"></i>
+                        <svg width="24" height="24" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="0" y="0" width="8" height="1"/><rect x="0" y="1" width="1" height="4"/><rect x="7" y="1" width="1" height="4"/><rect x="0" y="5" width="8" height="1"/><rect x="2" y="1" width="4" height="1"/><rect x="3" y="2" width="2" height="1"/></svg>
                         <span>Correo</span>
                     </a>
                     <a href="https://www.linkedin.com/in/ignacio-diago/" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
+                        <svg width="24" height="24" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="0" y="0" width="8" height="1"/><rect x="0" y="1" width="1" height="6"/><rect x="7" y="1" width="1" height="6"/><rect x="0" y="7" width="8" height="1"/><rect x="2" y="2" width="1" height="4"/><rect x="4" y="2" width="1" height="1"/><rect x="4" y="3" width="3" height="1"/><rect x="6" y="4" width="1" height="2"/><rect x="4" y="4" width="1" height="2"/></svg>
                         <span>LinkedIn</span>
                     </a>
                     <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
+                        <svg width="24" height="24" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="0" y="0" width="8" height="1"/><rect x="0" y="1" width="1" height="6"/><rect x="7" y="1" width="1" height="6"/><rect x="0" y="7" width="8" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="4" y="5" width="3" height="1"/></svg>
                         <span>GitHub</span>
                     </a>
                 </div>
@@ -422,7 +388,7 @@
     </footer>
 
     <button class="scroll-to-top" id="scrollToTop" aria-label="Volver arriba">
-        <i class="fas fa-arrow-up"></i>
+        <svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="3" y="0" width="2" height="1"/><rect x="2" y="1" width="4" height="1"/><rect x="1" y="2" width="6" height="1"/><rect x="3" y="3" width="2" height="5"/></svg>
     </button>
 
     <script type="module" src="app.js"></script>
