@@ -18,7 +18,7 @@
 
 ---
 
-## 🛠 Stack
+## Stack
 
 ```
 Frontend  →  HTML · CSS · Vanilla JS (sin bundler, sin framework)
@@ -27,7 +27,7 @@ AI        →  Google Gemini 2.5 Flash API
 Deploy    →  Render.com
 ```
 
-## ⚡ Run local
+## Run local
 
 ```bash
 # Linux / macOS
@@ -41,7 +41,7 @@ python server.py
 
 → `http://localhost:8000`
 
-## ✏️ Personalizar
+## Personalizar
 
 | Archivo | Qué editar |
 |---|---|
@@ -49,7 +49,7 @@ python server.py
 | `index.html` | Contenido de las secciones y meta SEO |
 | `styles.css` | Tipografía, colores y diseño |
 
-## 🔒 Seguridad
+## Seguridad
 
 La API key nunca se expone al cliente — el servidor Python actúa de proxy y la lee desde `GEMINI_API_KEY` (variable de entorno). Rate limiting: 60 req/min por IP.
 
