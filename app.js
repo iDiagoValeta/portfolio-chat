@@ -921,49 +921,53 @@ function initializePixelArtPhoto() {
     const avatar = document.querySelector('.avatar-placeholder');
     if (!photo || !avatar) return;
 
+    // Silueta persona 16×16 — cabeza + cuerpo, estilo Nothing Design
+    const PERSON = [
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0],
+        [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
+        [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
+        [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
+        [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
+        [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
+        [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    ];
+
     const canvas = document.createElement('canvas');
     canvas.className = 'pixel-photo';
     canvas.title = 'Click para volver a la foto';
     avatar.appendChild(canvas);
 
     let isPixelMode = false;
-    const PIXEL_SIZE = 8; // bloques de 8×8 px sobre el canvas escalado
 
     function renderPixelArt() {
-        if (!photo.complete || photo.naturalWidth === 0) {
-            photo.addEventListener('load', renderPixelArt, { once: true });
-            return;
+        const ROWS = PERSON.length;
+        const COLS = PERSON[0].length;
+        canvas.width  = COLS;
+        canvas.height = ROWS;
+
+        const ctx     = canvas.getContext('2d');
+        const isDark  = document.documentElement.classList.contains('dark-mode');
+        const fgColor = isDark ? '#e0e0e0' : '#1a1a1a';
+        const bgColor = isDark ? '#1a1a1a' : '#e8e8e8';
+
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, COLS, ROWS);
+        ctx.fillStyle = fgColor;
+
+        for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+                if (PERSON[r][c]) ctx.fillRect(c, r, 1, 1);
+            }
         }
-
-        const w    = avatar.offsetWidth;
-        const h    = avatar.offsetHeight;
-        const cols = Math.round(w / PIXEL_SIZE);
-        const rows = Math.round(h / PIXEL_SIZE);
-
-        canvas.width  = cols;
-        canvas.height = rows;
-
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(photo, 0, 0, cols, rows);
-
-        const imageData = ctx.getImageData(0, 0, cols, rows);
-        const data      = imageData.data;
-        const isDark    = document.documentElement.classList.contains('dark-mode');
-
-        // Colores FG/BG según el tema activo
-        const [fR, fG, fB] = isDark ? [224, 224, 224] : [26,  26,  26 ]; // #e0e0e0 / #1a1a1a
-        const [bR, bG, bB] = isDark ? [26,  26,  26 ] : [232, 232, 232]; // #1a1a1a / #e8e8e8
-
-        for (let i = 0; i < data.length; i += 4) {
-            const lum    = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
-            const filled = isDark ? lum > 110 : lum < 145;
-            data[i]     = filled ? fR : bR;
-            data[i + 1] = filled ? fG : bG;
-            data[i + 2] = filled ? fB : bB;
-            data[i + 3] = 255;
-        }
-
-        ctx.putImageData(imageData, 0, 0);
     }
 
     function activate() {
