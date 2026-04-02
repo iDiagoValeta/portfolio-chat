@@ -371,7 +371,30 @@ html.dark-mode .header {
     background: #1a1a1a;
     position: relative; flex-shrink: 0;
 }
-.profile-photo { width: 100%; height: 100%; object-fit: cover; }
+.profile-photo {
+    width: 100%; height: 100%; object-fit: cover;
+    cursor: pointer;
+    transition: opacity 0.25s ease;
+}
+.avatar-placeholder:hover .profile-photo { opacity: 0.8; }
+
+/* Canvas pixel art (click to activate) */
+.pixel-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    display: block;
+}
+.pixel-photo.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
 
 /* --- Botones ---------------------------------------------- */
 .btn {
