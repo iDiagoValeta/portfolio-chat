@@ -828,44 +828,91 @@ function initializeClock() {
     setInterval(tick, 1000);
 }
 
-// Función para barras de habilidades segmentadas (Nothing Design)
-function initializeSkillBars() {
-    const bars = document.querySelectorAll('.skill-bar-item');
-    if (!bars.length) return;
+// Función para el slider interactivo de habilidades (Nothing Design)
+function initializeSkillSlider() {
+    const track = document.getElementById('skillSegs');
+    if (!track) return;
 
-    const TOTAL_SEGMENTS = 20;
+    const SKILLS = [
+        { name: 'LLMs Y NLP',      pct: 92, tags: 'Fine-tuning PEFT/QLoRA · RAG Pipelines · LangChain · LlamaIndex · HuggingFace Transformers · OpenAI API' },
+        { name: 'COMPUTER VISION', pct: 85, tags: 'Vision Transformers (ViT) · Transfer Learning · Reconocimiento de gestos en tiempo real · OpenCV · MediaPipe' },
+        { name: 'FRAMEWORKS ML',   pct: 88, tags: 'PyTorch · TensorFlow · Scikit-learn · Keras · Optimización de hiperparámetros · Weights & Biases' },
+        { name: 'MLOps Y TOOLS',   pct: 78, tags: 'Git · Linux · Docker · Azure (Functions, OpenAI, Storage) · HuggingFace Hub · APIs RESTful' },
+        { name: 'PROGRAMACIÓN',    pct: 90, tags: 'Python (avanzado) · SQL · R · C · JavaScript · Backend robusto y automatización de pipelines' },
+    ];
 
-    bars.forEach(bar => {
-        const track = bar.querySelector('.skill-bar-track');
-        if (!track) return;
-        for (let i = 0; i < TOTAL_SEGMENTS; i++) {
-            const seg = document.createElement('span');
-            seg.className = 'segment';
-            track.appendChild(seg);
-        }
+    const TOTAL = 20;
+    const ZONE  = TOTAL / SKILLS.length; // 4 segs per skill
+    let activeZone = 0;
+
+    // Build segments
+    for (let i = 0; i < TOTAL; i++) {
+        const seg = document.createElement('span');
+        seg.className = 'segment';
+        track.appendChild(seg);
+    }
+
+    function updateDisplay(zone) {
+        activeZone = Math.max(0, Math.min(SKILLS.length - 1, zone));
+        const skill = SKILLS[activeZone];
+
+        const nameEl = document.getElementById('skillName');
+        const pctEl  = document.getElementById('skillPct');
+        const tagsEl = document.getElementById('skillTags');
+        if (nameEl) nameEl.textContent = skill.name;
+        if (pctEl)  pctEl.textContent  = skill.pct + '%';
+        if (tagsEl) tagsEl.textContent = skill.tags;
+
+        const filledTo = Math.round((skill.pct / 100) * TOTAL);
+        track.querySelectorAll('.segment').forEach((seg, i) => {
+            seg.classList.remove('filled', 'active');
+            const segZone = Math.floor(i / ZONE);
+            if (segZone === activeZone) {
+                seg.classList.add('active');
+            } else if (i < filledTo) {
+                seg.classList.add('filled');
+            }
+        });
+
+        document.querySelectorAll('.skill-zone-labels span').forEach((lbl, i) => {
+            lbl.classList.toggle('active', i === activeZone);
+        });
+
+        track.setAttribute('aria-valuenow', activeZone);
+    }
+
+    function zoneFromEvent(e) {
+        const rect  = track.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+        return Math.min(SKILLS.length - 1, Math.floor(ratio * SKILLS.length));
+    }
+
+    let dragging = false;
+    track.addEventListener('mousedown',  (e) => { dragging = true; updateDisplay(zoneFromEvent(e)); });
+    track.addEventListener('mousemove',  (e) => { if (dragging) updateDisplay(zoneFromEvent(e)); });
+    document.addEventListener('mouseup', ()  => { dragging = false; });
+    track.addEventListener('touchstart', (e) => { e.preventDefault(); updateDisplay(zoneFromEvent(e)); }, { passive: false });
+    track.addEventListener('touchmove',  (e) => { e.preventDefault(); updateDisplay(zoneFromEvent(e)); }, { passive: false });
+
+    document.querySelectorAll('.skill-zone-labels span').forEach((lbl, i) => {
+        lbl.addEventListener('click', () => updateDisplay(i));
     });
 
+    track.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { updateDisplay(activeZone + 1); e.preventDefault(); }
+        if (e.key === 'ArrowLeft')  { updateDisplay(activeZone - 1); e.preventDefault(); }
+    });
+
+    // Animar al entrar en viewport
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (!entry.isIntersecting) return;
-            const bar      = entry.target;
-            const level    = parseInt(bar.dataset.level, 10) || 0;
-            const segments = bar.querySelectorAll('.segment');
-            const filled   = Math.round((level / 100) * TOTAL_SEGMENTS);
-
-            bar.classList.add('visible');
-
-            segments.forEach((seg, i) => {
-                setTimeout(() => {
-                    if (i < filled) seg.classList.add('filled');
-                }, i * 45);
-            });
-
-            observer.unobserve(bar);
+            setTimeout(() => updateDisplay(0), 150);
+            observer.unobserve(entry.target);
         });
-    }, { threshold: 0.25 });
-
-    bars.forEach(bar => observer.observe(bar));
+    }, { threshold: 0.3 });
+    observer.observe(track);
 }
 
 // Inicializar cuando el DOM esté listo
@@ -885,7 +932,7 @@ if (document.readyState === 'loading') {
             initializeDarkMode();
             updateScrollProgress();
             initializeClock();
-            initializeSkillBars();
+            initializeSkillSlider();
             
             // Siempre volver al inicio al cargar
             window.scrollTo(0, 0);
@@ -907,7 +954,7 @@ if (document.readyState === 'loading') {
         initializeDarkMode();
         updateScrollProgress();
         initializeClock();
-        initializeSkillBars();
+        initializeSkillSlider();
 
         // Siempre volver al inicio al cargar
         window.scrollTo(0, 0);
