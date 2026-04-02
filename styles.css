@@ -1097,7 +1097,9 @@ html:not(.dark-mode) .clock-date { color: var(--text-muted); }
 
 /* --- Responsive ------------------------------------------- */
 @media (max-width: 900px) {
-    .hero-clock { display: none; }
+    .hero-clock { right: 1.25rem; bottom: 1.75rem; }
+    .hero-clock .clock-date { display: none; }
+    .clock-time { font-size: 1.35rem !important; }
     .pixel-theme-toggle { left: 1.25rem; bottom: 1.75rem; }
     .hero-content { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
     .hero-chips   { justify-content: center; }
