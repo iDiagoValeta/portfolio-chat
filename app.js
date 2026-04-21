@@ -38,15 +38,19 @@ const T = {
       },
       {
         title: 'Llama 3.2 1B — ORPO Fine-tuning',
-        desc: 'Pipeline de fine-tuning con ORPO preference optimization sobre Llama 3.2 1B. Tutorial completo con notebook y modelo GGUF publicado en HuggingFace Hub listo para despliegue con Ollama.',
+        desc: 'Tutorial completo en GitHub: fine-tuning con ORPO sobre Llama 3.2 1B, notebook paso a paso, exportación a GGUF y despliegue local con Ollama.',
       },
       {
         title: 'Reconocimiento ASL en tiempo real',
         desc: 'Clasificador ASL en tiempo real usando MediaPipe para extracción de landmarks y Vision Transformers (ViT) con TensorFlow/Keras. Inferencia live por webcam y transfer learning sobre un dataset personalizado.',
       },
       {
-        title: 'Pipeline documental multi-agente',
-        desc: 'Sistema multi-agente con CrewAI que automatiza la creación de informes PDF. Agentes especializados en investigación, análisis y verificación con flujo coordinado y exportación final vía ReportLab.',
+        title: 'portfolio-chat',
+        desc: 'Portfolio web full-stack con asistente Gemini: HTML/CSS/JS sin bundler, servidor proxy Python y despliegue en Render. Proyecto público y replicable.',
+      },
+      {
+        title: 'Modelos públicos en Hugging Face',
+        desc: 'Perfil en Hugging Face Hub con modelos y experimentos publicados: generación de texto, RAG y proyectos reproducibles.',
       },
     ],
     certs_title: 'Certificaciones',
@@ -125,15 +129,19 @@ const T = {
       },
       {
         title: 'Llama 3.2 1B — ORPO Fine-tuning',
-        desc: 'Fine-tuning pipeline using ORPO preference optimization on Llama 3.2 1B. Complete tutorial with notebook and a GGUF model published on HuggingFace Hub, ready for Ollama deployment.',
+        desc: 'Full tutorial on GitHub: ORPO fine-tuning on Llama 3.2 1B, step-by-step notebook, GGUF export and local deployment with Ollama.',
       },
       {
         title: 'ASL Real-time Gesture Recognition',
         desc: 'Real-time ASL classifier using MediaPipe for landmark extraction and Vision Transformers (ViT) with TensorFlow/Keras. Live webcam inference and transfer learning on a custom dataset.',
       },
       {
-        title: 'Multi-Agent Document Pipeline',
-        desc: 'Multi-agent CrewAI system that automates PDF report generation. Specialized research, analysis and verification agents coordinate the workflow and export the final document through ReportLab.',
+        title: 'portfolio-chat',
+        desc: 'Full-stack portfolio with a Gemini-powered assistant: vanilla HTML/CSS/JS, Python proxy server and Render deployment. Public, forkable repository.',
+      },
+      {
+        title: 'Public models on Hugging Face',
+        desc: 'Hugging Face Hub profile with published models and experiments: text generation, RAG and reproducible ML work.',
       },
     ],
     certs_title: 'Certifications',
