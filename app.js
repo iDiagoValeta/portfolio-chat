@@ -195,6 +195,7 @@ let typedTimer = null;
 let isProcessing = false;
 
 const $ = (id) => document.getElementById(id);
+const setText = (id, value) => { const el = $(id); if (el) el.textContent = value; };
 
 function sanitizeHtml(html) {
   if (!html) return '';
@@ -496,35 +497,38 @@ function applyLang() {
     const label = el.querySelector('.link-label');
     label.textContent = type === 'live' ? t.proj_live : type === 'hf' ? t.proj_hf : t.proj_gh;
   });
-  $('certsTitle').textContent = t.certs_title;
+  setText('certsTitle', t.certs_title);
   document.querySelectorAll('.cert-name').forEach((el, i) => { if (t.cert_cards[i]) el.textContent = t.cert_cards[i]; });
-  $('certMore').textContent = t.cert_more;
-  $('chatTitle').textContent = t.chat_title;
-  $('chatSub').textContent = t.chat_sub;
-  $('chatHeadTitle').textContent = t.chat_head_title;
-  $('chatHeadSub').textContent = t.chat_head_sub;
-  $('chatInput').placeholder = t.chat_placeholder;
-  $('clearChat').title = t.clear_chat;
-  $('chatSend').setAttribute('aria-label', t.send_label);
+  setText('certMore', t.cert_more);
+  setText('chatTitle', t.chat_title);
+  setText('chatSub', t.chat_sub);
+  setText('chatHeadTitle', t.chat_head_title);
+  setText('chatHeadSub', t.chat_head_sub);
+  const chatInput = $('chatInput');
+  if (chatInput) chatInput.placeholder = t.chat_placeholder;
+  const clearChatBtn = $('clearChat');
+  if (clearChatBtn) clearChatBtn.title = t.clear_chat;
+  const chatSendBtn = $('chatSend');
+  if (chatSendBtn) chatSendBtn.setAttribute('aria-label', t.send_label);
   renderSuggestions(t.suggestions);
-  [0, 1, 2].forEach((i) => { $('chip' + i).textContent = t.chips[i]; });
-  $('badge0').textContent = t.proj_badge_prod;
-  $('badge1').textContent = t.proj_badge_tfg;
-  $('eduLabel').textContent = t.edu_label;
-  $('eduDegree').textContent = t.edu_degree;
-  $('eduUni').textContent = t.edu_uni;
-  $('eduDesc').textContent = t.edu_desc;
-  $('langLabel').textContent = t.lang_label;
-  [1, 2, 3].forEach((i) => { $('langName' + i).textContent = t.lang_names[i - 1]; });
-  $('langNative1').textContent = t.lang_native;
-  $('langB2').textContent = t.lang_b2;
-  $('langNative2').textContent = t.lang_val;
-  $('clockLabel').textContent = t.clock_label;
-  $('contactTitle').textContent = t.contact_title;
-  $('contactSub').textContent = t.contact_sub;
-  $('footerText').textContent = t.footer;
-  document.querySelectorAll('.js-theme').forEach((btn) => btn.setAttribute('aria-label', t.theme_label));
-  document.querySelector('.top-btn')?.setAttribute('aria-label', t.top_label);
+  [0, 1, 2].forEach((i) => { setText('chip' + i, t.chips[i]); });
+  setText('badge0', t.proj_badge_prod);
+  setText('badge1', t.proj_badge_tfg);
+  setText('eduLabel', t.edu_label);
+  setText('eduDegree', t.edu_degree);
+  setText('eduUni', t.edu_uni);
+  setText('eduDesc', t.edu_desc);
+  setText('langLabel', t.lang_label);
+  if (t.lang_names) [1, 2, 3].forEach((i) => { setText('langName' + i, t.lang_names[i - 1]); });
+  setText('langNative1', t.lang_native);
+  setText('langB2', t.lang_b2);
+  setText('langNative2', t.lang_val);
+  setText('clockLabel', t.clock_label);
+  setText('contactTitle', t.contact_title);
+  setText('contactSub', t.contact_sub);
+  setText('footerText', t.footer);
+  document.querySelectorAll('.js-theme').forEach((btn) => btn.setAttribute('aria-label', t.theme_label || 'Toggle theme'));
+  document.querySelector('.top-btn')?.setAttribute('aria-label', t.top_label || 'Back to top');
 }
 
 function initScroll() {
