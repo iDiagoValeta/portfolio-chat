@@ -579,6 +579,18 @@ document.addEventListener('DOMContentLoaded', () => {
   applyDark();
   loadChatHistory();
 
+  // Run critical UI functions first — before any code that might crash
+  initClock();
+  observeReveal();
+  try {
+    applyLang();
+  } catch (_e) {
+    // Fallback: if applyLang crashes for any reason, force-reveal all hidden elements
+    document.querySelectorAll('.reveal:not(.in)').forEach((el) => el.classList.add('in'));
+  }
+  restoreChat();
+
+  // Theme toggles
   document.querySelectorAll('.js-theme').forEach((btn) => {
     btn.addEventListener('click', () => {
       dark = !dark;
@@ -586,38 +598,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  $('langBtn').addEventListener('click', () => {
-    lang = lang === 'es' ? 'en' : 'es';
-    applyLang();
-    restoreChat();
-  });
-
-  $('navToggle').addEventListener('click', () => {
-    $('navToggle').classList.toggle('open');
-    $('navLinks').classList.toggle('open');
-  });
-
-  $('navLinks').querySelectorAll('a').forEach((a) => {
-    a.addEventListener('click', () => {
-      $('navToggle').classList.remove('open');
-      $('navLinks').classList.remove('open');
+  const langBtn = $('langBtn');
+  if (langBtn) {
+    langBtn.addEventListener('click', () => {
+      lang = lang === 'es' ? 'en' : 'es';
+      applyLang();
+      restoreChat();
     });
-  });
+  }
 
-  $('chatSend').addEventListener('click', () => sendMsg());
-  $('chatInput').addEventListener('keydown', (e) => {
+  const navToggle = $('navToggle');
+  const navLinks = $('navLinks');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach((a) => {
+      a.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+  }
+
+  const chatSend = $('chatSend');
+  const chatInput = $('chatInput');
+  const clearChatBtn = $('clearChat');
+  const topBtn = document.querySelector('.top-btn');
+
+  if (chatSend) chatSend.addEventListener('click', () => sendMsg());
+  if (chatInput) chatInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMsg();
     }
   });
-  $('clearChat').addEventListener('click', clearChat);
-  document.querySelector('.top-btn').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  if (clearChatBtn) clearChatBtn.addEventListener('click', clearChat);
+  if (topBtn) topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   initSkillSlider();
   initScroll();
-  initClock();
-  observeReveal();
-  applyLang();
-  restoreChat();
 });

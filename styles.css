@@ -575,8 +575,9 @@ footer p { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; te
     from { opacity:0; transform: translateY(22px); }
     to   { opacity:1; transform: none; }
 }
-.reveal { opacity:0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
-.reveal.in { opacity:1; transform: none; }
+.reveal { opacity:0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; animation: reveal-fallback 0.7s ease-out 4s both; }
+.reveal.in { opacity:1; transform: none; animation: none; }
+@keyframes reveal-fallback { to { opacity:1; transform:none; } }
 
 @media (max-width:960px) {
     .nav-links { display: none; }
