@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find C:Usersnadivreposportfolio-chat -type f \\\\\\(-name *.js -o -name *.py -o -name *.json -o -name *.html -o -name .env* \\\\\\))",
+      "Bash(grep -r \"AIzaSy\\\\|sk-\\\\|sk_\\\\|Bearer\\\\|api_key.*=.*['''']\" C:Usersnadivreposportfolio-chat --include=*.js --include=*.py --include=*.html)",
+      "WebFetch(domain:portfolio-chat-aouj.onrender.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:api.github.com)"
+    ]
+  }
+}
