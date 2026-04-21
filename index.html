@@ -1,396 +1,284 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- SEO -->
-    <title>Ignacio Diago Valeta – AI Engineer | LLM Fine-tuning & Computer Vision</title>
-    <meta name="description" content="Portfolio de Ignacio Diago Valeta, AI Engineer especializado en LLM Fine-tuning (PEFT/QLoRA), RAG Pipelines, Computer Vision con Vision Transformers y sistemas Multi-Agente.">
-    <meta name="keywords" content="AI Engineer, LLM Fine-tuning, QLoRA, RAG, Computer Vision, Vision Transformers, PyTorch, HuggingFace, Multi-Agent, Python, Machine Learning">
-    <meta name="author" content="Ignacio Diago Valeta">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://portfolio-chat-aouj.onrender.com/">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://portfolio-chat-aouj.onrender.com/">
-    <meta property="og:title" content="Ignacio Diago Valeta – AI Engineer | LLM Fine-tuning & Computer Vision">
-    <meta property="og:description" content="Portfolio interactivo con chat IA. Especialista en fine-tuning de LLMs, RAG pipelines y Computer Vision con ViT.">
-    <meta property="og:image" content="https://portfolio-chat-aouj.onrender.com/images/foto-perfil.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://portfolio-chat-aouj.onrender.com/">
-    <meta property="twitter:title" content="Ignacio Diago Valeta – AI Engineer | LLM Fine-tuning & Computer Vision">
-    <meta property="twitter:description" content="Portfolio interactivo con chat IA. Especialista en fine-tuning de LLMs, RAG pipelines y Computer Vision con ViT.">
-    <meta property="twitter:image" content="https://portfolio-chat-aouj.onrender.com/images/foto-perfil.png">
-
-    <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=12">
-
-    <!-- Datos estructurados -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Ignacio Diago Valeta",
-        "jobTitle": "AI Engineer · LLM Fine-tuning & Computer Vision",
-        "url": "https://portfolio-chat-aouj.onrender.com/",
-        "sameAs": [
-            "https://github.com/iDiagoValeta",
-            "https://www.linkedin.com/in/ignacio-diago/"
-        ],
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Vinalesa",
-            "addressRegion": "Comunidad Valenciana",
-            "addressCountry": "ES"
-        },
-        "email": "nadiva1243@gmail.com"
-    }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ignacio Diago Valeta – AI Engineer</title>
+<meta name="description" content="Portfolio de Ignacio Diago Valeta, AI Engineer especializado en LLM Fine-tuning, RAG Pipelines y Computer Vision.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=13">
+<script>
+const _d = localStorage.getItem('dark');
+if (_d === 'true' || _d === null) {
+  document.documentElement.classList.add('dark');
+  if (_d === null) localStorage.setItem('dark', 'true');
+}
+</script>
 </head>
 <body>
-    <!-- Barra de progreso de scroll -->
-    <div class="scroll-progress" id="scrollProgress"></div>
+<div class="scroll-bar"></div>
 
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <h1>Ignacio Diago</h1>
-            </div>
-            <div class="nav-actions">
-                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Cambiar tema" title="Cambiar tema">
-                    <svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="3" y="0" width="3" height="1"/><rect x="2" y="1" width="5" height="1"/><rect x="1" y="2" width="3" height="1"/><rect x="0" y="3" width="3" height="2"/><rect x="1" y="5" width="3" height="1"/><rect x="2" y="6" width="5" height="1"/><rect x="3" y="7" width="3" height="1"/></svg>
-                </button>
-                <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
-            <ul class="nav-links" id="navLinks" role="menubar">
-                <li role="none"><a href="#inicio"      role="menuitem">Inicio</a></li>
-                <li role="none"><a href="#sobre-mi"    role="menuitem">Sobre mí</a></li>
-                <li role="none"><a href="#habilidades" role="menuitem">Habilidades</a></li>
-                <li role="none"><a href="#proyectos"   role="menuitem">Proyectos</a></li>
-                <li role="none"><a href="#chat"        role="menuitem">Chat IA</a></li>
-                <li role="none"><a href="#contacto"    role="menuitem">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+<header class="nav-wrap">
+  <nav>
+    <a href="#inicio" class="nav-brand">Ignacio Diago</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="lang-toggle" id="langBtn">EN</button>
+      <button class="theme-btn js-theme" aria-label="Toggle theme">
+        <svg width="14" height="14" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" fill="currentColor">
+          <rect x="3" y="0" width="2" height="1"/><rect x="3" y="7" width="2" height="1"/>
+          <rect x="0" y="3" width="1" height="2"/><rect x="7" y="3" width="1" height="2"/>
+          <rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/>
+          <rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/>
+          <rect x="2" y="2" width="4" height="4"/>
+        </svg>
+      </button>
+      <a href="https://raw.githubusercontent.com/iDiagoValeta/portfolio-chat/main/cv_ignacio_diago_en.pdf" target="_blank" class="cv-btn" id="cvBtn">
+        <svg width="10" height="10" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" fill="currentColor" shape-rendering="crispEdges">
+          <rect x="3" y="0" width="2" height="4"/><rect x="1" y="4" width="6" height="1"/>
+          <rect x="2" y="5" width="4" height="1"/><rect x="3" y="6" width="2" height="1"/>
+          <rect x="0" y="7" width="8" height="1"/>
+        </svg>
+        <span id="cvBtnLabel">CV</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
 
-    <!-- ===== INICIO ===== -->
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h2 class="hero-title">
-                    Hola, soy<br><span class="highlight">Ignacio Diago</span>
-                </h2>
-                <p class="hero-subtitle">AI Engineer · Optimización de Redes Neuronales</p>
-                <div class="hero-chips">
-                    <span class="hero-chip dark">LLM Fine-tuning · PEFT/QLoRA</span>
-                    <span class="hero-chip mid">Computer Vision · ViT</span>
-                    <span class="hero-chip light">Sistemas Multi-Agente</span>
-                </div>
-                <p class="hero-description">
-                    Ingeniero especializado en adaptar redes neuronales a problemas reales,
-                    desde el fine-tuning hasta el despliegue en producción.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#proyectos" class="btn btn-primary">
-                        <svg width="12" height="12" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="fill:currentColor;display:inline-block;vertical-align:middle"><rect x="0" y="3" width="5" height="2"/><rect x="3" y="1" width="2" height="2"/><rect x="3" y="5" width="2" height="2"/><rect x="4" y="0" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg> Ver proyectos
-                    </a>
-                    <a href="#chat" class="btn btn-secondary">
-                        <svg width="14" height="14" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="fill:currentColor;display:inline-block;vertical-align:middle"><rect x="1" y="0" width="6" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="3" y="2" width="2" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="1" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="1" y="4" width="1" height="1"/><rect x="3" y="4" width="2" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="1" y="5" width="2" height="1"/><rect x="5" y="5" width="2" height="1"/><rect x="2" y="6" width="4" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="5" y="7" width="1" height="1"/></svg> Chat IA
-                    </a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="avatar-placeholder">
-                    <img src="images/foto-perfil.png"
-                         alt="Ignacio Diago Valeta, AI Engineer"
-                         class="profile-photo" loading="lazy"
-                         onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\'fas fa-user\' style=\'font-size:5rem;color:rgba(255,255,255,0.3);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)\'></i>';">
-                </div>
-            </div>
+<section id="inicio" class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow" id="heroEyebrow">// AI Engineer · Valencia, España</div>
+      <h1 class="hero-name">Ignacio<br>Diago.</h1>
+      <p class="hero-role" id="heroRole"></p>
+      <div class="hero-chips">
+        <span class="chip hi" id="chip0">LLM Fine-tuning · PEFT/QLoRA</span>
+        <span class="chip" id="chip1">Computer Vision · ViT</span>
+        <span class="chip" id="chip2">Multi-Agente</span>
+      </div>
+      <p class="hero-desc" id="heroDesc">Ingeniero especializado en adaptar redes neuronales a problemas reales.</p>
+
+      <div class="hero-social">
+        <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/ignacio-diago" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener">HuggingFace</a>
+        <a href="mailto:nadiva1243@gmail.com">Email</a>
+      </div>
+
+      <div class="hero-btns">
+        <a href="#proyectos" class="btn btn-primary" id="heroBtn1"><span> Ver proyectos</span></a>
+        <a href="#chat" class="btn btn-outline" id="heroBtn2"><span> Chat IA</span></a>
+      </div>
+    </div>
+
+    <div class="hero-avatar">
+      <div class="avatar-ring" id="avatarRing">
+        <img src="images/ignaciodiagovaleta.png" alt="Ignacio Diago Valeta" loading="eager">
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-clock" id="heroClock">
+    <span class="clock-label" id="clockLabel">// HORA LOCAL</span>
+    <span class="clock-time" id="clockTime">--:--:--</span>
+    <span class="clock-date" id="clockDate">--- -- ---</span>
+  </div>
+
+</section>
+
+<section id="sobre-mi" class="section">
+  <div class="container">
+    <h2 class="sec-title reveal" id="aboutTitle">Sobre mí</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p id="aboutP1">Ingeniero Informático por la <strong>Universitat Politècnica de València (UPV)</strong>, especializado en IA aplicada.</p>
+        <p id="aboutP2">Actualmente trabajo como <strong>AI & Back-End Developer en CEU Educational Group</strong>.</p>
+        <div class="stats-row">
+          <div class="stat reveal"><span class="stat-num">1+</span><span class="stat-label" id="stat1Label">En producción</span></div>
+          <div class="stat reveal"><span class="stat-num">25+</span><span class="stat-label" id="stat2Label">Repos GitHub</span></div>
+          <div class="stat reveal"><span class="stat-num">5+</span><span class="stat-label" id="stat3Label">Certificaciones</span></div>
+          <div class="stat reveal"><span class="stat-num">3</span><span class="stat-label" id="stat4Label">Idiomas</span></div>
         </div>
-        <div class="hero-clock">
-            <span class="clock-label">// HORA LOCAL</span>
-            <span class="clock-time" id="clockDisplay">--:--:--</span>
-            <span class="clock-date" id="clockDate">--- -- ---</span>
+      </div>
+
+      <div class="reveal">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;">
+          <div id="eduLabel" style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">// EDUCACIÓN</div>
+          <div id="eduDegree" style="font-family:var(--mono);font-size:0.85rem;font-weight:700;color:var(--text);margin-bottom:0.25rem;">B.Sc. Ingeniería Informática</div>
+          <div id="eduUni" style="font-family:var(--mono);font-size:0.72rem;color:var(--text-2);margin-bottom:0.65rem;">Universitat Politècnica de València · 2022–2026</div>
+          <div id="eduDesc" style="font-size:0.85rem;color:var(--text-2);line-height:1.6;">Especialización en Computación — algoritmos, IA, Machine Learning y arquitectura de software.</div>
         </div>
-        <div class="pixel-theme-toggle" id="pixelThemeToggle" role="button" tabindex="0" aria-label="Cambiar tema">
-            <span class="toggle-label">// TEMA</span>
-            <div class="toggle-icon-wrap">
-                <svg class="pixel-icon pixel-moon" width="40" height="40" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                    <rect x="3" y="0" width="3" height="1" fill="currentColor"/>
-                    <rect x="2" y="1" width="5" height="1" fill="currentColor"/>
-                    <rect x="1" y="2" width="3" height="1" fill="currentColor"/>
-                    <rect x="0" y="3" width="3" height="2" fill="currentColor"/>
-                    <rect x="1" y="5" width="3" height="1" fill="currentColor"/>
-                    <rect x="2" y="6" width="5" height="1" fill="currentColor"/>
-                    <rect x="3" y="7" width="3" height="1" fill="currentColor"/>
-                </svg>
-                <svg class="pixel-icon pixel-sun" width="40" height="40" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
-                    <rect x="2" y="2" width="4" height="4" fill="currentColor"/>
-                    <rect x="3" y="0" width="2" height="1" fill="currentColor"/>
-                    <rect x="3" y="7" width="2" height="1" fill="currentColor"/>
-                    <rect x="0" y="3" width="1" height="2" fill="currentColor"/>
-                    <rect x="7" y="3" width="1" height="2" fill="currentColor"/>
-                    <rect x="1" y="1" width="1" height="1" fill="currentColor"/>
-                    <rect x="6" y="1" width="1" height="1" fill="currentColor"/>
-                    <rect x="1" y="6" width="1" height="1" fill="currentColor"/>
-                    <rect x="6" y="6" width="1" height="1" fill="currentColor"/>
-                </svg>
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;">
+          <div id="langLabel" style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">// IDIOMAS</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span id="langName1" style="font-family:var(--mono);font-size:0.78rem;color:var(--text);">Español</span><span id="langNative1" style="font-family:var(--mono);font-size:0.65rem;color:var(--accent);">Nativo</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span id="langName2" style="font-family:var(--mono);font-size:0.78rem;color:var(--text);">English</span><span id="langB2" style="font-family:var(--mono);font-size:0.65rem;color:var(--text-2);">B2 Cambridge</span></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span id="langName3" style="font-family:var(--mono);font-size:0.78rem;color:var(--text);">Valencià</span><span id="langNative2" style="font-family:var(--mono);font-size:0.65rem;color:var(--text-2);">Nativo · GVA</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experiencia" class="section section-alt">
+  <div class="container">
+    <h2 class="sec-title reveal" id="expTitle">Experiencia</h2>
+    <div style="max-width:640px;margin:0 auto;">
+      <div class="exp-timeline" id="expList"></div>
+    </div>
+  </div>
+</section>
+
+<section id="habilidades" class="section">
+  <div class="container">
+    <h2 class="sec-title reveal" id="skillsTitle">Habilidades</h2>
+    <div class="skill-wrap reveal">
+      <div class="skill-tabs" id="skillTabs"></div>
+      <div class="skill-list" id="skillList"></div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos" class="section section-alt">
+  <div class="container">
+    <h2 class="sec-title reveal" id="projTitle">Proyectos destacados</h2>
+    <div class="projects-grid">
+      <div class="proj-card reveal">
+        <div class="proj-banner"><span class="proj-badge" id="badge0">Producción</span><span class="proj-banner-label">CEU · Azure · OpenAI</span></div>
+        <div class="proj-body">
+          <h3 class="proj-title" data-project-title>GPT-CEU</h3>
+          <p class="proj-desc" data-project-desc>Asistente generativo desplegado en producción para el CEU Educational Group. Integra OpenAI API con RAG pipelines sobre fuentes de datos institucionales, optimizando flujos académicos y administrativos para toda la comunidad universitaria.</p>
+          <div class="proj-tags"><span class="tag">RAG Pipeline</span><span class="tag">OpenAI API</span><span class="tag">Azure</span><span class="tag">Python</span></div>
+          <a href="https://medios.uchceu.es/actualidad-ceu/se-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceuse-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceu/" target="_blank" rel="noopener" class="proj-link" data-proj-link="live"><span class="link-label">Ver en web</span></a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-banner"><span class="proj-badge" id="badge1">TFG</span><span class="proj-banner-label">Ollama · ChromaDB</span></div>
+        <div class="proj-body">
+          <h3 class="proj-title" data-project-title>localOllamaRAG</h3>
+          <p class="proj-desc" data-project-desc>Trabajo de Fin de Grado. Solución RAG on-premises open-source para extracción de información relevante en documentos. Búsqueda híbrida (semántica + keyword) sin dependencias cloud.</p>
+          <div class="proj-tags"><span class="tag">RAG</span><span class="tag">Ollama</span><span class="tag">ChromaDB</span><span class="tag">Python</span></div>
+          <a href="https://github.com/iDiagoValeta/localOllamaRAG" target="_blank" rel="noopener" class="proj-link" data-proj-link="gh"><span class="link-label">Ver en GitHub</span></a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-banner"><span class="proj-banner-label">Llama 3.2 · ORPO · HuggingFace</span></div>
+        <div class="proj-body">
+          <h3 class="proj-title" data-project-title>Llama 3.2 1B — ORPO Fine-tuning</h3>
+          <p class="proj-desc" data-project-desc>Pipeline de fine-tuning con ORPO preference optimization sobre Llama 3.2 1B. Tutorial completo con notebook y modelo GGUF publicado en HuggingFace Hub listo para despliegue con Ollama.</p>
+          <div class="proj-tags"><span class="tag">PEFT/QLoRA</span><span class="tag">ORPO</span><span class="tag">Llama 3.2</span><span class="tag">HuggingFace</span></div>
+          <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener" class="proj-link" data-proj-link="hf"><span class="link-label">Ver en HuggingFace</span></a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-banner"><span class="proj-banner-label">ViT · MediaPipe · OpenCV</span></div>
+        <div class="proj-body">
+          <h3 class="proj-title" data-project-title>ASL Real-time Gesture Recognition</h3>
+          <p class="proj-desc" data-project-desc>Clasificador ASL en tiempo real usando MediaPipe para extracción de landmarks y Vision Transformers (ViT) con TensorFlow/Keras. Inferencia live por webcam. Transfer Learning sobre dataset personalizado.</p>
+          <div class="proj-tags"><span class="tag">Vision Transformers</span><span class="tag">Transfer Learning</span><span class="tag">MediaPipe</span><span class="tag">OpenCV</span></div>
+          <a href="https://github.com/iDiagoValeta/ASL-Hand-Gesture-Recognition" target="_blank" rel="noopener" class="proj-link" data-proj-link="gh"><span class="link-label">Ver en GitHub</span></a>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-banner"><span class="proj-banner-label">CrewAI · LangChain · Python</span></div>
+        <div class="proj-body">
+          <h3 class="proj-title" data-project-title>Multi-Agent Document Pipeline</h3>
+          <p class="proj-desc" data-project-desc>Sistema multi-agente con CrewAI que automatiza la creación de informes PDF. Agentes especializados (Research, Analysis, Verification) con flujo coordinado y exportación final via ReportLab.</p>
+          <div class="proj-tags"><span class="tag">CrewAI</span><span class="tag">LangChain</span><span class="tag">Python</span><span class="tag">ReportLab</span></div>
+          <a href="https://github.com/iDiagoValeta/crewAI_Automated_Document_Pipeline" target="_blank" rel="noopener" class="proj-link" data-proj-link="gh"><span class="link-label">Ver en GitHub</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certificaciones" class="section">
+  <div class="container">
+    <h2 class="sec-title reveal" id="certsTitle">Certificaciones</h2>
+    <div class="certs-grid">
+      <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Machine Learning & Data Science</div><div class="cert-year">2024</div></div>
+      <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Python for Data Science</div><div class="cert-year">2024</div></div>
+      <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Linux Fundamentals</div><div class="cert-year">2023</div></div>
+      <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">SQL & R for Data Analysis</div><div class="cert-year">2023</div></div>
+      <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Mathematical Foundations of ML</div><div class="cert-year">2024</div></div>
+      <div class="cert-card reveal" style="border-style:dashed;opacity:0.4;display:flex;align-items:center;justify-content:center;"><div id="certMore" style="font-family:var(--mono);font-size:0.68rem;color:var(--text-3);text-align:center;letter-spacing:0.06em;">+ más en curso</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="chat" class="section section-alt">
+  <div class="container">
+    <h2 class="sec-title reveal" id="chatTitle">Chat IA</h2>
+    <p class="sec-sub" id="chatSub">Chat con contexto completo sobre mi perfil — desarrollado con Gemini 2.5 Flash.</p>
+    <div class="chat-wrap reveal">
+      <div class="chat-box">
+        <div class="chat-head">
+          <div class="chat-head-info">
+            <div class="chat-status-dot"></div>
+            <div>
+              <div class="chat-head-title" id="chatHeadTitle">Asistente IA · Ignacio Diago</div>
+              <div class="chat-head-sub" id="chatHeadSub">Asistente IA · listo</div>
             </div>
+          </div>
+          <div class="chat-head-actions">
+            <button class="chat-icon-btn" id="clearChat" title="Limpiar chat">
+              <svg width="12" height="12" viewBox="0 0 8 8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="2" y="0" width="4" height="1"/><rect x="0" y="1" width="8" height="1"/><rect x="1" y="2" width="1" height="5"/><rect x="6" y="2" width="1" height="5"/><rect x="1" y="7" width="6" height="1"/><rect x="3" y="3" width="1" height="3"/><rect x="5" y="3" width="1" height="3"/></svg>
+            </button>
+          </div>
         </div>
-    </section>
-
-    <!-- ===== SOBRE MÍ ===== -->
-    <section id="sobre-mi" class="section">
-        <div class="container">
-            <h2 class="section-title">Sobre mí</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        Ingeniero Informático por la <strong>Universitat Politècnica de València (UPV)</strong>,
-                        especializado en IA aplicada. Mi trabajo consiste en adaptar redes neuronales,
-                        tanto LLMs como sistemas de Computer Vision, para resolver problemas concretos
-                        mediante fine-tuning y optimización arquitectural.
-                    </p>
-                    <p>
-                        Actualmente trabajo como <strong>AI &amp; Back-End Developer en CEU Educational Group</strong>,
-                        donde he desarrollado y desplegado <strong>GPT-CEU</strong>, un asistente de IA
-                        con OpenAI API y RAG pipelines, optimizando flujos académicos y administrativos
-                        de toda la universidad.
-                    </p>
-
-                    <div class="focus-grid">
-                        <div class="focus-item">
-                            <svg class="pixel-art" width="24" height="24" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="1" y="0" width="1" height="1" fill="currentColor"/><rect x="3" y="0" width="1" height="1" fill="currentColor"/><rect x="5" y="0" width="1" height="1" fill="currentColor"/><rect x="0" y="1" width="7" height="1" fill="currentColor"/><rect x="0" y="2" width="1" height="1" fill="currentColor"/><rect x="2" y="2" width="4" height="1" fill="currentColor"/><rect x="7" y="2" width="1" height="1" fill="currentColor"/><rect x="0" y="3" width="8" height="2" fill="currentColor"/><rect x="0" y="5" width="1" height="1" fill="currentColor"/><rect x="2" y="5" width="4" height="1" fill="currentColor"/><rect x="7" y="5" width="1" height="1" fill="currentColor"/><rect x="0" y="6" width="7" height="1" fill="currentColor"/><rect x="1" y="7" width="1" height="1" fill="currentColor"/><rect x="3" y="7" width="1" height="1" fill="currentColor"/><rect x="5" y="7" width="1" height="1" fill="currentColor"/></svg>
-                            <h4>Especialización en LLMs</h4>
-                            <p>Fine-tuning con PEFT/QLoRA y RAG pipelines para precisión específica de dominio</p>
-                        </div>
-                        <div class="focus-item">
-                            <svg class="pixel-art" width="24" height="24" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="2" y="1" width="4" height="1" fill="currentColor"/><rect x="1" y="2" width="1" height="1" fill="currentColor"/><rect x="6" y="2" width="1" height="1" fill="currentColor"/><rect x="0" y="3" width="1" height="1" fill="currentColor"/><rect x="3" y="3" width="2" height="1" fill="currentColor"/><rect x="7" y="3" width="1" height="1" fill="currentColor"/><rect x="0" y="4" width="1" height="1" fill="currentColor"/><rect x="3" y="4" width="2" height="1" fill="currentColor"/><rect x="7" y="4" width="1" height="1" fill="currentColor"/><rect x="1" y="5" width="1" height="1" fill="currentColor"/><rect x="6" y="5" width="1" height="1" fill="currentColor"/><rect x="2" y="6" width="4" height="1" fill="currentColor"/></svg>
-                            <h4>Computer Vision</h4>
-                            <p>Transfer Learning en Vision Transformers (ViT) y reconocimiento de gestos en tiempo real</p>
-                        </div>
-                        <div class="focus-item">
-                            <svg class="pixel-art" width="24" height="24" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="3" y="0" width="2" height="2" fill="currentColor"/><rect x="3" y="2" width="2" height="1" fill="currentColor"/><rect x="2" y="3" width="1" height="1" fill="currentColor"/><rect x="5" y="3" width="1" height="1" fill="currentColor"/><rect x="1" y="4" width="2" height="2" fill="currentColor"/><rect x="5" y="4" width="2" height="2" fill="currentColor"/></svg>
-                            <h4>Sistemas Multi-Agente</h4>
-                            <p>Orquestación de agentes autónomos para workflows complejos con LangChain y CrewAI</p>
-                        </div>
-                    </div>
-
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>1+</h3>
-                            <p>Años en producción</p>
-                        </div>
-                        <div class="stat">
-                            <h3>15+</h3>
-                            <p>Repositorios en GitHub</p>
-                        </div>
-                        <div class="stat">
-                            <h3>8+</h3>
-                            <p>Certificaciones</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="chat-msgs" id="chatMsgs"></div>
+        <div class="chat-suggestions" id="chatSuggestions"></div>
+        <div class="chat-footer">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Pregunta sobre experiencia, proyectos, habilidades..." maxlength="2000" autocomplete="off">
+          <button class="chat-send" id="chatSend" aria-label="Enviar">
+            <svg width="12" height="12" viewBox="0 0 8 8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="1" y="0" width="1" height="8"/><rect x="2" y="1" width="1" height="6"/><rect x="3" y="2" width="1" height="4"/><rect x="4" y="3" width="1" height="2"/></svg>
+          </button>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ===== HABILIDADES ===== -->
-    <section id="habilidades" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Habilidades</h2>
-            <div class="skill-slider-wrap">
-                <div class="skill-active-header">
-                    <span class="skill-active-name" id="skillName">LLMs Y NLP</span>
-                    <span class="skill-active-pct" id="skillPct">92%</span>
-                </div>
-                <div class="skill-segs" id="skillSegs" tabindex="0" role="slider" aria-label="Navegador de habilidades" aria-valuenow="0" aria-valuemin="0" aria-valuemax="4"></div>
-                <div class="skill-zone-labels">
-                    <span>LLMs</span>
-                    <span>C.Vision</span>
-                    <span>Frameworks</span>
-                    <span>MLOps</span>
-                    <span>Prog</span>
-                </div>
-                <p class="skill-active-tags" id="skillTags">Fine-tuning PEFT/QLoRA · RAG Pipelines · LangChain · LlamaIndex · HuggingFace Transformers · OpenAI API</p>
-                <p class="skill-hint">// Arrastra o usa ← →</p>
-            </div>
-        </div>
-    </section>
+<section id="contacto" class="section">
+  <div class="container">
+    <h2 class="sec-title reveal" id="contactTitle">Contacto</h2>
+    <p class="sec-sub" id="contactSub">¿Interesado en colaborar? No dudes en escribir.</p>
+    <div class="contact-links">
+      <a href="mailto:nadiva1243@gmail.com" class="contact-card reveal"><span>Email</span></a>
+      <a href="https://linkedin.com/in/ignacio-diago" target="_blank" rel="noopener" class="contact-card reveal"><span>LinkedIn</span></a>
+      <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener" class="contact-card reveal"><span>GitHub</span></a>
+      <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener" class="contact-card reveal"><span>HuggingFace</span></a>
+    </div>
+  </div>
+</section>
 
-    <!-- ===== PROYECTOS ===== -->
-    <section id="proyectos" class="section">
-        <div class="container">
-            <h2 class="section-title">Proyectos destacados</h2>
-            <div class="projects-grid">
+<footer>
+  <div class="container">
+    <p id="footerText">© 2025 Ignacio Diago Valeta · AI Engineer</p>
+  </div>
+</footer>
 
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <svg class="pixel-art" width="40" height="40" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="1" y="0" width="6" height="1" fill="currentColor"/><rect x="1" y="1" width="1" height="1" fill="currentColor"/><rect x="6" y="1" width="1" height="1" fill="currentColor"/><rect x="1" y="2" width="1" height="1" fill="currentColor"/><rect x="3" y="2" width="2" height="1" fill="currentColor"/><rect x="6" y="2" width="1" height="1" fill="currentColor"/><rect x="1" y="3" width="1" height="1" fill="currentColor"/><rect x="6" y="3" width="1" height="1" fill="currentColor"/><rect x="1" y="4" width="1" height="1" fill="currentColor"/><rect x="3" y="4" width="2" height="1" fill="currentColor"/><rect x="6" y="4" width="1" height="1" fill="currentColor"/><rect x="1" y="5" width="2" height="1" fill="currentColor"/><rect x="5" y="5" width="2" height="1" fill="currentColor"/><rect x="2" y="6" width="4" height="1" fill="currentColor"/><rect x="2" y="7" width="1" height="1" fill="currentColor"/><rect x="5" y="7" width="1" height="1" fill="currentColor"/></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3>GPT-CEU</h3>
-                        <p>Asistente de IA generativa desplegado en producción para el CEU Educational Group.
-                           Integra OpenAI API con RAG pipelines conectados a fuentes de datos institucionales,
-                           automatizando flujos académicos y administrativos para toda la comunidad universitaria.</p>
-                        <div class="project-tags">
-                            <span class="tag">RAG Pipeline</span>
-                            <span class="tag">OpenAI API</span>
-                            <span class="tag">Azure</span>
-                            <span class="tag">Python</span>
-                        </div>
-                        <a href="https://medios.uchceu.es/actualidad-ceu/se-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceuse-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceu/"
-                           target="_blank" rel="noopener" class="project-link">
-                            Ver en la web <svg width="10" height="10" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="fill:currentColor;display:inline-block;vertical-align:middle"><rect x="0" y="3" width="5" height="2"/><rect x="3" y="1" width="2" height="2"/><rect x="3" y="5" width="2" height="2"/><rect x="4" y="0" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg>
-                        </a>
-                    </div>
-                </div>
+<button class="top-btn" aria-label="Volver arriba">
+  <svg width="12" height="12" viewBox="0 0 8 8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="3" y="0" width="2" height="5"/><rect x="1" y="1" width="2" height="2"/><rect x="5" y="1" width="2" height="2"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/></svg>
+</button>
 
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <svg class="pixel-art" width="40" height="40" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="1" y="0" width="1" height="1" fill="currentColor"/><rect x="3" y="0" width="1" height="1" fill="currentColor"/><rect x="5" y="0" width="1" height="1" fill="currentColor"/><rect x="1" y="1" width="1" height="1" fill="currentColor"/><rect x="3" y="1" width="1" height="1" fill="currentColor"/><rect x="5" y="1" width="1" height="1" fill="currentColor"/><rect x="1" y="2" width="5" height="1" fill="currentColor"/><rect x="0" y="3" width="6" height="2" fill="currentColor"/><rect x="1" y="5" width="5" height="1" fill="currentColor"/><rect x="1" y="6" width="4" height="1" fill="currentColor"/><rect x="2" y="7" width="2" height="1" fill="currentColor"/></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3>Reconocimiento de gestos en tiempo real</h3>
-                        <p>Pipeline de Transfer Learning sobre Vision Transformers (ViT) para clasificación
-                           de gestos en lenguaje de signos americano (ASL). Inferencia en tiempo real
-                           con webcam usando OpenCV y MediaPipe.</p>
-                        <div class="project-tags">
-                            <span class="tag">Vision Transformers</span>
-                            <span class="tag">Transfer Learning</span>
-                            <span class="tag">OpenCV</span>
-                            <span class="tag">MediaPipe</span>
-                        </div>
-                        <a href="https://github.com/iDiagoValeta/ASL-Hand-Gesture-Recognition"
-                           target="_blank" rel="noopener" class="project-link">
-                            Ver en GitHub <svg width="10" height="10" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="fill:currentColor;display:inline-block;vertical-align:middle"><rect x="0" y="3" width="5" height="2"/><rect x="3" y="1" width="2" height="2"/><rect x="3" y="5" width="2" height="2"/><rect x="4" y="0" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <svg class="pixel-art" width="40" height="40" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="3" y="0" width="2" height="2" fill="currentColor"/><rect x="3" y="2" width="2" height="1" fill="currentColor"/><rect x="2" y="3" width="1" height="1" fill="currentColor"/><rect x="5" y="3" width="1" height="1" fill="currentColor"/><rect x="1" y="4" width="2" height="2" fill="currentColor"/><rect x="5" y="4" width="2" height="2" fill="currentColor"/></svg>
-                    </div>
-                    <div class="project-content">
-                        <h3>Framework de automatización multi-agente</h3>
-                        <p>Orquestación de agentes autónomos con LangChain y CrewAI para automatizar
-                           workflows complejos con mínima intervención humana. Incluye pipelines de
-                           LLM fine-tuning con PEFT/QLoRA sobre Llama 3 y benchmarking de precisión.</p>
-                        <div class="project-tags">
-                            <span class="tag">LangChain</span>
-                            <span class="tag">CrewAI</span>
-                            <span class="tag">PEFT/QLoRA</span>
-                            <span class="tag">Llama 3</span>
-                        </div>
-                        <a href="https://github.com/iDiagoValeta?tab=repositories"
-                           target="_blank" rel="noopener" class="project-link">
-                            Ver en GitHub <svg width="10" height="10" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="fill:currentColor;display:inline-block;vertical-align:middle"><rect x="0" y="3" width="5" height="2"/><rect x="3" y="1" width="2" height="2"/><rect x="3" y="5" width="2" height="2"/><rect x="4" y="0" width="1" height="1"/><rect x="4" y="7" width="1" height="1"/></svg>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== CHAT ===== -->
-    <section id="chat" class="section section-alt">
-        <div class="container">
-            <h2 class="section-title">Pregúntale al asistente</h2>
-            <p class="section-subtitle">
-                Un chat con contexto completo sobre mi perfil. Lo he programado yo con Gemini 2.5 Flash.
-            </p>
-            <div class="chat-container">
-                <div class="chat-header">
-                    <div class="chat-header-info">
-                        <svg class="pixel-art" width="28" height="28" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="color:rgba(255,255,255,0.7)"><rect x="1" y="0" width="6" height="1" fill="currentColor"/><rect x="1" y="1" width="1" height="1" fill="currentColor"/><rect x="6" y="1" width="1" height="1" fill="currentColor"/><rect x="1" y="2" width="1" height="1" fill="currentColor"/><rect x="3" y="2" width="2" height="1" fill="currentColor"/><rect x="6" y="2" width="1" height="1" fill="currentColor"/><rect x="1" y="3" width="1" height="1" fill="currentColor"/><rect x="6" y="3" width="1" height="1" fill="currentColor"/><rect x="1" y="4" width="1" height="1" fill="currentColor"/><rect x="3" y="4" width="2" height="1" fill="currentColor"/><rect x="6" y="4" width="1" height="1" fill="currentColor"/><rect x="1" y="5" width="2" height="1" fill="currentColor"/><rect x="5" y="5" width="2" height="1" fill="currentColor"/><rect x="2" y="6" width="4" height="1" fill="currentColor"/><rect x="2" y="7" width="1" height="1" fill="currentColor"/><rect x="5" y="7" width="1" height="1" fill="currentColor"/></svg>
-                        <div>
-                            <h3>Asistente IA · Gemini 2.5 Flash</h3>
-                            <p class="chat-status" id="chatStatus">Listo para chatear</p>
-                        </div>
-                    </div>
-                    <div class="chat-header-actions">
-                        <button class="btn-export" id="exportChat" title="Exportar conversación" aria-label="Exportar conversación">
-                            <svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="3" y="0" width="2" height="3"/><rect x="1" y="3" width="6" height="1"/><rect x="2" y="4" width="4" height="1"/><rect x="3" y="5" width="2" height="1"/><rect x="0" y="7" width="8" height="1"/></svg>
-                        </button>
-                        <button class="btn-clear" id="clearChat" title="Limpiar chat" aria-label="Limpiar historial">
-                            <svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="2" y="0" width="4" height="1"/><rect x="1" y="1" width="6" height="1"/><rect x="0" y="2" width="8" height="1"/><rect x="0" y="3" width="1" height="4"/><rect x="7" y="3" width="1" height="4"/><rect x="0" y="7" width="8" height="1"/><rect x="2" y="3" width="1" height="4"/><rect x="5" y="3" width="1" height="4"/></svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message message-bot">
-                        <div class="message-avatar"><svg width="18" height="18" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block"><rect x="1" y="0" width="6" height="1" fill="currentColor"/><rect x="1" y="1" width="1" height="1" fill="currentColor"/><rect x="6" y="1" width="1" height="1" fill="currentColor"/><rect x="1" y="2" width="1" height="1" fill="currentColor"/><rect x="3" y="2" width="2" height="1" fill="currentColor"/><rect x="6" y="2" width="1" height="1" fill="currentColor"/><rect x="1" y="3" width="1" height="1" fill="currentColor"/><rect x="6" y="3" width="1" height="1" fill="currentColor"/><rect x="1" y="4" width="1" height="1" fill="currentColor"/><rect x="3" y="4" width="2" height="1" fill="currentColor"/><rect x="6" y="4" width="1" height="1" fill="currentColor"/><rect x="1" y="5" width="2" height="1" fill="currentColor"/><rect x="5" y="5" width="2" height="1" fill="currentColor"/><rect x="2" y="6" width="4" height="1" fill="currentColor"/><rect x="2" y="7" width="1" height="1" fill="currentColor"/><rect x="5" y="7" width="1" height="1" fill="currentColor"/></svg></div>
-                        <div class="message-content">
-                            <p>Hola, soy el asistente de Ignacio. Tengo contexto completo sobre su experiencia, proyectos y habilidades. ¿Qué te gustaría saber?</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="chat-input-container">
-                    <div class="chat-input-wrapper">
-                        <input
-                            type="text" id="chatInput" class="chat-input"
-                            placeholder="Pregunta sobre experiencia, proyectos, habilidades..."
-                            autocomplete="off"
-                            aria-label="Pregunta al asistente"
-                            maxlength="2000">
-                        <button id="sendButton" class="btn-send" aria-label="Enviar" title="Enviar (Enter)">
-                            <svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="1" y="0" width="1" height="8"/><rect x="2" y="1" width="1" height="6"/><rect x="3" y="2" width="1" height="4"/><rect x="4" y="3" width="1" height="2"/></svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== CONTACTO ===== -->
-    <section id="contacto" class="section">
-        <div class="container">
-            <h2 class="section-title">Contacto</h2>
-            <div class="contact-content">
-                <p class="contact-description">
-                    ¿Interesado en colaborar o conocer más? No dudes en escribirme.
-                </p>
-                <div class="contact-links">
-                    <a href="mailto:nadiva1243@gmail.com" class="contact-link" aria-label="Email">
-                        <svg width="24" height="24" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="0" y="0" width="8" height="1"/><rect x="0" y="1" width="1" height="4"/><rect x="7" y="1" width="1" height="4"/><rect x="0" y="5" width="8" height="1"/><rect x="2" y="1" width="4" height="1"/><rect x="3" y="2" width="2" height="1"/></svg>
-                        <span>Correo</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/ignacio-diago/" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="LinkedIn">
-                        <svg width="24" height="24" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="0" y="0" width="8" height="1"/><rect x="0" y="1" width="1" height="6"/><rect x="7" y="1" width="1" height="6"/><rect x="0" y="7" width="8" height="1"/><rect x="2" y="2" width="1" height="4"/><rect x="4" y="2" width="1" height="1"/><rect x="4" y="3" width="3" height="1"/><rect x="6" y="4" width="1" height="2"/><rect x="4" y="4" width="1" height="2"/></svg>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener noreferrer" class="contact-link" aria-label="GitHub">
-                        <svg width="24" height="24" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="0" y="0" width="8" height="1"/><rect x="0" y="1" width="1" height="6"/><rect x="7" y="1" width="1" height="6"/><rect x="0" y="7" width="8" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="2" y="4" width="1" height="1"/><rect x="4" y="5" width="3" height="1"/></svg>
-                        <span>GitHub</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Ignacio Diago Valeta · AI Engineer</p>
-        </div>
-    </footer>
-
-    <button class="scroll-to-top" id="scrollToTop" aria-label="Volver arriba">
-        <svg width="16" height="16" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block;fill:currentColor"><rect x="3" y="0" width="2" height="1"/><rect x="2" y="1" width="4" height="1"/><rect x="1" y="2" width="6" height="1"/><rect x="3" y="3" width="2" height="5"/></svg>
-    </button>
-
-    <script type="module" src="app.js"></script>
+<script type="module" src="app.js"></script>
 </body>
 </html>

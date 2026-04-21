@@ -1,1187 +1,619 @@
 import { PORTFOLIO_INFO } from './config.js';
 
-// ── Pixel-art SVGs (Nothing Design) ─────────────────────────────
-const SVG_BOT = `<svg width="18" height="18" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block"><rect x="1" y="0" width="6" height="1" fill="currentColor"/><rect x="1" y="1" width="1" height="1" fill="currentColor"/><rect x="6" y="1" width="1" height="1" fill="currentColor"/><rect x="1" y="2" width="1" height="1" fill="currentColor"/><rect x="3" y="2" width="2" height="1" fill="currentColor"/><rect x="6" y="2" width="1" height="1" fill="currentColor"/><rect x="1" y="3" width="1" height="1" fill="currentColor"/><rect x="6" y="3" width="1" height="1" fill="currentColor"/><rect x="1" y="4" width="1" height="1" fill="currentColor"/><rect x="3" y="4" width="2" height="1" fill="currentColor"/><rect x="6" y="4" width="1" height="1" fill="currentColor"/><rect x="1" y="5" width="2" height="1" fill="currentColor"/><rect x="5" y="5" width="2" height="1" fill="currentColor"/><rect x="2" y="6" width="4" height="1" fill="currentColor"/><rect x="2" y="7" width="1" height="1" fill="currentColor"/><rect x="5" y="7" width="1" height="1" fill="currentColor"/></svg>`;
+const T = {
+  es: {
+    nav: ['Inicio', 'Sobre mí', 'Experiencia', 'Habilidades', 'Proyectos', 'Contacto'],
+    hero_eyebrow: '// AI Engineer · Valencia, España',
+    hero_role: 'LLM Fine-tuning · Computer Vision · Multi-Agente',
+    hero_desc: 'Ingeniero especializado en adaptar redes neuronales a problemas reales — desde el fine-tuning hasta el despliegue en producción.',
+    hero_btn1: 'Ver proyectos',
+    hero_btn2: 'Chat IA',
+    about_title: 'Sobre mí',
+    about_p1: 'Ingeniero Informático por la <strong>Universitat Politècnica de València (UPV)</strong>, especializado en IA aplicada. Mi trabajo consiste en adaptar redes neuronales — LLMs y sistemas de Computer Vision — para resolver problemas concretos mediante fine-tuning y optimización arquitectural.',
+    about_p2: 'Actualmente trabajo como <strong>AI & Back-End Developer en CEU Educational Group</strong>, donde he desarrollado y desplegado <strong>GPT-CEU</strong>, un asistente generativo con OpenAI API y RAG pipelines que optimiza flujos académicos y administrativos.',
+    stat1: 'En producción',
+    stat2: 'Repos GitHub',
+    stat3: 'Certificaciones',
+    stat4: 'Idiomas',
+    exp_title: 'Experiencia',
+    exp: [
+      { date: 'Oct 2025 – Presente', role: 'AI & Back-End Developer', company: 'CEU Educational Group · Valencia', desc: 'Desarrollo y despliegue de GPT-CEU — asistente generativo con RAG pipelines. Integración de LLMs con fuentes de datos institucionales para staff y estudiantes.' },
+      { date: 'Feb 2025 – Jun 2025', role: 'Instructor de Talleres & Guía', company: 'Museo de Informática UPV · Valencia', desc: 'Talleres técnicos de Robótica, Criptografía y Programación. Comunicación técnica adaptada a audiencias diversas.' },
+      { date: 'Ene 2022 – Ene 2025', role: 'Tutor Particular', company: 'Superprof · Valencia', desc: 'Formación personalizada en Matemáticas, Física y Dibujo Técnico a nivel preuniversitario.' },
+    ],
+    skills_title: 'Habilidades',
+    skills: ['LLMs & NLP', 'Computer Vision', 'ML Frameworks', 'MLOps & Tools', 'Programación'],
+    proj_title: 'Proyectos destacados',
+    proj_live: 'Ver en web',
+    proj_gh: 'Ver en GitHub',
+    proj_hf: 'Ver en HuggingFace',
+    project_cards: [
+      {
+        title: 'GPT-CEU',
+        desc: 'Asistente generativo desplegado en producción para el CEU Educational Group. Integra OpenAI API con RAG pipelines sobre fuentes de datos institucionales, optimizando flujos académicos y administrativos para toda la comunidad universitaria.',
+      },
+      {
+        title: 'localOllamaRAG',
+        desc: 'Trabajo de Fin de Grado. Solución RAG on-premises open-source para extracción de información relevante en documentos. Búsqueda híbrida (semántica + keyword) sin dependencias cloud.',
+      },
+      {
+        title: 'Llama 3.2 1B — ORPO Fine-tuning',
+        desc: 'Pipeline de fine-tuning con ORPO preference optimization sobre Llama 3.2 1B. Tutorial completo con notebook y modelo GGUF publicado en HuggingFace Hub listo para despliegue con Ollama.',
+      },
+      {
+        title: 'Reconocimiento ASL en tiempo real',
+        desc: 'Clasificador ASL en tiempo real usando MediaPipe para extracción de landmarks y Vision Transformers (ViT) con TensorFlow/Keras. Inferencia live por webcam y transfer learning sobre un dataset personalizado.',
+      },
+      {
+        title: 'Pipeline documental multi-agente',
+        desc: 'Sistema multi-agente con CrewAI que automatiza la creación de informes PDF. Agentes especializados en investigación, análisis y verificación con flujo coordinado y exportación final vía ReportLab.',
+      },
+    ],
+    certs_title: 'Certificaciones',
+    cert_cards: [
+      'Machine Learning y Ciencia de Datos',
+      'Python para Ciencia de Datos',
+      'Fundamentos de Linux',
+      'SQL y R para Análisis de Datos',
+      'Fundamentos Matemáticos de ML',
+    ],
+    cert_more: '+ más en curso',
+    chat_title: 'Chat IA',
+    chat_sub: 'Chat con contexto completo sobre mi perfil — desarrollado con Gemini 2.5 Flash.',
+    chat_head_title: 'Asistente IA · Ignacio Diago',
+    chat_head_sub: 'Asistente IA · listo',
+    chat_user_avatar: 'Tú',
+    chat_welcome: 'Hola, soy el asistente de Ignacio. Tengo contexto completo sobre su perfil — experiencia, proyectos, habilidades y educación. ¿Qué te gustaría saber?',
+    chat_placeholder: 'Pregunta sobre experiencia, proyectos, habilidades...',
+    clear_chat: 'Limpiar chat',
+    send_label: 'Enviar',
+    suggestions: ['¿En qué proyectos trabaja?', '¿Qué tecnologías domina?', '¿Cuál es su experiencia?', '¿Disponible para prácticas?'],
+    contact_title: 'Contacto',
+    contact_sub: '¿Interesado en colaborar? No dudes en escribir.',
+    footer: '© 2025 Ignacio Diago Valeta · AI Engineer',
+    cv_btn: 'CV',
+    chips: ['LLM Fine-tuning · PEFT/QLoRA', 'Computer Vision · ViT', 'Multi-Agente'],
+    proj_badge_prod: 'Producción',
+    proj_badge_tfg: 'TFG',
+    edu_label: '// EDUCACIÓN',
+    edu_degree: 'B.Sc. Ingeniería Informática',
+    edu_uni: 'Universitat Politècnica de València · 2022–2026',
+    edu_desc: 'Especialización en Computación — algoritmos, IA, Machine Learning y arquitectura de software.',
+    lang_label: '// IDIOMAS',
+    lang_names: ['Español', 'English', 'Valencià'],
+    lang_native: 'Nativo',
+    lang_b2: 'B2 Cambridge',
+    lang_val: 'Nativo · GVA',
+    clock_label: '// HORA LOCAL',
+    theme_label: 'Cambiar tema',
+    top_label: 'Volver arriba',
+  },
+  en: {
+    nav: ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Contact'],
+    hero_eyebrow: '// AI Engineer · Valencia, Spain',
+    hero_role: 'LLM Fine-tuning · Computer Vision · Multi-Agent',
+    hero_desc: 'Engineer specialized in adapting neural networks to real-world problems — from fine-tuning all the way to production deployment.',
+    hero_btn1: 'View projects',
+    hero_btn2: 'AI Chat',
+    about_title: 'About me',
+    about_p1: 'Computer Engineer from the <strong>Universitat Politècnica de València (UPV)</strong>, specializing in applied AI. My work focuses on adapting neural networks — LLMs and Computer Vision systems — to solve concrete problems through fine-tuning and architectural optimization.',
+    about_p2: 'Currently working as <strong>AI & Back-End Developer at CEU Educational Group</strong>, where I developed and deployed <strong>GPT-CEU</strong>, a generative AI assistant using OpenAI API and RAG pipelines that streamlines academic and administrative workflows.',
+    stat1: 'In production',
+    stat2: 'GitHub repos',
+    stat3: 'Certifications',
+    stat4: 'Languages',
+    exp_title: 'Experience',
+    exp: [
+      { date: 'Oct 2025 – Present', role: 'AI & Back-End Developer', company: 'CEU Educational Group · Valencia', desc: 'Developed and deployed GPT-CEU — a generative assistant with RAG pipelines. Integrated LLMs with institutional data sources for staff and students.' },
+      { date: 'Feb 2025 – Jun 2025', role: 'Workshop Instructor & Museum Guide', company: 'UPV Informatics Museum · Valencia', desc: 'Technical workshops on Robotics, Cryptography and Programming. Adapted technical communication to diverse audiences.' },
+      { date: 'Jan 2022 – Jan 2025', role: 'Private Tutor', company: 'Superprof · Valencia', desc: 'Tailored one-on-one instruction in Mathematics, Physics and Technical Drawing to pre-university students.' },
+    ],
+    skills_title: 'Skills',
+    skills: ['LLMs & NLP', 'Computer Vision', 'ML Frameworks', 'MLOps & Tools', 'Programming'],
+    proj_title: 'Featured projects',
+    proj_live: 'View online',
+    proj_gh: 'View on GitHub',
+    proj_hf: 'View on HuggingFace',
+    project_cards: [
+      {
+        title: 'GPT-CEU',
+        desc: 'Production generative assistant for CEU Educational Group. It combines the OpenAI API with RAG pipelines over institutional data sources, streamlining academic and administrative workflows for the university community.',
+      },
+      {
+        title: 'localOllamaRAG',
+        desc: 'Final degree project. Open-source, on-premises RAG solution for extracting relevant information from documents. Hybrid search (semantic + keyword) with no cloud dependencies.',
+      },
+      {
+        title: 'Llama 3.2 1B — ORPO Fine-tuning',
+        desc: 'Fine-tuning pipeline using ORPO preference optimization on Llama 3.2 1B. Complete tutorial with notebook and a GGUF model published on HuggingFace Hub, ready for Ollama deployment.',
+      },
+      {
+        title: 'ASL Real-time Gesture Recognition',
+        desc: 'Real-time ASL classifier using MediaPipe for landmark extraction and Vision Transformers (ViT) with TensorFlow/Keras. Live webcam inference and transfer learning on a custom dataset.',
+      },
+      {
+        title: 'Multi-Agent Document Pipeline',
+        desc: 'Multi-agent CrewAI system that automates PDF report generation. Specialized research, analysis and verification agents coordinate the workflow and export the final document through ReportLab.',
+      },
+    ],
+    certs_title: 'Certifications',
+    cert_cards: [
+      'Machine Learning & Data Science',
+      'Python for Data Science',
+      'Linux Fundamentals',
+      'SQL & R for Data Analysis',
+      'Mathematical Foundations of ML',
+    ],
+    cert_more: '+ more in progress',
+    chat_title: 'AI Chat',
+    chat_sub: 'Chat with full profile context — powered by Gemini 2.5 Flash.',
+    chat_head_title: 'AI Assistant · Ignacio Diago',
+    chat_head_sub: 'AI assistant · ready',
+    chat_user_avatar: 'You',
+    chat_welcome: "Hi, I'm Ignacio's assistant. I have full context about his profile — experience, projects, skills and education. What would you like to know?",
+    chat_placeholder: 'Ask about experience, projects, skills...',
+    clear_chat: 'Clear chat',
+    send_label: 'Send',
+    suggestions: ['What projects is he working on?', 'Which technologies does he know?', 'What is his experience?', 'Available for internships?'],
+    contact_title: 'Contact',
+    contact_sub: 'Interested in collaborating? Feel free to reach out.',
+    footer: '© 2025 Ignacio Diago Valeta · AI Engineer',
+    cv_btn: 'CV',
+    chips: ['LLM Fine-tuning · PEFT/QLoRA', 'Computer Vision · ViT', 'Multi-Agent'],
+    proj_badge_prod: 'Production',
+    proj_badge_tfg: 'Thesis',
+    edu_label: '// EDUCATION',
+    edu_degree: 'B.Sc. Computer Engineering',
+    edu_uni: 'Universitat Politècnica de València · 2022–2026',
+    edu_desc: 'Computing specialization — algorithms, AI, Machine Learning and software architecture.',
+    lang_label: '// LANGUAGES',
+    lang_names: ['Spanish', 'English', 'Valencian'],
+    lang_native: 'Native',
+    lang_b2: 'B2 Cambridge',
+    lang_val: 'Native · GVA',
+    clock_label: '// LOCAL TIME',
+    theme_label: 'Toggle theme',
+    top_label: 'Back to top',
+  }
+};
 
-const SVG_USER = `<svg width="18" height="18" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" style="display:block"><rect x="2" y="0" width="4" height="1" fill="currentColor"/><rect x="2" y="1" width="1" height="1" fill="currentColor"/><rect x="5" y="1" width="1" height="1" fill="currentColor"/><rect x="2" y="2" width="4" height="1" fill="currentColor"/><rect x="3" y="3" width="2" height="1" fill="currentColor"/><rect x="1" y="4" width="6" height="1" fill="currentColor"/><rect x="1" y="5" width="1" height="1" fill="currentColor"/><rect x="6" y="5" width="1" height="1" fill="currentColor"/><rect x="1" y="6" width="1" height="1" fill="currentColor"/><rect x="6" y="6" width="1" height="1" fill="currentColor"/><rect x="1" y="7" width="2" height="1" fill="currentColor"/><rect x="5" y="7" width="2" height="1" fill="currentColor"/></svg>`;
+const SKILL_DETAILS = {
+  0: [['Fine-tuning PEFT/QLoRA', 95], ['RAG Pipelines', 92], ['LangChain / LlamaIndex', 88], ['HuggingFace Transformers', 90], ['OpenAI API', 93], ['Prompt Engineering', 88]],
+  1: [['Vision Transformers (ViT)', 85], ['Transfer Learning', 88], ['OpenCV', 82], ['MediaPipe', 80], ['Real-time Inference', 83]],
+  2: [['PyTorch', 90], ['TensorFlow / Keras', 85], ['Scikit-learn', 88], ['Hyperparameter Optimization', 80]],
+  3: [['Git / Linux', 85], ['HuggingFace Hub', 90], ['Weights & Biases', 75], ['Docker', 60]],
+  4: [['Python', 95], ['SQL', 80], ['R', 72], ['C', 68], ['NumPy / Pandas', 88]],
+};
 
-// Estado del chat
-let isProcessing = false;
-let conversationHistory = [];
-
-// Elementos del DOM (se inicializarán cuando el DOM esté listo)
-let chatInput, sendButton, chatMessages, clearChatButton, chatStatus;
-
-// Constantes
 const STORAGE_KEY = 'portfolio_chat_history';
-const CHAT_TIMEOUT = 60000; // 60 segundos (margen para reintentos)
-const MAX_REQUEST_SIZE = 100000; // 100KB
+const CHAT_TIMEOUT = 60000;
 
-// Función para sanitizar HTML (prevenir XSS)
+let lang = localStorage.getItem('lang') || 'es';
+let dark = localStorage.getItem('dark') === 'true';
+let chatHistory = [];
+let typedTimer = null;
+let isProcessing = false;
+
+const $ = (id) => document.getElementById(id);
+
 function sanitizeHtml(html) {
-    if (!html) return '';
-    
-    // Lista de tags permitidos
-    const allowedTags = ['p', 'br', 'strong', 'em', 'code', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'hr', 'table', 'thead', 'tbody', 'tr', 'th', 'td'];
-    
-    // Crear un elemento temporal para parsear
-    const temp = document.createElement('div');
-    temp.innerHTML = html;
-    
-    // Obtener todos los elementos
-    const allElements = temp.querySelectorAll('*');
-    
-    // Remover scripts y eventos peligrosos
-    allElements.forEach(el => {
-        // Remover atributos de eventos
-        Array.from(el.attributes).forEach(attr => {
-            if (attr.name.startsWith('on')) {
-                el.removeAttribute(attr.name);
-            }
-        });
-        
-        // Si el tag no está permitido, reemplazar por su contenido
-        if (!allowedTags.includes(el.tagName.toLowerCase())) {
-            const parent = el.parentNode;
-            while (el.firstChild) {
-                parent.insertBefore(el.firstChild, el);
-            }
-            parent.removeChild(el);
-        }
+  if (!html) return '';
+  const allowedTags = new Set(['P', 'BR', 'STRONG', 'EM', 'CODE', 'UL', 'OL', 'LI']);
+  const temp = document.createElement('div');
+  temp.innerHTML = html;
+  temp.querySelectorAll('*').forEach((el) => {
+    [...el.attributes].forEach((attr) => {
+      if (attr.name.startsWith('on')) el.removeAttribute(attr.name);
     });
-    
-    // Escapar contenido de texto para prevenir inyección
-    const walker = document.createTreeWalker(
-        temp,
-        NodeFilter.SHOW_TEXT,
-        null,
-        false
-    );
-    
-    const textNodes = [];
-    let node;
-    while (node = walker.nextNode()) {
-        textNodes.push(node);
+    if (!allowedTags.has(el.tagName)) {
+      const parent = el.parentNode;
+      while (el.firstChild) parent.insertBefore(el.firstChild, el);
+      parent.removeChild(el);
     }
-    
-    textNodes.forEach(textNode => {
-        const text = textNode.textContent;
-        const escaped = text
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#x27;');
-        
-        // Pero permitir los tags que ya procesamos
-        const temp2 = document.createElement('div');
-        temp2.innerHTML = escaped;
-        if (temp2.textContent === text) {
-            textNode.textContent = text; // No había HTML, mantener original
-        } else {
-            // Había HTML, pero ya fue procesado, usar el texto escapado y luego desescapar tags permitidos
-            const final = escaped
-                .replace(/&lt;(\/?)(p|br|strong|em|code|ul|ol|li|h[1-4]|hr|table|thead|tbody|tr|th|td)(\s[^&]*?)?&gt;/gi, '<$1$2$3>');
-            textNode.textContent = final;
-        }
-    });
-    
-    return temp.innerHTML;
+  });
+  return temp.innerHTML;
 }
 
-// Función para guardar historial en localStorage
+function mdToHtml(text) {
+  const escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const withMarkdown = escaped
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/(?:^|\n)- (.+?)(?=\n|$)/g, '<li>$1</li>')
+    .replace(/(<li>.*?<\/li>)/gs, '<ul>$1</ul>');
+
+  return withMarkdown
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean)
+    .map((paragraph) => (paragraph.startsWith('<ul>') ? paragraph : `<p>${paragraph.replace(/\n/g, '<br>')}</p>`))
+    .join('');
+}
+
 function saveChatHistory() {
-    try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory));
-    } catch (e) {
-        console.warn('No se pudo guardar el historial:', e);
-    }
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(chatHistory));
+  } catch (_error) {}
 }
 
-// Función para cargar historial desde localStorage
 function loadChatHistory() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+    const parsed = JSON.parse(saved);
+    if (Array.isArray(parsed)) chatHistory = parsed;
+  } catch (_error) {
+    chatHistory = [];
+  }
+}
+
+function applyDark() {
+  document.documentElement.classList.toggle('dark', dark);
+  localStorage.setItem('dark', String(dark));
+}
+
+function startTyped(id, text) {
+  const el = $(id);
+  if (!el) return;
+  clearTimeout(typedTimer);
+  el.textContent = '';
+  let i = 0;
+  const next = () => {
+    if (i <= text.length) {
+      el.textContent = text.slice(0, i);
+      i += 1;
+      typedTimer = setTimeout(next, 38);
+    }
+  };
+  next();
+}
+
+function renderExp(exp) {
+  const wrap = $('expList');
+  if (!wrap) return;
+  wrap.innerHTML = exp.map((e) => `
+    <div class="exp-item reveal">
+      <div class="exp-date">${e.date}</div>
+      <div class="exp-role">${e.role}</div>
+      <div class="exp-company">${e.company}</div>
+      <div class="exp-desc">${e.desc}</div>
+    </div>`).join('');
+  observeReveal();
+}
+
+function renderSkillTab(idx) {
+  document.querySelectorAll('.skill-tab').forEach((tab, i) => tab.classList.toggle('active', i === idx));
+  const list = $('skillList');
+  const skills = SKILL_DETAILS[idx] || [];
+  list.innerHTML = skills.map(([name, pct]) => `
+    <div class="skill-row">
+      <span class="skill-row-name">${name}</span>
+      <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="${pct}"></div></div>
+      <span class="skill-row-pct">${pct}%</span>
+    </div>`).join('');
+
+  requestAnimationFrame(() => {
+    list.querySelectorAll('.skill-row').forEach((row, i) => {
+      setTimeout(() => {
+        row.classList.add('show');
+        const fill = row.querySelector('.skill-bar-fill');
+        if (fill) fill.style.width = `${fill.dataset.pct}%`;
+      }, i * 55);
+    });
+  });
+}
+
+function initSkillSlider() {
+  const tabs = $('skillTabs');
+  if (!tabs) return;
+  const labels = T[lang].skills;
+  tabs.innerHTML = labels.map((label, i) => `<button class="skill-tab${i === 0 ? ' active' : ''}" data-idx="${i}">${label}</button>`).join('');
+  tabs.querySelectorAll('.skill-tab').forEach((btn) => {
+    btn.addEventListener('click', () => renderSkillTab(Number(btn.dataset.idx)));
+  });
+  renderSkillTab(0);
+}
+
+function refreshSkillTabs() {
+  const labels = T[lang].skills;
+  document.querySelectorAll('.skill-tab').forEach((btn, i) => {
+    btn.textContent = labels[i] || btn.textContent;
+  });
+}
+
+function appendMsg(role, html) {
+  const msgs = $('chatMsgs');
+  const isBot = role === 'bot';
+  const div = document.createElement('div');
+  div.className = `msg ${isBot ? 'msg-bot' : 'msg-user'}`;
+  div.innerHTML = `<div class="msg-avatar">${isBot ? 'AI' : T[lang].chat_user_avatar}</div><div class="msg-bubble">${html}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function renderSuggestions(list) {
+  const wrap = $('chatSuggestions');
+  wrap.innerHTML = list.map((s) => `<button class="sugg" data-text="${s.replace(/"/g, '&quot;')}">${s}</button>`).join('');
+  wrap.querySelectorAll('.sugg').forEach((btn) => {
+    btn.addEventListener('click', () => sendMsg(btn.dataset.text || ''));
+  });
+}
+
+function clearChat() {
+  chatHistory = [];
+  saveChatHistory();
+  $('chatMsgs').innerHTML = '';
+  appendMsg('bot', `<p>${T[lang].chat_welcome}</p>`);
+}
+
+function restoreChat() {
+  $('chatMsgs').innerHTML = '';
+
+  if (chatHistory.length === 0) {
+    appendMsg('bot', `<p>${T[lang].chat_welcome}</p>`);
+    return;
+  }
+
+  chatHistory.forEach((msg) => {
+    const text = msg?.parts?.[0]?.text || '';
+    if (!text) return;
+    if (msg.role === 'user') appendMsg('user', `<p>${text}</p>`);
+    if (msg.role === 'model') appendMsg('bot', sanitizeHtml(mdToHtml(text)));
+  });
+}
+
+async function requestGemini(userMessage) {
+  chatHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+
+  const contents = [
+    { role: 'user', parts: [{ text: PORTFOLIO_INFO }] },
+    { role: 'model', parts: [{ text: 'Entendido. Estoy listo para actuar como el asistente de Ignacio.' }] },
+    ...chatHistory,
+  ];
+
+  const requestBody = {
+    contents,
+    generationConfig: {
+      temperature: 0.7,
+      topK: 40,
+      topP: 0.95,
+      maxOutputTokens: 1024,
+    },
+  };
+
+  let response;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), CHAT_TIMEOUT);
     try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            const parsed = JSON.parse(saved);
-            if (Array.isArray(parsed)) {
-                conversationHistory = parsed;
-                return true;
-            }
-        }
-    } catch (e) {
-        console.warn('No se pudo cargar el historial:', e);
-    }
-    return false;
-}
-
-// Función para restaurar mensajes del historial
-function restoreChatMessages() {
-    if (conversationHistory.length === 0) return;
-    
-    // Limpiar mensajes actuales excepto el inicial
-    const initialMessage = chatMessages.querySelector('.message-bot:first-child');
-    chatMessages.innerHTML = '';
-    if (initialMessage) {
-        chatMessages.appendChild(initialMessage);
-    }
-    
-    // Restaurar mensajes del historial
-    conversationHistory.forEach(msg => {
-        if (msg.role === 'user' && msg.parts && msg.parts[0] && msg.parts[0].text) {
-            addMessage(msg.parts[0].text, true);
-        } else if (msg.role === 'model' && msg.parts && msg.parts[0] && msg.parts[0].text) {
-            addMessage(msg.parts[0].text, false);
-        }
-    });
-}
-
-// Función para exportar conversación
-function exportConversation() {
-    let text = 'Conversación del Portfolio Chat\n';
-    text += '================================\n\n';
-    
-    conversationHistory.forEach((msg, index) => {
-        const role = msg.role === 'user' ? 'Usuario' : 'Asistente';
-        const content = msg.parts && msg.parts[0] && msg.parts[0].text ? msg.parts[0].text : '';
-        text += `${index + 1}. ${role}:\n${content}\n\n`;
-    });
-    
-    // Crear blob y descargar
-    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `conversacion-portfolio-${new Date().toISOString().split('T')[0]}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
-
-// Función para inicializar los elementos del DOM
-function initializeElements() {
-    chatInput = document.getElementById('chatInput');
-    sendButton = document.getElementById('sendButton');
-    chatMessages = document.getElementById('chatMessages');
-    clearChatButton = document.getElementById('clearChat');
-    chatStatus = document.getElementById('chatStatus');
-    
-    // Verificar que todos los elementos existen
-    if (!chatInput || !sendButton || !chatMessages || !clearChatButton || !chatStatus) {
-        console.error('Error: No se pudieron encontrar todos los elementos del DOM');
-        return false;
-    }
-    
-    // [CAMBIO APLICADO]
-    // Se eliminó el bloque que verificaba GEMINI_API_KEY en el cliente.
-    // El chat está listo para usarse, asumiendo que el servidor proxy
-    // tiene la clave API configurada.
-    
-    return true;
-}
-
-// Función para convertir markdown básico a HTML
-function markdownToHtml(text) {
-    if (!text) return '';
-    
-    let html = text;
-    
-    // Procesar línea por línea para manejar diferentes elementos
-    const lines = html.split('\n');
-    const processedLines = [];
-    let inList = false;
-    let listType = 'ul'; // 'ul' o 'ol'
-    let inTable = false;
-    let tableRows = [];
-    
-    for (let i = 0; i < lines.length; i++) {
-        const originalLine = lines[i];
-        const line = originalLine.trim();
-        
-        // Detectar tablas markdown (debe tener al menos 3 columnas)
-        const pipeCount = (line.match(/\|/g) || []).length;
-        if (line.includes('|') && pipeCount >= 2) {
-            // Verificar si es línea de separación de tabla (|---|---|)
-            const isSeparator = line.match(/^\|[\s\-\|:]+\|$/);
-            
-            if (!isSeparator) {
-                if (!inTable) {
-                    inTable = true;
-                    tableRows = [];
-                }
-                // Usar la línea original para preservar espacios
-                tableRows.push(originalLine);
-            }
-            continue;
-        } else {
-            // Si estábamos en una tabla, procesarla antes de continuar
-            if (inTable && tableRows.length > 0) {
-                processedLines.push(processMarkdownTable(tableRows));
-                tableRows = [];
-                inTable = false;
-            }
-        }
-        
-        // Detectar títulos
-        if (line.match(/^#{1,4}\s+/)) {
-            if (inList) {
-                processedLines.push('</' + listType + '>');
-                inList = false;
-            }
-            const match = line.match(/^(#{1,4})\s+(.+)$/);
-            if (match) {
-                const level = match[1].length;
-                const title = match[2];
-                processedLines.push(`<h${level}>${title}</h${level}>`);
-            }
-            continue;
-        }
-        
-        // Detectar separadores horizontales
-        if (line.match(/^[-*_]{3,}$/)) {
-            if (inList) {
-                processedLines.push('</' + listType + '>');
-                inList = false;
-            }
-            processedLines.push('<hr>');
-            continue;
-        }
-        
-        // Detectar listas con viñetas
-        const listMatch = line.match(/^[\*\-\+] (.+)$/);
-        if (listMatch) {
-            if (inList && listType !== 'ul') {
-                processedLines.push('</' + listType + '>');
-                inList = false;
-            }
-            if (!inList) {
-                processedLines.push('<ul>');
-                inList = true;
-                listType = 'ul';
-            }
-            processedLines.push('<li>' + listMatch[1] + '</li>');
-            continue;
-        }
-        
-        // Detectar listas numeradas
-        const numberedListMatch = line.match(/^\d+\.\s+(.+)$/);
-        if (numberedListMatch) {
-            if (inList && listType !== 'ol') {
-                processedLines.push('</' + listType + '>');
-                inList = false;
-            }
-            if (!inList) {
-                processedLines.push('<ol>');
-                inList = true;
-                listType = 'ol';
-            }
-            processedLines.push('<li>' + numberedListMatch[1] + '</li>');
-            continue;
-        }
-        
-        // Si no es lista, cerrar la lista si estaba abierta
-        if (inList && line !== '') {
-            processedLines.push('</' + listType + '>');
-            inList = false;
-        }
-        
-        // Agregar la línea normal
-        if (line !== '' || processedLines.length === 0) {
-            processedLines.push(line);
-        }
-    }
-    
-    // Cerrar listas o tablas abiertas
-    if (inList) {
-        processedLines.push('</' + listType + '>');
-    }
-    if (inTable && tableRows.length > 0) {
-        processedLines.push(processMarkdownTable(tableRows));
-    }
-    
-    html = processedLines.join('\n');
-    
-    // Convertir negritas **texto** o __texto__
-    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
-    
-    // Convertir cursivas *texto* o _texto_ (evitar conflictos con listas y negritas)
-    // Solo procesar si no está dentro de tags HTML - usar método más compatible
-    // Primero procesar las que no están dentro de tags
-    html = html.replace(/([^<>\s]|^)\*([^*<>\n]+)\*([^<>\s]|$)/g, function(match, before, text, after) {
-        // Verificar que no estemos dentro de un tag HTML
-        if (before === '<' || after === '>') return match;
-        return before + '<em>' + text + '</em>' + after;
-    });
-    html = html.replace(/([^<>\s]|^)_([^_<>\n]+)_([^<>\s]|$)/g, function(match, before, text, after) {
-        if (before === '<' || after === '>') return match;
-        return before + '<em>' + text + '</em>' + after;
-    });
-    
-    // Convertir código inline `código`
-    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-    
-    // Convertir saltos de línea dobles a párrafos
-    html = html.split(/\n\n+/).map(paragraph => {
-        paragraph = paragraph.trim();
-        if (!paragraph) return '';
-        
-        // Si ya tiene HTML estructurado, no envolver en <p>
-        if (paragraph.includes('<ul>') || paragraph.includes('<ol>') || 
-            paragraph.includes('<li>') || paragraph.includes('<h') || 
-            paragraph.includes('<hr>') || paragraph.includes('<table>')) {
-            return paragraph;
-        }
-        
-        // Convertir saltos de línea simples a <br>
-        paragraph = paragraph.replace(/\n/g, '<br>');
-        return '<p>' + paragraph + '</p>';
-    }).join('');
-    
-    return html;
-}
-
-// Función para procesar tablas markdown
-function processMarkdownTable(rows) {
-    if (rows.length === 0) return '';
-    
-    let html = '<table>';
-    
-    // Primera fila es el encabezado
-    if (rows.length > 0) {
-        html += '<thead><tr>';
-        const headerCells = rows[0].split('|').filter(cell => cell.trim() !== '');
-        headerCells.forEach(cell => {
-            html += '<th>' + cell.trim() + '</th>';
-        });
-        html += '</tr></thead>';
-    }
-    
-    // Resto de filas son datos
-    if (rows.length > 1) {
-        html += '<tbody>';
-        for (let i = 1; i < rows.length; i++) {
-            html += '<tr>';
-            const cells = rows[i].split('|').filter(cell => cell.trim() !== '');
-            cells.forEach(cell => {
-                html += '<td>' + cell.trim() + '</td>';
-            });
-            html += '</tr>';
-        }
-        html += '</tbody>';
-    }
-    
-    html += '</table>';
-    return html;
-}
-
-// Función para agregar mensaje al chat
-function addMessage(content, isUser = false) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${isUser ? 'message-user' : 'message-bot'}`;
-    
-    const avatar = document.createElement('div');
-    avatar.className = 'message-avatar';
-    avatar.innerHTML = isUser ? SVG_USER : SVG_BOT;
-    
-    const messageContent = document.createElement('div');
-    messageContent.className = 'message-content';
-    
-    // Si es usuario, mostrar texto plano; si es bot, renderizar markdown
-    if (isUser) {
-        const p = document.createElement('p');
-        p.textContent = content;
-        messageContent.appendChild(p);
-    } else {
-        // Sanitizar HTML antes de insertar
-        const html = markdownToHtml(content);
-        messageContent.innerHTML = sanitizeHtml(html);
-    }
-    
-    messageDiv.appendChild(avatar);
-    messageDiv.appendChild(messageContent);
-    
-    chatMessages.appendChild(messageDiv);
-    scrollToBottom();
-}
-
-// Función para mostrar mensaje de carga
-function addLoadingMessage() {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = 'message message-bot';
-    messageDiv.id = 'loading-message';
-    
-    const avatar = document.createElement('div');
-    avatar.className = 'message-avatar';
-    avatar.innerHTML = SVG_BOT;
-
-    const messageContent = document.createElement('div');
-    messageContent.className = 'message-loading';
-    messageContent.innerHTML = '<span></span><span></span><span></span>';
-    
-    messageDiv.appendChild(avatar);
-    messageDiv.appendChild(messageContent);
-    
-    chatMessages.appendChild(messageDiv);
-    scrollToBottom();
-}
-
-// Función para remover mensaje de carga
-function removeLoadingMessage() {
-    const loadingMessage = document.getElementById('loading-message');
-    if (loadingMessage) {
-        loadingMessage.remove();
-    }
-}
-
-// Función para hacer scroll al final del chat
-function scrollToBottom() {
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-// Muestra cuenta regresiva en el status y resuelve al terminar
-async function countdownRetry(seconds) {
-    for (let i = seconds; i > 0; i--) {
-        chatStatus.textContent = `Cuota alcanzada. Reintentando en ${i}s...`;
-        chatStatus.style.color = '#f59e0b';
-        await new Promise(r => setTimeout(r, 1000));
-    }
-    chatStatus.textContent = 'Reintentando...';
-    chatStatus.style.color = '#6366f1';
-}
-
-// Función para enviar mensaje a Gemini API
-async function sendMessageToGemini(userMessage) {
-    try {
-        chatStatus.textContent = 'Pensando...';
-        chatStatus.style.color = '#6366f1';
-
-        // Agregar mensaje del usuario al historial (provisional; se revierte si hay error)
-        conversationHistory.push({
-            role: 'user',
-            parts: [{ text: userMessage }]
-        });
-
-        // Construir contenidos con contexto del portfolio
-        const contents = [
-            {
-                role: 'user',
-                parts: [{ text: PORTFOLIO_INFO }]
-            },
-            {
-                role: 'model',
-                parts: [{ text: 'Entendido. Estoy listo para actuar como el asistente de Ignacio.' }]
-            },
-            ...conversationHistory
-        ];
-
-        const requestBody = {
-            contents: contents,
-            generationConfig: {
-                temperature: 0.7,
-                topK: 40,
-                topP: 0.95,
-                maxOutputTokens: 1024,
-            }
-        };
-
-        const apiPath = '/api/gemini';
-
-        // Fetch con un reintento automático si se alcanza el límite de cuota (429)
-        let response;
-        for (let attempt = 0; attempt < 2; attempt++) {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), CHAT_TIMEOUT);
-            try {
-                response = await fetch(apiPath, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(requestBody),
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
-            } catch (e) {
-                clearTimeout(timeoutId);
-                throw e;
-            }
-
-            // Si es 429 y aún queda un intento, esperar y reintentar
-            if (response.status === 429 && attempt === 0) {
-                await countdownRetry(20);
-                continue;
-            }
-            break;
-        }
-
-        if (!response.ok) {
-            let errorMessage = 'Error al conectar con la API';
-            try {
-                const errorData = await response.json();
-                errorMessage = errorData.error?.message || errorMessage;
-                console.error('Error de API:', errorData);
-            } catch (e) {
-                errorMessage = `Error HTTP ${response.status}: ${response.statusText}`;
-            }
-            throw new Error(errorMessage);
-        }
-
-        const data = await response.json();
-
-        if (!data.candidates || data.candidates.length === 0) {
-            console.error('Respuesta sin candidatos:', data);
-            throw new Error('La API no devolvió ninguna respuesta');
-        }
-
-        const botResponse = data.candidates[0]?.content?.parts[0]?.text ||
-                            'Lo siento, no pude generar una respuesta. Por favor, intenta de nuevo.';
-
-        // Éxito: guardar historial con usuario + respuesta
-        saveChatHistory();
-        conversationHistory.push({
-            role: 'model',
-            parts: [{ text: botResponse }]
-        });
-        saveChatHistory();
-
-        chatStatus.textContent = 'Listo para chatear';
-        chatStatus.style.color = '#10b981';
-
-        return botResponse;
-
+      response = await fetch('/api/gemini', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestBody),
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
     } catch (error) {
-        // Revertir el mensaje del usuario del historial para no dejar intercambios incompletos
-        if (conversationHistory.length > 0 &&
-            conversationHistory[conversationHistory.length - 1].role === 'user') {
-            conversationHistory.pop();
-            saveChatHistory();
-        }
-
-        console.error('Error completo:', error);
-        chatStatus.textContent = 'Error de conexión';
-        chatStatus.style.color = '#ef4444';
-
-        const errorMsg = error.message || String(error);
-
-        if (error.name === 'AbortError' || errorMsg.includes('timeout') || errorMsg.includes('aborted')) {
-            return 'Error: La solicitud tardó demasiado tiempo. Por favor, intenta de nuevo.';
-        } else if (errorMsg.includes('API_KEY') || errorMsg.includes('API key') || errorMsg.includes('401')) {
-            return 'Error: La API key no es válida o ha expirado.';
-        } else if (errorMsg.includes('RESOURCE_EXHAUSTED') || errorMsg.includes('quota') || errorMsg.includes('429')) {
-            return 'Límite de cuota de Gemini alcanzado. El chat reintentó automáticamente sin éxito. Espera ~1 minuto e inténtalo de nuevo.';
-        } else if (errorMsg.includes('CORS') || errorMsg.includes('Failed to fetch') || errorMsg.includes('NetworkError')) {
-            return 'Error de conexión con el servidor. Por favor, inténtalo de nuevo en unos momentos.';
-        } else if (errorMsg.includes('403')) {
-            return 'Acceso denegado. Verifica que la API key tenga los permisos necesarios.';
-        } else {
-            return `Error: ${errorMsg}. Por favor, verifica tu conexión a internet.`;
-        }
+      clearTimeout(timeoutId);
+      throw error;
     }
-}
 
-// Función para manejar el envío de mensajes
-async function handleSendMessage() {
-    const message = chatInput.value.trim();
-    
-    // Validación de entrada
-    if (!message || isProcessing) return;
-    
-    // Sanitizar entrada del usuario (remover caracteres peligrosos)
-    const sanitizedMessage = message
-        .replace(/[<>]/g, '') // Remover < y >
-        .trim();
-    
-    if (!sanitizedMessage) return;
-    
-    // Validar longitud del mensaje
-    if (sanitizedMessage.length > 2000) {
-        addMessage('El mensaje es demasiado largo. Por favor, limita tu mensaje a 2000 caracteres.', false);
-        return;
+    if (response.status === 429 && attempt === 0) {
+      await new Promise((resolve) => setTimeout(resolve, 20000));
+      continue;
     }
-    
-    // [CAMBIO APLICADO]
-    // Se eliminó la comprobación de la API key en el cliente.
-    /*
-    if (GEMINI_API_KEY === 'TU_API_KEY_AQUI' || !GEMINI_API_KEY) {
-        addMessage('Por favor, configura tu API key de Gemini en el archivo config.js primero.', false);
-        return;
-    }
-    */
-    
-    // Agregar mensaje del usuario (usar mensaje sanitizado)
-    addMessage(sanitizedMessage, true);
-    chatInput.value = '';
-    sendButton.disabled = true;
-    isProcessing = true;
-    
-    // Mostrar mensaje de carga
-    addLoadingMessage();
-    
+    break;
+  }
+
+  if (!response.ok) {
+    let message = `Error HTTP ${response.status}`;
     try {
-        // Obtener respuesta de Gemini
-        const response = await sendMessageToGemini(message);
-        
-        // Remover mensaje de carga y agregar respuesta
-        removeLoadingMessage();
-        addMessage(response, false);
-        
-    } catch (error) {
-        removeLoadingMessage();
-        addMessage('Lo siento, ocurrió un error. Por favor, intenta de nuevo.', false);
-    } finally {
-        isProcessing = false;
-        sendButton.disabled = false;
-        chatInput.focus();
-    }
+      const errorData = await response.json();
+      message = errorData.error?.message || message;
+    } catch (_error) {}
+    throw new Error(message);
+  }
+
+  const data = await response.json();
+  const botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!botResponse) throw new Error('La API no devolvió ninguna respuesta');
+
+  chatHistory.push({ role: 'model', parts: [{ text: botResponse }] });
+  saveChatHistory();
+  return botResponse;
 }
 
-// Función para inicializar los event listeners
-function initializeEventListeners() {
-    if (!chatInput || !sendButton || !clearChatButton) {
-        console.error('Error: No se pueden agregar event listeners, elementos no encontrados');
-        return;
-    }
-    
-    // Event Listeners del chat
-    sendButton.addEventListener('click', handleSendMessage);
+async function sendMsg(text = '') {
+  if (isProcessing) return;
+  const input = $('chatInput');
+  const userText = (text || input.value).trim().replace(/[<>]/g, '');
+  if (!userText) return;
 
-    chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            handleSendMessage();
-        }
-    });
+  isProcessing = true;
+  $('chatSend').disabled = true;
+  input.value = '';
+  appendMsg('user', `<p>${userText}</p>`);
 
-    clearChatButton.addEventListener('click', () => {
-        // Mantener solo el mensaje inicial
-        const initialMessage = chatMessages.querySelector('.message-bot:first-child');
-        chatMessages.innerHTML = '';
-        if (initialMessage) {
-            chatMessages.appendChild(initialMessage);
-        }
-        conversationHistory = [];
-        // Limpiar localStorage
-        try {
-            localStorage.removeItem(STORAGE_KEY);
-        } catch (e) {
-            console.warn('No se pudo limpiar el historial:', e);
-        }
-        chatStatus.textContent = 'Listo para chatear';
-        chatStatus.style.color = '#10b981';
-    });
-    
-    // Botón exportar conversación
-    const exportChatButton = document.getElementById('exportChat');
-    if (exportChatButton) {
-        exportChatButton.addEventListener('click', () => {
-            if (conversationHistory.length === 0) {
-                addMessage('No hay conversación para exportar.', false);
-                return;
-            }
-            exportConversation();
-        });
+  const loader = document.createElement('div');
+  loader.className = 'msg msg-bot';
+  loader.innerHTML = '<div class="msg-avatar">AI</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
+  $('chatMsgs').appendChild(loader);
+  $('chatMsgs').scrollTop = $('chatMsgs').scrollHeight;
+
+  try {
+    const reply = await requestGemini(userText);
+    loader.remove();
+    appendMsg('bot', sanitizeHtml(mdToHtml(reply)));
+  } catch (error) {
+    loader.remove();
+    if (chatHistory.at(-1)?.role === 'user') {
+      chatHistory.pop();
+      saveChatHistory();
     }
-    
-    // Event Listener para el menú hamburguesa
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    const nav = document.querySelector('.nav');
-    
-    if (navToggle && navLinks) {
-        navToggle.addEventListener('click', () => {
-            const isOpen = nav.classList.contains('nav-open');
-            nav.classList.toggle('nav-open');
-            navToggle.classList.toggle('active');
-            navToggle.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
-        });
-        
-        // Cerrar menú al hacer clic fuera
-        document.addEventListener('click', (e) => {
-            if (nav.classList.contains('nav-open') && 
-                !nav.contains(e.target) && 
-                !navToggle.contains(e.target)) {
-                nav.classList.remove('nav-open');
-                navToggle.classList.remove('active');
-            }
-        });
-    }
+    appendMsg('bot', `<p>${error.message || 'Lo siento, hubo un error. Por favor intenta de nuevo.'}</p>`);
+  } finally {
+    isProcessing = false;
+    $('chatSend').disabled = false;
+  }
 }
 
-// Función para inicializar smooth scroll mejorado tipo HONOR
-function initializeSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const href = this.getAttribute('href');
-            if (href === '#') return;
-            
-            const target = document.querySelector(href);
-            if (target) {
-                // Scroll ultra suave con duración personalizada
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-                
-                // Cerrar menú móvil si está abierto
-                const nav = document.querySelector('.nav');
-                if (nav) {
-                    nav.classList.remove('nav-open');
-                    const navToggle = document.getElementById('navToggle');
-                    if (navToggle) {
-                        navToggle.classList.remove('active');
-                    }
-                }
-                
-                // Actualizar estado activo en navegación
-                updateActiveNavLink(href);
-            }
-        });
-    });
+function applyLang() {
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  const t = T[lang];
+
+  document.querySelectorAll('.nav-links a').forEach((a, i) => { if (t.nav[i]) a.textContent = t.nav[i]; });
+  $('langBtn').textContent = lang === 'es' ? 'EN' : 'ES';
+  $('cvBtnLabel').textContent = t.cv_btn;
+  $('heroEyebrow').textContent = t.hero_eyebrow;
+  startTyped('heroRole', t.hero_role);
+  $('heroDesc').textContent = t.hero_desc;
+  $('heroBtn1').querySelector('span').textContent = ` ${t.hero_btn1}`;
+  $('heroBtn2').querySelector('span').textContent = ` ${t.hero_btn2}`;
+  $('aboutTitle').textContent = t.about_title;
+  $('aboutP1').innerHTML = t.about_p1;
+  $('aboutP2').innerHTML = t.about_p2;
+  $('stat1Label').textContent = t.stat1;
+  $('stat2Label').textContent = t.stat2;
+  $('stat3Label').textContent = t.stat3;
+  $('stat4Label').textContent = t.stat4;
+  $('expTitle').textContent = t.exp_title;
+  renderExp(t.exp);
+  $('skillsTitle').textContent = t.skills_title;
+  refreshSkillTabs();
+  $('projTitle').textContent = t.proj_title;
+  document.querySelectorAll('.proj-card').forEach((card, i) => {
+    const project = t.project_cards[i];
+    if (!project) return;
+    const title = card.querySelector('[data-project-title]');
+    const desc = card.querySelector('[data-project-desc]');
+    if (title) title.textContent = project.title;
+    if (desc) desc.textContent = project.desc;
+  });
+  document.querySelectorAll('[data-proj-link]').forEach((el) => {
+    const type = el.dataset.projLink;
+    const label = el.querySelector('.link-label');
+    label.textContent = type === 'live' ? t.proj_live : type === 'hf' ? t.proj_hf : t.proj_gh;
+  });
+  $('certsTitle').textContent = t.certs_title;
+  document.querySelectorAll('.cert-name').forEach((el, i) => { if (t.cert_cards[i]) el.textContent = t.cert_cards[i]; });
+  $('certMore').textContent = t.cert_more;
+  $('chatTitle').textContent = t.chat_title;
+  $('chatSub').textContent = t.chat_sub;
+  $('chatHeadTitle').textContent = t.chat_head_title;
+  $('chatHeadSub').textContent = t.chat_head_sub;
+  $('chatInput').placeholder = t.chat_placeholder;
+  $('clearChat').title = t.clear_chat;
+  $('chatSend').setAttribute('aria-label', t.send_label);
+  renderSuggestions(t.suggestions);
+  [0, 1, 2].forEach((i) => { $('chip' + i).textContent = t.chips[i]; });
+  $('badge0').textContent = t.proj_badge_prod;
+  $('badge1').textContent = t.proj_badge_tfg;
+  $('eduLabel').textContent = t.edu_label;
+  $('eduDegree').textContent = t.edu_degree;
+  $('eduUni').textContent = t.edu_uni;
+  $('eduDesc').textContent = t.edu_desc;
+  $('langLabel').textContent = t.lang_label;
+  [1, 2, 3].forEach((i) => { $('langName' + i).textContent = t.lang_names[i - 1]; });
+  $('langNative1').textContent = t.lang_native;
+  $('langB2').textContent = t.lang_b2;
+  $('langNative2').textContent = t.lang_val;
+  $('clockLabel').textContent = t.clock_label;
+  $('contactTitle').textContent = t.contact_title;
+  $('contactSub').textContent = t.contact_sub;
+  $('footerText').textContent = t.footer;
+  document.querySelectorAll('.js-theme').forEach((btn) => btn.setAttribute('aria-label', t.theme_label));
+  document.querySelector('.top-btn')?.setAttribute('aria-label', t.top_label);
 }
 
-// Función para actualizar el enlace activo en la navegación
-function updateActiveNavLink(href) {
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === href) {
-            link.classList.add('active');
-        }
+function initScroll() {
+  const bar = document.querySelector('.scroll-bar');
+  const nav = document.querySelector('.nav-wrap');
+  const topBtn = document.querySelector('.top-btn');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    const max = document.body.scrollHeight - window.innerHeight;
+    if (bar) bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    nav.classList.toggle('scrolled', y > 30);
+    topBtn.classList.toggle('show', y > 400);
+
+    document.querySelectorAll('section[id]').forEach((section) => {
+      const top = section.offsetTop - 120;
+      const bottom = top + section.offsetHeight;
+      const link = document.querySelector(`.nav-links a[href="#${section.id}"]`);
+      if (link) link.classList.toggle('active', y >= top && y < bottom);
     });
+  }, { passive: true });
 }
 
-// Función mejorada para scroll reveal tipo HONOR con crossfade
-function initializeScrollReveal() {
-    // Todas las secciones excepto hero
-    const sections = document.querySelectorAll('.section');
-    
-    const observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -10% 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Añadir clase visible con retraso escalonado para elementos hijos
-                entry.target.classList.add('visible');
-                
-                // Animar elementos internos con stagger
-                const children = entry.target.querySelectorAll('.stat, .skill-card, .project-card, .contact-link');
-                children.forEach((child, index) => {
-                    setTimeout(() => {
-                        child.style.opacity = '1';
-                        child.style.transform = 'translateY(0)';
-                    }, index * 100);
-                });
-            }
-        });
-    }, observerOptions);
-    
-    sections.forEach(section => {
-        observer.observe(section);
+function observeReveal() {
+  const els = document.querySelectorAll('.reveal:not(.in)');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('in'), i * 60);
+        io.unobserve(entry.target);
+      }
     });
-    
-    // Observador para actualizar navegación activa según scroll
-    const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.getAttribute('id');
-                if (id) {
-                    updateActiveNavLink('#' + id);
-                }
-            }
-        });
-    }, {
-        threshold: 0.5
-    });
-    
-    document.querySelectorAll('section[id]').forEach(section => {
-        navObserver.observe(section);
-    });
+  }, { threshold: 0.1 });
+  els.forEach((el) => io.observe(el));
 }
 
-// Función para el reloj en tiempo real (Nothing Design)
-function initializeClock() {
-    const clockDisplay = document.getElementById('clockDisplay');
-    const clockDate    = document.getElementById('clockDate');
-    if (!clockDisplay) return;
-
-    const days   = ['DOM','LUN','MAR','MIÉ','JUE','VIE','SÁB'];
-    const months = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
-
-    function tick() {
-        const now = new Date();
-        const h = String(now.getHours()).padStart(2, '0');
-        const m = String(now.getMinutes()).padStart(2, '0');
-        const s = String(now.getSeconds()).padStart(2, '0');
-        clockDisplay.textContent = `${h}:${m}:${s}`;
-        if (clockDate) {
-            const day   = days[now.getDay()];
-            const date  = String(now.getDate()).padStart(2, '0');
-            const month = months[now.getMonth()];
-            clockDate.textContent = `${day} ${date} ${month}`;
-        }
-    }
-
-    tick();
-    setInterval(tick, 1000);
+function initClock() {
+  const tick = () => {
+    const now = new Date();
+    $('clockTime').textContent = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    $('clockDate').textContent = now.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-GB', { weekday: 'short', day: '2-digit', month: 'short' }).toUpperCase();
+  };
+  tick();
+  setInterval(tick, 1000);
 }
 
-// Función para el slider interactivo de habilidades (Nothing Design)
-function initializeSkillSlider() {
-    const track = document.getElementById('skillSegs');
-    if (!track) return;
+document.addEventListener('DOMContentLoaded', () => {
+  applyDark();
+  loadChatHistory();
 
-    const SKILLS = [
-        { name: 'LLMs Y NLP',      pct: 92, tags: 'Fine-tuning PEFT/QLoRA · RAG Pipelines · LangChain · LlamaIndex · HuggingFace Transformers · OpenAI API' },
-        { name: 'COMPUTER VISION', pct: 85, tags: 'Vision Transformers (ViT) · Transfer Learning · Reconocimiento de gestos en tiempo real · OpenCV · MediaPipe' },
-        { name: 'FRAMEWORKS ML',   pct: 88, tags: 'PyTorch · TensorFlow · Scikit-learn · Keras · Optimización de hiperparámetros · Weights & Biases' },
-        { name: 'MLOps Y TOOLS',   pct: 78, tags: 'Git · Linux · Docker · Azure (Functions, OpenAI, Storage) · HuggingFace Hub · APIs RESTful' },
-        { name: 'PROGRAMACIÓN',    pct: 90, tags: 'Python (avanzado) · SQL · R · C · JavaScript · Backend robusto y automatización de pipelines' },
-    ];
-
-    const TOTAL = 20;
-    const ZONE  = TOTAL / SKILLS.length; // 4 segs per skill
-    let activeZone = 0;
-
-    // Build segments
-    for (let i = 0; i < TOTAL; i++) {
-        const seg = document.createElement('span');
-        seg.className = 'segment';
-        track.appendChild(seg);
-    }
-
-    function updateDisplay(zone) {
-        activeZone = Math.max(0, Math.min(SKILLS.length - 1, zone));
-        const skill = SKILLS[activeZone];
-
-        const nameEl = document.getElementById('skillName');
-        const pctEl  = document.getElementById('skillPct');
-        const tagsEl = document.getElementById('skillTags');
-        if (nameEl) nameEl.textContent = skill.name;
-        if (pctEl)  pctEl.textContent  = skill.pct + '%';
-        if (tagsEl) tagsEl.textContent = skill.tags;
-
-        const filledTo = Math.round((skill.pct / 100) * TOTAL);
-        track.querySelectorAll('.segment').forEach((seg, i) => {
-            seg.classList.remove('filled', 'active');
-            const segZone = Math.floor(i / ZONE);
-            if (segZone === activeZone) {
-                seg.classList.add('active');
-            } else if (i < filledTo) {
-                seg.classList.add('filled');
-            }
-        });
-
-        document.querySelectorAll('.skill-zone-labels span').forEach((lbl, i) => {
-            lbl.classList.toggle('active', i === activeZone);
-        });
-
-        track.setAttribute('aria-valuenow', activeZone);
-    }
-
-    function zoneFromEvent(e) {
-        const rect  = track.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-        return Math.min(SKILLS.length - 1, Math.floor(ratio * SKILLS.length));
-    }
-
-    let dragging = false;
-    track.addEventListener('mousedown',  (e) => { dragging = true; updateDisplay(zoneFromEvent(e)); });
-    track.addEventListener('mousemove',  (e) => { if (dragging) updateDisplay(zoneFromEvent(e)); });
-    document.addEventListener('mouseup', ()  => { dragging = false; });
-    track.addEventListener('touchstart', (e) => { e.preventDefault(); updateDisplay(zoneFromEvent(e)); }, { passive: false });
-    track.addEventListener('touchmove',  (e) => { e.preventDefault(); updateDisplay(zoneFromEvent(e)); }, { passive: false });
-
-    document.querySelectorAll('.skill-zone-labels span').forEach((lbl, i) => {
-        lbl.addEventListener('click', () => updateDisplay(i));
+  document.querySelectorAll('.js-theme').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      dark = !dark;
+      applyDark();
     });
+  });
 
-    track.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') { updateDisplay(activeZone + 1); e.preventDefault(); }
-        if (e.key === 'ArrowLeft')  { updateDisplay(activeZone - 1); e.preventDefault(); }
+  $('langBtn').addEventListener('click', () => {
+    lang = lang === 'es' ? 'en' : 'es';
+    applyLang();
+    restoreChat();
+  });
+
+  $('navToggle').addEventListener('click', () => {
+    $('navToggle').classList.toggle('open');
+    $('navLinks').classList.toggle('open');
+  });
+
+  $('navLinks').querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => {
+      $('navToggle').classList.remove('open');
+      $('navLinks').classList.remove('open');
     });
+  });
 
-    // Animar al entrar en viewport
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            setTimeout(() => updateDisplay(0), 150);
-            observer.unobserve(entry.target);
-        });
-    }, { threshold: 0.3 });
-    observer.observe(track);
-}
-
-// Convierte la foto de perfil a pixel art 1-bit al hacer click
-function initializePixelArtPhoto() {
-    const photo  = document.querySelector('.profile-photo');
-    const avatar = document.querySelector('.avatar-placeholder');
-    if (!photo || !avatar) return;
-
-    // Silueta persona 16×16 — cabeza + cuerpo, estilo Nothing Design
-    const PERSON = [
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0],
-        [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
-        [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
-        [0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0],
-        [0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
-        [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
-        [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
-        [0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0],
-        [0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-    ];
-
-    const canvas = document.createElement('canvas');
-    canvas.className = 'pixel-photo';
-    canvas.title = 'Click para volver a la foto';
-    avatar.appendChild(canvas);
-
-    let isPixelMode = false;
-
-    function renderPixelArt() {
-        const ROWS = PERSON.length;
-        const COLS = PERSON[0].length;
-        canvas.width  = COLS;
-        canvas.height = ROWS;
-
-        const ctx     = canvas.getContext('2d');
-        const isDark  = document.documentElement.classList.contains('dark-mode');
-        const fgColor = isDark ? '#e0e0e0' : '#1a1a1a';
-        const bgColor = isDark ? '#1a1a1a' : '#e8e8e8';
-
-        ctx.fillStyle = bgColor;
-        ctx.fillRect(0, 0, COLS, ROWS);
-        ctx.fillStyle = fgColor;
-
-        for (let r = 0; r < ROWS; r++) {
-            for (let c = 0; c < COLS; c++) {
-                if (PERSON[r][c]) ctx.fillRect(c, r, 1, 1);
-            }
-        }
+  $('chatSend').addEventListener('click', () => sendMsg());
+  $('chatInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMsg();
     }
+  });
+  $('clearChat').addEventListener('click', clearChat);
+  document.querySelector('.top-btn').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    function activate() {
-        renderPixelArt();
-        photo.style.opacity = '0';
-        canvas.classList.add('visible');
-        isPixelMode = true;
-    }
-
-    function deactivate() {
-        canvas.classList.remove('visible');
-        photo.style.opacity = '1';
-        isPixelMode = false;
-    }
-
-    photo.addEventListener('click', () => isPixelMode ? deactivate() : activate());
-    canvas.addEventListener('click', () => deactivate());
-
-    // Re-renderizar en el color correcto si el tema cambia mientras está activo
-    [document.getElementById('pixelThemeToggle'), document.getElementById('darkModeToggle')]
-        .forEach(el => el?.addEventListener('click', () => {
-            if (isPixelMode) setTimeout(renderPixelArt, 300);
-        }));
-}
-
-// Inicializar cuando el DOM esté listo
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        if (initializeElements()) {
-            // Cargar historial guardado
-            if (loadChatHistory()) {
-                restoreChatMessages();
-            }
-            
-            initializeEventListeners();
-            initializeSmoothScroll();
-            initializeScrollReveal();
-            initializeHeaderEffects();
-            initializeScrollToTop();
-            initializeDarkMode();
-            updateScrollProgress();
-            initializeClock();
-            initializeSkillSlider();
-            initializePixelArtPhoto();
-
-            // Siempre volver al inicio al cargar
-            window.scrollTo(0, 0);
-        }
-    });
-} else {
-    // El DOM ya está listo
-    if (initializeElements()) {
-        // Cargar historial guardado
-        if (loadChatHistory()) {
-            restoreChatMessages();
-        }
-        
-        initializeEventListeners();
-        initializeSmoothScroll();
-        initializeScrollReveal();
-        initializeHeaderEffects();
-        initializeScrollToTop();
-        initializeDarkMode();
-        updateScrollProgress();
-        initializeClock();
-        initializeSkillSlider();
-        initializePixelArtPhoto();
-
-        // Siempre volver al inicio al cargar
-        window.scrollTo(0, 0);
-    }
-}
-
-// Exportar función para uso externo
-window.exportConversation = exportConversation;
-
-// Volver al inicio al recargar la página
-window.addEventListener('load', () => {
-    // Siempre volver al inicio al recargar
-    setTimeout(() => {
-        window.scrollTo(0, 0);
-    }, 0);
+  initSkillSlider();
+  initScroll();
+  initClock();
+  observeReveal();
+  applyLang();
+  restoreChat();
 });
-
-// También ejecutar cuando el DOM esté listo
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    setTimeout(() => {
-        window.scrollTo(0, 0);
-    }, 0);
-}
-
-// Función para efectos del header
-function initializeHeaderEffects() {
-    const header = document.querySelector('.header');
-    if (!header) return;
-    
-    let lastScroll = 0;
-    let ticking = false;
-    
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                const currentScroll = window.pageYOffset;
-                
-                // Añadir clase scrolled
-                if (currentScroll > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-                
-                // Auto-hide header al hacer scroll hacia abajo
-                if (currentScroll > lastScroll && currentScroll > 100) {
-                    header.classList.add('hide');
-                } else {
-                    header.classList.remove('hide');
-                }
-                
-                // Actualizar indicador de progreso de scroll
-                updateScrollProgress();
-                
-                // Mostrar/ocultar botón scroll to top
-                updateScrollToTopButton();
-                
-                lastScroll = currentScroll;
-                ticking = false;
-            });
-            
-            ticking = true;
-        }
-    });
-}
-
-// Función para actualizar indicador de progreso de scroll
-function updateScrollProgress() {
-    const progressBar = document.getElementById('scrollProgress');
-    if (!progressBar) return;
-    
-    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (window.pageYOffset / windowHeight) * 100;
-    progressBar.style.transform = `scaleX(${scrolled / 100})`;
-}
-
-// Función para actualizar botón scroll to top
-function updateScrollToTopButton() {
-    const scrollBtn = document.getElementById('scrollToTop');
-    if (!scrollBtn) return;
-    
-    if (window.pageYOffset > 300) {
-        scrollBtn.classList.add('visible');
-    } else {
-        scrollBtn.classList.remove('visible');
-    }
-}
-
-// Función para inicializar botón scroll to top
-function initializeScrollToTop() {
-    const scrollBtn = document.getElementById('scrollToTop');
-    if (scrollBtn) {
-        scrollBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
-}
-
-// Función para inicializar modo oscuro
-// — toggle principal: pixel art en hero (escritorio)
-// — fallback: botón nav (móvil)
-function initializeDarkMode() {
-    const heroToggle = document.getElementById('pixelThemeToggle');
-    const navToggle  = document.getElementById('darkModeToggle');
-
-    const savedTheme = localStorage.getItem('portfolio_theme');
-    const isDark = savedTheme !== 'light';
-
-    if (isDark) {
-        document.documentElement.classList.add('dark-mode');
-        if (navToggle) navToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    } else {
-        document.documentElement.classList.remove('dark-mode');
-        if (navToggle) navToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    }
-
-    function doToggle() {
-        const dark = document.documentElement.classList.contains('dark-mode');
-        if (dark) {
-            document.documentElement.classList.remove('dark-mode');
-            localStorage.setItem('portfolio_theme', 'light');
-            if (navToggle) navToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        } else {
-            document.documentElement.classList.add('dark-mode');
-            localStorage.setItem('portfolio_theme', 'dark');
-            if (navToggle) navToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-    }
-
-    // Hero toggle con animación de escáner (easter egg)
-    if (heroToggle) {
-        heroToggle.addEventListener('click', () => {
-            if (heroToggle.classList.contains('scanning')) return;
-            heroToggle.classList.add('scanning');
-            setTimeout(doToggle, 200);
-            setTimeout(() => heroToggle.classList.remove('scanning'), 500);
-        });
-        heroToggle.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); heroToggle.click(); }
-        });
-    }
-
-    // Fallback móvil (botón nav)
-    if (navToggle) {
-        navToggle.addEventListener('click', doToggle);
-    }
-}
