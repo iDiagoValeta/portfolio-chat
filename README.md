@@ -1,58 +1,72 @@
-# IGNACIO DIAGO VALETA — PORTFOLIO
+# Ignacio Diago Valeta Portfolio
 
-```
-░░██████░░
-░█░░░░░░█░
-░█░██░██░█
-░█░░░░░░█░
-░█░████░█░
-░█░░░░░░█░
-░░██████░░
-░░░█░░█░░░
-░░░████░░░
-```
+Interactive portfolio for Ignacio Diago Valeta, AI Engineer focused on LLM fine-tuning, RAG, computer vision, and multi-agent systems.
 
-**AI Engineer** — LLM Fine-tuning · Computer Vision · Multi-Agent
+Live site: [portfolio-chat-aouj.onrender.com](https://portfolio-chat-aouj.onrender.com/)
 
-🔗 [portfolio-chat-aouj.onrender.com](https://portfolio-chat-aouj.onrender.com/)
+## Why This Portfolio Exists
 
----
+The idea came from looking at the hiring process from an interviewer's perspective. If I were reviewing a candidate, I would want to ask questions directly to their CV and quickly understand how their experience fits the role.
 
-## Stack
+This portfolio turns that idea into a practical interface: a professional website with an integrated AI chat that can answer questions about my background, projects, skills, and experience.
 
-```
-Frontend  →  HTML · CSS · Vanilla JS (sin bundler, sin framework)
-Backend   →  Python (servidor proxy + rate limiting)
-AI        →  Google Gemini 2.5 Flash API
-Deploy    →  Render.com
-```
+## Preview
 
-## Run local
+### Header
+
+![Portfolio header](images/1.png)
+
+### AI Chat
+
+![AI chat section](images/2.png)
+
+### Experience
+
+![Experience section](images/3.png)
+
+These screenshots show three key parts of the portfolio. The site also includes additional sections for skills, projects, education, contact, and other professional details.
+
+## Tech Stack
+
+- Frontend: HTML, CSS, and vanilla JavaScript
+- Backend: Python proxy server
+- AI: Google Gemini 2.5 Flash API
+- Deployment: Render
+
+## Run Locally
+
+Set the Gemini API key and start the Python server:
 
 ```bash
-# Linux / macOS
-export GEMINI_API_KEY='tu_key'
-python server.py
-
-# Windows PowerShell
-$env:GEMINI_API_KEY='tu_key'
+export GEMINI_API_KEY="your_api_key"
 python server.py
 ```
 
-→ `http://localhost:8000`
+On Windows PowerShell:
 
-## Personalizar
+```powershell
+$env:GEMINI_API_KEY="your_api_key"
+python server.py
+```
 
-| Archivo | Qué editar |
-|---|---|
-| `config.js` | Contexto del asistente IA (prompt del sistema) |
-| `index.html` | Contenido de las secciones y meta SEO |
-| `styles.css` | Tipografía, colores y diseño |
+Then open:
 
-## Seguridad
+```text
+http://localhost:8000
+```
 
-La API key nunca se expone al cliente — el servidor Python actúa de proxy y la lee desde `GEMINI_API_KEY` (variable de entorno). Rate limiting: 60 req/min por IP.
+## Project Structure
 
----
+- `index.html` defines the portfolio sections and page metadata.
+- `styles.css` contains the visual design and responsive layout.
+- `app.js` handles client-side interactions.
+- `config.js` contains the AI assistant context.
+- `server.py` serves the site and proxies Gemini requests without exposing the API key.
 
-*MIT · 2025*
+## Security
+
+The Gemini API key is never exposed to the browser. Requests go through the Python server, which reads the key from the `GEMINI_API_KEY` environment variable and applies basic rate limiting.
+
+## License
+
+MIT
