@@ -12,6 +12,8 @@ This portfolio turns that idea into a practical interface: a professional websit
 
 ## Preview
 
+https://github.com/user-attachments/assets/68340cf7-de77-44ee-ae84-0b51651d1d8c
+
 ### Header
 
 ![Portfolio header](images/1.png)
