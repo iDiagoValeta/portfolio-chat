@@ -34,23 +34,19 @@ const T = {
       },
       {
         title: 'localOllamaRAG',
-        desc: 'Trabajo de Fin de Grado. Solución RAG on-premises open-source para extracción de información relevante en documentos. Búsqueda híbrida (semántica + keyword) sin dependencias cloud.',
+        desc: 'Trabajo de Fin de Grado. Sistema RAG completamente on-premises y open-source para extracción de información en grandes volúmenes documentales. Búsqueda híbrida (semántica + keyword) y evaluación de métricas RAG sin dependencias cloud.',
       },
       {
-        title: 'Llama 3.2 1B — ORPO Fine-tuning',
-        desc: 'Tutorial completo en GitHub: fine-tuning con ORPO sobre Llama 3.2 1B, notebook paso a paso, exportación a GGUF y despliegue local con Ollama.',
-      },
-      {
-        title: 'Reconocimiento ASL en tiempo real',
-        desc: 'Clasificador ASL en tiempo real usando MediaPipe para extracción de landmarks y Vision Transformers (ViT) con TensorFlow/Keras. Inferencia live por webcam y transfer learning sobre un dataset personalizado.',
+        title: 'OCR-CRM Pipeline',
+        desc: 'Azure Function que digitaliza formularios de matrícula manuscritos convirtiéndolos en registros CRM estructurados. Orquesta Azure Document Intelligence, GPT-4 y fuzzy matching para validación y normalización robusta de datos no estructurados.',
       },
       {
         title: 'portfolio-chat',
-        desc: 'Portfolio web full-stack con asistente Gemini: HTML/CSS/JS sin bundler, servidor proxy Python y despliegue en Render. Proyecto público y replicable.',
+        desc: 'Portfolio full-stack con asistente conversacional integrado vía Gemini 2.5 Flash. Proxy Python con rate limiting, frontend sin bundler y despliegue continuo en Render. Código público y reproducible.',
       },
       {
         title: 'Modelos públicos en Hugging Face',
-        desc: 'Perfil en Hugging Face Hub con modelos y experimentos publicados: generación de texto, RAG y proyectos reproducibles.',
+        desc: 'Perfil en Hugging Face Hub con modelos fine-tuned y experimentos reproducibles publicados: LLMs ajustados con PEFT/QLoRA, generación de texto y benchmarks de RAG.',
       },
     ],
     certs_title: 'Certificaciones',
@@ -62,6 +58,7 @@ const T = {
       'Fundamentos Matemáticos de ML',
     ],
     cert_more: '+ más en curso',
+    proj_more: '+ en curso',
     chat_title: 'Chat IA',
     chat_sub: 'Chat con contexto completo sobre mi perfil — desarrollado con Gemini 2.5 Flash.',
     chat_head_title: 'Asistente IA · Ignacio Diago',
@@ -121,27 +118,23 @@ const T = {
     project_cards: [
       {
         title: 'GPT-CEU',
-        desc: 'Production generative assistant for CEU Educational Group. It combines the OpenAI API with RAG pipelines over institutional data sources, streamlining academic and administrative workflows for the university community.',
+        desc: 'Production generative assistant for CEU Educational Group. Combines the OpenAI API with RAG pipelines over institutional data sources, streamlining academic and administrative workflows for the university community.',
       },
       {
         title: 'localOllamaRAG',
-        desc: 'Final degree project. Open-source, on-premises RAG solution for extracting relevant information from documents. Hybrid search (semantic + keyword) with no cloud dependencies.',
+        desc: 'Final degree thesis. Fully on-premises, open-source RAG system for information extraction over large document corpora. Hybrid retrieval (semantic + keyword) and RAG metric evaluation with no cloud dependencies.',
       },
       {
-        title: 'Llama 3.2 1B — ORPO Fine-tuning',
-        desc: 'Full tutorial on GitHub: ORPO fine-tuning on Llama 3.2 1B, step-by-step notebook, GGUF export and local deployment with Ollama.',
-      },
-      {
-        title: 'ASL Real-time Gesture Recognition',
-        desc: 'Real-time ASL classifier using MediaPipe for landmark extraction and Vision Transformers (ViT) with TensorFlow/Keras. Live webcam inference and transfer learning on a custom dataset.',
+        title: 'OCR-CRM Pipeline',
+        desc: 'Azure Function that converts handwritten enrolment forms into structured CRM records. Orchestrates Azure Document Intelligence, GPT-4 and fuzzy matching algorithms for robust validation and normalisation of noisy, unstructured data.',
       },
       {
         title: 'portfolio-chat',
-        desc: 'Full-stack portfolio with a Gemini-powered assistant: vanilla HTML/CSS/JS, Python proxy server and Render deployment. Public, forkable repository.',
+        desc: 'Full-stack portfolio with an integrated conversational assistant powered by Gemini 2.5 Flash. Python proxy with rate limiting, bundler-free frontend and continuous deployment on Render. Open-source and forkable.',
       },
       {
         title: 'Public models on Hugging Face',
-        desc: 'Hugging Face Hub profile with published models and experiments: text generation, RAG and reproducible ML work.',
+        desc: 'Hugging Face Hub profile with published fine-tuned models and reproducible experiments: PEFT/QLoRA-trained LLMs, text generation and RAG benchmarks.',
       },
     ],
     certs_title: 'Certifications',
@@ -153,6 +146,7 @@ const T = {
       'Mathematical Foundations of ML',
     ],
     cert_more: '+ more in progress',
+    proj_more: '+ in progress',
     chat_title: 'AI Chat',
     chat_sub: 'Chat with full profile context — powered by Gemini 2.5 Flash.',
     chat_head_title: 'AI Assistant · Ignacio Diago',
@@ -508,6 +502,7 @@ function applyLang() {
   setText('certsTitle', t.certs_title);
   document.querySelectorAll('.cert-name').forEach((el, i) => { if (t.cert_cards[i]) el.textContent = t.cert_cards[i]; });
   setText('certMore', t.cert_more);
+  setText('projMore', t.proj_more);
   setText('chatTitle', t.chat_title);
   setText('chatSub', t.chat_sub);
   setText('chatHeadTitle', t.chat_head_title);

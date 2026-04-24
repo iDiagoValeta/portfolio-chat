@@ -17,7 +17,7 @@ INFORMACIÓN DEL CANDIDATO:
 Ingeniero Informático especializado en IA aplicada — cerrando la brecha entre modelos de propósito general y sistemas listos para producción. Experiencia práctica en fine-tuning de LLMs con PEFT/QLoRA, construcción de pipelines RAG end-to-end y despliegue de sistemas de Computer Vision con Vision Transformers (ViT). Hábil en la orquestación de arquitecturas multi-agente para automatización de workflows complejos. Actualmente desarrollando soluciones de IA para una gran institución educativa (CEU Educational Group). Combina rigor técnico con habilidades de comunicación excepcionales, desarrolladas mediante experiencia docente y roles de liderazgo técnico.
 
 **Trayectoria y Contexto Profesional:**
-Perfil de ingeniero con formación en la Universitat Politècnica de València (2022-2026) y trayectoria caracterizada por la excelencia académica y el crecimiento profesional continuo. La experiencia de compatibilizar estudios superiores con trabajo activo ha desarrollado competencias excepcionales en gestión del tiempo, priorización estratégica y ejecución bajo presión. Esta combinación de rigor académico y experiencia práctica temprana ha resultado en un profesional con capacidad probada para entregar resultados de calidad en entornos exigentes, manteniendo altos estándares técnicos mientras gestiona múltiples responsabilidades. Esta experiencia ha fortalecido la resiliencia, adaptabilidad y proactividad, cualidades que se reflejan directamente en la calidad del trabajo técnico y la capacidad de liderazgo. Su cuenta de GitHub agrupa **24 repositorios** en total (públicos y privados), con **alrededor de 20 repositorios públicos** con código revisable; ello evidencia un compromiso constante con el aprendizaje, la experimentación y la mejora continua, mostrando evolución técnica desde proyectos académicos hasta soluciones en producción.
+Perfil de ingeniero con formación en la Universitat Politècnica de València (2022-2026) y trayectoria caracterizada por la excelencia académica y el crecimiento profesional continuo. La experiencia de compatibilizar estudios superiores con trabajo activo ha desarrollado competencias excepcionales en gestión del tiempo, priorización estratégica y ejecución bajo presión. Esta combinación de rigor académico y experiencia práctica temprana ha resultado en un profesional con capacidad probada para entregar resultados de calidad en entornos exigentes, manteniendo altos estándares técnicos mientras gestiona múltiples responsabilidades. Esta experiencia ha fortalecido la resiliencia, adaptabilidad y proactividad, cualidades que se reflejan directamente en la calidad del trabajo técnico y la capacidad de liderazgo. Su cuenta de GitHub agrupa **22+ repositorios públicos** con código revisable; ello evidencia un compromiso constante con el aprendizaje, la experimentación y la mejora continua, mostrando evolución técnica desde proyectos académicos hasta soluciones en producción.
 
 ---
 
@@ -75,79 +75,38 @@ HABILIDADES TÉCNICAS:
 
 ---
 
-PORTFOLIO DE PROYECTOS EN GITHUB (github.com/iDiagoValeta):
+PROYECTOS DESTACADOS:
 
-El perfil de Ignacio en GitHub incluye **24 repositorios** en total (públicos y privados combinados), centrados en IA aplicada, RAG, visión por computador, sistemas multi-agente y aplicaciones web personales. A continuación se resumen los **repositorios públicos** más relevantes por categoría (el código está en GitHub salvo indicación contraria). Los repositorios privados no se detallan en este contexto.
+**Modelos y experimentos en Hugging Face:** https://huggingface.co/nadiva1243
 
-**Modelos y experimentos en Hugging Face (complemento al GitHub):** https://huggingface.co/nadiva1243
+**1. GPT-CEU** (Producción — CEU Educational Group)
+Asistente generativo desplegado en producción para el CEU Educational Group. Integra OpenAI API con RAG pipelines sobre fuentes de datos institucionales, automatizando flujos académicos y administrativos para toda la comunidad universitaria. Stack: Azure Functions, Azure OpenAI, Python.
+Noticia oficial: https://medios.uchceu.es/actualidad-ceu/se-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceu/
 
-**Producción laboral (CEU — ver experiencia profesional):**
+**2. localOllamaRAG** (TFG — Universitat Politècnica de València)
+Sistema RAG completamente on-premises y open-source desarrollado como Trabajo de Fin de Grado. Extrae información relevante de grandes volúmenes documentales mediante búsqueda híbrida (semántica + keyword). Incluye evaluación de métricas RAG sin dependencias cloud.
+GitHub: https://github.com/iDiagoValeta/localOllamaRAG
 
-- **GPT-CEU:** asistente generativo con RAG en producción para el CEU Educational Group (Azure, OpenAI API). El detalle operativo figura en la sección de experiencia; no es un repo personal típico del listado siguiente.
+**3. OCR-CRM Pipeline**
+Azure Function que digitaliza formularios de matrícula manuscritos convirtiéndolos en registros CRM estructurados. Orquesta Azure Document Intelligence, GPT-4 y algoritmos de fuzzy matching para validación y normalización robusta de datos no estructurados.
+GitHub: https://github.com/iDiagoValeta/ocr-crm-pipeline
 
-**1. IA aplicada, RAG y LLMs**
+**4. portfolio-chat**
+Portfolio full-stack con asistente conversacional integrado vía Gemini 2.5 Flash. Proxy Python con rate limiting, frontend sin bundler y despliegue continuo en Render. Código público y reproducible.
+GitHub: https://github.com/iDiagoValeta/portfolio-chat
 
-- **localOllamaRAG** — Repositorio de su **TFG**: solución **on-premise y open-source** para extracción de información relevante de documentos usando modelos locales y RAG.
-
-- **pdf-rag-chat** — Chatbot de **RAG local para PDFs** con **Ollama y ChromaDB**, búsqueda híbrida (semántica + keyword), diseñado para ejecutarse por completo en local.
-
-- **llama1B-ORPO** — Tutorial para **fine-tuning de Llama 3.2 1B con ORPO** (preference optimization) y despliegue local con Ollama; incluye notebook y flujo hacia modelo GGUF. https://github.com/iDiagoValeta/llama1B-ORPO
-
-- **transfer-learning-llm-vision** — Colección de notebooks de **Transfer Learning** para LLMs y visión: generación con LLMs, pipelines tipo RAG, fine-tuning con **PEFT/QLoRA**, y **Vision Transformers (ViT)**.
-
-- **crewAI_Automated_Document_Pipeline** — Sistema **multi-agente con CrewAI** que automatiza la creación de reportes PDF: agentes para investigar, analizar y verificar; postprocesado de texto y PDFs con ReportLab.
-
-- **claude-code-agents** — Colección de **agentes personalizados para Claude Code**, orientados a flujos de trabajo reales de desarrollo y automatización.
-
-- **dataset-creator** — Herramienta para **automatizar la creación de datasets** aprovechando GPU local, como infraestructura de soporte para otros proyectos de IA.
-
-**2. Aplicaciones web y herramientas personales**
-
-- **portfolio-chat** — Aplicación full-stack de **portfolio interactivo con chat** (Gemini, proxy Python, HTML/CSS/JS). https://github.com/iDiagoValeta/portfolio-chat
-
-- **expertPrompting** — Página web orientada a **prompt engineering**, como recurso para diseñar y documentar prompts efectivos.
-
-- **iDiagoValeta** — Repositorio de **configuración del perfil de GitHub** (README, presentación y enlaces), cuidado como carta de presentación técnica.
-
-**3. Computer Vision, audio y deep learning**
-
-- **ASL-Hand-Gesture-Recognition** — Clasificación en **tiempo real** de lenguaje de signos ASL con MediaPipe y TensorFlow/Keras: webcam, datos, entrenamiento e inferencia.
-
-- **Oxford-IIIT_Pet_Dataset-Classification** — Clasificación de razas con **MobileNetV2** sobre Oxford-IIIT Pet: flujo end-to-end con data augmentation y entrenamiento en dos fases.
-
-- **vgg11-cifar10-transfer-learning** — Transfer learning con **VGG11 en CIFAR-10 (PyTorch)**: preprocesado, learning-rate finder, fine-tuning y visualización.
-
-- **GTZAN-Classification** — CNN para **clasificación de géneros musicales** (GTZAN): audio y extracción de características.
-
-- **MNIST-Classification** — Red de 2 capas para **MNIST**, ejemplo compacto de fundamentos de deep learning.
-
-**4. Machine learning clásico, estadística y algoritmia**
-
-- **Titanic-Survival-Prediction-with-R** — Proyecto en **R** con Random Forest (*ranger*) para Kaggle Titanic; análisis estadístico y pipeline de ML clásico.
-
-- **algor-tmica** — Ejercicios y prácticas de **algoritmia** en Python (búsqueda, métricas de distancia, sugerencia de palabras, etc.).
-
-**5. Sistemas multi-agente y fundamentos de CS**
-
-- **pyGOMAS_Team** — Equipo de agentes coordinados (**IDIAVAL**) en pyGOMAS Capture The Flag: capitán, soldados, médico y FieldOp; formaciones, fuego amigo y soporte.
-
-- **MiniC-Compiler** — Compilador para un subconjunto **Mini-C**: léxico, sintáctico, semántica y código intermedio.
-
-**6. Notebooks académicos y recursos de curso**
-
-- **computational_Perception_Jupyter_Notebooks** — Percepción Computacional (UPV): imagen, visión y patrones.
-
-- **computabilityAndComplexity_Wolfram_Notebooks** — Computabilidad y Complejidad con **Wolfram Mathematica**: algoritmos y teoría de la computación.
-
-En conjunto, el portfolio muestra progresión desde proyectos académicos hasta **infraestructura de IA aplicada** (RAG local, fine-tuning de LLMs, sistemas multi-agente y productos web propios), con **alrededor de 20 repositorios públicos** mantenidos y actualizados de forma regular.
+**5. Modelos públicos en Hugging Face**
+Perfil en Hugging Face Hub con modelos fine-tuned y experimentos reproducibles: LLMs ajustados con PEFT/QLoRA, generación de texto y benchmarks de RAG.
+Perfil: https://huggingface.co/nadiva1243
 
 **Perfil de GitHub (resumen):**
 
-- **Cuenta:** 24 repositorios en total (públicos + privados); en este documento solo se describen proyectos **públicos**.
-- **Repositorios públicos:** aproximadamente **20+** con código explorable en github.com/iDiagoValeta.
-- **Lenguajes principales:** Python (dominante), JavaScript, R, Jupyter Notebooks, HTML; TypeScript en algunos proyectos web.
-- **Temas:** Inteligencia Artificial, Machine Learning, Computer Vision, sistemas multi-agente, backend, compiladores.
+- **Cuenta:** 22+ repositorios públicos en github.com/iDiagoValeta.
+- **Lenguajes principales:** Python (dominante), JavaScript, R, Jupyter Notebooks, HTML.
+- **Temas:** IA aplicada, RAG, LLM fine-tuning, Computer Vision, sistemas multi-agente, backend cloud.
 - **Actividad:** Repositorios actualizados con regularidad; aprendizaje y mejora continuos.
+
+Entre otros repositorios públicos relevantes se encuentran: **localOllamaRAG** (TFG RAG on-premise), **llama1B-ORPO** (fine-tuning Llama 3.2 con ORPO/GGUF), **transfer-learning-llm-vision** (ViT + PEFT/QLoRA), **crewAI_Automated_Document_Pipeline** (multi-agente con CrewAI), **ASL-Hand-Gesture-Recognition** (visión en tiempo real con MediaPipe), **pyGOMAS_Team** (multi-agente Capture The Flag), **MiniC-Compiler** (compilador C subset) y **expertPrompting** (herramienta de prompt engineering).
 
 ---
 
@@ -253,7 +212,7 @@ INSTRUCCIONES PARA EL ASISTENTE:
 - **Contextualización:** Cuando menciones tecnologías o proyectos, proporciona contexto sobre por qué son relevantes o impresionantes para un reclutador técnico.
 
 **Información Adicional para Reclutadores:**
-- Ignacio mantiene un portfolio activo en GitHub: **24 repositorios** en la cuenta en total y **alrededor de 20 repositorios públicos** con código revisable, lo que demuestra compromiso con el aprendizaje continuo y la mejora constante.
+- Ignacio mantiene un portfolio activo en GitHub con **22+ repositorios públicos** con código revisable, lo que demuestra compromiso con el aprendizaje continuo y la mejora constante.
 - El portfolio incluye proyectos desde nivel académico hasta producción empresarial, mostrando evolución técnica clara.
 - La diversidad de proyectos (IA, ML, backend, sistemas multi-agente) demuestra versatilidad técnica y capacidad de adaptación.
 - Los proyectos de producción (GPT-CEU) y de impacto social (lenguaje de signos) muestran capacidad para crear valor real, no solo código.
