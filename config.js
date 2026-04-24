@@ -24,7 +24,7 @@ Perfil de ingeniero con formación en la Universitat Politècnica de València (
 EXPERIENCIA PROFESIONAL RELEVANTE:
 
 1.  **AI & Back-End Developer - CEU Educational Group** (Oct 2025 - Presente)
-    * Desarrolló y desplegó GPT-CEU, un asistente de IA generativa personalizado usando OpenAI API y pipelines RAG, optimizando flujos académicos y administrativos de toda la universidad
+    * Desarrolló y desplegó GPT-CEU, un asistente generativo con RAG sobre datos institucionales y function calling, capaz de realizar reservas, generar exámenes y gestionar trámites académicos de forma autónoma en nombre de los alumnos
     * Diseñó pipelines de integración LLM end-to-end conectando modelos de lenguaje a fuentes de datos institucionales, habilitando recuperación de información en tiempo real para staff y estudiantes
     * Colaboró con equipos cross-funcionales para traducir requisitos educativos complejos en soluciones técnicas impulsadas por IA, acelerando la automatización de procesos
     * Gestión de servicios cloud en Azure: Azure Functions, Azure OpenAI API, Azure Storage
@@ -80,7 +80,7 @@ PROYECTOS DESTACADOS:
 **Modelos y experimentos en Hugging Face:** https://huggingface.co/nadiva1243
 
 **1. GPT-CEU** (Producción — CEU Educational Group)
-Asistente generativo desplegado en producción para el CEU Educational Group. Integra OpenAI API con RAG pipelines sobre fuentes de datos institucionales, automatizando flujos académicos y administrativos para toda la comunidad universitaria. Stack: Azure Functions, Azure OpenAI, Python.
+Asistente generativo en producción para el CEU Educational Group. Combina RAG sobre fuentes de datos institucionales con function calling: tiene acceso a herramientas internas que le permiten ejecutar funciones del sistema, de forma que puede realizar reservas, generar exámenes y gestionar trámites académicos de forma autónoma en nombre de los alumnos. Stack: Azure Functions, Azure OpenAI (GPT-5), Python.
 Noticia oficial: https://medios.uchceu.es/actualidad-ceu/se-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceu/
 
 **2. localOllamaRAG** (TFG — Universitat Politècnica de València)
@@ -88,7 +88,7 @@ Sistema RAG completamente on-premises y open-source desarrollado como Trabajo de
 GitHub: https://github.com/iDiagoValeta/localOllamaRAG
 
 **3. OCR-CRM Pipeline**
-Azure Function que digitaliza formularios de matrícula manuscritos convirtiéndolos en registros CRM estructurados. Orquesta Azure Document Intelligence, GPT-4 y algoritmos de fuzzy matching para validación y normalización robusta de datos no estructurados.
+Azure Function que digitaliza formularios de matrícula manuscritos convirtiéndolos en registros CRM estructurados. Orquesta Azure Document Intelligence, GPT-5 y algoritmos de fuzzy matching para validación y normalización robusta de datos no estructurados.
 GitHub: https://github.com/iDiagoValeta/ocr-crm-pipeline
 
 **4. portfolio-chat**

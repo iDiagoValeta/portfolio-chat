@@ -30,7 +30,7 @@ const T = {
     project_cards: [
       {
         title: 'GPT-CEU',
-        desc: 'Asistente generativo desplegado en producción para el CEU Educational Group. Integra OpenAI API con RAG pipelines sobre fuentes de datos institucionales, optimizando flujos académicos y administrativos para toda la comunidad universitaria.',
+        desc: 'Asistente generativo en producción para el CEU Educational Group. Combina RAG sobre datos institucionales con function calling: realiza reservas, genera exámenes y gestiona trámites académicos de forma autónoma en nombre de los alumnos.',
       },
       {
         title: 'localOllamaRAG',
@@ -38,7 +38,7 @@ const T = {
       },
       {
         title: 'OCR-CRM Pipeline',
-        desc: 'Azure Function que digitaliza formularios de matrícula manuscritos convirtiéndolos en registros CRM estructurados. Orquesta Azure Document Intelligence, GPT-4 y fuzzy matching para validación y normalización robusta de datos no estructurados.',
+        desc: 'Azure Function que digitaliza formularios de matrícula manuscritos convirtiéndolos en registros CRM estructurados. Orquesta Azure Document Intelligence, GPT-5 y fuzzy matching para validación y normalización robusta de datos no estructurados.',
       },
       {
         title: 'portfolio-chat',
@@ -118,7 +118,7 @@ const T = {
     project_cards: [
       {
         title: 'GPT-CEU',
-        desc: 'Production generative assistant for CEU Educational Group. Combines the OpenAI API with RAG pipelines over institutional data sources, streamlining academic and administrative workflows for the university community.',
+        desc: 'Production generative assistant for CEU Educational Group. Combines RAG over institutional data with function calling: autonomously makes reservations, generates exams and handles administrative procedures on behalf of students.',
       },
       {
         title: 'localOllamaRAG',
@@ -126,7 +126,7 @@ const T = {
       },
       {
         title: 'OCR-CRM Pipeline',
-        desc: 'Azure Function that converts handwritten enrolment forms into structured CRM records. Orchestrates Azure Document Intelligence, GPT-4 and fuzzy matching algorithms for robust validation and normalisation of noisy, unstructured data.',
+        desc: 'Azure Function that converts handwritten enrolment forms into structured CRM records. Orchestrates Azure Document Intelligence, GPT-5 and fuzzy matching algorithms for robust validation and normalisation of noisy, unstructured data.',
       },
       {
         title: 'portfolio-chat',
