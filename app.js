@@ -275,9 +275,14 @@ function loadChatHistory() {
   }
 }
 
+const AVATAR_DARK  = 'images/ignaciodiagovaleta.png';
+const AVATAR_LIGHT = 'images/ignaciodiagovaletaWhite.png';
+
 function applyDark() {
   document.documentElement.classList.toggle('dark', dark);
   localStorage.setItem('dark', String(dark));
+  const avatarImg = document.getElementById('avatarImg');
+  if (avatarImg) avatarImg.src = dark ? AVATAR_DARK : AVATAR_LIGHT;
 }
 
 function startTyped(id, text) {
