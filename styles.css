@@ -1,21 +1,21 @@
 /* ============================================================
    PORTFOLIO – Ignacio Diago Valeta · AI Engineer
-   Paleta monocromática + acento técnico azul-eléctrico
+   Paleta cool-slate + acento violeta (#7c3aed / #a78bfa)
    ============================================================ */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    --bg:           #f7f7f6;
-    --bg-alt:       #f0f0ee;
+    --bg:           #f8f8fc;
+    --bg-alt:       #f1f1f9;
     --bg-card:      #ffffff;
-    --border:       #e2e2e0;
-    --border-sub:   #ececea;
-    --text:         #0d0d0c;
-    --text-2:       #5a5a58;
-    --text-3:       #9a9a97;
-    --accent:       #b58d65;
-    --accent-dim:   rgba(181,141,101,0.14);
+    --border:       #dddde9;
+    --border-sub:   #e9e9f4;
+    --text:         #0e0e18;
+    --text-2:       #5a5a72;
+    --text-3:       #9898b2;
+    --accent:       #7c3aed;
+    --accent-dim:   rgba(124,58,237,0.12);
     --mono:         'Space Mono', monospace;
     --sans:         'Space Grotesk', sans-serif;
     --r:            4px;
@@ -26,16 +26,16 @@
 }
 
 html.dark {
-    --bg:           #080807;
-    --bg-alt:       #111110;
-    --bg-card:      #141413;
-    --border:       rgba(255,255,255,0.09);
-    --border-sub:   rgba(255,255,255,0.05);
-    --text:         #f0f0ee;
-    --text-2:       #8a8a87;
-    --text-3:       #555552;
-    --accent:       #d6b58b;
-    --accent-dim:   rgba(214,181,139,0.16);
+    --bg:           #080810;
+    --bg-alt:       #0e0e1a;
+    --bg-card:      #121220;
+    --border:       rgba(139,92,246,0.13);
+    --border-sub:   rgba(139,92,246,0.07);
+    --text:         #f0f0fe;
+    --text-2:       #8888aa;
+    --text-3:       #4d4d68;
+    --accent:       #a78bfa;
+    --accent-dim:   rgba(167,139,250,0.16);
     --shadow:       0 2px 16px rgba(0,0,0,0.5);
     --shadow-lg:    0 8px 40px rgba(0,0,0,0.7);
 }
@@ -112,15 +112,15 @@ nav {
     letter-spacing: 0.08em; text-transform: uppercase;
     background: none; border: 1px solid var(--border);
     color: var(--text-2); cursor: pointer; padding: 0.35rem 0.6rem;
-    border-radius: var(--r); transition: all var(--t);
+    border-radius: var(--r); transition: opacity var(--t);
 }
-.lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.lang-toggle:hover { opacity: 0.8; }
 
 .cv-btn {
     font-family: var(--mono); font-size: 0.65rem; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase;
     background: var(--text); color: var(--bg);
-    border: none; cursor: pointer; padding: 0.38rem 0.85rem;
+    border: none; cursor: pointer; padding: 0 0.85rem;
     border-radius: var(--r); text-decoration: none;
     display: inline-flex; align-items: center; gap: 0.4rem;
     transition: opacity var(--t);
@@ -132,9 +132,38 @@ nav {
     color: var(--text-2); cursor: pointer;
     width: 32px; height: 32px; border-radius: var(--r);
     display: flex; align-items: center; justify-content: center;
-    transition: all var(--t);
+    transition: opacity var(--t);
 }
-.theme-btn:hover { border-color: var(--text-2); color: var(--text); }
+.theme-btn:hover { opacity: 0.8; }
+
+/* Controles del header: misma caja (40px) y mismo hover (opacidad) */
+.nav-actions .lang-toggle,
+.nav-actions .theme-btn,
+.nav-actions .cv-btn {
+    display: inline-flex;
+    height: 40px;
+    min-height: 40px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+}
+.nav-actions .lang-toggle { padding: 0 0.75rem; }
+.nav-actions .theme-btn { width: 40px; min-width: 40px; padding: 0; }
+.nav-actions .cv-btn { min-width: 40px; }
+
+.nav-actions .nav-toggle {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    transition: opacity var(--t);
+}
+.nav-actions .nav-toggle:hover { opacity: 0.8; }
 
 .nav-toggle {
     display: none; flex-direction: column; background: none;
@@ -157,43 +186,39 @@ nav {
 }
 
 :root {
-    --hero-text: #f0f0ee;
-    --hero-muted: rgba(240,240,238,0.45);
-    --hero-desc-color: rgba(240,240,238,0.55);
-    --hero-chip-border: rgba(255,255,255,0.12);
-    --hero-chip-color: rgba(240,240,238,0.65);
-    --hero-chip-hi-border: rgba(255,255,255,0.25);
-    --hero-chip-hi-color: rgba(240,240,238,0.9);
-    --hero-social-color: rgba(240,240,238,0.35);
-    --hero-outline-color: rgba(240,240,238,0.7);
-    --hero-outline-border: rgba(255,255,255,0.18);
-    --hero-outline-hover: rgba(255,255,255,0.07);
-    --hero-outline-hover-border: rgba(255,255,255,0.38);
-    --hero-clock-label: rgba(255,255,255,0.25);
-    --hero-clock-time: rgba(255,255,255,0.75);
-    --hero-clock-date: rgba(255,255,255,0.2);
-    --hero-ring-border: rgba(255,255,255,0.12);
-    --hero-ring-bg: #1c1c1a;
+    --hero-text: #f0f0fe;
+    --hero-muted: rgba(240,240,254,0.45);
+    --hero-desc-color: rgba(240,240,254,0.55);
+    --hero-chip-border: rgba(167,139,250,0.2);
+    --hero-chip-color: rgba(240,240,254,0.65);
+    --hero-social-color: #f0f0fe;
+    --hero-outline-color: rgba(240,240,254,0.7);
+    --hero-outline-border: rgba(167,139,250,0.3);
+    --hero-outline-hover: rgba(167,139,250,0.08);
+    --hero-outline-hover-border: rgba(167,139,250,0.55);
+    --hero-clock-label: rgba(167,139,250,0.4);
+    --hero-clock-time: rgba(240,240,254,0.75);
+    --hero-clock-date: rgba(167,139,250,0.35);
+    --hero-ring-border: rgba(139,92,246,0.2);
+    --hero-ring-bg: #16162a;
 }
 
 html:not(.dark) {
-    --hero-text: #0d0d0c;
-    --hero-muted: rgba(13,13,12,0.45);
-    --hero-desc-color: rgba(13,13,12,0.55);
-    --hero-chip-border: rgba(0,0,0,0.1);
-    --hero-chip-color: rgba(13,13,12,0.65);
-    --hero-chip-hi-border: rgba(0,0,0,0.22);
-    --hero-chip-hi-color: rgba(13,13,12,0.9);
-    --hero-social-color: rgba(13,13,12,0.35);
-    --hero-outline-color: rgba(13,13,12,0.65);
-    --hero-outline-border: rgba(0,0,0,0.15);
-    --hero-outline-hover: rgba(0,0,0,0.04);
-    --hero-outline-hover-border: rgba(0,0,0,0.3);
-    --hero-clock-label: rgba(13,13,12,0.3);
-    --hero-clock-time: rgba(13,13,12,0.65);
-    --hero-clock-date: rgba(13,13,12,0.25);
-    --hero-ring-border: rgba(0,0,0,0.1);
-    --hero-ring-bg: #e8e8e6;
+    --hero-text: #0e0e18;
+    --hero-muted: rgba(14,14,24,0.45);
+    --hero-desc-color: rgba(14,14,24,0.55);
+    --hero-chip-border: rgba(124,58,237,0.15);
+    --hero-chip-color: rgba(14,14,24,0.65);
+    --hero-social-color: #0e0e18;
+    --hero-outline-color: rgba(14,14,24,0.65);
+    --hero-outline-border: rgba(124,58,237,0.2);
+    --hero-outline-hover: rgba(124,58,237,0.06);
+    --hero-outline-hover-border: rgba(124,58,237,0.4);
+    --hero-clock-label: rgba(124,58,237,0.4);
+    --hero-clock-time: rgba(14,14,24,0.65);
+    --hero-clock-date: rgba(124,58,237,0.35);
+    --hero-ring-border: rgba(124,58,237,0.15);
+    --hero-ring-bg: #eeeef8;
 }
 .hero-inner {
     max-width: 1160px; margin: 0 auto; width: 100%;
@@ -234,7 +259,6 @@ html:not(.dark) {
     border: 1px solid var(--hero-chip-border); border-radius: 2px;
     color: var(--hero-chip-color); transition: border-color var(--t), color var(--t);
 }
-.chip.hi { border-color: var(--hero-chip-hi-border); color: var(--hero-chip-hi-color); }
 
 .hero-desc {
     font-size: 0.97rem; color: var(--hero-desc-color); line-height: 1.8;
@@ -251,6 +275,10 @@ html:not(.dark) {
     text-transform: uppercase; color: var(--hero-social-color);
     text-decoration: none; display: flex; align-items: center; gap: 0.35rem;
     transition: color var(--t);
+}
+.hero-social a strong {
+    font-weight: 700;
+    color: inherit;
 }
 .hero-social a:hover { color: var(--accent); }
 
@@ -273,6 +301,67 @@ html:not(.dark) {
     border: 1.5px solid var(--hero-outline-border);
 }
 .btn-outline:hover { background: var(--hero-outline-hover); border-color: var(--hero-outline-hover-border); }
+
+/* Hero CTAs: blanco en modo oscuro, oscuro en modo claro */
+html.dark .btn-primary {
+    background: #fafaf9;
+    color: #0d0d0c;
+}
+html.dark .btn-primary:hover {
+    background: #ffffff;
+}
+html.dark .btn-outline {
+    background: transparent;
+    color: #fafaf9;
+    border-color: rgba(255,255,255,0.88);
+}
+html.dark .btn-outline:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: #ffffff;
+}
+
+html:not(.dark) .btn-primary {
+    background: #0d0d0c;
+    color: #fafaf9;
+}
+html:not(.dark) .btn-primary:hover {
+    background: #1c1c1a;
+}
+html:not(.dark) .btn-outline {
+    background: transparent;
+    color: #0d0d0c;
+    border-color: rgba(13,13,12,0.78);
+}
+html:not(.dark) .btn-outline:hover {
+    background: rgba(13,13,12,0.06);
+    border-color: #0d0d0c;
+}
+
+/* Hero CTAs: mismo feedback que .chat-send / .top-btn (atenuación por opacidad) */
+.hero-btns .btn {
+    transition: opacity var(--t);
+}
+.hero-btns .btn:hover {
+    opacity: 0.8;
+}
+html.dark .hero-btns .btn-primary:hover {
+    background: #fafaf9;
+    color: #0d0d0c;
+}
+html.dark .hero-btns .btn-outline:hover {
+    background: transparent;
+    color: #fafaf9;
+    border-color: rgba(255,255,255,0.88);
+}
+html:not(.dark) .hero-btns .btn-primary:hover {
+    background: #0d0d0c;
+    color: #fafaf9;
+}
+html:not(.dark) .hero-btns .btn-outline:hover {
+    background: transparent;
+    color: #0d0d0c;
+    border-color: rgba(13,13,12,0.78);
+}
 
 .hero-avatar { animation: up 0.9s ease-out 0.15s both; }
 .avatar-ring {
@@ -343,6 +432,7 @@ html:not(.dark) {
 
 .skill-tabs {
   display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem;
+  justify-content: center;
 }
 .skill-tab {
   font-family: var(--mono); font-size: 0.66rem; font-weight: 700;
@@ -413,6 +503,17 @@ html:not(.dark) {
     font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
     text-transform: uppercase; padding: 2px 7px; border-radius: 2px;
     background: var(--accent); color: #fff;
+}
+
+html:not(.dark) .proj-banner {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+}
+html:not(.dark) .proj-banner::before {
+    background-image: radial-gradient(circle at 1px 1px, rgba(13,13,12,0.07) 1px, transparent 0);
+}
+html:not(.dark) .proj-banner-label {
+    color: rgba(13,13,12,0.42);
 }
 
 .proj-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
