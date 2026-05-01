@@ -2,27 +2,28 @@ import { PORTFOLIO_INFO } from './config.js';
 
 const T = {
   es: {
-    nav: ['Inicio', 'Sobre mí', 'Experiencia', 'Habilidades', 'Proyectos', 'Contacto'],
+    nav: ['Inicio', 'Sobre mí', 'Experiencia', 'Habilidades', 'Proyectos', 'Certificaciones', 'Chat IA', 'Contacto'],
     hero_eyebrow: '// AI Engineer · Valencia, España',
-    hero_role: 'LLM Fine-tuning · Computer Vision · Multi-Agente',
-    hero_desc: 'Ingeniero especializado en adaptar redes neuronales a problemas reales — desde el fine-tuning hasta el despliegue en producción.',
+    hero_role: 'Orquestación LLM · Visión por computador · Recuperación y procesamiento de información',
+    hero_desc: 'Mi enfoque está en orquestar LLMs y pipelines inteligentes, visión por computador y llevar la información desde la fuente hasta algo fiable y usable. Me gusta divulgar lo que aprendo y seguir ampliando conocimientos cada día.',
     hero_btn1: 'Ver proyectos',
     hero_btn2: 'Chat IA',
     about_title: 'Sobre mí',
-    about_p1: 'Ingeniero Informático por la <strong>Universitat Politècnica de València (UPV)</strong>, especializado en IA aplicada. Mi trabajo consiste en adaptar redes neuronales — LLMs y sistemas de Computer Vision — para resolver problemas concretos mediante fine-tuning y optimización arquitectural.',
-    about_p2: 'Actualmente trabajo como <strong>AI & Back-End Developer en CEU Educational Group</strong>, donde he desarrollado y desplegado <strong>GPT-CEU</strong>, un asistente generativo con OpenAI API y RAG pipelines que optimiza flujos académicos y administrativos.',
+    about_p1: 'Ingeniero Informático por la <strong>Universitat Politècnica de València (UPV)</strong>. No me planteo como experto cerrado en un solo nicho: mi <strong>enfoque</strong> combina orquestación de LLMs y pipelines, visión por computador, y tratamiento serio de la información (recuperarla, entenderla, procesarla hasta producto). Disfruto la divulgación técnica y aprender de forma continua — talleres, mentoría y código abierto encajan con cómo trabajo.',
+    about_p2: 'Trabajo como <strong>AI & Back-End Developer en CEU Educational Group</strong> en <strong>GPT-CEU</strong> (asistente en producción con RAG y function calling). También soy <strong>Inditex Tech Ambassador en la UPV</strong>, acercando el equipo tecnológico de Inditex a estudiantes STEM.',
     stat1: 'En producción',
     stat2: 'Repos GitHub',
     stat3: 'Certificaciones',
     stat4: 'Idiomas',
     exp_title: 'Experiencia',
     exp: [
+      { date: 'Abr 2026 – Presente', role: 'Inditex Tech Ambassador', company: 'Inditex · Comunidad Valenciana', desc: 'Programa selectivo que conecta talento universitario STEM con los equipos tecnológicos globales de Inditex. Puente entre el equipo tech de Inditex y estudiantes de la UPV — eventos exclusivos, mentoring y networking con profesionales de uno de los grupos tech y retail más importantes del mundo.' },
       { date: 'Oct 2025 – Presente', role: 'AI & Back-End Developer', company: 'CEU Educational Group · Valencia', desc: 'Desarrollo y despliegue de GPT-CEU — asistente generativo con RAG pipelines. Integración de LLMs con fuentes de datos institucionales para staff y estudiantes.' },
       { date: 'Feb 2025 – Jun 2025', role: 'Instructor de Talleres & Guía', company: 'Museo de Informática UPV · Valencia', desc: 'Talleres técnicos de Robótica, Criptografía y Programación. Comunicación técnica adaptada a audiencias diversas.' },
       { date: 'Ene 2022 – Ene 2025', role: 'Tutor Particular', company: 'Superprof · Valencia', desc: 'Formación personalizada en Matemáticas, Física y Dibujo Técnico a nivel preuniversitario.' },
     ],
     skills_title: 'Habilidades',
-    skills: ['LLMs & NLP', 'Computer Vision', 'ML Frameworks', 'MLOps & Tools', 'Programación'],
+    skills: ['LLMs Y RAG', 'IA Documental', 'Visión Artificial', 'Frameworks De ML', 'Backend Y Cloud'],
     proj_title: 'Proyectos destacados',
     proj_live: 'Ver en web',
     proj_gh: 'Ver en GitHub',
@@ -34,11 +35,11 @@ const T = {
       },
       {
         title: 'localOllamaRAG',
-        desc: 'Trabajo de Fin de Grado. Sistema RAG completamente on-premises y open-source para extracción de información en grandes volúmenes documentales. Búsqueda híbrida (semántica + keyword) y evaluación de métricas RAG sin dependencias cloud.',
+        desc: 'Sistema RAG completamente local y multilingüe desarrollado como TFG. Búsqueda híbrida semántica + léxica con Ollama y ChromaDB, fusión RRF, reranking con cross-encoders, contextual retrieval, CLI bilingüe e interfaz web con streaming. Evaluado con RAGAS y BERTScore sin ninguna dependencia cloud.',
       },
       {
         title: 'OCR-CRM Pipeline',
-        desc: 'Azure Function que digitaliza formularios de matrícula manuscritos convirtiéndolos en registros CRM estructurados. Orquesta Azure Document Intelligence, GPT-5 y fuzzy matching para validación y normalización robusta de datos no estructurados.',
+        desc: 'En producción en el CEU Educational Group: digitaliza formularios académicos manuscritos en registros CRM con Azure Functions, Document Intelligence, GPT y RapidFuzz; normalización de datos y revisión humana ante baja confianza.',
       },
       {
         title: 'portfolio-chat',
@@ -47,6 +48,10 @@ const T = {
       {
         title: 'Modelos públicos en Hugging Face',
         desc: 'Perfil en Hugging Face Hub con modelos fine-tuned y experimentos reproducibles publicados: LLMs ajustados con PEFT/QLoRA, generación de texto y benchmarks de RAG.',
+      },
+      {
+        title: 'dataset-creator',
+        desc: 'Herramienta local con Ollama: a partir de PDFs genera pares pregunta–respuesta supervisados, trazables al contexto fuente, y exporta JSONL con splits train/val/test.',
       },
     ],
     certs_title: 'Certificaciones',
@@ -68,12 +73,12 @@ const T = {
     chat_placeholder: 'Pregunta sobre experiencia, proyectos, habilidades...',
     clear_chat: 'Limpiar chat',
     send_label: 'Enviar',
-    suggestions: ['¿En qué proyectos trabaja?', '¿Qué tecnologías domina?', '¿Cuál es su experiencia?', '¿Disponible para prácticas?'],
+    suggestions: ['¿En qué proyectos trabaja?', '¿En qué áreas técnicas se enfoca?', '¿Cuál es su experiencia?', '¿Disponible para trabajar?'],
     contact_title: 'Contacto',
     contact_sub: '¿Interesado en colaborar? No dudes en escribir.',
-    footer: '© 2025 Ignacio Diago Valeta · AI Engineer',
+    footer: '© 2026 Ignacio Diago Valeta · AI Engineer',
     cv_btn: 'CV',
-    chips: ['LLM Fine-tuning · PEFT/QLoRA', 'Computer Vision · ViT', 'Multi-Agente'],
+    chips: ['Orquestación LLM · Pipelines', 'Visión Por Computador', 'Información · Procesamiento'],
     proj_badge_prod: 'Producción',
     proj_badge_tfg: 'TFG',
     edu_label: '// EDUCACIÓN',
@@ -90,27 +95,28 @@ const T = {
     top_label: 'Volver arriba',
   },
   en: {
-    nav: ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Contact'],
+    nav: ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Certifications', 'AI Chat', 'Contact'],
     hero_eyebrow: '// AI Engineer · Valencia, Spain',
-    hero_role: 'LLM Fine-tuning · Computer Vision · Multi-Agent',
-    hero_desc: 'Engineer specialized in adapting neural networks to real-world problems — from fine-tuning all the way to production deployment.',
+    hero_role: 'LLM Orchestration · Computer Vision · Information Retrieval & Processing',
+    hero_desc: 'My focus is LLM orchestration and intelligent pipelines, computer vision and turning messy information into something reliable you can actually use. I like sharing what I learn with others and keep building skills every day.',
     hero_btn1: 'View projects',
     hero_btn2: 'AI Chat',
     about_title: 'About me',
-    about_p1: 'Computer Engineer from the <strong>Universitat Politècnica de València (UPV)</strong>, specializing in applied AI. My work focuses on adapting neural networks — LLMs and Computer Vision systems — to solve concrete problems through fine-tuning and architectural optimization.',
-    about_p2: 'Currently working as <strong>AI & Back-End Developer at CEU Educational Group</strong>, where I developed and deployed <strong>GPT-CEU</strong>, a generative AI assistant using OpenAI API and RAG pipelines that streamlines academic and administrative workflows.',
+    about_p1: 'Computer Engineer from the <strong>Universitat Politècnica de València (UPV)</strong>. I don\'t think of myself as a closed expert in one niche: my <strong>focus</strong> blends LLM orchestration and pipelines, computer vision, and serious information work — retrieve it, understand it, process it into real products. I enjoy technical outreach and learning in public through workshops, mentoring and open code.',
+    about_p2: 'I work as <strong>AI & Back-End Developer at CEU Educational Group</strong> on <strong>GPT-CEU</strong> (production assistant with RAG and function calling). I\'m also an <strong>Inditex Tech Ambassador at UPV</strong>, connecting Inditex\'s technology teams with STEM students.',
     stat1: 'In production',
     stat2: 'GitHub repos',
     stat3: 'Certifications',
     stat4: 'Languages',
     exp_title: 'Experience',
     exp: [
+      { date: 'Apr 2026 – Present', role: 'Inditex Tech Ambassador', company: 'Inditex · Valencian Community', desc: 'Selective program connecting university STEM talent with Inditex\'s global technology teams. Bridge between Inditex\'s tech team and UPV students — exclusive tech events, mentoring sessions and networking with professionals from one of the world\'s most important tech and retail groups.' },
       { date: 'Oct 2025 – Present', role: 'AI & Back-End Developer', company: 'CEU Educational Group · Valencia', desc: 'Developed and deployed GPT-CEU — a generative assistant with RAG pipelines. Integrated LLMs with institutional data sources for staff and students.' },
       { date: 'Feb 2025 – Jun 2025', role: 'Workshop Instructor & Museum Guide', company: 'UPV Informatics Museum · Valencia', desc: 'Technical workshops on Robotics, Cryptography and Programming. Adapted technical communication to diverse audiences.' },
       { date: 'Jan 2022 – Jan 2025', role: 'Private Tutor', company: 'Superprof · Valencia', desc: 'Tailored one-on-one instruction in Mathematics, Physics and Technical Drawing to pre-university students.' },
     ],
     skills_title: 'Skills',
-    skills: ['LLMs & NLP', 'Computer Vision', 'ML Frameworks', 'MLOps & Tools', 'Programming'],
+    skills: ['LLMs & RAG', 'Document AI', 'Computer Vision', 'ML Frameworks', 'Backend & Cloud'],
     proj_title: 'Featured projects',
     proj_live: 'View online',
     proj_gh: 'View on GitHub',
@@ -122,11 +128,11 @@ const T = {
       },
       {
         title: 'localOllamaRAG',
-        desc: 'Final degree thesis. Fully on-premises, open-source RAG system for information extraction over large document corpora. Hybrid retrieval (semantic + keyword) and RAG metric evaluation with no cloud dependencies.',
+        desc: 'Fully local, multilingual RAG system developed as a final degree thesis. Hybrid semantic + lexical retrieval with Ollama and ChromaDB, RRF fusion, cross-encoder reranking, contextual retrieval, bilingual CLI and streaming web interface. Evaluated with RAGAS and BERTScore — zero cloud dependencies.',
       },
       {
         title: 'OCR-CRM Pipeline',
-        desc: 'Azure Function that converts handwritten enrolment forms into structured CRM records. Orchestrates Azure Document Intelligence, GPT-5 and fuzzy matching algorithms for robust validation and normalisation of noisy, unstructured data.',
+        desc: 'In production at CEU Educational Group: serverless pipeline that turns handwritten academic forms into structured CRM records with Azure Functions, Document Intelligence, GPT and RapidFuzz; data normalisation and human review on low-confidence fields.',
       },
       {
         title: 'portfolio-chat',
@@ -135,6 +141,10 @@ const T = {
       {
         title: 'Public models on Hugging Face',
         desc: 'Hugging Face Hub profile with published fine-tuned models and reproducible experiments: PEFT/QLoRA-trained LLMs, text generation and RAG benchmarks.',
+      },
+      {
+        title: 'dataset-creator',
+        desc: 'Local Ollama-based tool: from PDFs it builds supervised Q&A pairs traceable to source context and exports JSONL with train/val/test splits.',
       },
     ],
     certs_title: 'Certifications',
@@ -156,12 +166,12 @@ const T = {
     chat_placeholder: 'Ask about experience, projects, skills...',
     clear_chat: 'Clear chat',
     send_label: 'Send',
-    suggestions: ['What projects is he working on?', 'Which technologies does he know?', 'What is his experience?', 'Available for internships?'],
+    suggestions: ['What projects is he working on?', 'What are his technical focus areas?', 'What is his experience?', 'Is he available to work?'],
     contact_title: 'Contact',
     contact_sub: 'Interested in collaborating? Feel free to reach out.',
-    footer: '© 2025 Ignacio Diago Valeta · AI Engineer',
+    footer: '© 2026 Ignacio Diago Valeta · AI Engineer',
     cv_btn: 'CV',
-    chips: ['LLM Fine-tuning · PEFT/QLoRA', 'Computer Vision · ViT', 'Multi-Agent'],
+    chips: ['LLM Orchestration · Pipelines', 'Computer Vision', 'Information · Processing'],
     proj_badge_prod: 'Production',
     proj_badge_tfg: 'Thesis',
     edu_label: '// EDUCATION',
@@ -180,12 +190,26 @@ const T = {
 };
 
 const SKILL_DETAILS = {
-  0: [['Fine-tuning PEFT/QLoRA', 95], ['RAG Pipelines', 92], ['LangChain / LlamaIndex', 88], ['HuggingFace Transformers', 90], ['OpenAI API', 93], ['Prompt Engineering', 88]],
-  1: [['Vision Transformers (ViT)', 85], ['Transfer Learning', 88], ['OpenCV', 82], ['MediaPipe', 80], ['Real-time Inference', 83]],
-  2: [['PyTorch', 90], ['TensorFlow / Keras', 85], ['Scikit-learn', 88], ['Hyperparameter Optimization', 80]],
-  3: [['Git / Linux', 85], ['HuggingFace Hub', 90], ['Weights & Biases', 75], ['Docker', 60]],
-  4: [['Python', 95], ['SQL', 80], ['R', 72], ['C', 68], ['NumPy / Pandas', 88]],
+  en: {
+    0: [['Fine-Tuning PEFT/QLoRA', 95], ['RAG Pipelines', 93], ['Ollama / Local LLMs', 90], ['ChromaDB / Vector DBs', 88], ['HuggingFace Transformers', 90], ['OpenAI / Gemini API', 92], ['Prompt Engineering', 87]],
+    1: [['Azure Document Intelligence', 88], ['PDF Parsing (PyMuPDF)', 85], ['Fuzzy Matching (RapidFuzz)', 83], ['Dataset Generation QA', 87], ['OCR & Structured Extraction', 85], ['QA & Traceability', 80]],
+    2: [['Vision Transformers (ViT)', 85], ['Transfer Learning', 88], ['OpenCV', 82], ['MediaPipe', 80], ['Real-Time Inference', 83]],
+    3: [['PyTorch', 90], ['TensorFlow / Keras', 85], ['Scikit-learn', 88], ['NumPy / Pandas', 88], ['RAGAS / BERTScore', 78]],
+    4: [['Python', 95], ['Azure Functions / Cloud', 83], ['Flask / REST APIs', 82], ['Docker / Linux', 72], ['SQL', 80], ['Git / GitHub', 88]],
+  },
+  es: {
+    0: [['Fine-Tuning PEFT/QLoRA', 95], ['Pipelines RAG', 93], ['Ollama · LLMs Locales', 90], ['ChromaDB · Vectorial', 88], ['HuggingFace Transformers', 90], ['API OpenAI / Gemini', 92], ['Prompt Engineering', 87]],
+    1: [['Azure Document Intelligence', 88], ['PDF (PyMuPDF)', 85], ['Fuzzy Matching (RapidFuzz)', 83], ['Generación Datasets QA', 87], ['OCR · Extracción', 85], ['QA Y Trazabilidad', 80]],
+    2: [['Vision Transformers (ViT)', 85], ['Transfer Learning', 88], ['OpenCV', 82], ['MediaPipe', 80], ['Inferencia En Tiempo Real', 83]],
+    3: [['PyTorch', 90], ['TensorFlow / Keras', 85], ['Scikit-learn', 88], ['NumPy / Pandas', 88], ['RAGAS / BERTScore', 78]],
+    4: [['Python', 95], ['Azure Functions / Cloud', 83], ['Flask · APIs REST', 82], ['Docker / Linux', 72], ['SQL', 80], ['Git / GitHub', 88]],
+  },
 };
+
+function skillRowsFor(idx) {
+  const pack = SKILL_DETAILS[lang] || SKILL_DETAILS.en;
+  return pack[idx] || [];
+}
 
 const STORAGE_KEY = 'portfolio_chat_history';
 const CHAT_TIMEOUT = 60000;
@@ -288,7 +312,7 @@ function renderExp(exp) {
 function renderSkillTab(idx) {
   document.querySelectorAll('.skill-tab').forEach((tab, i) => tab.classList.toggle('active', i === idx));
   const list = $('skillList');
-  const skills = SKILL_DETAILS[idx] || [];
+  const skills = skillRowsFor(idx);
   list.innerHTML = skills.map(([name, pct]) => `
     <div class="skill-row">
       <span class="skill-row-name">${name}</span>
@@ -485,6 +509,8 @@ function applyLang() {
   renderExp(t.exp);
   $('skillsTitle').textContent = t.skills_title;
   refreshSkillTabs();
+  const activeSkillTab = document.querySelector('.skill-tab.active');
+  renderSkillTab(activeSkillTab ? Number(activeSkillTab.dataset.idx) : 0);
   $('projTitle').textContent = t.proj_title;
   document.querySelectorAll('.proj-card').forEach((card, i) => {
     const project = t.project_cards[i];
@@ -517,6 +543,7 @@ function applyLang() {
   [0, 1, 2].forEach((i) => { setText('chip' + i, t.chips[i]); });
   setText('badge0', t.proj_badge_prod);
   setText('badge1', t.proj_badge_tfg);
+  setText('badge2', t.proj_badge_prod);
   setText('eduLabel', t.edu_label);
   setText('eduDegree', t.edu_degree);
   setText('eduUni', t.edu_uni);
