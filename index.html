@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ignacio Diago Valeta – AI Engineer</title>
-<meta name="description" content="Portfolio de Ignacio Diago Valeta — AI Engineer con enfoque en orquestación LLM, visión por computador e información; divulgación y aprendizaje continuo.">
+<title>Ignacio Diago Valeta - AI Engineer</title>
+<meta name="description" content="Portfolio de Ignacio Diago Valeta - AI Engineer con enfoque en orquestacion LLM, vision por computador e informacion; divulgacion y aprendizaje continuo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=25">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=36">
 <script>
 const _d = localStorage.getItem('dark');
-if (_d === 'true' || _d === null) {
+if (_d === 'true') {
   document.documentElement.classList.add('dark');
-  if (_d === null) localStorage.setItem('dark', 'true');
+} else if (_d === null) {
+  localStorage.setItem('dark', 'false');
 }
 </script>
 </head>
@@ -22,10 +23,13 @@ if (_d === 'true' || _d === null) {
 
 <header class="nav-wrap">
   <nav>
-    <a href="#inicio" class="nav-brand">Ignacio Diago</a>
+    <a href="#inicio" class="nav-brand" aria-label="Ignacio Diago Valeta">
+      <span class="brand-mark">IDV</span>
+      <span class="brand-name">Ignacio Diago</span>
+    </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#sobre-mi">Sobre mi</a></li>
       <li><a href="#experiencia">Experiencia</a></li>
       <li><a href="#habilidades">Habilidades</a></li>
       <li><a href="#proyectos">Proyectos</a></li>
@@ -34,131 +38,125 @@ if (_d === 'true' || _d === null) {
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="lang-toggle" id="langBtn">EN</button>
-      <button class="theme-btn js-theme" aria-label="Toggle theme">
-        <svg width="14" height="14" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" fill="currentColor">
-          <rect x="3" y="0" width="2" height="1"/><rect x="3" y="7" width="2" height="1"/>
-          <rect x="0" y="3" width="1" height="2"/><rect x="7" y="3" width="1" height="2"/>
-          <rect x="1" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/>
-          <rect x="1" y="6" width="1" height="1"/><rect x="6" y="6" width="1" height="1"/>
-          <rect x="2" y="2" width="4" height="4"/>
-        </svg>
+      <button class="lang-toggle" id="langBtn" type="button">EN</button>
+      <button class="theme-btn js-theme" type="button" aria-label="Toggle theme">
+        <span class="theme-glyph" aria-hidden="true"></span>
       </button>
-      <a href="https://raw.githubusercontent.com/iDiagoValeta/portfolio-chat/main/cv_ignacio_diago_en.pdf" target="_blank" class="cv-btn" id="cvBtn">
-        <svg width="10" height="10" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" fill="currentColor" shape-rendering="crispEdges">
-          <rect x="3" y="0" width="2" height="4"/><rect x="1" y="4" width="6" height="1"/>
-          <rect x="2" y="5" width="4" height="1"/><rect x="3" y="6" width="2" height="1"/>
-          <rect x="0" y="7" width="8" height="1"/>
-        </svg>
+      <a href="https://raw.githubusercontent.com/iDiagoValeta/portfolio-chat/main/cv_ignacio_diago_en.pdf" target="_blank" rel="noopener" class="cv-btn" id="cvBtn">
         <span id="cvBtnLabel">CV</span>
       </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 </header>
 
-<section id="inicio" class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-eyebrow" id="heroEyebrow">// AI Engineer · Valencia, España</div>
-      <h1 class="hero-name">Ignacio<br>Diago.</h1>
-      <p class="hero-role" id="heroRole"></p>
-      <div class="hero-chips">
-        <span class="chip" id="chip0">Orquestación LLM · Pipelines</span>
-        <span class="chip" id="chip1">Visión Por Computador</span>
-        <span class="chip" id="chip2">Información · Procesamiento</span>
-      </div>
-      <p class="hero-desc" id="heroDesc">Mi enfoque está en orquestar LLMs y pipelines inteligentes, visión por computador y llevar la información desde la fuente hasta algo fiable y usable. Me gusta divulgar lo que aprendo y seguir ampliando conocimientos cada día.</p>
+<main>
+  <section id="inicio" class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="hero-eyebrow" id="heroEyebrow">// AI Engineer · Valencia, España</div>
+        <h1 class="hero-name">Ignacio<br>Diago<br>Valeta</h1>
+        <p class="hero-role" id="heroRole"></p>
+        <p class="hero-desc" id="heroDesc">Mi enfoque está en orquestar LLMs y pipelines inteligentes, visión por computador y llevar la información desde la fuente hasta algo fiable y usable. Me gusta divulgar lo que aprendo y seguir ampliando conocimientos cada día.</p>
 
-      <div class="hero-social">
-        <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener"><strong>GitHub</strong></a>
-        <a href="https://linkedin.com/in/ignacio-diago" target="_blank" rel="noopener"><strong>LinkedIn</strong></a>
-        <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener"><strong>HuggingFace</strong></a>
-        <a href="mailto:nadiva1243@gmail.com"><strong>Email</strong></a>
+        <div class="hero-chips">
+          <span class="chip" id="chip0">Orquestación LLM · Pipelines</span>
+          <span class="chip" id="chip1">Visión Por Computador</span>
+          <span class="chip" id="chip2">Información · Procesamiento</span>
+        </div>
+
+        <div class="hero-btns">
+          <a href="#proyectos" class="btn btn-primary" id="heroBtn1"><span> Ver proyectos</span></a>
+          <a href="#chat" class="btn btn-outline" id="heroBtn2"><span> Chat IA</span></a>
+        </div>
       </div>
 
-      <div class="hero-btns">
-        <a href="#proyectos" class="btn btn-outline" id="heroBtn1"><span> Ver proyectos</span></a>
-        <a href="#chat" class="btn btn-primary" id="heroBtn2"><span> Chat IA</span></a>
+      <div class="hero-visual">
+        <div class="portrait-frame">
+          <img id="avatarImg" src="images/ignaciodiagovaleta.png" alt="Ignacio Diago Valeta" loading="eager">
+        </div>
+        <div class="hero-card hero-clock" id="heroClock">
+          <span class="clock-label" id="clockLabel">// HORA LOCAL</span>
+          <span class="clock-time" id="clockTime">--:--:--</span>
+          <span class="clock-date" id="clockDate">--- -- ---</span>
+        </div>
+        <div class="hero-social">
+          <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener"><strong>GitHub</strong></a>
+          <a href="https://linkedin.com/in/ignacio-diago" target="_blank" rel="noopener"><strong>LinkedIn</strong></a>
+          <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener"><strong>HuggingFace</strong></a>
+          <a href="mailto:nadiva1243@gmail.com"><strong>Email</strong></a>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="hero-avatar">
-      <div class="avatar-ring" id="avatarRing">
-        <img id="avatarImg" src="images/ignaciodiagovaleta.png" alt="Ignacio Diago Valeta" loading="eager">
-      </div>
+  <section id="sobre-mi" class="section section-about">
+    <div class="section-head container">
+      <p class="section-kicker">01 / perfil</p>
+      <h2 class="sec-title reveal" id="aboutTitle">Sobre mí</h2>
     </div>
-  </div>
-
-  <div class="hero-clock" id="heroClock">
-    <span class="clock-label" id="clockLabel">// HORA LOCAL</span>
-    <span class="clock-time" id="clockTime">--:--:--</span>
-    <span class="clock-date" id="clockDate">--- -- ---</span>
-  </div>
-
-</section>
-
-<section id="sobre-mi" class="section">
-  <div class="container">
-    <h2 class="sec-title reveal" id="aboutTitle">Sobre mí</h2>
-    <div class="about-grid">
+    <div class="about-grid container">
       <div class="about-text reveal">
         <p id="aboutP1">Ingeniero Informático por la <strong>Universitat Politècnica de València (UPV)</strong>. No me planteo como experto cerrado en un solo nicho: mi <strong>enfoque</strong> combina orquestación de LLMs y pipelines, visión por computador, y tratamiento serio de la información (recuperarla, entenderla, procesarla hasta producto). Disfruto la divulgación técnica y aprender de forma continua — talleres, mentoría y código abierto encajan con cómo trabajo.</p>
         <p id="aboutP2">Trabajo como <strong>AI & Back-End Developer en CEU Educational Group</strong> en <strong>GPT-CEU</strong> (asistente en producción con RAG y function calling). También soy <strong>Inditex Tech Ambassador en la UPV</strong>, acercando el equipo tecnológico de Inditex a estudiantes STEM.</p>
-        <div class="stats-row">
-          <div class="stat reveal"><span class="stat-num">1+</span><span class="stat-label" id="stat1Label">En producción</span></div>
-          <div class="stat reveal"><span class="stat-num">23+</span><span class="stat-label" id="stat2Label">Repos GitHub</span></div>
-          <div class="stat reveal"><span class="stat-num">5+</span><span class="stat-label" id="stat3Label">Certificaciones</span></div>
-          <div class="stat reveal"><span class="stat-num">3</span><span class="stat-label" id="stat4Label">Idiomas</span></div>
-        </div>
       </div>
 
-      <div class="reveal">
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;">
-          <div id="eduLabel" style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">// EDUCACIÓN</div>
-          <div id="eduDegree" style="font-family:var(--mono);font-size:0.85rem;font-weight:700;color:var(--text);margin-bottom:0.25rem;">B.Sc. Ingeniería Informática</div>
-          <div id="eduUni" style="font-family:var(--mono);font-size:0.72rem;color:var(--text-2);margin-bottom:0.65rem;">Universitat Politècnica de València · 2022–2026</div>
-          <div id="eduDesc" style="font-size:0.85rem;color:var(--text-2);line-height:1.6;">Especialización en Computación — algoritmos, IA, Machine Learning y arquitectura de software.</div>
+      <div class="about-dossier reveal">
+        <div class="dossier-block">
+          <div id="eduLabel" class="meta-label">// EDUCACIÓN</div>
+          <h3 id="eduDegree">B.Sc. Ingeniería Informática</h3>
+          <p id="eduUni">Universitat Politècnica de València · 2022-2026</p>
+          <span id="eduDesc">Especialización en Computación — algoritmos, IA, Machine Learning y arquitectura de software.</span>
         </div>
-        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;">
-          <div id="langLabel" style="font-family:var(--mono);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem;">// IDIOMAS</div>
-          <div style="display:flex;flex-direction:column;gap:0.5rem;">
-            <div style="display:flex;justify-content:space-between;align-items:center;"><span id="langName1" style="font-family:var(--mono);font-size:0.78rem;color:var(--text);">Español</span><span id="langNative1" style="font-family:var(--mono);font-size:0.65rem;color:var(--accent);">Nativo</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;"><span id="langName2" style="font-family:var(--mono);font-size:0.78rem;color:var(--text);">English</span><span id="langB2" style="font-family:var(--mono);font-size:0.65rem;color:var(--text-2);">B2 Cambridge</span></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;"><span id="langName3" style="font-family:var(--mono);font-size:0.78rem;color:var(--text);">Valencià</span><span id="langNative2" style="font-family:var(--mono);font-size:0.65rem;color:var(--text-2);">Nativo · GVA</span></div>
-          </div>
+        <div class="dossier-block">
+          <div id="langLabel" class="meta-label">// IDIOMAS</div>
+          <div class="language-row"><span id="langName1">Español</span><strong id="langNative1">Nativo</strong></div>
+          <div class="language-row"><span id="langName2">English</span><strong id="langB2">B2 Cambridge</strong></div>
+          <div class="language-row"><span id="langName3">Valencià</span><strong id="langNative2">Nativo · GVA</strong></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<section id="experiencia" class="section section-alt">
-  <div class="container">
-    <h2 class="sec-title reveal" id="expTitle">Experiencia</h2>
-    <div style="max-width:640px;margin:0 auto;">
+    <div class="stats-row container">
+      <div class="stat reveal"><span class="stat-num">1+</span><span class="stat-label" id="stat1Label">En producción</span></div>
+      <div class="stat reveal"><span class="stat-num">23+</span><span class="stat-label" id="stat2Label">Repos GitHub</span></div>
+      <div class="stat reveal"><span class="stat-num">5+</span><span class="stat-label" id="stat3Label">Certificaciones</span></div>
+      <div class="stat reveal"><span class="stat-num">3</span><span class="stat-label" id="stat4Label">Idiomas</span></div>
+    </div>
+  </section>
+
+  <section id="experiencia" class="section section-timeline">
+    <div class="section-head container">
+      <p class="section-kicker">02 / trayectoria</p>
+      <h2 class="sec-title reveal" id="expTitle">Experiencia</h2>
+    </div>
+    <div class="timeline-wrap container">
       <div class="exp-timeline" id="expList"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="habilidades" class="section">
-  <div class="container">
-    <h2 class="sec-title reveal" id="skillsTitle">Habilidades</h2>
-    <div class="skill-wrap reveal">
+  <section id="habilidades" class="section">
+    <div class="section-head container">
+      <p class="section-kicker">03 / stack</p>
+      <h2 class="sec-title reveal" id="skillsTitle">Habilidades</h2>
+    </div>
+    <div class="skill-wrap container reveal">
       <div class="skill-tabs" id="skillTabs"></div>
       <div class="skill-list" id="skillList"></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="proyectos" class="section section-alt">
-  <div class="container">
-    <h2 class="sec-title reveal" id="projTitle">Proyectos destacados</h2>
-    <div class="projects-grid">
-      <div class="proj-card reveal">
+  <section id="proyectos" class="section section-projects">
+    <div class="section-head container">
+      <p class="section-kicker">04 / producción</p>
+      <h2 class="sec-title reveal" id="projTitle">Proyectos destacados</h2>
+    </div>
+
+    <div class="projects-grid container">
+      <article class="proj-card reveal">
+        <div class="proj-index">01</div>
         <div class="proj-banner"><span class="proj-badge" id="badge0">Producción</span><span class="proj-banner-label">CEU · Azure · OpenAI</span></div>
         <div class="proj-body">
           <h3 class="proj-title" data-project-title>GPT-CEU</h3>
@@ -166,9 +164,10 @@ if (_d === 'true' || _d === null) {
           <div class="proj-tags"><span class="tag">RAG Pipeline</span><span class="tag">OpenAI API</span><span class="tag">Azure</span><span class="tag">Python</span></div>
           <a href="https://medios.uchceu.es/actualidad-ceu/se-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceuse-presenta-una-nueva-herramienta-de-ia-para-toda-la-comunidad-universitaria-gpt-ceu/" target="_blank" rel="noopener" class="proj-link" data-proj-link="live"><span class="link-label">Ver en web</span></a>
         </div>
-      </div>
+      </article>
 
-      <div class="proj-card reveal">
+      <article class="proj-card reveal">
+        <div class="proj-index">02</div>
         <div class="proj-banner"><span class="proj-badge" id="badge1">TFG</span><span class="proj-banner-label">Ollama · ChromaDB · Python</span></div>
         <div class="proj-body">
           <h3 class="proj-title" data-project-title>localOllamaRAG</h3>
@@ -176,19 +175,21 @@ if (_d === 'true' || _d === null) {
           <div class="proj-tags"><span class="tag">RAG</span><span class="tag">Ollama</span><span class="tag">ChromaDB</span><span class="tag">Python</span></div>
           <a href="https://github.com/iDiagoValeta/localOllamaRAG" target="_blank" rel="noopener" class="proj-link" data-proj-link="gh"><span class="link-label">Ver en GitHub</span></a>
         </div>
-      </div>
+      </article>
 
-      <div class="proj-card reveal">
-        <div class="proj-banner"><span class="proj-badge" id="badge2">Producción</span><span class="proj-banner-label">CEU · Azure · Document Intelligence · GPT</span></div>
+      <article class="proj-card reveal">
+        <div class="proj-index">03</div>
+        <div class="proj-banner"><span class="proj-badge" id="badge2">Producción</span><span class="proj-banner-label">Document Intelligence · GPT</span></div>
         <div class="proj-body">
           <h3 class="proj-title" data-project-title>OCR-CRM Pipeline</h3>
           <p class="proj-desc" data-project-desc>En producción en el CEU Educational Group: digitaliza formularios académicos manuscritos en registros CRM con Azure Functions, Document Intelligence, GPT y RapidFuzz; normalización de datos y revisión humana ante baja confianza.</p>
           <div class="proj-tags"><span class="tag">Azure Functions</span><span class="tag">Document Intelligence</span><span class="tag">RapidFuzz</span><span class="tag">Python</span></div>
           <a href="https://github.com/iDiagoValeta/ocr-crm-pipeline" target="_blank" rel="noopener" class="proj-link" data-proj-link="gh"><span class="link-label">Ver en GitHub</span></a>
         </div>
-      </div>
+      </article>
 
-      <div class="proj-card reveal">
+      <article class="proj-card reveal">
+        <div class="proj-index">04</div>
         <div class="proj-banner"><span class="proj-banner-label">Gemini · Python · Vanilla JS</span></div>
         <div class="proj-body">
           <h3 class="proj-title" data-project-title>portfolio-chat</h3>
@@ -196,9 +197,10 @@ if (_d === 'true' || _d === null) {
           <div class="proj-tags"><span class="tag">Gemini API</span><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">Render</span></div>
           <a href="https://github.com/iDiagoValeta/portfolio-chat" target="_blank" rel="noopener" class="proj-link" data-proj-link="gh"><span class="link-label">Ver en GitHub</span></a>
         </div>
-      </div>
+      </article>
 
-      <div class="proj-card reveal">
+      <article class="proj-card reveal">
+        <div class="proj-index">05</div>
         <div class="proj-banner"><span class="proj-banner-label">Hugging Face Hub</span></div>
         <div class="proj-body">
           <h3 class="proj-title" data-project-title>Modelos públicos en Hugging Face</h3>
@@ -206,40 +208,43 @@ if (_d === 'true' || _d === null) {
           <div class="proj-tags"><span class="tag">Transformers</span><span class="tag">PEFT/QLoRA</span><span class="tag">Open weights</span></div>
           <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener" class="proj-link" data-proj-link="hf"><span class="link-label">Ver en HuggingFace</span></a>
         </div>
-      </div>
+      </article>
 
-      <div class="proj-card reveal">
+      <article class="proj-card reveal">
+        <div class="proj-index">06</div>
         <div class="proj-banner"><span class="proj-banner-label">Ollama · ChromaDB · JSONL</span></div>
         <div class="proj-body">
           <h3 class="proj-title" data-project-title>dataset-creator</h3>
-          <p class="proj-desc" data-project-desc>Herramienta local con Ollama: a partir de PDFs genera pares pregunta–respuesta supervisados, trazables al contexto fuente, y exporta JSONL con splits train/val/test.</p>
+          <p class="proj-desc" data-project-desc>Herramienta local con Ollama: a partir de PDFs genera pares pregunta-respuesta supervisados, trazables al contexto fuente, y exporta JSONL con splits train/val/test.</p>
           <div class="proj-tags"><span class="tag">Ollama</span><span class="tag">PDF Parsing</span><span class="tag">Dataset QA</span><span class="tag">Python</span></div>
           <a href="https://github.com/iDiagoValeta/dataset-creator" target="_blank" rel="noopener" class="proj-link" data-proj-link="gh"><span class="link-label">Ver en GitHub</span></a>
         </div>
-      </div>
+      </article>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="certificaciones" class="section">
-  <div class="container">
-    <h2 class="sec-title reveal" id="certsTitle">Certificaciones</h2>
-    <div class="certs-grid">
+  <section id="certificaciones" class="section section-certs">
+    <div class="section-head container">
+      <p class="section-kicker">05 / formación</p>
+      <h2 class="sec-title reveal" id="certsTitle">Certificaciones</h2>
+    </div>
+    <div class="certs-grid container">
       <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Machine Learning & Data Science</div><div class="cert-year">2025</div></div>
       <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Python for Data Science</div><div class="cert-year">2025</div></div>
       <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Linux Fundamentals</div><div class="cert-year">2025</div></div>
       <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">SQL & R for Data Analysis</div><div class="cert-year">2025</div></div>
       <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Mathematical Foundations of ML</div><div class="cert-year">2025</div></div>
-      <div class="cert-card reveal" style="border-style:dashed;opacity:0.4;display:flex;align-items:center;justify-content:center;"><div id="certMore" style="font-family:var(--mono);font-size:0.68rem;color:var(--text-3);text-align:center;letter-spacing:0.06em;">+ más en curso</div></div>
+      <div class="cert-card cert-card-more reveal"><div id="certMore">+ más en curso</div></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="chat" class="section section-alt">
-  <div class="container">
-    <h2 class="sec-title reveal" id="chatTitle">Chat IA</h2>
-    <p class="sec-sub" id="chatSub">Chat con contexto completo sobre mi perfil — desarrollado con Gemini 2.5 Flash.</p>
-    <div class="chat-wrap reveal">
+  <section id="chat" class="section section-chat">
+    <div class="section-head container">
+      <p class="section-kicker">06 / asistente</p>
+      <h2 class="sec-title reveal" id="chatTitle">Chat IA</h2>
+      <p class="sec-sub" id="chatSub">Chat con contexto completo sobre mi perfil — desarrollado con Gemini 2.5 Flash.</p>
+    </div>
+    <div class="chat-wrap container reveal">
       <div class="chat-box">
         <div class="chat-head">
           <div class="chat-head-info">
@@ -250,36 +255,33 @@ if (_d === 'true' || _d === null) {
             </div>
           </div>
           <div class="chat-head-actions">
-            <button class="chat-icon-btn" id="clearChat" title="Limpiar chat">
-              <svg width="12" height="12" viewBox="0 0 8 8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="2" y="0" width="4" height="1"/><rect x="0" y="1" width="8" height="1"/><rect x="1" y="2" width="1" height="5"/><rect x="6" y="2" width="1" height="5"/><rect x="1" y="7" width="6" height="1"/><rect x="3" y="3" width="1" height="3"/><rect x="5" y="3" width="1" height="3"/></svg>
-            </button>
+            <button class="chat-icon-btn" id="clearChat" type="button" title="Limpiar chat" aria-label="Limpiar chat">×</button>
           </div>
         </div>
         <div class="chat-msgs" id="chatMsgs"></div>
         <div class="chat-suggestions" id="chatSuggestions"></div>
         <div class="chat-footer">
           <input type="text" class="chat-input" id="chatInput" placeholder="Pregunta sobre experiencia, proyectos, habilidades..." maxlength="2000" autocomplete="off">
-          <button class="chat-send" id="chatSend" aria-label="Enviar">
-            <svg width="12" height="12" viewBox="0 0 8 8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="1" y="0" width="1" height="8"/><rect x="2" y="1" width="1" height="6"/><rect x="3" y="2" width="1" height="4"/><rect x="4" y="3" width="1" height="2"/></svg>
-          </button>
+          <button class="chat-send" id="chatSend" type="button" aria-label="Enviar">↗</button>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="contacto" class="section">
-  <div class="container">
-    <h2 class="sec-title reveal" id="contactTitle">Contacto</h2>
-    <p class="sec-sub" id="contactSub">¿Interesado en colaborar? No dudes en escribir.</p>
-    <div class="contact-links">
+  <section id="contacto" class="section section-contact">
+    <div class="section-head container">
+      <p class="section-kicker">07 / contacto</p>
+      <h2 class="sec-title reveal" id="contactTitle">Contacto</h2>
+      <p class="sec-sub" id="contactSub">¿Interesado en colaborar? No dudes en escribir.</p>
+    </div>
+    <div class="contact-links container">
       <a href="mailto:nadiva1243@gmail.com" class="contact-card reveal"><span>Email</span></a>
       <a href="https://linkedin.com/in/ignacio-diago" target="_blank" rel="noopener" class="contact-card reveal"><span>LinkedIn</span></a>
       <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener" class="contact-card reveal"><span>GitHub</span></a>
       <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener" class="contact-card reveal"><span>HuggingFace</span></a>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
 <footer>
   <div class="container">
@@ -287,9 +289,7 @@ if (_d === 'true' || _d === null) {
   </div>
 </footer>
 
-<button class="top-btn" aria-label="Volver arriba">
-  <svg width="12" height="12" viewBox="0 0 8 8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect x="3" y="0" width="2" height="5"/><rect x="1" y="1" width="2" height="2"/><rect x="5" y="1" width="2" height="2"/><rect x="0" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/></svg>
-</button>
+<button class="top-btn" type="button" aria-label="Volver arriba">↑</button>
 
 <script type="module" src="app.js?v=14"></script>
 </body>
