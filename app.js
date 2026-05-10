@@ -93,6 +93,7 @@ const T = {
     clock_label: '// HORA LOCAL',
     theme_label: 'Cambiar tema',
     top_label: 'Volver arriba',
+    kickers: ['01 / perfil', '02 / trayectoria', '03 / stack', '04 / producción', '05 / formación', '06 / asistente', '07 / contacto'],
   },
   en: {
     nav: ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Certifications', 'AI Chat', 'Contact'],
@@ -186,6 +187,7 @@ const T = {
     clock_label: '// LOCAL TIME',
     theme_label: 'Toggle theme',
     top_label: 'Back to top',
+    kickers: ['01 / profile', '02 / experience', '03 / stack', '04 / projects', '05 / certifications', '06 / assistant', '07 / contact'],
   }
 };
 
@@ -564,6 +566,7 @@ function applyLang() {
   setText('footerText', t.footer);
   document.querySelectorAll('.js-theme').forEach((btn) => btn.setAttribute('aria-label', t.theme_label || 'Toggle theme'));
   document.querySelector('.top-btn')?.setAttribute('aria-label', t.top_label || 'Back to top');
+  if (t.kickers) t.kickers.forEach((text, i) => setText('kicker' + (i + 1), text));
 }
 
 function initScroll() {

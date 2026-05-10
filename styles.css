@@ -7,26 +7,26 @@
 * { margin: 0; padding: 0; }
 
 :root {
-  --bg: #f2ece3;
-  --bg-2: #e4d9cb;
-  --panel: #f8f1e7;
-  --panel-2: #d9cabc;
-  --ink: #373431;
-  --ink-soft: #56514c;
-  --muted: #777069;
-  --muted-2: #9b9288;
-  --line: rgba(55, 52, 49, 0.15);
-  --line-strong: rgba(55, 52, 49, 0.38);
-  --lime: #bd6b46;
-  --blue: #8b8176;
-  --coral: #9b5338;
-  --cyan: #c8b8a8;
-  --on-accent: #f1e6d8;
-  --on-accent-soft: #373431;
+  --bg: #f5f5f3;
+  --bg-2: #ebebea;
+  --panel: #ffffff;
+  --panel-2: #e2e2e0;
+  --ink: #111111;
+  --ink-soft: #333333;
+  --muted: #6a6a6a;
+  --muted-2: #9a9a9a;
+  --line: rgba(17, 17, 17, 0.10);
+  --line-strong: rgba(17, 17, 17, 0.22);
+  --orange: #d4621e;
+  --orange-dark: #a94b14;
+  --gray-accent: #6e6e6e;
+  --gray-light: #c0c0bc;
+  --on-accent: #ffffff;
+  --on-accent-soft: #111111;
   --hover-shadow: 7px 7px 0 var(--ink);
   --hover-shadow-sm: 4px 4px 0 var(--ink);
-  --shadow: 10px 10px 0 rgba(55, 52, 49, 0.1);
-  --shadow-soft: 0 24px 70px rgba(55, 52, 49, 0.12);
+  --shadow: 10px 10px 0 rgba(17, 17, 17, 0.10);
+  --shadow-soft: 0 24px 70px rgba(17, 17, 17, 0.10);
   --mono: "IBM Plex Mono", monospace;
   --serif: "Newsreader", serif;
   --display: "Archivo Black", sans-serif;
@@ -35,26 +35,26 @@
 }
 
 html.dark {
-  --bg: #191511;
-  --bg-2: #231e19;
-  --panel: #29231d;
-  --panel-2: #342b23;
-  --ink: #ded1c0;
-  --ink-soft: #c7b9a7;
-  --muted: #a09385;
-  --muted-2: #75695d;
-  --line: rgba(222, 209, 192, 0.12);
-  --line-strong: rgba(222, 209, 192, 0.32);
-  --lime: #c87552;
-  --blue: #938a7d;
-  --coral: #ac6042;
-  --cyan: #a99888;
-  --on-accent: #241a14;
-  --on-accent-soft: #d8c8b6;
-  --hover-shadow: 7px 7px 0 rgba(222, 209, 192, 0.82);
-  --hover-shadow-sm: 4px 4px 0 rgba(222, 209, 192, 0.72);
-  --shadow: 10px 10px 0 rgba(172, 96, 66, 0.16);
-  --shadow-soft: 0 28px 80px rgba(0, 0, 0, 0.48);
+  --bg: #0d0d0d;
+  --bg-2: #171717;
+  --panel: #1c1c1c;
+  --panel-2: #252525;
+  --ink: #f0f0f0;
+  --ink-soft: #d0d0d0;
+  --muted: #909090;
+  --muted-2: #606060;
+  --line: rgba(240, 240, 240, 0.09);
+  --line-strong: rgba(240, 240, 240, 0.20);
+  --orange: #e07535;
+  --orange-dark: #c06030;
+  --gray-accent: #888888;
+  --gray-light: #484848;
+  --on-accent: #ffffff;
+  --on-accent-soft: #111111;
+  --hover-shadow: 7px 7px 0 rgba(240, 240, 240, 0.75);
+  --hover-shadow-sm: 4px 4px 0 rgba(240, 240, 240, 0.65);
+  --shadow: 10px 10px 0 rgba(0, 0, 0, 0.35);
+  --shadow-soft: 0 28px 80px rgba(0, 0, 0, 0.55);
 }
 
 html {
@@ -105,7 +105,7 @@ img {
   z-index: 500;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, var(--lime), var(--cyan), var(--coral));
+  background: linear-gradient(90deg, var(--orange), var(--gray-light), var(--orange-dark));
   transform: scaleX(0);
   transform-origin: left;
 }
@@ -147,7 +147,7 @@ nav {
   align-items: center;
   justify-content: center;
   border: 2px solid var(--ink);
-  background: var(--lime);
+  background: var(--orange);
   color: var(--on-accent-soft);
   font-family: var(--display);
   font-size: 0.75rem;
@@ -319,7 +319,7 @@ nav {
   width: 31%;
   min-width: 260px;
   background:
-    repeating-linear-gradient(-45deg, color-mix(in srgb, var(--lime) 28%, transparent) 0 10px, transparent 10px 22px);
+    repeating-linear-gradient(-45deg, color-mix(in srgb, var(--orange) 28%, transparent) 0 10px, transparent 10px 22px);
   clip-path: polygon(0 0, 100% 0, 63% 100%, 0 100%);
   opacity: 0.55;
 }
@@ -348,13 +348,7 @@ nav {
   font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
-  color: var(--blue);
-}
-
-html.dark .hero-eyebrow,
-html.dark .section-kicker,
-html.dark .meta-label {
-  color: var(--lime);
+  color: var(--orange);
 }
 
 .hero-name {
@@ -374,7 +368,7 @@ html.dark .meta-label {
   font-size: 0.96rem;
   font-weight: 700;
   letter-spacing: 0;
-  color: var(--coral);
+  color: var(--orange-dark);
   text-transform: uppercase;
   overflow-wrap: anywhere;
 }
@@ -418,9 +412,9 @@ html.dark .meta-label {
   overflow-wrap: anywhere;
 }
 
-.chip:nth-child(1) { box-shadow: inset 6px 0 0 var(--lime); }
-.chip:nth-child(2) { box-shadow: inset 6px 0 0 var(--blue); }
-.chip:nth-child(3) { box-shadow: inset 6px 0 0 var(--coral); }
+.chip:nth-child(1) { box-shadow: inset 6px 0 0 var(--orange); }
+.chip:nth-child(2) { box-shadow: inset 6px 0 0 var(--gray-accent); }
+.chip:nth-child(3) { box-shadow: inset 6px 0 0 var(--orange-dark); }
 
 .hero-btns {
   display: flex;
@@ -448,7 +442,7 @@ html.dark .meta-label {
 }
 
 .btn-primary {
-  background: var(--lime);
+  background: var(--orange);
   color: var(--on-accent-soft);
 }
 
@@ -480,7 +474,7 @@ html.dark .meta-label {
   aspect-ratio: 4 / 5;
   border: 2px solid var(--ink);
   background:
-    linear-gradient(135deg, var(--lime) 0 18%, transparent 18% 100%),
+    linear-gradient(135deg, var(--orange) 0 18%, transparent 18% 100%),
     var(--panel-2);
   box-shadow: var(--shadow);
   overflow: hidden;
@@ -503,7 +497,7 @@ html.dark .meta-label {
   border: 1px solid var(--ink);
   background: var(--panel);
   background-clip: padding-box;
-  box-shadow: 8px 8px 0 var(--coral);
+  box-shadow: 8px 8px 0 var(--orange-dark);
   padding: 16px;
   isolation: isolate;
   overflow: hidden;
@@ -555,7 +549,7 @@ html.dark .meta-label {
 }
 
 .hero-social a:hover {
-  background: var(--blue);
+  background: var(--gray-accent);
   color: var(--on-accent);
   transform: translate(-3px, -3px);
   box-shadow: var(--hover-shadow-sm);
@@ -634,11 +628,11 @@ html.dark .meta-label {
   border: 1px solid var(--line-strong);
   background: var(--panel);
   padding: 20px;
-  box-shadow: 7px 7px 0 color-mix(in srgb, var(--blue) 35%, transparent);
+  box-shadow: 7px 7px 0 color-mix(in srgb, var(--gray-accent) 35%, transparent);
 }
 
 .dossier-block + .dossier-block {
-  box-shadow: 7px 7px 0 color-mix(in srgb, var(--lime) 45%, transparent);
+  box-shadow: 7px 7px 0 color-mix(in srgb, var(--orange) 45%, transparent);
 }
 
 .dossier-block h3 {
@@ -672,7 +666,7 @@ html.dark .meta-label {
 }
 
 .language-row strong {
-  color: var(--coral);
+  color: var(--orange-dark);
   font-size: 0.74rem;
   text-align: right;
   text-transform: uppercase;
@@ -696,10 +690,10 @@ html.dark .meta-label {
   transition: transform var(--speed), background var(--speed), box-shadow var(--speed);
 }
 
-.stat:nth-child(1) { border-top: 8px solid var(--lime); }
-.stat:nth-child(2) { border-top: 8px solid var(--blue); }
-.stat:nth-child(3) { border-top: 8px solid var(--coral); }
-.stat:nth-child(4) { border-top: 8px solid var(--cyan); }
+.stat:nth-child(1) { border-top: 8px solid var(--orange); }
+.stat:nth-child(2) { border-top: 8px solid var(--gray-accent); }
+.stat:nth-child(3) { border-top: 8px solid var(--orange-dark); }
+.stat:nth-child(4) { border-top: 8px solid var(--gray-light); }
 
 .stat:hover {
   transform: translateY(-5px);
@@ -749,7 +743,7 @@ html.dark .meta-label {
   left: 0;
   width: 12px;
   height: 12px;
-  background: var(--lime);
+  background: var(--orange);
   border: 2px solid var(--ink);
   transform: translateX(-22px);
 }
@@ -759,7 +753,7 @@ html.dark .meta-label {
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0;
-  color: var(--blue);
+  color: var(--gray-accent);
   text-transform: uppercase;
 }
 
@@ -776,7 +770,7 @@ html.dark .meta-label {
   font-family: var(--mono);
   font-size: 0.82rem;
   font-weight: 700;
-  color: var(--coral);
+  color: var(--orange-dark);
 }
 
 .exp-desc {
@@ -862,7 +856,7 @@ html.dark .meta-label {
 }
 
 .skill-row-pct {
-  color: var(--coral);
+  color: var(--orange-dark);
   text-align: right;
 }
 
@@ -878,7 +872,7 @@ html.dark .meta-label {
 .skill-bar-fill {
   width: 0;
   height: 100%;
-  background: linear-gradient(90deg, var(--lime), var(--cyan));
+  background: linear-gradient(90deg, var(--orange), var(--gray-light));
   transition: width 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -923,21 +917,21 @@ html.dark .meta-label {
   min-height: 116px;
   border-bottom: 1px solid var(--line);
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--blue) 84%, transparent) 0 32%, transparent 32% 100%),
+    linear-gradient(135deg, color-mix(in srgb, var(--gray-accent) 84%, transparent) 0 32%, transparent 32% 100%),
     repeating-linear-gradient(90deg, color-mix(in srgb, var(--ink) 10%, transparent) 0 1px, transparent 1px 22px),
     var(--panel-2);
 }
 
 .proj-card:nth-child(2n) .proj-banner {
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--lime) 90%, transparent) 0 36%, transparent 36% 100%),
+    linear-gradient(135deg, color-mix(in srgb, var(--orange) 90%, transparent) 0 36%, transparent 36% 100%),
     repeating-linear-gradient(0deg, color-mix(in srgb, var(--ink) 10%, transparent) 0 1px, transparent 1px 20px),
     var(--panel-2);
 }
 
 .proj-card:nth-child(3n) .proj-banner {
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--coral) 88%, transparent) 0 30%, transparent 30% 100%),
+    linear-gradient(135deg, color-mix(in srgb, var(--orange-dark) 88%, transparent) 0 30%, transparent 30% 100%),
     repeating-linear-gradient(-45deg, color-mix(in srgb, var(--ink) 10%, transparent) 0 1px, transparent 1px 14px),
     var(--panel-2);
 }
@@ -952,7 +946,7 @@ html.dark .meta-label {
   min-height: 28px;
   padding: 0 9px;
   border: 1px solid var(--ink);
-  background: var(--lime);
+  background: var(--orange);
   color: var(--on-accent-soft);
   font-family: var(--mono);
   font-size: 0.68rem;
@@ -1037,7 +1031,7 @@ html.dark .meta-label {
 }
 
 .proj-link:hover {
-  background: var(--lime);
+  background: var(--orange);
   color: var(--on-accent-soft);
   transform: translate(-3px, -3px);
   box-shadow: var(--hover-shadow-sm);
@@ -1054,9 +1048,9 @@ html.dark .meta-label {
   min-height: 150px;
   border: 1px solid var(--line-strong);
   background:
-    radial-gradient(circle at 18% 22%, color-mix(in srgb, var(--lime) 10%, transparent) 0 2px, transparent 2px 10px),
-    radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--coral) 9%, transparent) 0 1px, transparent 1px 9px),
-    linear-gradient(135deg, color-mix(in srgb, var(--panel) 92%, var(--lime)) 0%, var(--panel) 58%, color-mix(in srgb, var(--panel) 88%, var(--cyan)) 100%);
+    radial-gradient(circle at 18% 22%, color-mix(in srgb, var(--orange) 10%, transparent) 0 2px, transparent 2px 10px),
+    radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--orange-dark) 9%, transparent) 0 1px, transparent 1px 9px),
+    linear-gradient(135deg, color-mix(in srgb, var(--panel) 92%, var(--orange)) 0%, var(--panel) 58%, color-mix(in srgb, var(--panel) 88%, var(--gray-light)) 100%);
   padding: 18px;
   border-radius: var(--radius);
   overflow: hidden;
@@ -1090,9 +1084,9 @@ html.dark .cert-card::before {
   inset: auto 14px 14px auto;
   width: 74px;
   height: 74px;
-  border: 1px solid color-mix(in srgb, var(--coral) 54%, transparent);
+  border: 1px solid color-mix(in srgb, var(--orange-dark) 54%, transparent);
   background:
-    repeating-linear-gradient(-45deg, color-mix(in srgb, var(--coral) 22%, transparent) 0 3px, transparent 3px 9px);
+    repeating-linear-gradient(-45deg, color-mix(in srgb, var(--orange-dark) 22%, transparent) 0 3px, transparent 3px 9px);
   opacity: 0.58;
   transform: rotate(3deg);
 }
@@ -1102,8 +1096,8 @@ html.dark .cert-card::before {
   width: 96px;
   height: 34px;
   background:
-    repeating-linear-gradient(90deg, color-mix(in srgb, var(--blue) 34%, transparent) 0 5px, transparent 5px 11px);
-  border-color: color-mix(in srgb, var(--blue) 50%, transparent);
+    repeating-linear-gradient(90deg, color-mix(in srgb, var(--gray-accent) 34%, transparent) 0 5px, transparent 5px 11px);
+  border-color: color-mix(in srgb, var(--gray-accent) 50%, transparent);
   transform: rotate(-2deg);
 }
 
@@ -1113,17 +1107,17 @@ html.dark .cert-card::before {
   height: 58px;
   border-radius: 50%;
   background:
-    radial-gradient(circle, color-mix(in srgb, var(--lime) 34%, transparent) 0 42%, transparent 43% 100%);
-  border-color: color-mix(in srgb, var(--lime) 52%, transparent);
+    radial-gradient(circle, color-mix(in srgb, var(--orange) 34%, transparent) 0 42%, transparent 43% 100%);
+  border-color: color-mix(in srgb, var(--orange) 52%, transparent);
   transform: none;
 }
 
 .cert-card:hover {
   transform: translateY(-5px);
   background:
-    radial-gradient(circle at 18% 22%, color-mix(in srgb, var(--lime) 14%, transparent) 0 2px, transparent 2px 10px),
-    radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--coral) 12%, transparent) 0 1px, transparent 1px 9px),
-    linear-gradient(135deg, color-mix(in srgb, var(--panel-2) 82%, var(--lime)) 0%, var(--panel-2) 58%, color-mix(in srgb, var(--panel-2) 84%, var(--cyan)) 100%);
+    radial-gradient(circle at 18% 22%, color-mix(in srgb, var(--orange) 14%, transparent) 0 2px, transparent 2px 10px),
+    radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--orange-dark) 12%, transparent) 0 1px, transparent 1px 9px),
+    linear-gradient(135deg, color-mix(in srgb, var(--panel-2) 82%, var(--orange)) 0%, var(--panel-2) 58%, color-mix(in srgb, var(--panel-2) 84%, var(--gray-light)) 100%);
   box-shadow: var(--hover-shadow-sm);
 }
 
@@ -1135,7 +1129,7 @@ html.dark .cert-card::before {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0;
-  color: var(--blue);
+  color: var(--gray-accent);
   text-transform: uppercase;
 }
 
@@ -1184,9 +1178,9 @@ html.dark .cert-card::before {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  border-bottom: 1px solid var(--line-strong);
+  border-bottom: 1px solid rgba(240, 240, 240, 0.15);
   background:
-    linear-gradient(90deg, var(--ink) 0 74%, var(--lime) 74% 100%);
+    linear-gradient(90deg, #111111 0 74%, var(--orange) 74% 100%);
   padding: 14px 18px;
 }
 
@@ -1202,7 +1196,7 @@ html.dark .cert-card::before {
   height: 15px;
   flex: 0 0 auto;
   border: 2px solid var(--on-accent-soft);
-  background: var(--lime);
+  background: var(--orange);
   animation: blink 2.2s ease infinite;
 }
 
@@ -1219,23 +1213,23 @@ html.dark .cert-card::before {
 }
 
 .chat-head-title {
-  color: var(--bg-2);
+  color: #f0f0f0;
   font-size: 0.88rem;
   font-weight: 700;
 }
 
 .chat-head-sub {
   margin-top: 2px;
-  color: rgba(244, 246, 235, 0.58);
+  color: rgba(240, 240, 240, 0.55);
   font-size: 0.72rem;
 }
 
 .chat-icon-btn {
   width: 42px;
   height: 42px;
-  border: 1px solid var(--on-accent-soft);
-  background: var(--bg);
-  color: var(--on-accent-soft);
+  border: 1px solid rgba(240, 240, 240, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f0f0f0;
   cursor: pointer;
   font-family: var(--display);
   font-size: 1.35rem;
@@ -1283,7 +1277,7 @@ html.dark .cert-card::before {
   align-items: center;
   justify-content: center;
   border: 1px solid var(--ink);
-  background: var(--lime);
+  background: var(--orange);
   color: var(--on-accent-soft);
   font-family: var(--mono);
   font-size: 0.68rem;
@@ -1293,7 +1287,7 @@ html.dark .cert-card::before {
 }
 
 .msg-user .msg-avatar {
-  background: var(--blue);
+  background: var(--gray-accent);
   color: var(--on-accent);
 }
 
@@ -1308,7 +1302,7 @@ html.dark .cert-card::before {
 
 .msg-user .msg-bubble {
   background: var(--panel);
-  border-color: var(--blue);
+  border-color: var(--gray-accent);
 }
 
 .msg-bubble p + p {
@@ -1342,7 +1336,7 @@ html.dark .cert-card::before {
 .typing-dots span {
   width: 7px;
   height: 7px;
-  background: var(--coral);
+  background: var(--orange-dark);
   animation: dot 1.1s ease infinite;
 }
 
@@ -1374,7 +1368,7 @@ html.dark .cert-card::before {
 }
 
 .sugg:hover {
-  background: var(--coral);
+  background: var(--orange-dark);
   color: var(--on-accent);
   transform: translate(-2px, -2px);
   box-shadow: var(--hover-shadow-sm);
@@ -1407,8 +1401,8 @@ html.dark .cert-card::before {
 }
 
 .chat-input:focus {
-  border-color: var(--blue);
-  box-shadow: inset 0 -3px 0 var(--blue);
+  border-color: var(--gray-accent);
+  box-shadow: inset 0 -3px 0 var(--gray-accent);
 }
 
 .chat-send {
@@ -1425,7 +1419,7 @@ html.dark .cert-card::before {
 }
 
 .chat-send:hover:not(:disabled) {
-  background: var(--lime);
+  background: var(--orange);
   color: var(--on-accent-soft);
   transform: translate(-2px, -2px);
   box-shadow: var(--hover-shadow-sm);
@@ -1462,10 +1456,10 @@ html.dark .cert-card::before {
   text-transform: uppercase;
 }
 
-.contact-card:nth-child(1):hover { background: var(--lime); color: var(--on-accent-soft); }
-.contact-card:nth-child(2):hover { background: var(--blue); color: var(--on-accent); }
-.contact-card:nth-child(3):hover { background: var(--coral); color: var(--on-accent); }
-.contact-card:nth-child(4):hover { background: var(--cyan); color: var(--on-accent-soft); }
+.contact-card:nth-child(1):hover { background: var(--orange); color: var(--on-accent-soft); }
+.contact-card:nth-child(2):hover { background: var(--gray-accent); color: var(--on-accent); }
+.contact-card:nth-child(3):hover { background: var(--orange-dark); color: var(--on-accent); }
+.contact-card:nth-child(4):hover { background: var(--gray-light); color: var(--on-accent-soft); }
 
 .contact-card:hover {
   transform: translate(-4px, -4px);
@@ -1498,7 +1492,7 @@ footer p {
   align-items: center;
   justify-content: center;
   border: 1px solid var(--ink);
-  background: var(--lime);
+  background: var(--orange);
   color: var(--on-accent-soft);
   cursor: pointer;
   font-family: var(--display);
@@ -1731,7 +1725,7 @@ footer p {
     position: static;
     width: 100%;
     margin-top: 12px;
-    box-shadow: 6px 6px 0 var(--coral);
+    box-shadow: 6px 6px 0 var(--orange-dark);
   }
 
   .hero-visual {
