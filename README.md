@@ -1,6 +1,6 @@
 # Ignacio Diago Valeta Portfolio
 
-Interactive portfolio for Ignacio Diago Valeta, AI Engineer focused on LLM fine-tuning, RAG, computer vision, and multi-agent systems.
+Interactive portfolio for Ignacio Diago Valeta, AI Engineer focused on LLM orchestration, RAG pipelines, computer vision, and intelligent information processing.
 
 Live site: [portfolio-chat-aouj.onrender.com](https://portfolio-chat-aouj.onrender.com/)
 
@@ -12,21 +12,27 @@ This portfolio turns that idea into a practical interface: a professional websit
 
 ## Preview
 
-https://github.com/user-attachments/assets/68340cf7-de77-44ee-ae84-0b51651d1d8c
+### Hero
 
-### Header
+![Portfolio hero section](images/1.png)
 
-![Portfolio header](images/1.png)
+### About & Stats
 
-### AI Chat
-
-![AI chat section](images/2.png)
+![About section with dossier and stats](images/2.png)
 
 ### Experience
 
-![Experience section](images/3.png)
+![Experience timeline section](images/3.png)
 
-These screenshots show three key parts of the portfolio. The site also includes additional sections for skills, projects, education, contact, and other professional details.
+### Featured Projects
+
+![Projects grid section](images/4.png)
+
+### AI Chat
+
+![AI Chat interface](images/5.png)
+
+These screenshots show the portfolio in light mode. The site includes a dark mode toggle and full bilingual support (ES / EN).
 
 ## Tech Stack
 
@@ -34,6 +40,14 @@ These screenshots show three key parts of the portfolio. The site also includes 
 - Backend: Python proxy server
 - AI: Google Gemini 2.5 Flash API
 - Deployment: Render
+
+## Features
+
+- **AI Chat**: Ask anything about Ignacio's background, projects, and skills directly in the interface
+- **Dark / Light mode**: Clean white-and-black palette with orange accents, toggled from the navbar
+- **Bilingual**: Full ES / EN support switchable at any point
+- **Responsive**: Works on desktop and mobile
+- **Live clock**: Displays local Valencia time in the hero card
 
 ## Run Locally
 
@@ -61,8 +75,8 @@ http://localhost:8000
 
 - `index.html` defines the portfolio sections and page metadata.
 - `styles.css` contains the visual design and responsive layout.
-- `app.js` handles client-side interactions.
-- `config.js` contains the AI assistant context.
+- `app.js` handles client-side interactions and bilingual content.
+- `config.js` contains the AI assistant context and portfolio data.
 - `server.py` serves the site and proxies Gemini requests without exposing the API key.
 
 ## Security
