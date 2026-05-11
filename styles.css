@@ -32,6 +32,8 @@
   --display: "Archivo Black", sans-serif;
   --radius: 8px;
   --speed: 180ms ease;
+  --container-max: 1180px;
+  --page-gutter: clamp(24px, 3.5vw + 8px, 80px);
 }
 
 html.dark {
@@ -94,7 +96,7 @@ img {
 }
 
 .container {
-  width: min(1180px, calc(100% - 48px));
+  width: min(var(--container-max), calc(100% - var(--page-gutter) * 2));
   margin: 0 auto;
 }
 
@@ -124,7 +126,7 @@ img {
 }
 
 nav {
-  width: min(1180px, calc(100% - 48px));
+  width: min(var(--container-max), calc(100% - var(--page-gutter) * 2));
   height: 74px;
   margin: 0 auto;
   display: flex;
@@ -305,7 +307,7 @@ nav {
 .hero {
   position: relative;
   min-height: 100svh;
-  padding: 130px 0 72px;
+  padding: clamp(104px, 11vw, 130px) 0 clamp(56px, 9vw, 72px);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -327,12 +329,12 @@ nav {
 .hero-inner {
   position: relative;
   z-index: 2;
-  width: min(1180px, calc(100% - 48px));
+  width: min(var(--container-max), calc(100% - var(--page-gutter) * 2));
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.74fr);
+  grid-template-columns: minmax(0, 1.08fr) minmax(240px, 0.74fr);
   align-items: center;
-  gap: 56px;
+  gap: clamp(28px, 3.5vw, 56px);
 }
 
 .hero-copy {
@@ -354,7 +356,7 @@ nav {
 .hero-name {
   margin-top: 16px;
   font-family: var(--display);
-  font-size: 5.7rem;
+  font-size: clamp(2.85rem, 5.5vw + 1.2rem, 5.7rem);
   line-height: 0.91;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -374,9 +376,9 @@ nav {
 }
 
 .hero-desc {
-  max-width: 650px;
+  max-width: min(650px, 100%);
   margin-top: 18px;
-  font-size: 1.36rem;
+  font-size: clamp(1.05rem, 0.35vw + 1rem, 1.36rem);
   line-height: 1.35;
   color: var(--ink-soft);
   overflow-wrap: anywhere;
@@ -557,7 +559,7 @@ nav {
 
 .section {
   position: relative;
-  padding: 92px 0;
+  padding: clamp(64px, 8vw, 92px) 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -569,15 +571,15 @@ nav {
 
 .section-head {
   display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
+  grid-template-columns: minmax(120px, 190px) minmax(0, 1fr);
   align-items: start;
-  gap: 34px;
-  margin-bottom: 38px;
+  gap: clamp(20px, 3vw, 34px);
+  margin-bottom: clamp(28px, 3.5vw, 38px);
 }
 
 .sec-title {
   font-family: var(--display);
-  font-size: 3.7rem;
+  font-size: clamp(2.15rem, 2.8vw + 1.35rem, 3.7rem);
   line-height: 0.96;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -585,16 +587,16 @@ nav {
 
 .sec-sub {
   grid-column: 2;
-  max-width: 640px;
+  max-width: min(640px, 100%);
   margin-top: -16px;
-  font-size: 1.18rem;
+  font-size: clamp(1rem, 0.25vw + 0.92rem, 1.18rem);
   color: var(--muted);
 }
 
 .about-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 380px;
-  gap: 48px;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, min(380px, 34vw));
+  gap: clamp(28px, 4vw, 48px);
   align-items: start;
 }
 
@@ -604,8 +606,8 @@ nav {
 }
 
 .about-text p {
-  max-width: 760px;
-  font-size: 1.34rem;
+  max-width: min(760px, 100%);
+  font-size: clamp(1.05rem, 0.45vw + 0.95rem, 1.34rem);
   line-height: 1.48;
   color: var(--ink-soft);
 }
@@ -703,7 +705,7 @@ nav {
 
 .stat-num {
   font-family: var(--display);
-  font-size: 3.1rem;
+  font-size: clamp(2rem, 2.5vw + 1.2rem, 3.1rem);
   line-height: 1;
 }
 
@@ -730,8 +732,8 @@ nav {
 .exp-item {
   position: relative;
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 28px;
+  grid-template-columns: minmax(148px, 220px) minmax(0, 1fr);
+  gap: clamp(18px, 2.5vw, 28px);
   padding: 28px 0;
   border-bottom: 1px solid var(--line);
 }
@@ -782,8 +784,8 @@ nav {
 
 .skill-wrap {
   display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
-  gap: 28px;
+  grid-template-columns: minmax(220px, min(320px, 30vw)) minmax(0, 1fr);
+  gap: clamp(20px, 2.5vw, 28px);
   align-items: start;
 }
 
@@ -826,9 +828,9 @@ nav {
 
 .skill-row {
   display: grid;
-  grid-template-columns: minmax(170px, 0.7fr) minmax(160px, 1fr) 54px;
+  grid-template-columns: minmax(120px, 0.55fr) minmax(100px, 1fr) minmax(44px, 54px);
   align-items: center;
-  gap: 18px;
+  gap: clamp(10px, 1.5vw, 18px);
   min-height: 62px;
   border-bottom: 1px solid var(--line);
   opacity: 0;
@@ -879,13 +881,13 @@ nav {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 14px;
+  gap: clamp(12px, 1.4vw, 14px);
 }
 
 .proj-card {
   position: relative;
   grid-column: span 4;
-  min-height: 430px;
+  min-height: clamp(360px, 42vw, 430px);
   display: flex;
   flex-direction: column;
   border: 1px solid var(--line-strong);
@@ -1163,7 +1165,7 @@ html.dark .cert-card::before {
 }
 
 .chat-wrap {
-  max-width: 920px;
+  max-width: min(920px, 100%);
 }
 
 .chat-box {
@@ -1534,12 +1536,11 @@ footer p {
 @media (max-width: 1120px) {
   .nav-links { gap: 0.3rem; }
   .nav-links a { font-size: 0.6rem; padding: 0 5px; }
-  .hero-name { font-size: 4.8rem; }
   .projects-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .proj-card { grid-column: span 3; }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 900px) {
   nav {
     height: 68px;
   }
@@ -1594,10 +1595,6 @@ footer p {
   .hero-inner {
     grid-template-columns: 1fr;
     gap: 42px;
-  }
-
-  .hero-name {
-    font-size: 4.1rem;
   }
 
   .hero-visual {
@@ -1814,6 +1811,18 @@ footer p {
   .chat-input {
     height: 46px;
     font-size: 0.78rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --container-max: 1240px;
+  }
+}
+
+@media (min-width: 1680px) {
+  :root {
+    --container-max: 1260px;
   }
 }
 
