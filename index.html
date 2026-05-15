@@ -3,12 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ignacio Diago Valeta - AI Engineer</title>
-<meta name="description" content="Portfolio de Ignacio Diago Valeta - AI Engineer con enfoque en orquestacion LLM, vision por computador e informacion; divulgacion y aprendizaje continuo.">
+<title>Ignacio Diago Valeta — AI Engineer · Orquestación LLM y Visión por Computador</title>
+<meta name="description" content="Portfolio de Ignacio Diago Valeta, AI Engineer. Enfoque en orquestación de LLMs, pipelines RAG, visión por computador y procesamiento de información. IA en producción en CEU Educational Group.">
+<meta name="author" content="Ignacio Diago Valeta">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://portfolio-chat-aouj.onrender.com/">
+<meta name="theme-color" content="#f5f5f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="images/ignaciodiagovaletaWhite.png">
+<link rel="apple-touch-icon" href="images/ignaciodiagovaletaWhite.png">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Ignacio Diago Valeta — Portfolio">
+<meta property="og:title" content="Ignacio Diago Valeta — AI Engineer">
+<meta property="og:description" content="AI Engineer. Orquestación de LLMs, pipelines RAG, visión por computador y procesamiento de información. IA en producción en CEU Educational Group.">
+<meta property="og:url" content="https://portfolio-chat-aouj.onrender.com/">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://portfolio-chat-aouj.onrender.com/images/ignaciodiagovaletaWhite.png">
+<meta property="og:image:alt" content="Ignacio Diago Valeta — AI Engineer">
+<meta property="profile:first_name" content="Ignacio">
+<meta property="profile:last_name" content="Diago Valeta">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ignacio Diago Valeta — AI Engineer">
+<meta name="twitter:description" content="AI Engineer. Orquestación de LLMs, pipelines RAG, visión por computador y procesamiento de información.">
+<meta name="twitter:image" content="https://portfolio-chat-aouj.onrender.com/images/ignaciodiagovaletaWhite.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Ignacio Diago Valeta",
+    "givenName": "Ignacio",
+    "familyName": "Diago Valeta",
+    "url": "https://portfolio-chat-aouj.onrender.com/",
+    "image": "https://portfolio-chat-aouj.onrender.com/images/ignaciodiagovaletaWhite.png",
+    "jobTitle": "AI Engineer",
+    "worksFor": { "@type": "Organization", "name": "CEU Educational Group" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universitat Politècnica de València" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Valencia", "addressCountry": "ES" },
+    "knowsAbout": ["LLM Orchestration", "RAG", "Computer Vision", "Document AI", "Python", "Machine Learning"],
+    "knowsLanguage": ["es", "en", "ca"],
+    "sameAs": [
+      "https://github.com/iDiagoValeta",
+      "https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/",
+      "https://huggingface.co/nadiva1243"
+    ]
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=39">
+<link rel="stylesheet" href="styles.css?v=40">
 <script>
 const _d = localStorage.getItem('dark');
 if (_d === 'true') {
@@ -42,7 +92,7 @@ if (_d === 'true') {
       <button class="theme-btn js-theme" type="button" aria-label="Toggle theme">
         <span class="theme-glyph" aria-hidden="true"></span>
       </button>
-      <a href="https://raw.githubusercontent.com/iDiagoValeta/portfolio-chat/main/cv_ignacio_diago_en.pdf" target="_blank" rel="noopener" class="cv-btn" id="cvBtn">
+      <a href="cv_ignacio_diago_en.pdf" target="_blank" rel="noopener" class="cv-btn" id="cvBtn">
         <span id="cvBtnLabel">CV</span>
       </a>
       <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu">
@@ -84,7 +134,7 @@ if (_d === 'true') {
         </div>
         <div class="hero-social">
           <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener"><strong>GitHub</strong></a>
-          <a href="https://linkedin.com/in/ignacio-diago" target="_blank" rel="noopener"><strong>LinkedIn</strong></a>
+          <a href="https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/" target="_blank" rel="noopener"><strong>LinkedIn</strong></a>
           <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener"><strong>HuggingFace</strong></a>
           <a href="mailto:nadiva1243@gmail.com"><strong>Email</strong></a>
         </div>
@@ -258,7 +308,7 @@ if (_d === 'true') {
             <button class="chat-icon-btn" id="clearChat" type="button" title="Limpiar chat" aria-label="Limpiar chat">×</button>
           </div>
         </div>
-        <div class="chat-msgs" id="chatMsgs"></div>
+        <div class="chat-msgs" id="chatMsgs" aria-live="polite" role="log"></div>
         <div class="chat-suggestions" id="chatSuggestions"></div>
         <div class="chat-footer">
           <input type="text" class="chat-input" id="chatInput" placeholder="Pregunta sobre experiencia, proyectos, habilidades..." maxlength="2000" autocomplete="off">
@@ -276,7 +326,7 @@ if (_d === 'true') {
     </div>
     <div class="contact-links container">
       <a href="mailto:nadiva1243@gmail.com" class="contact-card reveal"><span>Email</span></a>
-      <a href="https://linkedin.com/in/ignacio-diago" target="_blank" rel="noopener" class="contact-card reveal"><span>LinkedIn</span></a>
+      <a href="https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/" target="_blank" rel="noopener" class="contact-card reveal"><span>LinkedIn</span></a>
       <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener" class="contact-card reveal"><span>GitHub</span></a>
       <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener" class="contact-card reveal"><span>HuggingFace</span></a>
     </div>
@@ -291,6 +341,6 @@ if (_d === 'true') {
 
 <button class="top-btn" type="button" aria-label="Volver arriba">↑</button>
 
-<script type="module" src="app.js?v=15"></script>
+<script type="module" src="app.js?v=16"></script>
 </body>
 </html>

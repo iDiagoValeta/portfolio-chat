@@ -356,14 +356,18 @@ function refreshSkillTabs() {
   });
 }
 
-function appendMsg(role, html) {
+function appendMsg(role, html, smooth = false) {
   const msgs = $('chatMsgs');
   const isBot = role === 'bot';
   const div = document.createElement('div');
   div.className = `msg ${isBot ? 'msg-bot' : 'msg-user'}`;
   div.innerHTML = `<div class="msg-avatar">${isBot ? 'AI' : T[lang].chat_user_avatar}</div><div class="msg-bubble">${html}</div>`;
   msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
+  if (smooth) {
+    msgs.scrollTo({ top: msgs.scrollHeight, behavior: 'smooth' });
+  } else {
+    msgs.scrollTop = msgs.scrollHeight;
+  }
 }
 
 function renderSuggestions(list) {
@@ -467,7 +471,7 @@ async function sendMsg(text = '') {
   isProcessing = true;
   $('chatSend').disabled = true;
   input.value = '';
-  appendMsg('user', `<p>${userText}</p>`);
+  appendMsg('user', `<p>${userText}</p>`, true);
 
   const loader = document.createElement('div');
   loader.className = 'msg msg-bot';
@@ -478,7 +482,7 @@ async function sendMsg(text = '') {
   try {
     const reply = await requestGemini(userText);
     loader.remove();
-    appendMsg('bot', sanitizeHtml(mdToHtml(reply)));
+    appendMsg('bot', sanitizeHtml(mdToHtml(reply)), true);
   } catch (error) {
     loader.remove();
     if (chatHistory.at(-1)?.role === 'user') {

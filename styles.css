@@ -813,6 +813,7 @@ nav {
   background: var(--ink);
   color: var(--bg);
   transform: translateX(6px);
+  box-shadow: inset 6px 0 0 var(--orange);
 }
 
 .skill-tab:hover {
@@ -1140,7 +1141,7 @@ html.dark .cert-card::before {
   z-index: 1;
   margin-top: 18px;
   font-family: var(--display);
-  font-size: 1.15rem;
+  font-size: clamp(1.05rem, 0.4vw + 0.95rem, 1.3rem);
   line-height: 1.1;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -1245,7 +1246,8 @@ html.dark .cert-card::before {
 }
 
 .chat-msgs {
-  height: 430px;
+  min-height: clamp(300px, 42vh, 380px);
+  max-height: clamp(440px, 60vh, 640px);
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -1533,6 +1535,16 @@ footer p {
   to { opacity: 1; transform: none; }
 }
 
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.proj-card:focus-within {
+  border-color: var(--ink);
+  box-shadow: var(--hover-shadow);
+}
+
 @media (max-width: 1120px) {
   .nav-links { gap: 0.3rem; }
   .nav-links a { font-size: 0.6rem; padding: 0 5px; }
@@ -1790,7 +1802,8 @@ footer p {
   }
 
   .chat-msgs {
-    height: 390px;
+    min-height: clamp(280px, 46vh, 340px);
+    max-height: clamp(420px, 62vh, 560px);
     padding: 14px;
   }
 
