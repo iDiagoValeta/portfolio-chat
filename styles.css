@@ -62,6 +62,20 @@ html.dark {
 html {
   scroll-behavior: smooth;
   background: var(--bg);
+  overflow-x: clip;
+}
+
+.hero-name,
+.sec-title,
+.section-kicker,
+.proj-title,
+.exp-role,
+.cert-name,
+.contact-card span {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  min-width: 0;
 }
 
 body {
@@ -1696,12 +1710,12 @@ footer p {
   }
 
   .hero-name {
-    font-size: 3.05rem;
+    font-size: clamp(2.4rem, 11vw, 3rem);
   }
 
   .hero-desc,
   .about-text p {
-    font-size: 1.12rem;
+    font-size: 1.05rem;
   }
 
   .hero-role {
@@ -1755,7 +1769,7 @@ footer p {
   }
 
   .sec-title {
-    font-size: 2.55rem;
+    font-size: clamp(1.9rem, 8.5vw, 2.5rem);
   }
 
   .about-dossier,
