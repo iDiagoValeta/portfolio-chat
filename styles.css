@@ -1676,50 +1676,110 @@ footer p {
 }
 
 @media (max-width: 680px) {
+  :root {
+    --hover-shadow: 4px 4px 0 var(--ink);
+    --hover-shadow-sm: 3px 3px 0 var(--ink);
+    --shadow: 5px 5px 0 rgba(17, 17, 17, 0.12);
+  }
+
   .container,
   nav,
   .hero-inner {
-    width: calc(100% - 32px);
+    width: calc(100% - 28px);
     max-width: 1180px;
   }
 
+  nav {
+    height: 64px;
+    gap: 10px;
+  }
+
+  .nav-wrap {
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .brand-mark {
+    width: 38px;
+    height: 38px;
+    box-shadow: 4px 4px 0 var(--ink);
+    font-size: 0.68rem;
+  }
+
   .nav-actions {
-    gap: 6px;
+    gap: 5px;
+    margin-left: auto;
   }
 
   .lang-toggle,
   .theme-btn,
   .cv-btn,
   .nav-toggle {
-    height: 38px;
-    min-width: 38px;
+    height: 36px;
+    min-width: 36px;
+    font-size: 0.66rem;
   }
 
   .lang-toggle,
   .cv-btn {
-    padding: 0 9px;
+    padding: 0 8px;
+  }
+
+  .nav-toggle {
+    width: 36px;
+  }
+
+  .nav-links.open {
+    inset: 64px 0 0;
+    padding: 18px 14px;
+    justify-content: flex-start;
+  }
+
+  .nav-links.open a {
+    min-height: 44px;
   }
 
   .hero {
     min-height: auto;
-    padding: 104px 0 54px;
+    padding: 90px 0 46px;
+    overflow: clip;
+  }
+
+  .hero::before {
+    inset: 64px auto 0 0;
+    width: 68%;
+    min-width: 0;
+    opacity: 0.28;
   }
 
   .hero-inner {
     display: block;
   }
 
+  .hero-eyebrow,
+  .section-kicker,
+  .meta-label {
+    font-size: 0.68rem;
+    line-height: 1.35;
+  }
+
   .hero-name {
-    font-size: clamp(2.4rem, 11vw, 3rem);
+    margin-top: 14px;
+    font-size: clamp(2.35rem, 12.5vw, 3rem);
+    line-height: 0.94;
   }
 
   .hero-desc,
   .about-text p {
-    font-size: 1.05rem;
+    font-size: 1rem;
+    line-height: 1.43;
   }
 
   .hero-role {
-    font-size: 0.82rem;
+    min-height: 0;
+    margin-top: 22px;
+    font-size: 0.76rem;
+    line-height: 1.45;
   }
 
   .hero-copy,
@@ -1730,55 +1790,109 @@ footer p {
   .hero-desc {
     width: 100%;
     max-width: 100%;
-    max-inline-size: calc(100vw - 32px);
+    max-inline-size: calc(100vw - 28px);
   }
 
   .hero-chips {
     display: grid;
     grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 22px;
   }
 
   .chip {
     width: 100%;
+    min-height: 34px;
     min-width: 0;
+    padding: 0 10px;
+    font-size: 0.66rem;
+    line-height: 1.25;
     white-space: normal;
+  }
+
+  .hero-btns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 26px;
+  }
+
+  .btn {
+    min-height: 48px;
+    padding: 0 10px;
+    font-size: 0.72rem;
   }
 
   .hero-card {
     position: static;
     width: 100%;
     margin-top: 12px;
-    box-shadow: 6px 6px 0 var(--orange-dark);
+    padding: 14px;
+    box-shadow: 5px 5px 0 var(--orange-dark);
   }
 
   .hero-visual {
-    margin-top: 42px;
+    margin-top: 34px;
+  }
+
+  .portrait-frame {
+    width: min(100%, 340px);
+    margin-right: auto;
+    margin-left: auto;
+    border-width: 1px;
   }
 
   .hero-social {
-    grid-template-columns: 1fr;
+    width: min(100%, 340px);
+    margin-right: auto;
+    margin-left: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .hero-social a {
+    min-height: 40px;
+    padding: 0 8px;
+    font-size: 0.66rem;
   }
 
   .section {
-    padding: 66px 0;
+    padding: 54px 0;
   }
 
   .section-head {
-    gap: 14px;
-    margin-bottom: 26px;
+    gap: 10px;
+    margin-bottom: 22px;
   }
 
   .sec-title {
-    font-size: clamp(1.9rem, 8.5vw, 2.5rem);
+    font-size: clamp(2rem, 10vw, 2.65rem);
+    line-height: 0.98;
   }
 
   .about-dossier,
-  .stats-row,
-  .skill-tabs,
   .projects-grid,
-  .certs-grid,
-  .contact-links {
+  .certs-grid {
     grid-template-columns: 1fr;
+  }
+
+  .stats-row,
+  .contact-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .stat {
+    min-height: 106px;
+    padding: 14px;
+  }
+
+  .stat-num {
+    font-size: 2.05rem;
+  }
+
+  .stat-label {
+    font-size: 0.62rem;
   }
 
   .exp-item {
@@ -1792,15 +1906,57 @@ footer p {
     transform: none;
   }
 
+  .skill-tabs {
+    display: flex;
+    gap: 8px;
+    margin-inline: -14px;
+    padding: 0 14px 6px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .skill-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .skill-tab {
+    flex: 0 0 min(74vw, 230px);
+    min-height: 44px;
+    scroll-snap-align: start;
+    font-size: 0.68rem;
+  }
+
+  .skill-tab.active {
+    transform: none;
+  }
+
+  .skill-list {
+    margin-top: 18px;
+  }
+
   .skill-row {
-    grid-template-columns: 1fr 48px;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 10px;
     padding: 13px 0;
+  }
+
+  .skill-row-name {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .skill-row-pct {
+    min-width: 42px;
   }
 
   .skill-bar-track {
     grid-column: 1 / -1;
     grid-row: 2;
+    height: 10px;
   }
 
   .proj-card {
@@ -1838,6 +1994,72 @@ footer p {
   .chat-input {
     height: 46px;
     font-size: 0.78rem;
+  }
+
+  .contact-card {
+    min-height: 76px;
+    padding: 14px 8px;
+  }
+
+  .contact-card span {
+    font-size: 0.92rem;
+  }
+
+  footer {
+    padding: 24px 72px 24px 14px;
+  }
+
+  footer p {
+    text-align: left;
+    line-height: 1.45;
+  }
+
+  .top-btn {
+    right: 14px;
+    bottom: 14px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (max-width: 380px) {
+  .container,
+  nav,
+  .hero-inner {
+    width: calc(100% - 24px);
+  }
+
+  .nav-actions {
+    gap: 4px;
+  }
+
+  .lang-toggle,
+  .theme-btn,
+  .cv-btn,
+  .nav-toggle {
+    height: 34px;
+    min-width: 34px;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    font-size: 0.64rem;
+  }
+
+  .hero-btns,
+  .stats-row,
+  .contact-links {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-name {
+    font-size: clamp(2.15rem, 13vw, 2.65rem);
+  }
+
+  .portrait-frame,
+  .hero-social {
+    width: 100%;
   }
 }
 
