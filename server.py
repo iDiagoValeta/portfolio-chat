@@ -6,6 +6,7 @@ Evita problemas de CORS y mantiene la API key segura en el servidor
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import json
+import socket
 import urllib.request
 import urllib.parse
 import os
@@ -238,13 +239,32 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
             # Si hay algún error, simplemente no loguear
             pass
 
+
+class DualStackHTTPServer(HTTPServer):
+    """Escucha en :: con IPv4 mapeado; evita ERR_CONNECTION_REFUSED con localhost→::1."""
+
+    address_family = socket.AF_INET6
+
+    def server_bind(self):
+        self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+        super().server_bind()
+
+
 def run_server(port=None):
     if port is None:
         port = int(os.environ.get('PORT', 8000))
-    
-    server_address = ('0.0.0.0', port)  # Escuchar en todas las interfaces
-    httpd = HTTPServer(server_address, CORSRequestHandler)
+
+    try:
+        httpd = DualStackHTTPServer(("::", port), CORSRequestHandler)
+    except OSError:
+        httpd = HTTPServer(("0.0.0.0", port), CORSRequestHandler)
+        print(
+            f"Aviso: solo IPv4 en el puerto {port}. "
+            f"Si el navegador muestra conexión rechazada con localhost, prueba http://127.0.0.1:{port}/"
+        )
+
     print(f"Servidor iniciado en puerto {port}")
+    print(f"  http://127.0.0.1:{port}/  |  http://localhost:{port}/")
     print(f"API Key configurada: {'Sí' if API_KEY else 'No'}")
     try:
         httpd.serve_forever()
