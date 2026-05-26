@@ -271,7 +271,11 @@ function loadChatHistory() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return;
     const parsed = JSON.parse(saved);
-    if (Array.isArray(parsed)) chatHistory = parsed;
+    if (!Array.isArray(parsed)) return;
+    // Descartar historial del formato anterior (tenía PORTFOLIO_INFO embebido como turno de usuario)
+    const hasOldFormat = parsed[0]?.role === 'user' && parsed[0]?.parts?.[0]?.text?.startsWith('\nEres un asistente');
+    if (hasOldFormat) { localStorage.removeItem(STORAGE_KEY); return; }
+    chatHistory = parsed;
   } catch (_error) {
     chatHistory = [];
   }
@@ -395,14 +399,9 @@ function restoreChat() {
 async function requestGeminiStream(userMessage, onChunk) {
   chatHistory.push({ role: 'user', parts: [{ text: userMessage }] });
 
-  const contents = [
-    { role: 'user', parts: [{ text: PORTFOLIO_INFO }] },
-    { role: 'model', parts: [{ text: 'Entendido. Estoy listo para actuar como el asistente de Ignacio.' }] },
-    ...chatHistory,
-  ];
-
   const requestBody = {
-    contents,
+    systemInstruction: { parts: [{ text: PORTFOLIO_INFO }] },
+    contents: chatHistory,
     generationConfig: { temperature: 0.7, topK: 40, topP: 0.95, maxOutputTokens: 2048 },
   };
 
@@ -458,10 +457,10 @@ async function requestGeminiStream(userMessage, onChunk) {
       if (!dataStr || dataStr === '[DONE]') continue;
       try {
         const data = JSON.parse(dataStr);
-        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-        if (text) {
-          fullText += text;
-          onChunk(text, fullText);
+        for (const part of data.candidates?.[0]?.content?.parts ?? []) {
+          if (part.thought || !part.text) continue;
+          fullText += part.text;
+          onChunk(part.text, fullText);
         }
       } catch (_e) {
         // Ignorar eventos malformados
