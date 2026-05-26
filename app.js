@@ -11,7 +11,7 @@ const T = {
     about_title: 'Sobre mí',
     about_p1: 'Ingeniero Informático por la <strong>Universitat Politècnica de València (UPV)</strong>. No me planteo como experto cerrado en un solo nicho: mi <strong>enfoque</strong> combina orquestación de LLMs y pipelines, visión por computador, y tratamiento serio de la información (recuperarla, entenderla, procesarla hasta producto). Disfruto la divulgación técnica y aprender de forma continua — talleres, mentoría y código abierto encajan con cómo trabajo.',
     about_p2: 'Trabajo como <strong>AI & Back-End Developer en CEU Educational Group</strong> en <strong>GPT-CEU</strong> (asistente en producción con RAG y function calling). También soy <strong>Inditex Tech Ambassador en la UPV</strong>, acercando el equipo tecnológico de Inditex a estudiantes STEM.',
-    stat1: 'En producción',
+    stat1: 'Usuarios IA/mes',
     stat2: 'Repos GitHub',
     stat3: 'Certificaciones',
     stat4: 'Idiomas',
@@ -31,7 +31,7 @@ const T = {
     project_cards: [
       {
         title: 'GPT-CEU',
-        desc: 'Asistente generativo en producción para el CEU Educational Group. Combina RAG sobre datos institucionales con function calling: realiza reservas, genera exámenes y gestiona trámites académicos de forma autónoma en nombre de los alumnos.',
+        desc: 'Asistente generativo en producción para el CEU Educational Group con <strong>miles de usuarios activos al mes</strong>. Combina RAG sobre datos institucionales con function calling: realiza reservas, genera exámenes y gestiona trámites académicos de forma autónoma en nombre de los alumnos.',
       },
       {
         title: 'localOllamaRAG',
@@ -105,7 +105,7 @@ const T = {
     about_title: 'About me',
     about_p1: 'Computer Engineer from the <strong>Universitat Politècnica de València (UPV)</strong>. I don\'t think of myself as a closed expert in one niche: my <strong>focus</strong> blends LLM orchestration and pipelines, computer vision, and serious information work — retrieve it, understand it, process it into real products. I enjoy technical outreach and learning in public through workshops, mentoring and open code.',
     about_p2: 'I work as <strong>AI & Back-End Developer at CEU Educational Group</strong> on <strong>GPT-CEU</strong> (production assistant with RAG and function calling). I\'m also an <strong>Inditex Tech Ambassador at UPV</strong>, connecting Inditex\'s technology teams with STEM students.',
-    stat1: 'In production',
+    stat1: 'Active AI users/mo',
     stat2: 'GitHub repos',
     stat3: 'Certifications',
     stat4: 'Languages',
@@ -125,7 +125,7 @@ const T = {
     project_cards: [
       {
         title: 'GPT-CEU',
-        desc: 'Production generative assistant for CEU Educational Group. Combines RAG over institutional data with function calling: autonomously makes reservations, generates exams and handles administrative procedures on behalf of students.',
+        desc: 'Production generative assistant for CEU Educational Group with <strong>thousands of monthly active users</strong>. Combines RAG over institutional data with function calling: autonomously makes reservations, generates exams and handles administrative procedures on behalf of students.',
       },
       {
         title: 'localOllamaRAG',
@@ -217,7 +217,7 @@ const STORAGE_KEY = 'portfolio_chat_history';
 const CHAT_TIMEOUT = 60000;
 
 let lang = localStorage.getItem('lang') || 'es';
-let dark = localStorage.getItem('dark') === 'true';
+let dark = localStorage.getItem('dark') !== 'false';
 let chatHistory = [];
 let typedTimer = null;
 let isProcessing = false;
@@ -320,20 +320,11 @@ function renderSkillTab(idx) {
   document.querySelectorAll('.skill-tab').forEach((tab, i) => tab.classList.toggle('active', i === idx));
   const list = $('skillList');
   const skills = skillRowsFor(idx);
-  list.innerHTML = skills.map(([name, pct]) => `
-    <div class="skill-row">
-      <span class="skill-row-name">${name}</span>
-      <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="${pct}"></div></div>
-      <span class="skill-row-pct">${pct}%</span>
-    </div>`).join('');
+  list.innerHTML = skills.map(([name]) => `<span class="skill-chip">${name}</span>`).join('');
 
   requestAnimationFrame(() => {
-    list.querySelectorAll('.skill-row').forEach((row, i) => {
-      setTimeout(() => {
-        row.classList.add('show');
-        const fill = row.querySelector('.skill-bar-fill');
-        if (fill) fill.style.width = `${fill.dataset.pct}%`;
-      }, i * 55);
+    list.querySelectorAll('.skill-chip').forEach((chip, i) => {
+      setTimeout(() => chip.classList.add('show'), i * 35);
     });
   });
 }
@@ -401,7 +392,7 @@ function restoreChat() {
   });
 }
 
-async function requestGemini(userMessage) {
+async function requestGeminiStream(userMessage, onChunk) {
   chatHistory.push({ role: 'user', parts: [{ text: userMessage }] });
 
   const contents = [
@@ -412,12 +403,7 @@ async function requestGemini(userMessage) {
 
   const requestBody = {
     contents,
-    generationConfig: {
-      temperature: 0.7,
-      topK: 40,
-      topP: 0.95,
-      maxOutputTokens: 2048,
-    },
+    generationConfig: { temperature: 0.7, topK: 40, topP: 0.95, maxOutputTokens: 2048 },
   };
 
   let response;
@@ -427,7 +413,7 @@ async function requestGemini(userMessage) {
     try {
       response = await fetch('/api/gemini', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'text/event-stream' },
         body: JSON.stringify(requestBody),
         signal: controller.signal,
       });
@@ -436,7 +422,6 @@ async function requestGemini(userMessage) {
       clearTimeout(timeoutId);
       throw error;
     }
-
     if (response.status === 429 && attempt === 0) {
       await new Promise((resolve) => setTimeout(resolve, 20000));
       continue;
@@ -453,13 +438,42 @@ async function requestGemini(userMessage) {
     throw new Error(message);
   }
 
-  const data = await response.json();
-  const botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!botResponse) throw new Error('La API no devolvió ninguna respuesta');
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let fullText = '';
 
-  chatHistory.push({ role: 'model', parts: [{ text: botResponse }] });
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+
+    const events = buffer.split('\n\n');
+    buffer = events.pop();
+
+    for (const evt of events) {
+      const line = evt.trim();
+      if (!line.startsWith('data:')) continue;
+      const dataStr = line.slice(5).trim();
+      if (!dataStr || dataStr === '[DONE]') continue;
+      try {
+        const data = JSON.parse(dataStr);
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (text) {
+          fullText += text;
+          onChunk(text, fullText);
+        }
+      } catch (_e) {
+        // Ignorar eventos malformados
+      }
+    }
+  }
+
+  if (!fullText) throw new Error('La API no devolvió ninguna respuesta');
+
+  chatHistory.push({ role: 'model', parts: [{ text: fullText }] });
   saveChatHistory();
-  return botResponse;
+  return fullText;
 }
 
 async function sendMsg(text = '') {
@@ -473,18 +487,25 @@ async function sendMsg(text = '') {
   input.value = '';
   appendMsg('user', `<p>${userText}</p>`, true);
 
-  const loader = document.createElement('div');
-  loader.className = 'msg msg-bot';
-  loader.innerHTML = '<div class="msg-avatar">AI</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
-  $('chatMsgs').appendChild(loader);
-  $('chatMsgs').scrollTop = $('chatMsgs').scrollHeight;
+  const msgs = $('chatMsgs');
+  const div = document.createElement('div');
+  div.className = 'msg msg-bot';
+  div.innerHTML = '<div class="msg-avatar">AI</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  const bubble = div.querySelector('.msg-bubble');
+  let firstChunk = true;
 
   try {
-    const reply = await requestGemini(userText);
-    loader.remove();
-    appendMsg('bot', sanitizeHtml(mdToHtml(reply)), true);
+    const fullText = await requestGeminiStream(userText, (_chunk, accumulated) => {
+      if (firstChunk) firstChunk = false;
+      bubble.innerHTML = sanitizeHtml(mdToHtml(accumulated)) + '<span class="msg-cursor"></span>';
+      msgs.scrollTop = msgs.scrollHeight;
+    });
+    bubble.innerHTML = sanitizeHtml(mdToHtml(fullText));
   } catch (error) {
-    loader.remove();
+    div.remove();
     if (chatHistory.at(-1)?.role === 'user') {
       chatHistory.pop();
       saveChatHistory();
@@ -529,7 +550,7 @@ function applyLang() {
     const title = card.querySelector('[data-project-title]');
     const desc = card.querySelector('[data-project-desc]');
     if (title) title.textContent = project.title;
-    if (desc) desc.textContent = project.desc;
+    if (desc) desc.innerHTML = project.desc;
   });
   document.querySelectorAll('[data-proj-link]').forEach((el) => {
     const type = el.dataset.projLink;
@@ -571,6 +592,160 @@ function applyLang() {
   document.querySelectorAll('.js-theme').forEach((btn) => btn.setAttribute('aria-label', t.theme_label || 'Toggle theme'));
   document.querySelector('.top-btn')?.setAttribute('aria-label', t.top_label || 'Back to top');
   if (t.kickers) t.kickers.forEach((text, i) => setText('kicker' + (i + 1), text));
+}
+
+function goToSection(id) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  const navHeight = document.querySelector('.nav-wrap')?.offsetHeight || 74;
+  const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+function initCommandPalette() {
+  const cmdk = $('cmdk');
+  const input = $('cmdkInput');
+  const list = $('cmdkList');
+  const trigger = $('cmdkTrigger');
+  if (!cmdk || !input || !list) return;
+
+  let activeIdx = 0;
+  let filtered = [];
+
+  const buildCommands = () => {
+    const t = T[lang];
+    const isES = lang === 'es';
+    const goLabel = isES ? 'IR A' : 'GO TO';
+    const actLabel = isES ? 'ACCIÓN' : 'ACTION';
+    const extLabel = isES ? 'EXTERNO' : 'EXTERNAL';
+    const openLabel = isES ? 'ABRIR' : 'OPEN';
+    const sectionIds = ['inicio', 'sobre-mi', 'experiencia', 'habilidades', 'proyectos', 'certificaciones', 'chat', 'contacto'];
+    const navCmds = sectionIds.map((id, i) => ({
+      kind: goLabel, label: t.nav[i], icon: '#', action: () => goToSection(id),
+    }));
+    return [
+      ...navCmds,
+      { kind: actLabel, label: isES ? 'Cambiar tema (claro/oscuro)' : 'Toggle theme (light/dark)', icon: '◐', action: () => { dark = !dark; applyDark(); } },
+      { kind: actLabel, label: isES ? 'Cambiar idioma (ES ↔ EN)' : 'Toggle language (EN ↔ ES)', icon: 'A', action: () => { lang = lang === 'es' ? 'en' : 'es'; applyLang(); restoreChat(); } },
+      { kind: openLabel, label: isES ? 'Descargar CV (PDF)' : 'Download CV (PDF)', icon: '↓', action: () => window.open('cv_ignacio_diago_en.pdf', '_blank') },
+      { kind: extLabel, label: 'GitHub', icon: '↗', action: () => window.open('https://github.com/iDiagoValeta', '_blank') },
+      { kind: extLabel, label: 'LinkedIn', icon: '↗', action: () => window.open('https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/', '_blank') },
+      { kind: extLabel, label: 'HuggingFace', icon: '↗', action: () => window.open('https://huggingface.co/nadiva1243', '_blank') },
+      { kind: extLabel, label: 'Email', icon: '↗', action: () => { window.location.href = 'mailto:nadiva1243@gmail.com'; } },
+    ];
+  };
+
+  const render = () => {
+    if (filtered.length === 0) {
+      const isES = lang === 'es';
+      list.innerHTML = `<li class="cmdk-empty">${isES ? 'Sin resultados' : 'No results'}</li>`;
+      return;
+    }
+    list.innerHTML = filtered.map((cmd, i) => `
+      <li class="cmdk-item${i === activeIdx ? ' active' : ''}" data-idx="${i}" role="option">
+        <span class="cmdk-item-icon">${cmd.icon}</span>
+        <span class="cmdk-item-label">${cmd.label}</span>
+        <span class="cmdk-item-kind">${cmd.kind}</span>
+      </li>`).join('');
+    list.querySelectorAll('.cmdk-item').forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        activeIdx = Number(el.dataset.idx);
+        list.querySelectorAll('.cmdk-item').forEach((it, i) => it.classList.toggle('active', i === activeIdx));
+      });
+      el.addEventListener('click', () => execute());
+    });
+  };
+
+  const filter = (query) => {
+    const q = query.trim().toLowerCase();
+    const all = buildCommands();
+    if (!q) {
+      filtered = all;
+    } else {
+      filtered = all.filter((c) => c.label.toLowerCase().includes(q));
+      if (q.length >= 3) {
+        const isES = lang === 'es';
+        filtered.push({
+          kind: 'CHAT IA',
+          icon: '✦',
+          label: `${isES ? 'Preguntar al asistente' : 'Ask the assistant'}: "${query.trim()}"`,
+          action: () => {
+            goToSection('chat');
+            setTimeout(() => sendMsg(query.trim()), 380);
+          },
+        });
+      }
+    }
+    activeIdx = 0;
+    render();
+  };
+
+  const execute = () => {
+    const cmd = filtered[activeIdx];
+    if (!cmd) return;
+    close();
+    setTimeout(() => cmd.action(), 80);
+  };
+
+  const open = () => {
+    cmdk.classList.add('open');
+    cmdk.setAttribute('aria-hidden', 'false');
+    input.value = '';
+    filter('');
+    setTimeout(() => input.focus(), 50);
+  };
+
+  const close = () => {
+    cmdk.classList.remove('open');
+    cmdk.setAttribute('aria-hidden', 'true');
+    input.blur();
+  };
+
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      cmdk.classList.contains('open') ? close() : open();
+      return;
+    }
+    if (!cmdk.classList.contains('open')) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      close();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (filtered.length === 0) return;
+      activeIdx = (activeIdx + 1) % filtered.length;
+      render();
+      list.children[activeIdx]?.scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (filtered.length === 0) return;
+      activeIdx = (activeIdx - 1 + filtered.length) % filtered.length;
+      render();
+      list.children[activeIdx]?.scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      execute();
+    }
+  });
+
+  input.addEventListener('input', () => filter(input.value));
+  document.querySelectorAll('[data-cmdk-close]').forEach((el) => el.addEventListener('click', close));
+  if (trigger) trigger.addEventListener('click', open);
+}
+
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      const navHeight = document.querySelector('.nav-wrap')?.offsetHeight || 74;
+      const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+      setTimeout(() => window.scrollTo({ top, behavior: 'smooth' }), 10);
+    });
+  });
 }
 
 function initScroll() {
@@ -681,4 +856,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initSkillSlider();
   initScroll();
+  initSmoothScroll();
+  initCommandPalette();
 });

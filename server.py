@@ -25,6 +25,7 @@ def get_api_key():
 
 API_KEY = get_api_key()
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+GEMINI_STREAM_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent"
 
 # Configuración de seguridad
 REQUEST_TIMEOUT = 30  # segundos
@@ -53,6 +54,12 @@ def is_rate_limited(client_ip):
     return False
 
 class CORSRequestHandler(SimpleHTTPRequestHandler):
+    extensions_map = {
+        **SimpleHTTPRequestHandler.extensions_map,
+        '.woff2': 'font/woff2',
+        '.woff': 'font/woff',
+    }
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=Path(__file__).parent, **kwargs)
     
@@ -173,19 +180,13 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
                 self.wfile.write(error_response.encode('utf-8'))
                 return
 
-            # Preparar la solicitud a Gemini con timeout
-            url = f"{GEMINI_API_URL}?key={API_KEY}"
+            # Streaming: pedir Server-Sent Events a Gemini y reenviar al cliente
+            url = f"{GEMINI_STREAM_URL}?key={API_KEY}&alt=sse"
             req = urllib.request.Request(url, data=json.dumps(request_data).encode('utf-8'))
             req.add_header('Content-Type', 'application/json')
 
-            # Realizar la solicitud con timeout
             try:
-                with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as response:
-                    response_data = response.read()
-                    self.send_response(200)
-                    self.send_header('Content-Type', 'application/json')
-                    self.end_headers()
-                    self.wfile.write(response_data)
+                upstream = urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT)
             except urllib.error.URLError as e:
                 if 'timeout' in str(e).lower() or 'timed out' in str(e).lower():
                     self.send_response(504)
@@ -198,8 +199,28 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
                         }
                     })
                     self.wfile.write(error_response.encode('utf-8'))
-                else:
-                    raise
+                    return
+                raise
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/event-stream; charset=utf-8')
+            self.send_header('Cache-Control', 'no-cache, no-transform')
+            self.send_header('X-Accel-Buffering', 'no')
+            self.end_headers()
+
+            try:
+                while True:
+                    chunk = upstream.read(1024)
+                    if not chunk:
+                        break
+                    try:
+                        self.wfile.write(chunk)
+                        self.wfile.flush()
+                    except (BrokenPipeError, ConnectionResetError):
+                        break
+            finally:
+                upstream.close()
+            return
 
         except urllib.error.HTTPError as e:
             try:
