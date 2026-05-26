@@ -271,11 +271,7 @@ function loadChatHistory() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return;
     const parsed = JSON.parse(saved);
-    if (!Array.isArray(parsed)) return;
-    // Descartar historial del formato anterior (tenía PORTFOLIO_INFO embebido como turno de usuario)
-    const hasOldFormat = parsed[0]?.role === 'user' && parsed[0]?.parts?.[0]?.text?.startsWith('\nEres un asistente');
-    if (hasOldFormat) { localStorage.removeItem(STORAGE_KEY); return; }
-    chatHistory = parsed;
+    if (Array.isArray(parsed)) chatHistory = parsed;
   } catch (_error) {
     chatHistory = [];
   }
@@ -396,13 +392,18 @@ function restoreChat() {
   });
 }
 
-async function requestGeminiStream(userMessage, onChunk) {
+async function requestGemini(userMessage) {
   chatHistory.push({ role: 'user', parts: [{ text: userMessage }] });
 
+  const contents = [
+    { role: 'user', parts: [{ text: PORTFOLIO_INFO }] },
+    { role: 'model', parts: [{ text: 'Entendido. Estoy listo para actuar como el asistente de Ignacio.' }] },
+    ...chatHistory,
+  ];
+
   const requestBody = {
-    systemInstruction: { parts: [{ text: PORTFOLIO_INFO }] },
-    contents: chatHistory,
-    generationConfig: { temperature: 0.7, topK: 40, topP: 0.95, maxOutputTokens: 2048, thinkingConfig: { thinkingBudget: 0 } },
+    contents,
+    generationConfig: { temperature: 0.7, topK: 40, topP: 0.95, maxOutputTokens: 2048 },
   };
 
   let response;
@@ -412,7 +413,7 @@ async function requestGeminiStream(userMessage, onChunk) {
     try {
       response = await fetch('/api/gemini', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'text/event-stream' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody),
         signal: controller.signal,
       });
@@ -437,42 +438,13 @@ async function requestGeminiStream(userMessage, onChunk) {
     throw new Error(message);
   }
 
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
-  let buffer = '';
-  let fullText = '';
+  const data = await response.json();
+  const botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!botResponse) throw new Error('La API no devolvió ninguna respuesta');
 
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
-
-    const events = buffer.split('\n\n');
-    buffer = events.pop();
-
-    for (const evt of events) {
-      const line = evt.trim();
-      if (!line.startsWith('data:')) continue;
-      const dataStr = line.slice(5).trim();
-      if (!dataStr || dataStr === '[DONE]') continue;
-      try {
-        const data = JSON.parse(dataStr);
-        for (const part of data.candidates?.[0]?.content?.parts ?? []) {
-          if (part.thought || !part.text) continue;
-          fullText += part.text;
-          onChunk(part.text, fullText);
-        }
-      } catch (_e) {
-        // Ignorar eventos malformados
-      }
-    }
-  }
-
-  if (!fullText) throw new Error('La API no devolvió ninguna respuesta');
-
-  chatHistory.push({ role: 'model', parts: [{ text: fullText }] });
+  chatHistory.push({ role: 'model', parts: [{ text: botResponse }] });
   saveChatHistory();
-  return fullText;
+  return botResponse;
 }
 
 async function sendMsg(text = '') {
@@ -486,25 +458,18 @@ async function sendMsg(text = '') {
   input.value = '';
   appendMsg('user', `<p>${userText}</p>`, true);
 
-  const msgs = $('chatMsgs');
-  const div = document.createElement('div');
-  div.className = 'msg msg-bot';
-  div.innerHTML = '<div class="msg-avatar">AI</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-
-  const bubble = div.querySelector('.msg-bubble');
-  let firstChunk = true;
+  const loader = document.createElement('div');
+  loader.className = 'msg msg-bot';
+  loader.innerHTML = '<div class="msg-avatar">AI</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
+  $('chatMsgs').appendChild(loader);
+  $('chatMsgs').scrollTop = $('chatMsgs').scrollHeight;
 
   try {
-    const fullText = await requestGeminiStream(userText, (_chunk, accumulated) => {
-      if (firstChunk) firstChunk = false;
-      bubble.innerHTML = sanitizeHtml(mdToHtml(accumulated)) + '<span class="msg-cursor"></span>';
-      msgs.scrollTop = msgs.scrollHeight;
-    });
-    bubble.innerHTML = sanitizeHtml(mdToHtml(fullText));
+    const reply = await requestGemini(userText);
+    loader.remove();
+    appendMsg('bot', sanitizeHtml(mdToHtml(reply)), true);
   } catch (error) {
-    div.remove();
+    loader.remove();
     if (chatHistory.at(-1)?.role === 'user') {
       chatHistory.pop();
       saveChatHistory();

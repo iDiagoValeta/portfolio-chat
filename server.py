@@ -25,7 +25,6 @@ def get_api_key():
 
 API_KEY = get_api_key()
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
-GEMINI_STREAM_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent"
 
 # Configuración de seguridad
 REQUEST_TIMEOUT = 30  # segundos
@@ -180,13 +179,17 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
                 self.wfile.write(error_response.encode('utf-8'))
                 return
 
-            # Streaming: pedir Server-Sent Events a Gemini y reenviar al cliente
-            url = f"{GEMINI_STREAM_URL}?key={API_KEY}&alt=sse"
+            url = f"{GEMINI_API_URL}?key={API_KEY}"
             req = urllib.request.Request(url, data=json.dumps(request_data).encode('utf-8'))
             req.add_header('Content-Type', 'application/json')
 
             try:
-                upstream = urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT)
+                with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as response:
+                    response_data = response.read()
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'application/json')
+                    self.end_headers()
+                    self.wfile.write(response_data)
             except urllib.error.URLError as e:
                 if 'timeout' in str(e).lower() or 'timed out' in str(e).lower():
                     self.send_response(504)
@@ -199,28 +202,8 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
                         }
                     })
                     self.wfile.write(error_response.encode('utf-8'))
-                    return
-                raise
-
-            self.send_response(200)
-            self.send_header('Content-Type', 'text/event-stream; charset=utf-8')
-            self.send_header('Cache-Control', 'no-cache, no-transform')
-            self.send_header('X-Accel-Buffering', 'no')
-            self.end_headers()
-
-            try:
-                while True:
-                    chunk = upstream.read(1024)
-                    if not chunk:
-                        break
-                    try:
-                        self.wfile.write(chunk)
-                        self.wfile.flush()
-                    except (BrokenPipeError, ConnectionResetError):
-                        break
-            finally:
-                upstream.close()
-            return
+                else:
+                    raise
 
         except urllib.error.HTTPError as e:
             try:
