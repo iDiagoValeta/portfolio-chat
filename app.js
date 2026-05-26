@@ -402,7 +402,7 @@ async function requestGeminiStream(userMessage, onChunk) {
   const requestBody = {
     systemInstruction: { parts: [{ text: PORTFOLIO_INFO }] },
     contents: chatHistory,
-    generationConfig: { temperature: 0.7, topK: 40, topP: 0.95, maxOutputTokens: 2048 },
+    generationConfig: { temperature: 0.7, topK: 40, topP: 0.95, maxOutputTokens: 2048, thinkingConfig: { thinkingBudget: 0 } },
   };
 
   let response;
