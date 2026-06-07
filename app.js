@@ -2,8 +2,8 @@ import { PORTFOLIO_INFO } from './config.js';
 
 const T = {
   es: {
-    nav: ['Inicio', 'Sobre mí', 'Experiencia', 'Habilidades', 'Proyectos', 'Certificaciones', 'Chat IA', 'Contacto'],
-    hero_eyebrow: '// AI Engineer · Valencia, España',
+    nav: ['Inicio', 'Sobre mí', 'Experiencia', 'Habilidades', 'Proyectos', 'Chat IA', 'Contacto'],
+    hero_eyebrow: 'AI Engineer · Valencia, España',
     hero_role: 'Orquestación LLM · Visión por computador · Recuperación y procesamiento de información',
     hero_desc: 'Mi enfoque está en orquestar LLMs y pipelines inteligentes, visión por computador y llevar la información desde la fuente hasta algo fiable y usable. Me gusta divulgar lo que aprendo y seguir ampliando conocimientos cada día.',
     hero_btn1: 'Ver proyectos',
@@ -81,23 +81,22 @@ const T = {
     chips: ['Orquestación LLM · Pipelines', 'Visión Por Computador', 'Información · Procesamiento'],
     proj_badge_prod: 'Producción',
     proj_badge_tfg: 'TFG',
-    edu_label: '// EDUCACIÓN',
+    edu_label: 'Educación',
     edu_degree: 'B.Sc. Ingeniería Informática',
     edu_uni: 'Universitat Politècnica de València · 2022–2026',
     edu_desc: 'Especialización en Computación — algoritmos, IA, Machine Learning y arquitectura de software.',
-    lang_label: '// IDIOMAS',
+    lang_label: 'Idiomas',
     lang_names: ['Español', 'English', 'Valencià'],
     lang_native: 'Nativo',
     lang_b2: 'B2 Cambridge',
     lang_val: 'Nativo · GVA',
-    clock_label: '// HORA LOCAL',
+    clock_label: 'Hora local',
     theme_label: 'Cambiar tema',
     top_label: 'Volver arriba',
-    kickers: ['01 / perfil', '02 / trayectoria', '03 / stack', '04 / producción', '05 / formación', '06 / asistente', '07 / contacto'],
   },
   en: {
-    nav: ['Home', 'About', 'Experience', 'Skills', 'Projects', 'Certifications', 'AI Chat', 'Contact'],
-    hero_eyebrow: '// AI Engineer · Valencia, Spain',
+    nav: ['Home', 'About', 'Experience', 'Skills', 'Projects', 'AI Chat', 'Contact'],
+    hero_eyebrow: 'AI Engineer · Valencia, Spain',
     hero_role: 'LLM Orchestration · Computer Vision · Information Retrieval & Processing',
     hero_desc: 'My focus is LLM orchestration and intelligent pipelines, computer vision and turning messy information into something reliable you can actually use. I like sharing what I learn with others and keep building skills every day.',
     hero_btn1: 'View projects',
@@ -175,19 +174,18 @@ const T = {
     chips: ['LLM Orchestration · Pipelines', 'Computer Vision', 'Information · Processing'],
     proj_badge_prod: 'Production',
     proj_badge_tfg: 'Thesis',
-    edu_label: '// EDUCATION',
+    edu_label: 'Education',
     edu_degree: 'B.Sc. Computer Engineering',
     edu_uni: 'Universitat Politècnica de València · 2022–2026',
     edu_desc: 'Computing specialization — algorithms, AI, Machine Learning and software architecture.',
-    lang_label: '// LANGUAGES',
+    lang_label: 'Languages',
     lang_names: ['Spanish', 'English', 'Valencian'],
     lang_native: 'Native',
     lang_b2: 'B2 Cambridge',
     lang_val: 'Native · GVA',
-    clock_label: '// LOCAL TIME',
+    clock_label: 'Local time',
     theme_label: 'Toggle theme',
     top_label: 'Back to top',
-    kickers: ['01 / profile', '02 / experience', '03 / stack', '04 / projects', '05 / certifications', '06 / assistant', '07 / contact'],
   }
 };
 
@@ -491,7 +489,6 @@ function applyLang() {
   $('cvBtnLabel').textContent = t.cv_btn;
   $('heroEyebrow').textContent = t.hero_eyebrow;
   startTyped('heroRole', t.hero_role);
-  $('heroDesc').textContent = t.hero_desc;
   $('heroBtn1').querySelector('span').textContent = ` ${t.hero_btn1}`;
   $('heroBtn2').querySelector('span').textContent = ` ${t.hero_btn2}`;
   $('aboutTitle').textContent = t.about_title;
@@ -536,7 +533,6 @@ function applyLang() {
   const chatSendBtn = $('chatSend');
   if (chatSendBtn) chatSendBtn.setAttribute('aria-label', t.send_label);
   renderSuggestions(t.suggestions);
-  [0, 1, 2].forEach((i) => { setText('chip' + i, t.chips[i]); });
   setText('badge0', t.proj_badge_prod);
   setText('badge1', t.proj_badge_tfg);
   setText('badge2', t.proj_badge_prod);
@@ -555,7 +551,6 @@ function applyLang() {
   setText('footerText', t.footer);
   document.querySelectorAll('.js-theme').forEach((btn) => btn.setAttribute('aria-label', t.theme_label || 'Toggle theme'));
   document.querySelector('.top-btn')?.setAttribute('aria-label', t.top_label || 'Back to top');
-  if (t.kickers) t.kickers.forEach((text, i) => setText('kicker' + (i + 1), text));
 }
 
 function goToSection(id) {
@@ -583,7 +578,7 @@ function initCommandPalette() {
     const actLabel = isES ? 'ACCIÓN' : 'ACTION';
     const extLabel = isES ? 'EXTERNO' : 'EXTERNAL';
     const openLabel = isES ? 'ABRIR' : 'OPEN';
-    const sectionIds = ['inicio', 'sobre-mi', 'experiencia', 'habilidades', 'proyectos', 'certificaciones', 'chat', 'contacto'];
+    const sectionIds = ['inicio', 'sobre-mi', 'experiencia', 'habilidades', 'proyectos', 'chat', 'contacto'];
     const navCmds = sectionIds.map((id, i) => ({
       kind: goLabel, label: t.nav[i], icon: '#', action: () => goToSection(id),
     }));
@@ -756,6 +751,20 @@ function initClock() {
   setInterval(tick, 1000);
 }
 
+/* ============================================================
+   Flower field — static botanical wallpaper that reacts to the cursor
+   ============================================================ */
+
+// a small wink for anyone who opens the console
+function initWink() {
+  try {
+    console.log(
+      '%c   ✿   \n  (•‿•)  Hecho con flores y café en Valencia.\n   |    github.com/iDiagoValeta',
+      'font-family:monospace;color:#888;line-height:1.5;'
+    );
+  } catch (_e) {}
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   applyDark();
   loadChatHistory();
@@ -822,4 +831,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initScroll();
   initSmoothScroll();
   initCommandPalette();
+  initWink();
 });

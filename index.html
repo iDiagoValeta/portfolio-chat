@@ -8,9 +8,9 @@
 <meta name="author" content="Ignacio Diago Valeta">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://portfolio-chat-aouj.onrender.com/">
-<meta name="theme-color" content="#f5f5f3" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
-<link rel="icon" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="14" fill="%230d0d0d"/%3E%3Ctext x="50%25" y="54%25" text-anchor="middle" dominant-baseline="middle" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="%23f5f5f3"%3EIDV%3C/text%3E%3C/svg%3E'>
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="18" fill="%230b0b0b"/%3E%3Cg fill="none" stroke="%23ffffff" stroke-width="2.6"%3E%3Ccircle cx="32" cy="32" r="4.5"/%3E%3Cellipse cx="32" cy="20" rx="5.5" ry="11"/%3E%3Cellipse cx="32" cy="20" rx="5.5" ry="11" transform="rotate(60 32 32)"/%3E%3Cellipse cx="32" cy="20" rx="5.5" ry="11" transform="rotate(120 32 32)"/%3E%3Cellipse cx="32" cy="20" rx="5.5" ry="11" transform="rotate(180 32 32)"/%3E%3Cellipse cx="32" cy="20" rx="5.5" ry="11" transform="rotate(240 32 32)"/%3E%3Cellipse cx="32" cy="20" rx="5.5" ry="11" transform="rotate(300 32 32)"/%3E%3C/g%3E%3C/svg%3E'>
 
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="Ignacio Diago Valeta — Portfolio">
@@ -57,7 +57,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=44">
+<link rel="stylesheet" href="styles.css?v=59">
 <script>
 if (localStorage.getItem('dark') !== 'false') {
   document.documentElement.classList.add('dark');
@@ -65,6 +65,7 @@ if (localStorage.getItem('dark') !== 'false') {
 </script>
 </head>
 <body>
+<div id="flowerField" aria-hidden="true"></div>
 <div class="scroll-bar"></div>
 
 <header class="nav-wrap">
@@ -79,7 +80,6 @@ if (localStorage.getItem('dark') !== 'false') {
       <li><a href="#experiencia">Experiencia</a></li>
       <li><a href="#habilidades">Habilidades</a></li>
       <li><a href="#proyectos">Proyectos</a></li>
-      <li><a href="#certificaciones">Certificaciones</a></li>
       <li><a href="#chat">Chat IA</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -106,16 +106,9 @@ if (localStorage.getItem('dark') !== 'false') {
   <section id="inicio" class="hero">
     <div class="hero-inner">
       <div class="hero-copy">
-        <div class="hero-eyebrow" id="heroEyebrow">// AI Engineer · Valencia, España</div>
+        <div class="hero-eyebrow" id="heroEyebrow">AI Engineer · Valencia, España</div>
         <h1 class="hero-name">Ignacio<br>Diago<br>Valeta</h1>
         <p class="hero-role" id="heroRole"></p>
-        <p class="hero-desc" id="heroDesc">Mi enfoque está en orquestar LLMs y pipelines inteligentes, visión por computador y llevar la información desde la fuente hasta algo fiable y usable. Me gusta divulgar lo que aprendo y seguir ampliando conocimientos cada día.</p>
-
-        <div class="hero-chips">
-          <span class="chip" id="chip0">Orquestación LLM · Pipelines</span>
-          <span class="chip" id="chip1">Visión Por Computador</span>
-          <span class="chip" id="chip2">Información · Procesamiento</span>
-        </div>
 
         <div class="hero-btns">
           <a href="#proyectos" class="btn btn-primary" id="heroBtn1"><span> Ver proyectos</span></a>
@@ -128,15 +121,9 @@ if (localStorage.getItem('dark') !== 'false') {
           <img id="avatarImg" src="images/ignaciodiagovaleta.png" alt="Ignacio Diago Valeta" loading="eager">
         </div>
         <div class="hero-card hero-clock" id="heroClock">
-          <span class="clock-label" id="clockLabel">// HORA LOCAL</span>
+          <span class="clock-label" id="clockLabel">Hora local</span>
           <span class="clock-time" id="clockTime">--:--:--</span>
           <span class="clock-date" id="clockDate">--- -- ---</span>
-        </div>
-        <div class="hero-social">
-          <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener"><strong>GitHub</strong></a>
-          <a href="https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/" target="_blank" rel="noopener"><strong>LinkedIn</strong></a>
-          <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener"><strong>HuggingFace</strong></a>
-          <a href="mailto:nadiva1243@gmail.com"><strong>Email</strong></a>
         </div>
       </div>
     </div>
@@ -144,7 +131,6 @@ if (localStorage.getItem('dark') !== 'false') {
 
   <section id="sobre-mi" class="section section-about">
     <div class="section-head container">
-      <p class="section-kicker" id="kicker1">01 / perfil</p>
       <h2 class="sec-title reveal" id="aboutTitle">Sobre mí</h2>
     </div>
     <div class="about-grid container">
@@ -155,13 +141,13 @@ if (localStorage.getItem('dark') !== 'false') {
 
       <div class="about-dossier reveal">
         <div class="dossier-block">
-          <div id="eduLabel" class="meta-label">// EDUCACIÓN</div>
+          <div id="eduLabel" class="meta-label">Educación</div>
           <h3 id="eduDegree">B.Sc. Ingeniería Informática</h3>
           <p id="eduUni">Universitat Politècnica de València · 2022-2026</p>
           <span id="eduDesc">Especialización en Computación — algoritmos, IA, Machine Learning y arquitectura de software.</span>
         </div>
         <div class="dossier-block">
-          <div id="langLabel" class="meta-label">// IDIOMAS</div>
+          <div id="langLabel" class="meta-label">Idiomas</div>
           <div class="language-row"><span id="langName1">Español</span><strong id="langNative1">Nativo</strong></div>
           <div class="language-row"><span id="langName2">English</span><strong id="langB2">B2 Cambridge</strong></div>
           <div class="language-row"><span id="langName3">Valencià</span><strong id="langNative2">Nativo · GVA</strong></div>
@@ -179,7 +165,6 @@ if (localStorage.getItem('dark') !== 'false') {
 
   <section id="experiencia" class="section section-timeline">
     <div class="section-head container">
-      <p class="section-kicker" id="kicker2">02 / trayectoria</p>
       <h2 class="sec-title reveal" id="expTitle">Experiencia</h2>
     </div>
     <div class="timeline-wrap container">
@@ -189,18 +174,28 @@ if (localStorage.getItem('dark') !== 'false') {
 
   <section id="habilidades" class="section">
     <div class="section-head container">
-      <p class="section-kicker" id="kicker3">03 / stack</p>
       <h2 class="sec-title reveal" id="skillsTitle">Habilidades</h2>
     </div>
     <div class="skill-wrap container reveal">
       <div class="skill-tabs" id="skillTabs"></div>
       <div class="skill-list" id="skillList"></div>
     </div>
+
+    <div class="about-certs container reveal">
+      <p class="about-certs-label" id="certsTitle">Certificaciones</p>
+      <div class="certs-grid">
+        <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Machine Learning & Data Science</div><div class="cert-year">2025</div></div>
+        <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Python for Data Science</div><div class="cert-year">2025</div></div>
+        <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Linux Fundamentals</div><div class="cert-year">2025</div></div>
+        <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">SQL & R for Data Analysis</div><div class="cert-year">2025</div></div>
+        <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Mathematical Foundations of ML</div><div class="cert-year">2025</div></div>
+        <div class="cert-card cert-card-more reveal"><div id="certMore">+ más en curso</div></div>
+      </div>
+    </div>
   </section>
 
   <section id="proyectos" class="section section-projects">
     <div class="section-head container">
-      <p class="section-kicker" id="kicker4">04 / producción</p>
       <h2 class="sec-title reveal" id="projTitle">Proyectos destacados</h2>
     </div>
 
@@ -273,24 +268,8 @@ if (localStorage.getItem('dark') !== 'false') {
     </div>
   </section>
 
-  <section id="certificaciones" class="section section-certs">
-    <div class="section-head container">
-      <p class="section-kicker" id="kicker5">05 / formación</p>
-      <h2 class="sec-title reveal" id="certsTitle">Certificaciones</h2>
-    </div>
-    <div class="certs-grid container">
-      <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Machine Learning & Data Science</div><div class="cert-year">2025</div></div>
-      <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Python for Data Science</div><div class="cert-year">2025</div></div>
-      <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Linux Fundamentals</div><div class="cert-year">2025</div></div>
-      <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">SQL & R for Data Analysis</div><div class="cert-year">2025</div></div>
-      <div class="cert-card reveal"><div class="cert-provider">edX</div><div class="cert-name">Mathematical Foundations of ML</div><div class="cert-year">2025</div></div>
-      <div class="cert-card cert-card-more reveal"><div id="certMore">+ más en curso</div></div>
-    </div>
-  </section>
-
   <section id="chat" class="section section-chat">
     <div class="section-head container">
-      <p class="section-kicker" id="kicker6">06 / asistente</p>
       <h2 class="sec-title reveal" id="chatTitle">Chat IA</h2>
       <p class="sec-sub" id="chatSub">Chat con contexto completo sobre mi perfil — desarrollado con Gemini 2.5 Flash.</p>
     </div>
@@ -320,7 +299,6 @@ if (localStorage.getItem('dark') !== 'false') {
 
   <section id="contacto" class="section section-contact">
     <div class="section-head container">
-      <p class="section-kicker" id="kicker7">07 / contacto</p>
       <h2 class="sec-title reveal" id="contactTitle">Contacto</h2>
       <p class="sec-sub" id="contactSub">¿Interesado en colaborar? No dudes en escribir.</p>
     </div>
@@ -330,14 +308,9 @@ if (localStorage.getItem('dark') !== 'false') {
       <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener" class="contact-card reveal"><span>GitHub</span></a>
       <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener" class="contact-card reveal"><span>HuggingFace</span></a>
     </div>
+    <p class="contact-copy container reveal" id="footerText">© 2026 Ignacio Diago Valeta</p>
   </section>
 </main>
-
-<footer>
-  <div class="container">
-    <p id="footerText">© 2026 Ignacio Diago Valeta</p>
-  </div>
-</footer>
 
 <button class="top-btn" type="button" aria-label="Volver arriba">↑</button>
 
@@ -358,6 +331,6 @@ if (localStorage.getItem('dark') !== 'false') {
   </div>
 </div>
 
-<script type="module" src="app.js?v=18"></script>
+<script type="module" src="app.js?v=23"></script>
 </body>
 </html>
