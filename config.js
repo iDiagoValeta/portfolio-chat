@@ -98,7 +98,7 @@ Pipeline serverless en producción en el CEU que digitaliza formularios académi
 GitHub: https://github.com/iDiagoValeta/ocr-crm-pipeline
 
 **4. portfolio-chat**
-Portfolio full-stack con asistente conversacional integrado vía Gemini 2.5 Flash. Proxy Python con rate limiting, frontend sin bundler y despliegue continuo en Render. Código público y reproducible.
+Portfolio full-stack con asistente conversacional integrado vía DeepSeek V4 Flash. Proxy Python con rate limiting, frontend sin bundler y despliegue continuo en Render. Código público y reproducible.
 GitHub: https://github.com/iDiagoValeta/portfolio-chat
 
 **5. dataset-creator**

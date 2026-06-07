@@ -1,0 +1,6 @@
+# Variables de entorno locales (contienen secretos — nunca commitear)
+.env
+
+# Python
+__pycache__/
+*.pyc

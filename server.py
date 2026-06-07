@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Servidor proxy para la API de Gemini
+Servidor proxy para la API de DeepSeek
 Evita problemas de CORS y mantiene la API key segura en el servidor
 """
 
@@ -15,16 +15,29 @@ import time
 from collections import defaultdict
 from datetime import datetime
 
+# Cargar variables desde un archivo .env local si existe (sin dependencias externas)
+def load_dotenv():
+    env_path = Path(__file__).parent / '.env'
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding='utf-8').splitlines():
+        line = line.strip()
+        if not line or line.startswith('#') or '=' not in line:
+            continue
+        key, _, value = line.partition('=')
+        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+
 # Obtener la API key desde una variable de entorno
 def get_api_key():
     """Lee la API key desde una variable de entorno"""
-    api_key = os.environ.get('GEMINI_API_KEY')
+    api_key = os.environ.get('DEEPSEEK_API_KEY')
     if not api_key:
-        print("Error: La variable de entorno GEMINI_API_KEY no está configurada.")
+        print("Error: La variable de entorno DEEPSEEK_API_KEY no está configurada.")
     return api_key
 
+load_dotenv()
 API_KEY = get_api_key()
-GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
 
 # Configuración de seguridad
 REQUEST_TIMEOUT = 30  # segundos
@@ -179,17 +192,32 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
                 self.wfile.write(error_response.encode('utf-8'))
                 return
 
-            url = f"{GEMINI_API_URL}?key={API_KEY}"
-            req = urllib.request.Request(url, data=json.dumps(request_data).encode('utf-8'))
+            is_stream = bool(request_data.get('stream'))
+            req = urllib.request.Request(DEEPSEEK_API_URL, data=json.dumps(request_data).encode('utf-8'))
             req.add_header('Content-Type', 'application/json')
+            req.add_header('Authorization', f'Bearer {API_KEY}')
 
             try:
                 with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as response:
-                    response_data = response.read()
-                    self.send_response(200)
-                    self.send_header('Content-Type', 'application/json')
-                    self.end_headers()
-                    self.wfile.write(response_data)
+                    if is_stream:
+                        # Pass-through del SSE: reenviar los chunks al cliente conforme llegan
+                        self.send_response(200)
+                        self.send_header('Content-Type', 'text/event-stream')
+                        self.send_header('Cache-Control', 'no-cache')
+                        self.send_header('X-Accel-Buffering', 'no')
+                        self.end_headers()
+                        while True:
+                            chunk = response.read(1024)
+                            if not chunk:
+                                break
+                            self.wfile.write(chunk)
+                            self.wfile.flush()
+                    else:
+                        response_data = response.read()
+                        self.send_response(200)
+                        self.send_header('Content-Type', 'application/json')
+                        self.end_headers()
+                        self.wfile.write(response_data)
             except urllib.error.URLError as e:
                 if 'timeout' in str(e).lower() or 'timed out' in str(e).lower():
                     self.send_response(504)
@@ -197,7 +225,7 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
                     self.end_headers()
                     error_response = json.dumps({
                         "error": {
-                            "message": "Timeout al conectar con la API de Gemini",
+                            "message": "Timeout al conectar con la API de DeepSeek",
                             "code": 504
                         }
                     })

@@ -43,7 +43,7 @@ const T = {
       },
       {
         title: 'portfolio-chat',
-        desc: 'Portfolio full-stack con asistente conversacional integrado vía Gemini 2.5 Flash. Proxy Python con rate limiting, frontend sin bundler y despliegue continuo en Render. Código público y reproducible.',
+        desc: 'Portfolio full-stack con asistente conversacional integrado vía DeepSeek V4 Flash. Proxy Python con rate limiting, frontend sin bundler y despliegue continuo en Render. Código público y reproducible.',
       },
       {
         title: 'Modelos públicos en Hugging Face',
@@ -65,7 +65,7 @@ const T = {
     cert_more: '+ más en curso',
     proj_more: '+ en curso',
     chat_title: 'Chat IA',
-    chat_sub: 'Chat con contexto completo sobre mi perfil — desarrollado con Gemini 2.5 Flash.',
+    chat_sub: 'Chat con contexto completo sobre mi perfil — desarrollado con DeepSeek V4 Flash.',
     chat_head_title: 'Asistente IA · Ignacio Diago',
     chat_head_sub: 'Asistente IA · listo',
     chat_user_avatar: 'Tú',
@@ -136,7 +136,7 @@ const T = {
       },
       {
         title: 'portfolio-chat',
-        desc: 'Full-stack portfolio with an integrated conversational assistant powered by Gemini 2.5 Flash. Python proxy with rate limiting, bundler-free frontend and continuous deployment on Render. Open-source and forkable.',
+        desc: 'Full-stack portfolio with an integrated conversational assistant powered by DeepSeek V4 Flash. Python proxy with rate limiting, bundler-free frontend and continuous deployment on Render. Open-source and forkable.',
       },
       {
         title: 'Public models on Hugging Face',
@@ -158,7 +158,7 @@ const T = {
     cert_more: '+ more in progress',
     proj_more: '+ in progress',
     chat_title: 'AI Chat',
-    chat_sub: 'Chat with full profile context — powered by Gemini 2.5 Flash.',
+    chat_sub: 'Chat with full profile context — powered by DeepSeek V4 Flash.',
     chat_head_title: 'AI Assistant · Ignacio Diago',
     chat_head_sub: 'AI assistant · ready',
     chat_user_avatar: 'You',
@@ -211,7 +211,7 @@ function skillRowsFor(idx) {
   return pack[idx] || [];
 }
 
-const STORAGE_KEY = 'portfolio_chat_history';
+const STORAGE_KEY = 'portfolio_chat_history_v2';
 const CHAT_TIMEOUT = 60000;
 
 let lang = localStorage.getItem('lang') || 'es';
@@ -383,25 +383,28 @@ function restoreChat() {
   }
 
   chatHistory.forEach((msg) => {
-    const text = msg?.parts?.[0]?.text || '';
+    const text = msg?.content || '';
     if (!text) return;
     if (msg.role === 'user') appendMsg('user', `<p>${text}</p>`);
-    if (msg.role === 'model') appendMsg('bot', sanitizeHtml(mdToHtml(text)));
+    if (msg.role === 'assistant') appendMsg('bot', sanitizeHtml(mdToHtml(text)));
   });
 }
 
-async function requestGemini(userMessage) {
-  chatHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+async function requestGemini(userMessage, onToken) {
+  chatHistory.push({ role: 'user', content: userMessage });
 
-  const contents = [
-    { role: 'user', parts: [{ text: PORTFOLIO_INFO }] },
-    { role: 'model', parts: [{ text: 'Entendido. Estoy listo para actuar como el asistente de Ignacio.' }] },
+  const messages = [
+    { role: 'system', content: PORTFOLIO_INFO },
     ...chatHistory,
   ];
 
   const requestBody = {
-    contents,
-    generationConfig: { temperature: 0.7, topK: 40, topP: 0.95, maxOutputTokens: 2048 },
+    model: 'deepseek-v4-flash',
+    messages,
+    temperature: 0.7,
+    max_tokens: 8192,
+    reasoning_effort: 'low',
+    stream: true,
   };
 
   let response;
@@ -436,13 +439,42 @@ async function requestGemini(userMessage) {
     throw new Error(message);
   }
 
-  const data = await response.json();
-  const botResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!botResponse) throw new Error('La API no devolvió ninguna respuesta');
+  // Lee el stream SSE y acumula solo delta.content (ignora delta.reasoning_content)
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '';
+  let fullText = '';
 
-  chatHistory.push({ role: 'model', parts: [{ text: botResponse }] });
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop();
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed.startsWith('data:')) continue;
+      const payload = trimmed.slice(5).trim();
+      if (payload === '[DONE]') continue;
+      try {
+        const json = JSON.parse(payload);
+        if (json.error) throw new Error(json.error.message || 'Error de la API');
+        const token = json.choices?.[0]?.delta?.content;
+        if (token) {
+          fullText += token;
+          onToken(fullText);
+        }
+      } catch (error) {
+        if (error.message && error.message !== 'Unexpected end of JSON input') throw error;
+      }
+    }
+  }
+
+  if (!fullText) throw new Error('La API no devolvió ninguna respuesta');
+
+  chatHistory.push({ role: 'assistant', content: fullText });
   saveChatHistory();
-  return botResponse;
+  return fullText;
 }
 
 async function sendMsg(text = '') {
@@ -461,11 +493,13 @@ async function sendMsg(text = '') {
   loader.innerHTML = '<div class="msg-avatar">AI</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
   $('chatMsgs').appendChild(loader);
   $('chatMsgs').scrollTop = $('chatMsgs').scrollHeight;
+  const bubble = loader.querySelector('.msg-bubble');
 
   try {
-    const reply = await requestGemini(userText);
-    loader.remove();
-    appendMsg('bot', sanitizeHtml(mdToHtml(reply)), true);
+    await requestGemini(userText, (fullText) => {
+      bubble.innerHTML = sanitizeHtml(mdToHtml(fullText));
+      $('chatMsgs').scrollTop = $('chatMsgs').scrollHeight;
+    });
   } catch (error) {
     loader.remove();
     if (chatHistory.at(-1)?.role === 'user') {

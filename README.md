@@ -38,7 +38,7 @@ These screenshots show the portfolio in light mode. The site includes a dark mod
 
 - Frontend: HTML, CSS, and vanilla JavaScript
 - Backend: Python proxy server
-- AI: Google Gemini 2.5 Flash API
+- AI: DeepSeek V4 Flash API
 - Deployment: Render
 
 ## Features
@@ -51,17 +51,17 @@ These screenshots show the portfolio in light mode. The site includes a dark mod
 
 ## Run Locally
 
-Set the Gemini API key and start the Python server:
+Set the DeepSeek API key and start the Python server:
 
 ```bash
-export GEMINI_API_KEY="your_api_key"
+export DEEPSEEK_API_KEY="your_api_key"
 python server.py
 ```
 
 On Windows PowerShell:
 
 ```powershell
-$env:GEMINI_API_KEY="your_api_key"
+$env:DEEPSEEK_API_KEY="your_api_key"
 python server.py
 ```
 
@@ -77,11 +77,11 @@ http://localhost:8000
 - `styles.css` contains the visual design and responsive layout.
 - `app.js` handles client-side interactions and bilingual content.
 - `config.js` contains the AI assistant context and portfolio data.
-- `server.py` serves the site and proxies Gemini requests without exposing the API key.
+- `server.py` serves the site and proxies DeepSeek requests without exposing the API key.
 
 ## Security
 
-The Gemini API key is never exposed to the browser. Requests go through the Python server, which reads the key from the `GEMINI_API_KEY` environment variable and applies basic rate limiting.
+The DeepSeek API key is never exposed to the browser. Requests go through the Python server, which reads the key from the `DEEPSEEK_API_KEY` environment variable and applies basic rate limiting.
 
 ## License
 

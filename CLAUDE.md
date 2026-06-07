@@ -8,17 +8,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 # Linux / macOS
-export GEMINI_API_KEY='tu_api_key'
+export DEEPSEEK_API_KEY='tu_api_key'
 python server.py
 
 # Windows CMD
-set GEMINI_API_KEY=tu_api_key
+set DEEPSEEK_API_KEY=tu_api_key
 python server.py
 
 # Windows PowerShell
-$env:GEMINI_API_KEY='tu_api_key'
+$env:DEEPSEEK_API_KEY='tu_api_key'
 python server.py
 ```
+
+Alternativamente, crea un archivo `.env` (ignorado por git) en la raíz con `DEEPSEEK_API_KEY=tu_api_key`; `server.py` lo carga automáticamente al arrancar, así no hace falta exportar la variable cada vez.
 
 El servidor escucha en `http://localhost:8000` (puerto configurable vía variable de entorno `PORT`).
 
@@ -28,7 +30,7 @@ El proyecto está desplegado en Render.com. El `Procfile` define el comando de a
 ```
 web: python server.py
 ```
-La variable de entorno `GEMINI_API_KEY` debe configurarse en el panel de Render.
+La variable de entorno `DEEPSEEK_API_KEY` debe configurarse en el panel de Render.
 
 ---
 
@@ -40,9 +42,9 @@ Este proyecto es un **portfolio web estático + backend proxy Python**, sin bund
 
 ```
 Navegador (app.js)
-  → POST /api/gemini  (al propio servidor Python)
+  → POST /api/gemini  (al propio servidor Python; ruta heredada, sin renombrar)
     → server.py  (valida, aplica rate limiting, reenvía)
-      → Google Gemini API  (con la API key del servidor)
+      → DeepSeek API  (con la API key del servidor)
         ← respuesta JSON
       ← respuesta JSON transparente
     ← respuesta al cliente
@@ -56,7 +58,7 @@ La razón del proxy es doble: evitar exponer la API key en el cliente y gestiona
 |---|---|
 | `server.py` | Servidor HTTP Python. Sirve los estáticos **y** actúa de proxy para `/api/gemini`. Implementa rate limiting (60 req/min/IP), timeout (30s) y validación de tamaño (100 KB). |
 | `app.js` | Lógica completa del cliente: chat, modo oscuro, scroll reveal, header auto-hide, barra de progreso. Usa ES6 modules (`import` de `config.js`). |
-| `config.js` | **Fuente de verdad del contexto de IA.** Exporta `PORTFOLIO_INFO`, el prompt de sistema enviado a Gemini en cada petición. Modificar este archivo cambia cómo responde el asistente. |
+| `config.js` | **Fuente de verdad del contexto de IA.** Exporta `PORTFOLIO_INFO`, el prompt de sistema (`role: system`) enviado a DeepSeek en cada petición. Modificar este archivo cambia cómo responde el asistente. |
 | `styles.css` | Todo el CSS. Sin preprocesador. El tema se controla con la clase `html.dark-mode`. Cache-busting manual via `?v=N` en el `<link>` de `index.html`. |
 | `index.html` | Estructura HTML única. Contiene meta SEO, Open Graph, Twitter Cards y JSON-LD. |
 
@@ -77,11 +79,13 @@ Las secciones `#habilidades` y `#chat` tienen la clase `section-alt`, que en mod
 
 ### Historial del chat
 
-El historial se guarda en `localStorage` con la clave `portfolio_chat_history` en formato nativo de Gemini:
+El historial se guarda en `localStorage` con la clave `portfolio_chat_history_v2` en formato de mensajes de DeepSeek (compatible con OpenAI):
 ```js
-{ role: 'user' | 'model', parts: [{ text: '...' }] }
+{ role: 'user' | 'assistant', content: '...' }
 ```
-En cada petición, `app.js` antepone el bloque `PORTFOLIO_INFO` como turno inicial del sistema antes de enviar el historial real. Si la API devuelve un 429, el cliente espera 20 segundos y reintenta automáticamente una vez.
+En cada petición, `app.js` antepone el bloque `PORTFOLIO_INFO` como mensaje `{ role: 'system' }` antes de enviar el historial real. Si la API devuelve un 429, el cliente espera 20 segundos y reintenta automáticamente una vez.
+
+Las respuestas llegan en **streaming** (SSE, `stream: true`): `server.py` reenvía los chunks tal cual (`text/event-stream`) y `app.js` acumula únicamente `delta.content`, descartando `delta.reasoning_content` (el razonamiento interno del modelo, que nunca se muestra). La burbuja del bot se va pintando token a token; mientras el modelo razona (aún sin `content`) se mantienen los *typing dots*.
 
 ### Seguridad XSS
 
