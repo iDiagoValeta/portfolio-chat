@@ -59,6 +59,7 @@ La razón del proxy es doble: evitar exponer la API key en el cliente y gestiona
 | `server.py` | Servidor HTTP Python. Sirve los estáticos **y** actúa de proxy para `/api/gemini`. Implementa rate limiting (60 req/min/IP), timeout (30s) y validación de tamaño (100 KB). |
 | `app.js` | Lógica completa del cliente: chat, modo oscuro, scroll reveal, header auto-hide, barra de progreso. Usa ES6 modules (`import` de `config.js`). |
 | `config.js` | **Fuente de verdad del contexto de IA.** Exporta `PORTFOLIO_INFO`, el prompt de sistema (`role: system`) enviado a DeepSeek en cada petición. Modificar este archivo cambia cómo responde el asistente. |
+| `fx3d.js` | Efectos visuales sin dependencias (canvas 2D + proyección en perspectiva): polen 3D con constelaciones, tilt 3D con glare, paralaje 3D del hero, letras del nombre con entrada 3D, cursor personalizado, intro bloom (1×/sesión), ripple en clicks y botones magnéticos. Respeta `prefers-reduced-motion` y punteros táctiles. El import en `app.js` lleva `?v=N` propio para cache-busting. |
 | `styles.css` | Todo el CSS. Sin preprocesador. El tema se controla con la clase `html.dark-mode`. Cache-busting manual via `?v=N` en el `<link>` de `index.html`. |
 | `index.html` | Estructura HTML única. Contiene meta SEO, Open Graph, Twitter Cards y JSON-LD. |
 

@@ -32,7 +32,7 @@ This portfolio turns that idea into a practical interface: a professional websit
 
 ![AI Chat interface](images/5.png)
 
-These screenshots show the portfolio in light mode. The site includes a dark mode toggle and full bilingual support (ES / EN).
+These screenshots show the portfolio in dark mode (the default). The site includes a light mode toggle and full bilingual support (ES / EN).
 
 ## Tech Stack
 
@@ -44,7 +44,9 @@ These screenshots show the portfolio in light mode. The site includes a dark mod
 ## Features
 
 - **AI Chat**: Ask anything about Ignacio's background, projects, and skills directly in the interface
-- **Dark / Light mode**: Clean white-and-black palette with orange accents, toggled from the navbar
+- **Botanical line-art design**: Fixed floral engraving background with a single sage accent, dark mode by default with a light mode toggle
+- **Visual effects engine** (`fx3d.js`, zero dependencies): 3D pollen depth-field with constellation links, perspective card tilt with cursor glare, hero parallax, staggered 3D letter entrance, custom cursor, intro bloom, click ripples and magnetic buttons — all respecting `prefers-reduced-motion` and touch devices
+- **Command palette**: Quick navigation and actions with `Ctrl/⌘ + K`
 - **Bilingual**: Full ES / EN support switchable at any point
 - **Responsive**: Works on desktop and mobile
 - **Live clock**: Displays local Valencia time in the hero card
@@ -76,6 +78,7 @@ http://localhost:8000
 - `index.html` defines the portfolio sections and page metadata.
 - `styles.css` contains the visual design and responsive layout.
 - `app.js` handles client-side interactions and bilingual content.
+- `fx3d.js` implements the dependency-free visual effects (canvas 3D pollen, tilt, parallax, custom cursor, intro).
 - `config.js` contains the AI assistant context and portfolio data.
 - `server.py` serves the site and proxies DeepSeek requests without exposing the API key.
 

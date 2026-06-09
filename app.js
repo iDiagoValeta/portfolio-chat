@@ -1,4 +1,5 @@
 import { PORTFOLIO_INFO } from './config.js';
+import { initFx3d, initTilt, initMagnetic, initHeroParallax, initHeroLetters, initCursor, initIntro, initRipple } from './fx3d.js?v=2';
 
 const T = {
   es: {
@@ -746,12 +747,21 @@ function initScroll() {
   const nav = document.querySelector('.nav-wrap');
   const topBtn = document.querySelector('.top-btn');
 
+  const timeline = document.querySelector('.exp-timeline');
+
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
     const max = document.body.scrollHeight - window.innerHeight;
     if (bar) bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
     nav.classList.toggle('scrolled', y > 30);
     topBtn.classList.toggle('show', y > 400);
+
+    // la línea del timeline se dibuja a medida que entra en pantalla
+    if (timeline) {
+      const r = timeline.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, (window.innerHeight * 0.8 - r.top) / r.height));
+      timeline.style.setProperty('--tl', progress.toFixed(3));
+    }
 
     document.querySelectorAll('section[id]').forEach((section) => {
       const top = section.offsetTop - 120;
@@ -773,6 +783,31 @@ function observeReveal() {
     });
   }, { threshold: 0.1 });
   els.forEach((el) => io.observe(el));
+}
+
+function initCounters() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      io.unobserve(entry.target);
+      const el = entry.target;
+      const match = el.textContent.trim().match(/^(\d+)(.*)$/);
+      if (!match) return;
+      const target = Number(match[1]);
+      const suffix = match[2];
+      const start = performance.now();
+      const duration = 1200;
+      const tick = (now) => {
+        const k = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(target * eased) + suffix;
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.stat-num').forEach((el) => io.observe(el));
 }
 
 function initClock() {
@@ -800,6 +835,7 @@ function initWink() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initIntro();
   applyDark();
   loadChatHistory();
 
@@ -865,5 +901,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initScroll();
   initSmoothScroll();
   initCommandPalette();
+  initCounters();
+  initFx3d();
+  initTilt();
+  initMagnetic();
+  initHeroParallax();
+  initHeroLetters();
+  initCursor();
+  initRipple();
   initWink();
 });

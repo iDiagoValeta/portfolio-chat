@@ -57,7 +57,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=59">
+<link rel="stylesheet" href="styles.css?v=64">
 <script>
 if (localStorage.getItem('dark') !== 'false') {
   document.documentElement.classList.add('dark');
@@ -66,6 +66,7 @@ if (localStorage.getItem('dark') !== 'false') {
 </head>
 <body>
 <div id="flowerField" aria-hidden="true"></div>
+<canvas id="fx3d" aria-hidden="true"></canvas>
 <div class="scroll-bar"></div>
 
 <header class="nav-wrap">
@@ -331,6 +332,6 @@ if (localStorage.getItem('dark') !== 'false') {
   </div>
 </div>
 
-<script type="module" src="app.js?v=23"></script>
+<script type="module" src="app.js?v=28"></script>
 </body>
 </html>

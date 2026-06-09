@@ -141,6 +141,15 @@ img { display: block; max-width: 100%; }
 /* dark mode: invert the engraving so the flowers read white on black */
 html.dark #flowerField { filter: invert(1); opacity: 0.92; }
 
+/* 3D fx layer — pollen depth-field + IDV wireframe flower (fx3d.js).
+   Above the sections (their surface is ~85% opaque) but below nav/grain. */
+#fx3d {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
 /* subtle paper grain so surfaces don't read flat */
 body::before {
   content: "";
@@ -402,6 +411,28 @@ html.dark .theme-glyph::after { clip-path: inset(0 50% 0 0); }
 
 .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin: 32px 0 0; }
 
+/* staggered entrance on first paint */
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-eyebrow { animation: heroRise 700ms cubic-bezier(0.22, 1, 0.36, 1) 80ms backwards; }
+.hero-role { animation: heroRise 700ms cubic-bezier(0.22, 1, 0.36, 1) 320ms backwards; }
+.hero-btns { animation: heroRise 700ms cubic-bezier(0.22, 1, 0.36, 1) 440ms backwards; }
+.hero-visual { animation: heroRise 900ms cubic-bezier(0.22, 1, 0.36, 1) 260ms backwards; }
+
+/* letras del nombre: entrada 3D escalonada (spans creados en fx3d.js) */
+.hero-name { perspective: 900px; }
+.hero-name .ch {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  animation: chIn 640ms cubic-bezier(0.22, 1, 0.36, 1) calc(220ms + var(--i, 0) * 34ms) backwards;
+}
+@keyframes chIn {
+  from { opacity: 0; transform: translateY(0.45em) rotateX(62deg); }
+  to { opacity: 1; transform: none; }
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -502,6 +533,20 @@ html.dark .theme-glyph::after { clip-path: inset(0 50% 0 0); }
   font-size: clamp(1rem, 0.25vw + 0.92rem, 1.12rem);
 }
 
+/* botanical flourish under section titles, grows on reveal */
+.sec-title::after {
+  content: "";
+  display: block;
+  width: 58px;
+  height: 2px;
+  margin: 18px auto 0;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+}
+.sec-title.in::after { transform: scaleX(1); }
+
 /* ----- About ----- */
 .about-grid {
   display: grid;
@@ -590,7 +635,9 @@ html.dark .theme-glyph::after { clip-path: inset(0 50% 0 0); }
   position: absolute;
   left: 5px; top: 6px; bottom: 6px;
   width: 1px;
-  background: var(--line-2);
+  background: linear-gradient(to bottom, var(--accent), var(--line-2));
+  transform: scaleY(var(--tl, 1));  /* drawn progressively on scroll (app.js) */
+  transform-origin: top;
 }
 .exp-item {
   position: relative;
@@ -676,11 +723,19 @@ html.dark .theme-glyph::after { clip-path: inset(0 50% 0 0); }
 }
 .proj-card:hover { border-color: var(--accent); transform: translateY(-4px); }
 .proj-index {
+  position: absolute;
+  top: 14px;
+  right: 22px;
   font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--muted-2);
-  letter-spacing: 0.06em;
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: color-mix(in srgb, var(--ink) 9%, transparent);
+  transition: color var(--t);
+  pointer-events: none;
 }
+.proj-card:hover .proj-index { color: color-mix(in srgb, var(--accent) 38%, transparent); }
 .proj-banner { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin: 14px 0 4px; }
 .proj-badge {
   padding: 4px 12px;
@@ -768,6 +823,12 @@ html.dark .theme-glyph::after { clip-path: inset(0 50% 0 0); }
   width: 9px; height: 9px;
   border-radius: 50%;
   background: var(--accent);
+  animation: statusPulse 2.4s ease-out infinite;
+}
+@keyframes statusPulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  70% { box-shadow: 0 0 0 9px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
 }
 .chat-head-title { font-family: var(--display); font-weight: 600; font-size: 0.96rem; }
 .chat-head-sub { font-size: 0.74rem; color: var(--muted); }
@@ -840,10 +901,10 @@ html.dark .theme-glyph::after { clip-path: inset(0 50% 0 0); }
   background: var(--bg);
   color: var(--ink);
   font-size: 0.92rem;
-  transition: border-color var(--t);
+  transition: border-color var(--t), box-shadow var(--t);
 }
 .chat-input::placeholder { color: var(--muted-2); }
-.chat-input:focus { outline: none; border-color: var(--accent); }
+.chat-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 .chat-send {
   flex-shrink: 0;
   width: 46px; height: 46px;
@@ -913,8 +974,12 @@ html.dark .theme-glyph::after { clip-path: inset(0 50% 0 0); }
 .top-btn.show:hover { background: var(--accent); color: var(--bg); transform: translateY(-3px); }
 
 /* ----- Reveal on scroll ----- */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity 640ms var(--t), transform 640ms cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal { opacity: 0; transform: translateY(22px) scale(0.985); transition: opacity 640ms var(--t), transform 640ms cubic-bezier(0.22, 1, 0.36, 1); }
 .reveal.in { opacity: 1; transform: none; }
+
+/* project cards enter rotating in perspective */
+.projects-grid { perspective: 1200px; }
+.proj-card.reveal:not(.in) { transform: translateY(30px) rotateX(7deg) scale(0.985); }
 
 /* ============================================================
    Command palette
@@ -997,6 +1062,122 @@ html.dark .theme-glyph::after { clip-path: inset(0 50% 0 0); }
 .proj-card:hover,
 .cert-card:hover,
 .contact-card:hover { box-shadow: var(--shadow-md); }
+
+/* ============================================================
+   3D tilt glare — highlight that follows the cursor (fx3d.js
+   sets --gx / --gy per card)
+   ============================================================ */
+.cert-card, .stat { position: relative; }
+.proj-card::before,
+.cert-card::before,
+.stat::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--t);
+  background: radial-gradient(
+    420px circle at var(--gx, 50%) var(--gy, 50%),
+    color-mix(in srgb, var(--accent) 16%, transparent),
+    transparent 65%
+  );
+}
+.proj-card:hover::before,
+.cert-card:hover::before,
+.stat:hover::before { opacity: 1; }
+
+/* ============================================================
+   Custom cursor (fx3d.js adds html.cursor-fx on fine pointers)
+   ============================================================ */
+html.cursor-fx, html.cursor-fx * { cursor: none !important; }
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 200;
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--accent);
+}
+.cursor-ring {
+  width: 34px; height: 34px;
+  border: 1.5px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  transition: opacity 300ms ease, width 240ms ease, height 240ms ease, border-color 240ms ease;
+}
+.cursor-ring.grow {
+  width: 56px; height: 56px;
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* ============================================================
+   Intro bloom — the IDV flower draws itself once per session
+   ============================================================ */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  transition: opacity 480ms ease;
+}
+.intro.out { opacity: 0; pointer-events: none; }
+.intro svg {
+  color: var(--accent);
+  animation: introSpin 1400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes introSpin { from { transform: rotate(-50deg) scale(0.85); } }
+.intro ellipse, .intro circle {
+  stroke-dasharray: 72;
+  stroke-dashoffset: 72;
+  animation: introDraw 760ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.intro ellipse:nth-of-type(2) { animation-delay: 60ms; }
+.intro ellipse:nth-of-type(3) { animation-delay: 120ms; }
+.intro ellipse:nth-of-type(4) { animation-delay: 180ms; }
+.intro ellipse:nth-of-type(5) { animation-delay: 240ms; }
+.intro ellipse:nth-of-type(6) { animation-delay: 300ms; }
+.intro circle { animation-delay: 380ms; }
+@keyframes introDraw { to { stroke-dashoffset: 0; } }
+
+/* ============================================================
+   Click ripple
+   ============================================================ */
+.btn, .cv-btn, .chat-send, .sugg, .skill-tab, .contact-card {
+  position: relative;
+  overflow: hidden;
+}
+.fx-ripple {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: color-mix(in srgb, currentColor 20%, transparent);
+  transform: scale(0);
+  opacity: 0.7;
+  animation: rippleOut 600ms ease-out forwards;
+}
+@keyframes rippleOut { to { transform: scale(1); opacity: 0; } }
+
+/* ============================================================
+   Finishing touches — selection, focus, scrollbars
+   ============================================================ */
+::selection { background: color-mix(in srgb, var(--accent) 30%, transparent); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.chat-msgs, .cmdk-list { scrollbar-width: thin; scrollbar-color: var(--line-2) transparent; }
+.chat-msgs::-webkit-scrollbar, .cmdk-list::-webkit-scrollbar { width: 8px; }
+.chat-msgs::-webkit-scrollbar-track, .cmdk-list::-webkit-scrollbar-track { background: transparent; }
+.chat-msgs::-webkit-scrollbar-thumb, .cmdk-list::-webkit-scrollbar-thumb {
+  background: var(--line-2);
+  border-radius: 8px;
+}
 
 /* ============================================================
    Responsive
