@@ -1,4 +1,4 @@
-import { PORTFOLIO_INFO } from './config.js';
+import { PORTFOLIO_INFO } from './config.js?v=51';
 
 // Contenido bilingüe. Fuente: CV vigente (iDiagoValeta/resume), 2026-09-01.
 const T = {
@@ -80,7 +80,7 @@ const T = {
   },
 };
 
-const STORAGE_KEY = 'portfolio_chat_history_v2';
+const STORAGE_KEY = 'portfolio_chat_history_v3';
 const CHAT_TIMEOUT = 60000;
 
 let lang = localStorage.getItem('lang') || 'es';

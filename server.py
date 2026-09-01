@@ -89,6 +89,9 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        path = (self.path or '').split('?', 1)[0]
+        if path.endswith(('.js', '.css', '.html')):
+            self.send_header('Cache-Control', 'no-cache')
         super().end_headers()
 
     def do_OPTIONS(self):
