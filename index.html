@@ -8,8 +8,8 @@
 <meta name="author" content="Ignacio Diago Valeta">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://portfolio-chat-aouj.onrender.com/">
-<meta name="theme-color" content="#F5F1EA" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#111013" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f3f0f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#150f23" media="(prefers-color-scheme: dark)">
 
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="Ignacio Diago Valeta">
@@ -30,7 +30,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=83">
+<link rel="stylesheet" href="styles.css?v=90">
 
 <script type="application/ld+json">
 {
@@ -50,6 +50,15 @@
 </head>
 <body>
 
+<div class="lava" aria-hidden="true">
+  <span class="lava-blob lava-a"></span>
+  <span class="lava-blob lava-b"></span>
+  <span class="lava-blob lava-c"></span>
+  <span class="lava-blob lava-d"></span>
+  <span class="lava-blob lava-e"></span>
+</div>
+<canvas id="pxbg" class="pxbg" aria-hidden="true"></canvas>
+
 <a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
 
 <header class="hdr">
@@ -64,13 +73,6 @@
       <a href="#contacto" data-i18n="nav_contact">Contacto</a>
     </nav>
     <div class="hdr-act">
-      <div class="pal" id="palPick" role="group" aria-label="Paleta de color">
-        <button type="button" data-p="everforest" style="--c:#8DA101" aria-label="Everforest"></button>
-        <button type="button" data-p="solarized"  style="--c:#268BD2" aria-label="Solarized"></button>
-        <button type="button" data-p="nord"       style="--c:#5E81AC" aria-label="Nord"></button>
-        <button type="button" data-p="rosepine"   style="--c:#907AA9" aria-label="Rosé Pine"></button>
-        <button type="button" data-p="gruvbox"    style="--c:#AF3A03" aria-label="Gruvbox"></button>
-      </div>
       <button id="langBtn" class="ico" type="button" aria-label="Cambiar idioma">EN</button>
       <button id="themeBtn" class="ico" type="button" aria-label="Cambiar tema">◐</button>
       <a class="ico" href="resume.pdf" target="_blank" rel="noopener" data-i18n="cv">CV</a>
@@ -153,6 +155,6 @@
   <span class="mono">2026</span>
 </footer>
 
-<script type="module" src="app.js?v=44"></script>
+<script type="module" src="app.js?v=50"></script>
 </body>
 </html>

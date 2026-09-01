@@ -85,7 +85,7 @@ const CHAT_TIMEOUT = 60000;
 
 let lang = localStorage.getItem('lang') || 'es';
 const savedDark = localStorage.getItem('dark');
-let dark = savedDark !== null ? savedDark !== 'false' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = savedDark !== null ? savedDark !== 'false' : true;
 let chatHistory = [];
 let isProcessing = false;
 
@@ -303,6 +303,7 @@ function applyDark() {
   document.documentElement.classList.toggle('dark', dark);
   document.documentElement.classList.toggle('light', !dark);
   localStorage.setItem('dark', String(dark));
+  refreshPixelBg();
 }
 
 function renderExp(list) {
@@ -356,17 +357,6 @@ function applyLang() {
   restoreChat();
 }
 
-const PALETTES = ['everforest', 'solarized', 'nord', 'rosepine', 'gruvbox'];
-
-function applyPalette(p) {
-  if (!PALETTES.includes(p)) p = PALETTES[0];
-  document.documentElement.setAttribute('data-pal', p);
-  localStorage.setItem('pal', p);
-  document.querySelectorAll('#palPick button').forEach((b) => {
-    b.setAttribute('aria-pressed', String(b.dataset.p === p));
-  });
-}
-
 // Reloj de A Coruña. La zona se fija explicitamente para que la hora sea la de
 // Ignacio, no la del visitante. A Coruña comparte zona peninsular (Europe/Madrid).
 function startClock() {
@@ -384,15 +374,99 @@ function startClock() {
   setInterval(tick, 1000);
 }
 
+// Rastro pixelado bajo el cursor. El rAF solo corre mientras el rastro vive.
+let refreshPixelBg = () => {};
+
+function startPixelBg() {
+  const canvas = $('pxbg');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d', { alpha: true });
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const CELL = 7;
+  const RADIUS = 2.1;
+  const TRAIL_MS = 2800;
+  const MAX_POINTS = 20;
+  const MIN_DIST = 0.75;
+  let stamps = [];
+  let raf = 0;
+
+  const rgb = (raw, fallback) => {
+    const parts = (raw || fallback).split(',').map((n) => Number(n.trim()));
+    return parts.length === 3 && parts.every(Number.isFinite) ? parts : fallback.split(',').map(Number);
+  };
+
+  function size() {
+    const w = Math.max(1, Math.ceil(window.innerWidth / CELL));
+    const h = Math.max(1, Math.ceil(window.innerHeight / CELL));
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+    }
+  }
+
+  function addStamp(px, py) {
+    const last = stamps[stamps.length - 1];
+    if (last && Math.hypot(px - last.x, py - last.y) < MIN_DIST) {
+      last.x = px;
+      last.y = py;
+      last.t = performance.now();
+      return;
+    }
+    stamps.push({ x: px, y: py, t: performance.now() });
+    if (stamps.length > MAX_POINTS) stamps.shift();
+  }
+
+  function paint(now) {
+    const w = canvas.width;
+    const h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+    stamps = stamps.filter((s) => now - s.t < TRAIL_MS);
+    const s = getComputedStyle(document.documentElement);
+    const [hr, hg, hb] = rgb(s.getPropertyValue('--px-hot'), '106,95,193');
+    for (const stamp of stamps) {
+      const fade = 1 - (now - stamp.t) / TRAIL_MS;
+      const a = fade * fade * 0.88;
+      const x0 = Math.max(0, Math.floor(stamp.x - RADIUS));
+      const y0 = Math.max(0, Math.floor(stamp.y - RADIUS));
+      const x1 = Math.min(w - 1, Math.ceil(stamp.x + RADIUS));
+      const y1 = Math.min(h - 1, Math.ceil(stamp.y + RADIUS));
+      for (let y = y0; y <= y1; y++) {
+        for (let x = x0; x <= x1; x++) {
+          const dist = Math.hypot(x - stamp.x, y - stamp.y);
+          if (dist > RADIUS) continue;
+          const t = 1 - dist / RADIUS;
+          ctx.fillStyle = `rgba(${hr},${hg},${hb},${(a * (0.2 + t * t * 0.8)).toFixed(3)})`;
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+    }
+    if (stamps.length) raf = requestAnimationFrame(paint);
+    else raf = 0;
+  }
+
+  function onMove(e) {
+    addStamp(
+      (e.clientX / window.innerWidth) * canvas.width,
+      (e.clientY / window.innerHeight) * canvas.height,
+    );
+    if (!raf) raf = requestAnimationFrame(paint);
+  }
+
+  refreshPixelBg = size;
+  size();
+
+  if (reduced) return;
+
+  window.addEventListener('pointermove', onMove, { passive: true });
+  window.addEventListener('resize', size);
+}
+
 function init() {
   loadChatHistory();
   startClock();
-  applyPalette(localStorage.getItem('pal') || 'everforest');
-  document.querySelectorAll('#palPick button').forEach((b) => {
-    b.addEventListener('click', () => applyPalette(b.dataset.p));
-  });
   applyDark();
   applyLang();
+  startPixelBg();
 
   $('themeBtn').addEventListener('click', () => { dark = !dark; applyDark(); });
   $('langBtn').addEventListener('click', () => { lang = lang === 'es' ? 'en' : 'es'; applyLang(); });
