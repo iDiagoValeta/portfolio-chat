@@ -10,46 +10,23 @@ The idea came from looking at the hiring process from an interviewer's perspecti
 
 This portfolio turns that idea into a practical interface: a professional website with an integrated AI chat that can answer questions about my background, projects, skills, and experience.
 
-## Preview
-
-### Hero
-
-![Portfolio hero section](images/1.png)
-
-### About & Stats
-
-![About section with dossier and stats](images/2.png)
-
-### Experience
-
-![Experience timeline section](images/3.png)
-
-### Featured Projects
-
-![Projects grid section](images/4.png)
-
-### AI Chat
-
-![AI Chat interface](images/5.png)
-
-These screenshots show the portfolio in dark mode (the default). The site includes a light mode toggle and full bilingual support (ES / EN).
-
 ## Tech Stack
 
-- Frontend: HTML, CSS, and vanilla JavaScript
-- Backend: Python proxy server
-- AI: DeepSeek V4 Flash API
+- Frontend: HTML, CSS, and vanilla JavaScript. No bundler, no npm dependencies
+- Backend: Python proxy server (standard library only)
+- AI: DeepSeek V4 Flash API, streamed over SSE
 - Deployment: Render
 
 ## Features
 
-- **AI Chat**: Ask anything about Ignacio's background, projects, and skills directly in the interface
-- **Botanical line-art design**: Fixed floral engraving background with a single sage accent, dark mode by default with a light mode toggle
-- **Visual effects engine** (`fx3d.js`, zero dependencies): 3D pollen depth-field with constellation links, perspective card tilt with cursor glare, hero parallax, staggered 3D letter entrance, custom cursor, intro bloom, click ripples and magnetic buttons — all respecting `prefers-reduced-motion` and touch devices
-- **Command palette**: Quick navigation and actions with `Ctrl/⌘ + K`
-- **Bilingual**: Full ES / EN support switchable at any point
-- **Responsive**: Works on desktop and mobile
-- **Live clock**: Displays local Valencia time in the hero card
+- **AI Chat**: Ask anything about Ignacio's background, projects, and skills. The
+  assistant answers strictly from the data in the CV
+- **Bilingual**: Full ES / EN support, switchable at any point
+- **Light and dark**: Follows the system preference by default, with a manual toggle
+  that persists
+- **Responsive**: Single-column layout below 760 px, no horizontal scroll
+- **No dependencies**: No npm, no build step, no external fonts or CDNs. Everything is
+  served from the repository
 
 ## Run Locally
 
@@ -75,12 +52,14 @@ http://localhost:8000
 
 ## Project Structure
 
-- `index.html` defines the portfolio sections and page metadata.
-- `styles.css` contains the visual design and responsive layout.
-- `app.js` handles client-side interactions and bilingual content.
-- `fx3d.js` implements the dependency-free visual effects (canvas 3D pollen, tilt, parallax, custom cursor, intro).
-- `config.js` contains the AI assistant context and portfolio data.
-- `server.py` serves the site and proxies DeepSeek requests without exposing the API key.
+- `index.html` defines the page shell, sections and metadata (SEO, Open Graph, JSON-LD).
+- `styles.css` contains the full visual design. No preprocessor.
+- `app.js` holds the bilingual content, renders every section and drives the chat.
+- `config.js` is the single source of truth for the assistant context. Editing it changes
+  how the assistant answers.
+- `server.py` serves the static files and proxies DeepSeek requests without exposing the
+  API key.
+- `resume.pdf` is the CV linked from the page.
 
 ## Security
 

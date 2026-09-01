@@ -4,7 +4,7 @@ Servidor proxy para la API de DeepSeek
 Evita problemas de CORS y mantiene la API key segura en el servidor
 """
 
-from http.server import HTTPServer, SimpleHTTPRequestHandler
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 import json
 import socket
 import urllib.request
@@ -272,7 +272,7 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
             pass
 
 
-class DualStackHTTPServer(HTTPServer):
+class DualStackHTTPServer(ThreadingHTTPServer):
     """Escucha en :: con IPv4 mapeado; evita ERR_CONNECTION_REFUSED con localhost→::1."""
 
     address_family = socket.AF_INET6
@@ -289,7 +289,7 @@ def run_server(port=None):
     try:
         httpd = DualStackHTTPServer(("::", port), CORSRequestHandler)
     except OSError:
-        httpd = HTTPServer(("0.0.0.0", port), CORSRequestHandler)
+        httpd = ThreadingHTTPServer(("0.0.0.0", port), CORSRequestHandler)
         print(
             f"Aviso: solo IPv4 en el puerto {port}. "
             f"Si el navegador muestra conexión rechazada con localhost, prueba http://127.0.0.1:{port}/"

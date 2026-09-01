@@ -56,27 +56,40 @@ La razón del proxy es doble: evitar exponer la API key en el cliente y gestiona
 
 | Archivo | Rol |
 |---|---|
-| `server.py` | Servidor HTTP Python. Sirve los estáticos **y** actúa de proxy para `/api/gemini`. Implementa rate limiting (60 req/min/IP), timeout (30s) y validación de tamaño (100 KB). |
-| `app.js` | Lógica completa del cliente: chat, modo oscuro, scroll reveal, header auto-hide, barra de progreso. Usa ES6 modules (`import` de `config.js`). |
-| `config.js` | **Fuente de verdad del contexto de IA.** Exporta `PORTFOLIO_INFO`, el prompt de sistema (`role: system`) enviado a DeepSeek en cada petición. Modificar este archivo cambia cómo responde el asistente. |
-| `fx3d.js` | Efectos visuales sin dependencias (canvas 2D + proyección en perspectiva): polen 3D con constelaciones, tilt 3D con glare, paralaje 3D del hero, letras del nombre con entrada 3D, cursor personalizado, intro bloom (1×/sesión), ripple en clicks y botones magnéticos. Respeta `prefers-reduced-motion` y punteros táctiles. El import en `app.js` lleva `?v=N` propio para cache-busting. |
-| `styles.css` | Todo el CSS. Sin preprocesador. El tema se controla con la clase `html.dark-mode`. Cache-busting manual via `?v=N` en el `<link>` de `index.html`. |
-| `index.html` | Estructura HTML única. Contiene meta SEO, Open Graph, Twitter Cards y JSON-LD. |
-
----
+| `server.py` | Servidor HTTP. Sirve los estáticos **y** actúa de proxy para `/api/gemini`. Rate limiting (60 req/min/IP), timeout (30s) y validación de tamaño (100 KB). Solo librería estándar. |
+| `app.js` | Contenido bilingüe (objeto `T`), render de todas las secciones, tema, idioma y chat con streaming. |
+| `config.js` | **Fuente de verdad del contexto de IA.** Exporta `PORTFOLIO_INFO`, el prompt de sistema enviado a DeepSeek. Modificarlo cambia cómo responde el asistente. Regla: aquí no entra ningún dato que no esté en el CV. |
+| `styles.css` | Todo el CSS. Sin preprocesador. Cache-busting manual via `?v=N` en `index.html`. |
+| `index.html` | Estructura, meta SEO, Open Graph, Twitter Cards y JSON-LD. El contenido de las secciones lo pinta `app.js`. |
+| `resume.pdf` | CV enlazado desde la página. Se sincroniza con el repo `iDiagoValeta/resume`. |
 
 ## Decisiones de diseño relevantes
 
-### Tema oscuro/claro
+### Tema claro y oscuro
 
-- **El modo oscuro es el predeterminado.** `initializeDarkMode()` en `app.js` lee `localStorage.getItem('portfolio_theme')` y activa el oscuro si el valor no es `'light'`.
-- El tema se aplica añadiendo/quitando la clase `dark-mode` en el elemento `<html>` (no en `body`).
-- En CSS, el modo oscuro usa el selector `html.dark-mode` y el modo claro usa `html:not(.dark-mode)`. Las variables CSS (tokens) se redefinen en ambos bloques al inicio de `styles.css`.
-- Para garantizar que no haya huecos negros al redimensionar la ventana, tanto `html` como `body` tienen `background-color` definido y `body` tiene `min-height: 100vh`.
+- **Por defecto se respeta el sistema.** `app.js` lee `localStorage.dark`; si no existe,
+  consulta `prefers-color-scheme`.
+- El tema se aplica con las clases `dark` o `light` en el elemento `<html>`.
+- En CSS los tokens se definen en `:root` (claro), se redefinen bajo
+  `@media (prefers-color-scheme: dark)` con el guardián `:root:not(.light)`, y otra vez
+  bajo `html.dark` para que el conmutador gane en ambos sentidos.
+- El avatar de la cabecera cambia de archivo según el tema (`applyDark`).
 
-### Secciones alternadas
+### Contenido bilingüe
 
-Las secciones `#habilidades` y `#chat` tienen la clase `section-alt`, que en modo oscuro recibe un tinte muy sutil (`rgba(255,255,255,0.018)`) para crear separación visual sin romper la estética oscura.
+Todo el texto vive en el objeto `T` de `app.js`, con las claves `es` y `en`. El HTML
+marca los nodos con `data-i18n="clave"` y `data-i18n-ph="clave"` para los placeholders.
+`applyLang()` recorre esos atributos y vuelve a pintar las secciones que se generan por
+JavaScript. Para añadir una cadena basta con crear la clave en ambos idiomas y marcar el
+nodo, sin tocar `applyLang`.
+
+### Sin dependencias ni animación continua
+
+No hay npm, ni bundler, ni fuentes externas: las tres tipografías se sirven desde
+`fonts/`. La única animación es el indicador de escritura del chat, y se suprime bajo
+`prefers-reduced-motion`. No debe introducirse ningún bucle `requestAnimationFrame`
+permanente: la versión anterior lo tenía y penalizaba a los navegadores sin aceleración
+por hardware.
 
 ### Historial del chat
 
