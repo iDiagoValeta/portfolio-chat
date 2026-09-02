@@ -1,12 +1,16 @@
-import { PORTFOLIO_INFO } from './config.js?v=51';
+import { PORTFOLIO_INFO } from './config.js?v=52';
 
-// Contenido bilingüe. Fuente: CV vigente (iDiagoValeta/resume), 2026-09-01.
+// Contenido bilingüe. Fuente: CV vigente (iDiagoValeta/resume), 2026-09-02.
 const T = {
   es: {
     skip: 'Saltar al contenido', cv: 'CV',
-    nav_exp: 'Experiencia', nav_proj: 'Proyectos',    nav_chat: 'Chat', nav_contact: 'Contacto',
+    nav_exp: 'Experiencia', nav_proj: 'Proyectos', nav_chat: 'Chat', nav_contact: 'Contacto',
     role: 'AI & Back-End Engineer',
-    now_k: 'PUESTO ACTUAL', now_d: 'Desde septiembre 2026',
+    about_k: 'SOBRE MÍ',
+    about_v: 'AI & Back-End Engineer especializado en la orquestación de sistemas LLM, arquitecturas RAG y back ends escalables en producción. Graduado en Ingeniería Informática por la UPV.',
+    news_link: 'La Terminal',
+    proj_code: 'Código',
+    proj_demo: 'Web en vivo',
     exp_title: 'Experiencia', proj_title: 'Proyectos',
     edu_title: 'Formación', chat_title: 'Pregunta a la IA', contact_title: 'Contacto',
     chat_lead: 'Asistente con el contexto completo del perfil. Responde con los datos reales del CV.',
@@ -29,12 +33,25 @@ const T = {
         desc: 'Formación personalizada en matemáticas, física y dibujo técnico para secundaria y preuniversitario.' },
     ],
     proj: [
-      { t: 'MonkeyGrab',
-        d: 'Sistema RAG multilingüe para PDFs centrado en privacidad, sin ninguna dependencia de APIs externas. Recuperación híbrida semántica y léxica. Proyecto final de grado.' },
-      { t: 'OCR a CRM',
-        d: 'Sustituye la digitalización manual externalizada de matrículas manuscritas por un pipeline serverless que escribe directo en el CRM. En producción en CEU.' },
-      { t: 'Dataset Creator',
-        d: 'Pipeline local y reproducible para generar datasets supervisados de preguntas y respuestas a partir de PDFs, con detección de idioma y controles de calidad.' },
+      {
+        t: 'MonkeyGrab',
+        tech: 'Ollama · ChromaDB · LlamaIndex · React · Flask',
+        d: 'Sistema RAG multilingüe para PDFs centrado en privacidad, sin dependencias de APIs externas. Recuperación híbrida semántica y léxica. Proyecto final de grado (UPV).',
+        repo: 'https://github.com/iDiagoValeta/localOllamaRAG',
+      },
+      {
+        t: 'OCR a CRM',
+        tech: 'Azure Functions · Document Intelligence · GPT-4 · RapidFuzz',
+        d: 'Sustituyó la digitalización manual externalizada de matrículas manuscritas por un pipeline serverless que escribe directo en el CRM. En producción en CEU.',
+        repo: 'https://github.com/iDiagoValeta/ocr-crm-pipeline',
+      },
+      {
+        t: 'La Terminal',
+        tech: 'TypeScript · Eleventy 3 · DeepSeek · GitHub Actions',
+        d: 'Diario estático de noticias tech y repositorios trending en español, publicado cada día en GitHub Pages. Pipeline serverless automatizado con curación LLM (DeepSeek) y validación JSON Schema sin servidor ni base de datos.',
+        repo: 'https://github.com/iDiagoValeta/automated-news',
+        demo: 'https://idiagovaleta.github.io/automated-news/',
+      },
     ],
     edu: [
       { t: 'Universitat Politècnica de València', d: 'Ingeniería Informática, especialidad en Computación', y: '2026' },
@@ -42,9 +59,13 @@ const T = {
   },
   en: {
     skip: 'Skip to content', cv: 'CV',
-    nav_exp: 'Experience', nav_proj: 'Projects',    nav_chat: 'Chat', nav_contact: 'Contact',
+    nav_exp: 'Experience', nav_proj: 'Projects', nav_chat: 'Chat', nav_contact: 'Contact',
     role: 'AI & Back-End Engineer',
-    now_k: 'CURRENT ROLE', now_d: 'Since September 2026',
+    about_k: 'ABOUT ME',
+    about_v: 'AI & Back-End Engineer focused on production: LLM orchestration, RAG systems, and scalable serverless architectures. Computer Science graduate from UPV.',
+    news_link: 'La Terminal',
+    proj_code: 'Code',
+    proj_demo: 'Live Demo',
     exp_title: 'Experience', proj_title: 'Projects',
     edu_title: 'Education', chat_title: 'Ask the AI', contact_title: 'Contact',
     chat_lead: 'Assistant with full context of the profile. Answers with the real data from the CV.',
@@ -67,18 +88,41 @@ const T = {
         desc: 'Personalized instruction in mathematics, physics and technical drawing for secondary and pre-university students.' },
     ],
     proj: [
-      { t: 'MonkeyGrab',
-        d: 'Privacy-focused multilingual RAG system for PDFs with no dependency on external APIs. Hybrid semantic and lexical retrieval. Final degree project.' },
-      { t: 'OCR to CRM',
-        d: 'Replaced the outsourced manual digitization of handwritten enrollment forms with a serverless pipeline writing straight into the CRM. Running in production at CEU.' },
-      { t: 'Dataset Creator',
-        d: 'Reproducible local pipeline for generating supervised QA datasets from PDFs, with language detection and quality controls.' },
+      {
+        t: 'MonkeyGrab',
+        tech: 'Ollama · ChromaDB · LlamaIndex · React · Flask',
+        d: 'Privacy-focused multilingual RAG system for PDFs with zero external API dependencies. Hybrid semantic and lexical retrieval. Final degree project (UPV).',
+        repo: 'https://github.com/iDiagoValeta/localOllamaRAG',
+      },
+      {
+        t: 'OCR to CRM',
+        tech: 'Azure Functions · Document Intelligence · GPT-4 · RapidFuzz',
+        d: 'Replaced outsourced manual digitization of handwritten enrollment forms with a serverless pipeline writing straight into the CRM. Running in production at CEU.',
+        repo: 'https://github.com/iDiagoValeta/ocr-crm-pipeline',
+      },
+      {
+        t: 'La Terminal',
+        tech: 'TypeScript · Eleventy 3 · DeepSeek · GitHub Actions',
+        d: 'Daily static tech news and trending open-source digest in Spanish, published daily to GitHub Pages. Serverless pipeline powered by LLM curation (DeepSeek) and JSON Schema validation without database or server.',
+        repo: 'https://github.com/iDiagoValeta/automated-news',
+        demo: 'https://idiagovaleta.github.io/automated-news/',
+      },
     ],
     edu: [
       { t: 'Universitat Politècnica de València', d: 'Computer Engineer, Computing specialization', y: '2026' },
     ],
   },
 };
+
+const PALETTES = [
+  { id: 'lime', name: 'Electric Lime', color: '#c2ef4e' },
+  { id: 'emerald', name: 'Cyber Emerald', color: '#10b981' },
+  { id: 'amber', name: 'Warm Amber', color: '#f59e0b' },
+  { id: 'cyan', name: 'Neon Cyan', color: '#06b6d4' },
+  { id: 'mono', name: 'Monochrome', color: '#e4e4e7' },
+];
+
+let currentPalette = localStorage.getItem('portfolio_palette') || 'lime';
 
 const STORAGE_KEY = 'portfolio_chat_history_v3';
 const CHAT_TIMEOUT = 60000;
@@ -303,7 +347,28 @@ function applyDark() {
   document.documentElement.classList.toggle('dark', dark);
   document.documentElement.classList.toggle('light', !dark);
   localStorage.setItem('dark', String(dark));
-  refreshPixelBg();
+}
+
+function applyPalette(pal) {
+  if (!PALETTES.some((p) => p.id === pal)) pal = 'lime';
+  currentPalette = pal;
+  localStorage.setItem('portfolio_palette', pal);
+  document.documentElement.setAttribute('data-palette', pal);
+  renderPalettePicker();
+}
+
+function renderPalettePicker() {
+  const container = $('palettePicker');
+  if (!container) return;
+  container.innerHTML = PALETTES.map((p) => `
+    <button type="button" class="pal-dot ${p.id === currentPalette ? 'active' : ''}" 
+            data-palette="${p.id}" title="${p.name}" aria-label="Paleta ${p.name}"
+            style="--dot-color:${p.color}">
+    </button>
+  `).join('');
+  container.querySelectorAll('.pal-dot').forEach((btn) => {
+    btn.addEventListener('click', () => applyPalette(btn.dataset.palette));
+  });
 }
 
 function renderExp(list) {
@@ -321,9 +386,22 @@ function renderExp(list) {
 
 function renderProj(list) {
   $('projList').innerHTML = list.map((p) => `
-    <article class="proj">
-      <h3>${esc(p.t)}</h3>
-      <p>${esc(p.d)}</p>
+    <article class="proj-card">
+      <div class="proj-top">
+        <h3 class="proj-title">${esc(p.t)}</h3>
+        ${p.tech ? `<div class="proj-tech">${esc(p.tech)}</div>` : ''}
+      </div>
+      <p class="proj-desc">${esc(p.d)}</p>
+      <div class="proj-actions">
+        ${p.repo ? `<a href="${esc(p.repo)}" target="_blank" rel="noopener" class="proj-btn" aria-label="Ver repositorio de ${esc(p.t)}">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span>${esc(T[lang].proj_code || 'Código')}</span>
+        </a>` : ''}
+        ${p.demo ? `<a href="${esc(p.demo)}" target="_blank" rel="noopener" class="proj-btn" aria-label="Ver demo web de ${esc(p.t)}">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
+          <span>${esc(T[lang].proj_demo || 'Web')}</span>
+        </a>` : ''}
+      </div>
     </article>`).join('');
 }
 
@@ -357,8 +435,6 @@ function applyLang() {
   restoreChat();
 }
 
-// Reloj de A Coruña. La zona se fija explicitamente para que la hora sea la de
-// Ignacio, no la del visitante. A Coruña comparte zona peninsular (Europe/Madrid).
 function startClock() {
   const el = document.getElementById('clock');
   if (!el) return;
@@ -374,99 +450,44 @@ function startClock() {
   setInterval(tick, 1000);
 }
 
-// Rastro pixelado bajo el cursor. El rAF solo corre mientras el rastro vive.
-let refreshPixelBg = () => {};
-
-function startPixelBg() {
-  const canvas = $('pxbg');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d', { alpha: true });
+// Halo ambiental suave reactivo al cursor (sin rastro residual)
+function startAmbientSpotlight() {
+  const root = document.documentElement;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const CELL = 7;
-  const RADIUS = 2.1;
-  const TRAIL_MS = 2800;
-  const MAX_POINTS = 20;
-  const MIN_DIST = 0.75;
-  let stamps = [];
-  let raf = 0;
-
-  const rgb = (raw, fallback) => {
-    const parts = (raw || fallback).split(',').map((n) => Number(n.trim()));
-    return parts.length === 3 && parts.every(Number.isFinite) ? parts : fallback.split(',').map(Number);
-  };
-
-  function size() {
-    const w = Math.max(1, Math.ceil(window.innerWidth / CELL));
-    const h = Math.max(1, Math.ceil(window.innerHeight / CELL));
-    if (canvas.width !== w || canvas.height !== h) {
-      canvas.width = w;
-      canvas.height = h;
-    }
-  }
-
-  function addStamp(px, py) {
-    const last = stamps[stamps.length - 1];
-    if (last && Math.hypot(px - last.x, py - last.y) < MIN_DIST) {
-      last.x = px;
-      last.y = py;
-      last.t = performance.now();
-      return;
-    }
-    stamps.push({ x: px, y: py, t: performance.now() });
-    if (stamps.length > MAX_POINTS) stamps.shift();
-  }
-
-  function paint(now) {
-    const w = canvas.width;
-    const h = canvas.height;
-    ctx.clearRect(0, 0, w, h);
-    stamps = stamps.filter((s) => now - s.t < TRAIL_MS);
-    const s = getComputedStyle(document.documentElement);
-    const [hr, hg, hb] = rgb(s.getPropertyValue('--px-hot'), '106,95,193');
-    for (const stamp of stamps) {
-      const fade = 1 - (now - stamp.t) / TRAIL_MS;
-      const a = fade * fade * 0.88;
-      const x0 = Math.max(0, Math.floor(stamp.x - RADIUS));
-      const y0 = Math.max(0, Math.floor(stamp.y - RADIUS));
-      const x1 = Math.min(w - 1, Math.ceil(stamp.x + RADIUS));
-      const y1 = Math.min(h - 1, Math.ceil(stamp.y + RADIUS));
-      for (let y = y0; y <= y1; y++) {
-        for (let x = x0; x <= x1; x++) {
-          const dist = Math.hypot(x - stamp.x, y - stamp.y);
-          if (dist > RADIUS) continue;
-          const t = 1 - dist / RADIUS;
-          ctx.fillStyle = `rgba(${hr},${hg},${hb},${(a * (0.2 + t * t * 0.8)).toFixed(3)})`;
-          ctx.fillRect(x, y, 1, 1);
-        }
-      }
-    }
-    if (stamps.length) raf = requestAnimationFrame(paint);
-    else raf = 0;
-  }
-
-  function onMove(e) {
-    addStamp(
-      (e.clientX / window.innerWidth) * canvas.width,
-      (e.clientY / window.innerHeight) * canvas.height,
-    );
-    if (!raf) raf = requestAnimationFrame(paint);
-  }
-
-  refreshPixelBg = size;
-  size();
-
   if (reduced) return;
 
-  window.addEventListener('pointermove', onMove, { passive: true });
-  window.addEventListener('resize', size);
+  let scheduled = false;
+  let clientX = window.innerWidth / 2;
+  let clientY = window.innerHeight / 3;
+
+  function update() {
+    root.style.setProperty('--mouse-x', `${clientX}px`);
+    root.style.setProperty('--mouse-y', `${clientY}px`);
+    root.style.setProperty('--spotlight-opacity', '1');
+    scheduled = false;
+  }
+
+  window.addEventListener('pointermove', (e) => {
+    clientX = e.clientX;
+    clientY = e.clientY;
+    if (!scheduled) {
+      scheduled = true;
+      requestAnimationFrame(update);
+    }
+  }, { passive: true });
+
+  document.addEventListener('pointerleave', () => {
+    root.style.setProperty('--spotlight-opacity', '0');
+  });
 }
 
 function init() {
   loadChatHistory();
   startClock();
   applyDark();
+  applyPalette(currentPalette);
   applyLang();
-  startPixelBg();
+  startAmbientSpotlight();
 
   $('themeBtn').addEventListener('click', () => { dark = !dark; applyDark(); });
   $('langBtn').addEventListener('click', () => { lang = lang === 'es' ? 'en' : 'es'; applyLang(); });

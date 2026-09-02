@@ -71,22 +71,29 @@ EXPERIENCIA PROFESIONAL:
 PROYECTOS:
 
 1. MonkeyGrab, sistema RAG local on-premises (2026)
+   GitHub: https://github.com/iDiagoValeta/localOllamaRAG
    Tecnologías: Ollama, ChromaDB, LlamaIndex, Flask, React.
    Sistema RAG multilingüe para PDFs centrado en privacidad, construido como proyecto
    final de grado, sin ninguna dependencia de APIs externas. Recuperación híbrida
    semántica y léxica, con back end en Flask e interfaz web en React.
 
 2. Pipeline de automatización OCR a CRM (2026)
+   GitHub: https://github.com/iDiagoValeta/ocr-crm-pipeline
    Tecnologías: Azure Functions, Azure Document Intelligence, GPT-4, RapidFuzz.
    Sustituyó la digitalización manual externalizada de formularios de matrícula
    manuscritos de una universidad privada por un pipeline serverless que escribe
    directamente en el CRM. Combina extracción OCR, cotejo difuso contra los catálogos
    institucionales y validación mediante GPT. En producción en CEU.
 
-3. Dataset Creator (2026)
-   Tecnologías: Python, procesamiento de PDF, JSONL, generación de preguntas y respuestas.
-   Pipeline local y reproducible para generar datasets supervisados de preguntas y
-   respuestas a partir de PDFs, con detección de idioma y controles de calidad.
+3. La Terminal (2026)
+   GitHub: https://github.com/iDiagoValeta/automated-news
+   Web: https://idiagovaleta.github.io/automated-news/
+   Tecnologías: TypeScript, Eleventy 3, DeepSeek, GitHub Actions, GitHub Pages.
+   Diario estático de noticias tech y repositorios trending en español, publicado cada
+   día en GitHub Pages. Pipeline serverless automatizado con recolección de fuentes
+   (RSS, Hacker News, GitHub Trending), desduplicación, enriquecimiento, curación y
+   redacción con LLMs, y validación estricta con JSON Schema sin necesidad de servidor
+   ni base de datos.
 
 FORMACIÓN Y RECONOCIMIENTOS:
 - Universitat Politècnica de València (UPV), Ingeniería Informática, especialidad en

@@ -30,7 +30,7 @@
 <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=90">
+<link rel="stylesheet" href="styles.css?v=94">
 
 <script type="application/ld+json">
 {
@@ -53,11 +53,8 @@
 <div class="lava" aria-hidden="true">
   <span class="lava-blob lava-a"></span>
   <span class="lava-blob lava-b"></span>
-  <span class="lava-blob lava-c"></span>
-  <span class="lava-blob lava-d"></span>
-  <span class="lava-blob lava-e"></span>
 </div>
-<canvas id="pxbg" class="pxbg" aria-hidden="true"></canvas>
+<div id="ambientSpotlight" class="ambient-spotlight" aria-hidden="true"></div>
 
 <a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
 
@@ -73,8 +70,12 @@
       <a href="#contacto" data-i18n="nav_contact">Contacto</a>
     </nav>
     <div class="hdr-act">
+      <div id="palettePicker" class="palette-picker" role="group" aria-label="Selector de paleta de color"></div>
       <button id="langBtn" class="ico" type="button" aria-label="Cambiar idioma">EN</button>
-      <button id="themeBtn" class="ico" type="button" aria-label="Cambiar tema">◐</button>
+      <button id="themeBtn" class="ico ico-theme" type="button" aria-label="Cambiar tema">
+        <svg class="theme-svg theme-svg-sun" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="theme-svg theme-svg-moon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
       <a class="ico" href="resume.pdf" target="_blank" rel="noopener" data-i18n="cv">CV</a>
     </div>
   </div>
@@ -92,13 +93,13 @@
       <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener">GitHub</a>
       <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener">Hugging Face</a>
       <a href="mailto:nadiva1243@gmail.com">Email</a>
+      <a href="https://idiagovaleta.github.io/automated-news/" target="_blank" rel="noopener" data-i18n="news_link">La Terminal</a>
     </div>
   </div>
   <div class="hero-side">
-    <aside class="now">
-      <div class="now-k" data-i18n="now_k">PUESTO ACTUAL</div>
-      <div class="now-v">AI Engineer<br>Inditex</div>
-      <div class="now-d" data-i18n="now_d">Desde septiembre 2026</div>
+    <aside class="about-card">
+      <div class="about-k" data-i18n="about_k">SOBRE MÍ</div>
+      <p class="about-v" data-i18n="about_v">AI &amp; Back-End Engineer especializado en la orquestación de sistemas LLM, arquitecturas RAG y back ends escalables en producción. Graduado en Ingeniería Informática por la UPV.</p>
     </aside>
     <div class="clock" aria-live="off">
       <span class="clock-k" data-i18n="clock_k">HORA LOCAL</span>
@@ -128,14 +129,17 @@
   <p class="lead" data-i18n="chat_lead">Asistente con el contexto completo del perfil. Responde con los datos reales del CV.</p>
   <div class="box chat">
     <div class="chat-head">
-      <span data-i18n="chat_head">Asistente</span>
+      <div class="chat-head-title">
+        <span class="chat-dot"></span>
+        <span data-i18n="chat_head">Asistente</span>
+      </div>
       <button id="chatClear" class="chat-clear" type="button" data-i18n="chat_clear">Limpiar</button>
     </div>
-    <div id="chatMsgs" class="chat-msgs" role="log" aria-live="polite"></div>
+    <div id="chatMsgs" class="chat-msgs" aria-live="polite"></div>
     <div id="chatSuggestions" class="chat-sugg"></div>
-    <form class="chat-form" id="chatForm">
-      <input id="chatInput" type="text" autocomplete="off" data-i18n-ph="chat_ph" placeholder="Escribe tu pregunta">
-      <button id="chatSend" type="submit" class="btn" data-i18n="chat_send">Enviar</button>
+    <form id="chatForm" class="chat-form">
+      <input id="chatInput" type="text" autocomplete="off" placeholder="Escribe tu pregunta..." data-i18n-ph="chat_ph">
+      <button id="chatSend" type="submit" data-i18n="chat_send">Enviar</button>
     </form>
   </div>
 </section>
@@ -155,6 +159,6 @@
   <span class="mono">2026</span>
 </footer>
 
-<script type="module" src="app.js?v=51"></script>
+<script type="module" src="app.js?v=55"></script>
 </body>
 </html>
