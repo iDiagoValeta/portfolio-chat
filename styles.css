@@ -330,14 +330,14 @@ body::before{
   .lava-blob{animation:none}
 }
 
-/* Halo reactivo al ratón que altera el entorno en tiempo real */
+/* Halo reactivo al ratón en el fondo ambiental (estrictamente detrás del contenido) */
 .ambient-spotlight{
   position:fixed;
   inset:0;
-  z-index:4;
+  z-index:0;
   pointer-events:none;
   background:radial-gradient(
-    520px circle at var(--mouse-x, 50vw) var(--mouse-y, 35vh),
+    580px circle at var(--mouse-x, 50vw) var(--mouse-y, 35vh),
     var(--spotlight-color),
     transparent 68%
   );
