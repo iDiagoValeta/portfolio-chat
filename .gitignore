@@ -4,3 +4,6 @@
 # Python
 __pycache__/
 *.pyc
+
+# Claude Code per-machine settings
+.claude/settings.local.json
