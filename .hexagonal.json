@@ -1,0 +1,8 @@
+{
+  "core": ["portfolio/chat.py"],
+  "ports": ["portfolio/ports.py"],
+  "driving_adapters": ["portfolio/web.py"],
+  "driven_adapters": ["portfolio/deepseek.py"],
+  "composition_root": ["server.py"],
+  "forbidden_in_core": ["urllib", "http", "socket", "ssl", "requests"]
+}
