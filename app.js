@@ -1,144 +1,139 @@
-import { PORTFOLIO_INFO } from './config.js?v=52';
-
-// Contenido bilingüe. Fuente: CV vigente (iDiagoValeta/resume), 2026-09-02.
+// Contenido bilingüe. Fuentes: CV vigente (iDiagoValeta/resume, 2026-09-02) y, para los
+// proyectos, los README y descripciones de los repositorios públicos (2026-11-07).
 const T = {
   es: {
-    skip: 'Saltar al contenido', cv: 'CV',
-    nav_exp: 'Experiencia', nav_proj: 'Proyectos', nav_chat: 'Chat', nav_contact: 'Contacto',
-    role: 'AI & Back-End Engineer',
-    about_k: 'SOBRE MÍ',
-    about_v: 'AI & Back-End Engineer especializado en la orquestación de sistemas LLM, arquitecturas RAG y back ends escalables en producción. Graduado en Ingeniería Informática por la UPV.',
-    news_link: 'La Terminal',
-    proj_code: 'Código',
-    proj_demo: 'Web en vivo',
-    exp_title: 'Experiencia', proj_title: 'Proyectos',
-    edu_title: 'Formación', chat_title: 'Pregunta a la IA', contact_title: 'Contacto',
-    chat_lead: 'Asistente con el contexto completo del perfil. Responde con los datos reales del CV.',
-    chat_ph: 'Escribe tu pregunta', chat_send: 'Enviar',
-    chat_head: 'Asistente', chat_clear: 'Limpiar', foot: 'A Coruña, España', clock_k: 'HORA LOCAL',
-    chat_welcome: 'Hola. Tengo el contexto completo del perfil de Ignacio: experiencia, proyectos, stack y formación. ¿Qué quieres saber?',
-    chat_user_avatar: 'TÚ',
-    chat_suggestions: ['¿Qué hizo en Auro AI?', '¿Qué experiencia tiene con RAG?', '¿Qué stack domina?', '¿Dónde trabaja ahora?'],
-    contact_lead: 'Disponible para hablar de proyectos con impacto real.',
+    skip: 'Saltar al contenido', cv: 'Descargar CV', cv_full: 'Ver el CV completo',
+    lang_label: 'Switch to English', theme_label: 'Cambiar tema',
+    role: 'AI Engineer en Inditex',
+    nav_about: 'Sobre mí', nav_chat: 'Pregúntale a mi CV', nav_chat_short: 'Pregúntale', nav_exp: 'Experiencia', nav_proj: 'Proyectos', nav_contact: 'Contacto',
+    lede: 'Llevo sistemas de IA y NLP del prototipo a producción.',
+    now: [
+      ['Ahora', 'AI Engineer en Inditex, A Coruña.'],
+      ['Construyo', 'Herramientas open source.'],
+      ['Me interesa', 'Modelos locales, privacidad y agentes autónomos.'],
+    ],
+    about: [
+      'Creo que la buena tecnología es la que se nota poco y resuelve mucho. Me atraen los modelos que corren donde están los datos, los agentes que saben cuándo parar y preguntar, y las herramientas que evitan reinventar lo que ya existe.',
+      'Pasé varios años enseñando matemáticas, física e historia de la computación, y me quedó una convicción: entender a fondo cómo funciona algo es la mejor forma de construir lo siguiente. Por eso no me caso con ninguna herramienta y elijo la que mejor resuelve cada problema.',
+      'Graduado en Ingeniería Informática por la UPV, hoy soy **AI Engineer en Inditex**, en A Coruña, después de llevar sistemas de IA a producción como **Technical Lead en Auro AI** y en **Grupo CEU**. Fuera del trabajo construyo herramientas open source y mantengo **La Terminal**, un diario tecnológico que se publica solo cada día.',
+    ],
+    chat_title: 'Asistente con el contexto de mi CV',
+    chat_lead: 'Responde únicamente con información real de mi trayectoria, en el idioma en que le escribas.',
+    chat_ph: 'Escribe tu pregunta', chat_send: 'Enviar', chat_clear: 'Limpiar',
+    chat_note: 'Máximo 6 preguntas por minuto y 40 al día.',
+    chat_welcome: 'Hola. Pregúntame por la experiencia, los proyectos o la formación de Ignacio.',
+    chat_suggestions: ['¿Qué hizo en Auro AI?', '¿Qué experiencia tiene en NLP?', '¿Qué es mouseketool?', '¿Qué ha llevado a producción?'],
+    chat_limit: 'Has alcanzado el límite de preguntas por ahora. Vuelve a intentarlo más tarde o escribe a nadiva1243@gmail.com.',
+    chat_fail: 'No he podido responder ahora mismo. Inténtalo de nuevo en unos segundos.',
     exp: [
-      { role: 'AI Engineer', note: '', company: 'Inditex · Graduate program', date: 'SEP 2026 → ACTUAL', lead: true,
-        desc: 'Incorporación al **graduate program de tecnología** de Inditex.' },
-      { role: 'Technical Lead', note: '', company: 'Auro AI · Valencia', date: 'JUN 2026 → SEP 2026',
-        desc: 'Dirección técnica de un asistente de IA que lee facturas de energía y telecomunicaciones por WhatsApp y cambia al usuario a la mejor tarifa de España. A cargo del back end: un **monorepo TypeScript de seis apps** sobre PostgreSQL, Docker y Google Cloud Platform, con **despliegues sin caída**. Definición del **estándar de ingeniería del equipo**.', },
-      { role: 'AI & Back-End Developer', note: '', company: 'Grupo Educativo CEU · Valencia', date: 'OCT 2025 → JUN 2026',
-        desc: '**GPT-CEU**, asistente de IA generativa para las **tres universidades del grupo** por web y WhatsApp, con enrutado por rol para estudiantes, profesorado y personal. Modelos de lenguaje conectados a fuentes institucionales mediante Azure Functions y **pipelines RAG**, respondiendo con información académica en tiempo real **en producción**.' },
-      { role: 'Guía e instructor de talleres técnicos', note: '', company: 'Museo de Informática, UPV · Valencia', date: 'FEB 2025 → JUN 2025',
-        desc: 'Diseño e impartición de talleres de robótica, criptografía y programación, y visitas guiadas sobre historia de la computación.' },
-      { role: 'Profesor particular', note: '', company: 'Superprof · Valencia', date: 'ENE 2022 → ENE 2025',
-        desc: 'Formación personalizada en matemáticas, física y dibujo técnico para secundaria y preuniversitario.' },
+      { date: 'Desde sep 2026', role: 'AI Engineer', org: 'Inditex',
+        desc: '' },
+      { date: 'Jun a sep 2026', role: 'Technical Lead', org: 'Auro AI',
+        desc: 'Liderazgo técnico de un asistente de IA que analiza facturas de energía y telecomunicaciones por WhatsApp y cambia al usuario a la tarifa más competitiva del mercado español. Responsable del back-end: un **monorepo de seis aplicaciones** con **zero-downtime deployments** y rollback automático. Definí los estándares de ingeniería de un equipo de cuatro personas.' },
+      { date: 'Oct 2025 a jun 2026', role: 'AI & Back-End Developer', org: 'Grupo Educativo CEU',
+        desc: 'Desarrollo y despliegue de **GPT-CEU**, asistente de IA generativa para las **tres universidades del grupo** en web y WhatsApp, con routing por perfil para estudiantes, profesorado y personal. Integración de LLMs con las fuentes de datos institucionales mediante pipelines de NLP, con información académica en tiempo real **en producción**.' },
+      { date: 'Feb a jun 2025', role: 'Museum Guide & Technical Workshop Instructor', org: 'Museo de Informática, UPV',
+        desc: 'Diseño e impartición de talleres de robótica, criptografía y programación, y visitas guiadas sobre la historia de la computación.' },
+      { date: 'Ene 2022 a ene 2025', role: 'Private Tutor', org: 'Superprof',
+        desc: 'Formación personalizada en matemáticas, física y dibujo técnico para secundaria y bachillerato.' },
     ],
     proj: [
-      {
-        t: 'MonkeyGrab',
-        tech: 'Ollama · ChromaDB · LlamaIndex · React · Flask',
-        d: 'Sistema RAG multilingüe para PDFs centrado en privacidad, sin dependencias de APIs externas. Recuperación híbrida semántica y léxica. Proyecto final de grado (UPV).',
-        repo: 'https://github.com/iDiagoValeta/localOllamaRAG',
-      },
-      {
-        t: 'OCR a CRM',
-        tech: 'Azure Functions · Document Intelligence · GPT-4 · RapidFuzz',
-        d: 'Sustituyó la digitalización manual externalizada de matrículas manuscritas por un pipeline serverless que escribe directo en el CRM. En producción en CEU.',
-        repo: 'https://github.com/iDiagoValeta/ocr-crm-pipeline',
-      },
-      {
-        t: 'La Terminal',
-        tech: 'TypeScript · Eleventy 3 · DeepSeek · GitHub Actions',
-        d: 'Diario estático de noticias tech y repositorios trending en español, publicado cada día en GitHub Pages. Pipeline serverless automatizado con curación LLM (DeepSeek) y validación JSON Schema sin servidor ni base de datos.',
-        repo: 'https://github.com/iDiagoValeta/automated-news',
-        demo: 'https://idiagovaleta.github.io/automated-news/',
-      },
+      { t: 'MonkeyGrab', img: 'images/projects/monkeygrab.jpg', alt: 'Respuesta de MonkeyGrab citando el documento y la página de origen',
+        d: 'Un NotebookLM de código abierto que funciona en local: consulta tus documentos con modelos abiertos sin que ningún dato salga de tu equipo. Genera resúmenes, esquemas y tests, entiende texto e imágenes en castellano, inglés y valenciano, y combina hybrid search con reranking. Trabajo de fin de grado.',
+        links: [['Código', 'https://github.com/iDiagoValeta/localOllamaRAG'], ['Memoria del TFG', 'https://github.com/iDiagoValeta/academic-monkeygrab']] },
+      { t: 'mouseketool', img: 'images/projects/mouseketool.jpg', alt: 'Veredicto de mouseketool con ventajas e inconvenientes de cada candidato',
+        d: 'Antes de construir, comprueba si ya existe. Un MCP server y una Agent Skill que localizan proyectos open source en GitHub, revisan su código y emiten un veredicto: reutilizar, adaptar, partir de uno o construir desde cero.',
+        links: [['Código', 'https://github.com/iDiagoValeta/mouseketool']] },
+      { t: 'La Terminal', img: 'images/projects/la-terminal.jpg', alt: 'Portada de La Terminal',
+        d: 'Publicación tecnológica en español generada de forma autónoma cada día: un pipeline de LLMs recopila fuentes, elimina duplicados, selecciona y redacta las noticias, y las publica sin servidor ni base de datos.',
+        links: [['Web', 'https://idiagovaleta.github.io/automated-news/'], ['Código', 'https://github.com/iDiagoValeta/automated-news']] },
+      { t: 'jev-decision-gate', img: 'images/projects/jev-decision-gate.jpg', alt: 'jev-decision-gate bloqueando una acción irreversible',
+        d: 'Permission gate para coding agents: bloquea acciones irreversibles antes de su ejecución, aprueba automáticamente el trabajo rutinario y solo escala a una persona cuando es necesario. Incluye una variante que decide con un modelo local.',
+        links: [['Código', 'https://github.com/iDiagoValeta/jev-decision-gate'], ['Variante local', 'https://github.com/iDiagoValeta/ollaya-decision-gate']] },
     ],
-    edu: [
-      { t: 'Universitat Politècnica de València', d: 'Ingeniería Informática, especialidad en Computación', y: '2026' },
-    ],
+    more_proj: 'Más proyectos en GitHub',
+    contact_big: '¿Hablamos?',
+    contact_lead: 'Abierto a conversar sobre proyectos interesantes.',
   },
   en: {
-    skip: 'Skip to content', cv: 'CV',
-    nav_exp: 'Experience', nav_proj: 'Projects', nav_chat: 'Chat', nav_contact: 'Contact',
-    role: 'AI & Back-End Engineer',
-    about_k: 'ABOUT ME',
-    about_v: 'AI & Back-End Engineer focused on production: LLM orchestration, RAG systems, and scalable serverless architectures. Computer Science graduate from UPV.',
-    news_link: 'La Terminal',
-    proj_code: 'Code',
-    proj_demo: 'Live Demo',
-    exp_title: 'Experience', proj_title: 'Projects',
-    edu_title: 'Education', chat_title: 'Ask the AI', contact_title: 'Contact',
-    chat_lead: 'Assistant with full context of the profile. Answers with the real data from the CV.',
-    chat_ph: 'Type your question', chat_send: 'Send',
-    chat_head: 'Assistant', chat_clear: 'Clear', foot: 'A Coruña, Spain', clock_k: 'LOCAL TIME',
-    chat_welcome: 'Hi. I have full context on Ignacio: experience, projects, stack and education. What would you like to know?',
-    chat_user_avatar: 'YOU',
-    chat_suggestions: ['What did he do at Auro AI?', 'What RAG experience does he have?', 'What is his stack?', 'Where does he work now?'],
-    contact_lead: 'Open to talking about projects with real impact.',
+    skip: 'Skip to content', cv: 'Download CV', cv_full: 'View the full CV',
+    lang_label: 'Cambiar a español', theme_label: 'Toggle theme',
+    role: 'AI Engineer at Inditex',
+    nav_about: 'About', nav_chat: 'Ask my CV', nav_chat_short: 'Ask', nav_exp: 'Experience', nav_proj: 'Projects', nav_contact: 'Contact',
+    lede: 'I take AI and NLP systems from prototype to production.',
+    now: [
+      ['Now', 'AI Engineer at Inditex, A Coruña.'],
+      ['Building', 'Open source tools.'],
+      ['Into', 'Local models, privacy and autonomous agents.'],
+    ],
+    about: [
+      'I believe good technology is the kind you barely notice and that solves a lot. I am drawn to models that run where the data lives, agents that know when to stop and ask, and tools that avoid reinventing what already exists.',
+      'I spent several years teaching mathematics, physics and the history of computing, and it left me with a conviction: understanding deeply how something works is the best way to build the next thing. That is why I am not wedded to any tool and pick whichever solves each problem best.',
+      'A Computer Engineering graduate from UPV, I am now an **AI Engineer at Inditex**, in A Coruña, after taking AI systems to production as **Technical Lead at Auro AI** and at **Grupo CEU**. Outside work I build open source tools and run **La Terminal**, a tech digest that publishes itself every day.',
+    ],
+    chat_title: 'An assistant with the context of my CV',
+    chat_lead: 'It answers only with real information from my career, in the language you write in.',
+    chat_ph: 'Type your question', chat_send: 'Send', chat_clear: 'Clear',
+    chat_note: 'Up to 6 questions per minute and 40 per day.',
+    chat_welcome: 'Hi. Ask me about Ignacio’s experience, projects or education.',
+    chat_suggestions: ['What did he do at Auro AI?', 'What NLP experience does he have?', 'What is mouseketool?', 'What has he shipped to production?'],
+    chat_limit: 'You have reached the question limit for now. Try again later or write to nadiva1243@gmail.com.',
+    chat_fail: 'I could not answer right now. Try again in a few seconds.',
     exp: [
-      { role: 'AI Engineer', note: '', company: 'Inditex · Graduate program', date: 'SEP 2026 → PRESENT', lead: true,
-        desc: 'Joining the Inditex **technology graduate program**.' },
-      { role: 'Technical Lead', note: '', company: 'Auro AI · Valencia', date: 'JUN 2026 → SEP 2026',
-        desc: 'Led the technical development of an AI assistant that reads energy and telecom bills over WhatsApp and switches users to the best tariff in Spain. In charge of the back end: a **six-app TypeScript monorepo** over PostgreSQL, Docker and Google Cloud Platform, with **zero-downtime deploys**. Defined the team\'s **engineering standard**.', },
-      { role: 'AI & Back-End Developer', note: '', company: 'Grupo Educativo CEU · Valencia', date: 'OCT 2025 → JUN 2026',
-        desc: 'Developed and deployed **GPT-CEU**, a generative AI assistant serving the group’s **three universities** over web and WhatsApp, with role-aware routing for students, faculty and staff. Connected language models to institutional data sources through serverless Azure Functions and **RAG pipelines**, answering with real-time academic information **in production**.' },
-      { role: 'Museum guide & technical workshop instructor', note: '', company: 'Museo de Informática, UPV · Valencia', date: 'FEB 2025 → JUN 2025',
-        desc: 'Designed and delivered technical workshops on robotics, cryptography and programming, and led guided visits on the history of computing.' },
-      { role: 'Private tutor', note: '', company: 'Superprof · Valencia', date: 'JAN 2022 → JAN 2025',
-        desc: 'Personalized instruction in mathematics, physics and technical drawing for secondary and pre-university students.' },
+      { date: 'Since Sep 2026', role: 'AI Engineer', org: 'Inditex',
+        desc: '' },
+      { date: 'Jun to Sep 2026', role: 'Technical Lead', org: 'Auro AI',
+        desc: 'Technical leadership of an AI assistant that analyses energy and telecom bills over WhatsApp and switches users to the most competitive tariff in Spain. Owned the back-end: a **six-app monorepo** with **zero-downtime deployments** and automatic rollback. Defined the engineering standards for a team of four.' },
+      { date: 'Oct 2025 to Jun 2026', role: 'AI & Back-End Developer', org: 'Grupo Educativo CEU',
+        desc: 'Built and deployed **GPT-CEU**, a generative AI assistant serving the group’s **three universities** over web and WhatsApp, with role-based routing for students, faculty and staff. Integrated LLMs with institutional data sources through NLP pipelines, delivering real-time academic information **in production**.' },
+      { date: 'Feb to Jun 2025', role: 'Museum Guide & Technical Workshop Instructor', org: 'Museo de Informática, UPV',
+        desc: 'Designed and delivered workshops on robotics, cryptography and programming, and led guided tours on the history of computing.' },
+      { date: 'Jan 2022 to Jan 2025', role: 'Private Tutor', org: 'Superprof',
+        desc: 'Personalised tuition in mathematics, physics and technical drawing for secondary and pre-university students.' },
     ],
     proj: [
-      {
-        t: 'MonkeyGrab',
-        tech: 'Ollama · ChromaDB · LlamaIndex · React · Flask',
-        d: 'Privacy-focused multilingual RAG system for PDFs with zero external API dependencies. Hybrid semantic and lexical retrieval. Final degree project (UPV).',
-        repo: 'https://github.com/iDiagoValeta/localOllamaRAG',
-      },
-      {
-        t: 'OCR to CRM',
-        tech: 'Azure Functions · Document Intelligence · GPT-4 · RapidFuzz',
-        d: 'Replaced outsourced manual digitization of handwritten enrollment forms with a serverless pipeline writing straight into the CRM. Running in production at CEU.',
-        repo: 'https://github.com/iDiagoValeta/ocr-crm-pipeline',
-      },
-      {
-        t: 'La Terminal',
-        tech: 'TypeScript · Eleventy 3 · DeepSeek · GitHub Actions',
-        d: 'Daily static tech news and trending open-source digest in Spanish, published daily to GitHub Pages. Serverless pipeline powered by LLM curation (DeepSeek) and JSON Schema validation without database or server.',
-        repo: 'https://github.com/iDiagoValeta/automated-news',
-        demo: 'https://idiagovaleta.github.io/automated-news/',
-      },
+      { t: 'MonkeyGrab', img: 'images/projects/monkeygrab.jpg', alt: 'A MonkeyGrab answer citing the source document and page',
+        d: 'An open source, local NotebookLM: query your documents with open models without any data leaving your machine. It generates summaries, outlines and quizzes, understands text and images in Spanish, English and Valencian, and combines hybrid search with reranking. Final degree project.',
+        links: [['Code', 'https://github.com/iDiagoValeta/localOllamaRAG'], ['Thesis', 'https://github.com/iDiagoValeta/academic-monkeygrab']] },
+      { t: 'mouseketool', img: 'images/projects/mouseketool.jpg', alt: 'A mouseketool verdict with pros and cons per candidate',
+        d: 'Before you build it, check it exists. An MCP server and Agent Skill that find open source projects on GitHub, review their code and deliver a verdict: reuse, adapt, use as a base or build from scratch.',
+        links: [['Code', 'https://github.com/iDiagoValeta/mouseketool']] },
+      { t: 'La Terminal', img: 'images/projects/la-terminal.jpg', alt: 'La Terminal front page',
+        d: 'A Spanish tech publication generated autonomously every day: an LLM pipeline collects sources, removes duplicates, curates and writes the stories, and publishes them with no server or database.',
+        links: [['Website', 'https://idiagovaleta.github.io/automated-news/'], ['Code', 'https://github.com/iDiagoValeta/automated-news']] },
+      { t: 'jev-decision-gate', img: 'images/projects/jev-decision-gate.jpg', alt: 'jev-decision-gate blocking an irreversible action',
+        d: 'A permission gate for coding agents: blocks irreversible actions before they run, auto-approves routine work and only escalates to a human when it matters. Includes a variant that decides with a local model.',
+        links: [['Code', 'https://github.com/iDiagoValeta/jev-decision-gate'], ['Local variant', 'https://github.com/iDiagoValeta/ollaya-decision-gate']] },
     ],
-    edu: [
-      { t: 'Universitat Politècnica de València', d: 'Computer Engineer, Computing specialization', y: '2026' },
-    ],
+    more_proj: 'More projects on GitHub',
+    contact_big: 'Let’s talk',
+    contact_lead: 'Open to conversations about interesting projects.',
   },
 };
-
-const PALETTES = [
-  { id: 'lime', name: 'Electric Lime', color: '#c2ef4e' },
-  { id: 'emerald', name: 'Cyber Emerald', color: '#10b981' },
-  { id: 'amber', name: 'Warm Amber', color: '#f59e0b' },
-  { id: 'cyan', name: 'Neon Cyan', color: '#06b6d4' },
-  { id: 'mono', name: 'Monochrome', color: '#e4e4e7' },
-];
-
-let currentPalette = localStorage.getItem('portfolio_palette') || 'lime';
 
 const STORAGE_KEY = 'portfolio_chat_history_v3';
 const CHAT_TIMEOUT = 60000;
 
-let lang = localStorage.getItem('lang') || 'es';
-const savedDark = localStorage.getItem('dark');
-let dark = savedDark !== null ? savedDark !== 'false' : true;
+let lang = localStorage.getItem('lang') === 'en' ? 'en' : 'es';
 let chatHistory = [];
 let isProcessing = false;
 
 const $ = (id) => document.getElementById(id);
+const motion = () => (matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 // Enfasis controlado: **texto** pasa a <strong> despues de escapar, nunca antes.
-const fmt = (s) => esc(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+// Cada mención de una empresa o de La Terminal enlaza a su web. GPT-CEU no cuenta: es el proyecto, no la institución.
+const ORGS = [
+  ['Grupo Educativo CEU', 'https://www.ceu.es/'], ['Grupo CEU', 'https://www.ceu.es/'],
+  ['Auro AI', 'https://aurobot.ai/'], ['Inditex', 'https://www.inditex.com/'],
+  ['La Terminal', 'https://idiagovaleta.github.io/automated-news/'],
+];
+const ORG_RE = new RegExp(`(?<![\\w-])(${ORGS.map(([n]) => n).join('|')})(?![\\w-])`, 'g');
+const linkOrgs = (html) => html.replace(ORG_RE, (name) => `<a class="org-link" href="${ORGS.find(([n]) => n === name)[1]}" target="_blank" rel="noopener">${name}</a>`);
+const fmt = (s) => linkOrgs(esc(s).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>'));
+const external = (url) => /^https?:/.test(url) ? ' target="_blank" rel="noopener"' : '';
 
-// --- Chat: sanitizado, markdown e historial (sin cambios respecto a la versión anterior) ---
+// --- Chat: sanitizado, markdown e historial ---
 
 function sanitizeHtml(html) {
   if (!html) return '';
@@ -188,21 +183,30 @@ function loadChatHistory() {
   } catch (_e) { chatHistory = []; }
 }
 
-function appendMsg(role, html, smooth = false) {
+// role: 'user' | 'bot' | 'error'. El texto del usuario entra por textContent, nunca como HTML.
+function appendMsg(role, content, smooth = false) {
   const msgs = $('chatMsgs');
-  const isBot = role === 'bot';
   const div = document.createElement('div');
-  div.className = `msg ${isBot ? 'msg-bot' : 'msg-user'}`;
-  div.innerHTML = `<div class="msg-avatar">${isBot ? 'AI' : T[lang].chat_user_avatar}</div><div class="msg-bubble">${html}</div>`;
+  div.className = `msg ${role === 'user' ? 'msg-user' : 'msg-bot'}${role === 'error' ? ' msg-error' : ''}`;
+  div.innerHTML = '<div class="msg-body"></div>';
+  const body = div.querySelector('.msg-body');
+  if (role === 'user') {
+    const p = document.createElement('p');
+    p.textContent = content;
+    body.appendChild(p);
+  } else {
+    body.innerHTML = content;
+  }
   msgs.appendChild(div);
-  if (smooth) msgs.scrollTo({ top: msgs.scrollHeight, behavior: 'smooth' });
+  if (smooth) msgs.scrollTo({ top: msgs.scrollHeight, behavior: motion() });
   else msgs.scrollTop = msgs.scrollHeight;
+  return div;
 }
 
 function renderSuggestions(list) {
   const wrap = $('chatSuggestions');
-  wrap.innerHTML = list.map((s) => `<button type="button" class="sugg" data-text="${esc(s)}">${esc(s)}</button>`).join('');
-  wrap.querySelectorAll('.sugg').forEach((btn) => {
+  wrap.innerHTML = list.map((s) => `<button type="button" class="sugg-cell" data-text="${esc(s)}">${esc(s)}</button>`).join('');
+  wrap.querySelectorAll('.sugg-cell').forEach((btn) => {
     btn.addEventListener('click', () => sendMsg(btn.dataset.text || ''));
   });
 }
@@ -210,21 +214,20 @@ function renderSuggestions(list) {
 function clearChat() {
   chatHistory = [];
   saveChatHistory();
-  $('chatMsgs').innerHTML = '';
-  appendMsg('bot', `<p>${T[lang].chat_welcome}</p>`);
+  restoreChat();
   $('chatInput').focus();
 }
 
 function restoreChat() {
   $('chatMsgs').innerHTML = '';
   if (chatHistory.length === 0) {
-    appendMsg('bot', `<p>${T[lang].chat_welcome}</p>`);
+    appendMsg('bot', `<p>${esc(T[lang].chat_welcome)}</p>`);
     return;
   }
   chatHistory.forEach((msg) => {
     const text = msg?.content || '';
     if (!text) return;
-    if (msg.role === 'user') appendMsg('user', `<p>${esc(text)}</p>`);
+    if (msg.role === 'user') appendMsg('user', text);
     if (msg.role === 'assistant') appendMsg('bot', sanitizeHtml(mdToHtml(text)));
   });
 }
@@ -232,14 +235,8 @@ function restoreChat() {
 async function requestGemini(userMessage, onToken) {
   chatHistory.push({ role: 'user', content: userMessage });
 
-  const requestBody = {
-    model: 'deepseek-v4-flash',
-    messages: [{ role: 'system', content: PORTFOLIO_INFO }, ...chatHistory],
-    temperature: 0.7,
-    max_tokens: 8192,
-    reasoning_effort: 'low',
-    stream: true,
-  };
+  // El servidor fija modelo, parámetros y contexto (config.js); aquí solo va la conversación.
+  const requestBody = { messages: chatHistory };
 
   let response;
   for (let attempt = 0; attempt < 2; attempt += 1) {
@@ -257,15 +254,19 @@ async function requestGemini(userMessage, onToken) {
       clearTimeout(timeoutId);
       throw error;
     }
-    if (response.status === 429 && attempt === 0) {
-      await new Promise((resolve) => setTimeout(resolve, 20000));
+    // Reintenta una vez solo si el servidor pide una espera corta; un tope diario no se arregla esperando.
+    const retryAfter = Number(response.headers.get('Retry-After')) || 0;
+    if (response.status === 429 && attempt === 0 && retryAfter > 0 && retryAfter <= 20) {
+      await new Promise((resolve) => setTimeout(resolve, retryAfter * 1000));
       continue;
     }
     break;
   }
 
+  if (response.status === 429) throw new Error(T[lang].chat_limit);
+
   if (!response.ok) {
-    let message = `Error HTTP ${response.status}`;
+    let message = T[lang].chat_fail;
     try {
       const errorData = await response.json();
       message = errorData.error?.message || message;
@@ -292,7 +293,7 @@ async function requestGemini(userMessage, onToken) {
       if (payload === '[DONE]') continue;
       try {
         const json = JSON.parse(payload);
-        if (json.error) throw new Error(json.error.message || 'Error de la API');
+        if (json.error) throw new Error(json.error.message || T[lang].chat_fail);
         const token = json.choices?.[0]?.delta?.content;
         if (token) { fullText += token; onToken(fullText); }
       } catch (error) {
@@ -301,7 +302,7 @@ async function requestGemini(userMessage, onToken) {
     }
   }
 
-  if (!fullText) throw new Error('La API no devolvió ninguna respuesta');
+  if (!fullText) throw new Error(T[lang].chat_fail);
 
   chatHistory.push({ role: 'assistant', content: fullText });
   saveChatHistory();
@@ -317,104 +318,83 @@ async function sendMsg(text = '') {
   isProcessing = true;
   $('chatSend').disabled = true;
   input.value = '';
-  appendMsg('user', `<p>${esc(userText)}</p>`, true);
+  appendMsg('user', userText, true);
 
-  const loader = document.createElement('div');
-  loader.className = 'msg msg-bot';
-  loader.innerHTML = '<div class="msg-avatar">AI</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
-  $('chatMsgs').appendChild(loader);
-  $('chatMsgs').scrollTop = $('chatMsgs').scrollHeight;
-  const bubble = loader.querySelector('.msg-bubble');
+  // Los puntos siguen mientras el modelo razona y se sustituyen por el texto con el primer token.
+  const live = appendMsg('bot', '<div class="typing"><span></span><span></span><span></span></div>');
+  const body = live.querySelector('.msg-body');
 
   try {
     await requestGemini(userText, (fullText) => {
-      bubble.innerHTML = sanitizeHtml(mdToHtml(fullText));
+      body.innerHTML = sanitizeHtml(mdToHtml(fullText));
       $('chatMsgs').scrollTop = $('chatMsgs').scrollHeight;
     });
   } catch (error) {
-    loader.remove();
+    live.remove();
     if (chatHistory.at(-1)?.role === 'user') { chatHistory.pop(); saveChatHistory(); }
-    appendMsg('bot', `<p>${esc(error.message || 'Hubo un error. Inténtalo de nuevo.')}</p>`);
+    appendMsg('error', `<p>${esc(error.name === 'AbortError' ? T[lang].chat_fail : (error.message || T[lang].chat_fail))}</p>`);
   } finally {
     isProcessing = false;
     $('chatSend').disabled = false;
   }
 }
 
-// --- Tema e idioma ---
+// --- Tema ---
 
-function applyDark() {
+function applyDark(dark) {
   document.documentElement.classList.toggle('dark', dark);
   document.documentElement.classList.toggle('light', !dark);
-  localStorage.setItem('dark', String(dark));
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#221a10' : '#f1e9dd');
 }
 
-function applyPalette(pal) {
-  if (!PALETTES.some((p) => p.id === pal)) pal = 'lime';
-  currentPalette = pal;
-  localStorage.setItem('portfolio_palette', pal);
-  document.documentElement.setAttribute('data-palette', pal);
-  renderPalettePicker();
+function toggleDark() {
+  const dark = !document.documentElement.classList.contains('dark');
+  applyDark(dark);
+  try { localStorage.setItem('dark', String(dark)); } catch (_e) {}
 }
 
-function renderPalettePicker() {
-  const container = $('palettePicker');
-  if (!container) return;
-  container.innerHTML = PALETTES.map((p) => `
-    <button type="button" class="pal-dot ${p.id === currentPalette ? 'active' : ''}" 
-            data-palette="${p.id}" title="${p.name}" aria-label="Paleta ${p.name}"
-            style="--dot-color:${p.color}">
-    </button>
-  `).join('');
-  container.querySelectorAll('.pal-dot').forEach((btn) => {
-    btn.addEventListener('click', () => applyPalette(btn.dataset.palette));
-  });
+
+// --- Secciones ---
+
+
+function renderAbout(paragraphs, now) {
+  $('aboutText').innerHTML = paragraphs.map((p) => `<p>${fmt(p)}</p>`).join('');
+  $('nowList').innerHTML = now.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${linkOrgs(esc(v))}</dd></div>`).join('');
 }
 
 function renderExp(list) {
   $('expList').innerHTML = list.map((j) => `
-    <article class="job${j.lead ? ' lead-job' : ''}">
-      <div class="job-h">
-        <div class="job-t">${esc(j.role)}${j.note ? ` <small>(${esc(j.note)})</small>` : ''}</div>
-        <div class="job-d">${esc(j.date)}</div>
+    <li class="item">
+      <div class="item-side">${esc(j.date)}</div>
+      <div>
+        <h3>${esc(j.role)}<span class="org">, ${linkOrgs(esc(j.org))}</span></h3>
+        ${j.desc ? `<p>${fmt(j.desc)}</p>` : ''}
       </div>
-      <div class="job-c">${esc(j.company)}</div>
-      <p>${fmt(j.desc)}</p>
-      ${j.stats ? `<div class="stats">${j.stats.map(([v, k]) => `<div class="stat"><b>${esc(v)}</b><span>${esc(k)}</span></div>`).join('')}</div>` : ''}
-    </article>`).join('');
+    </li>`).join('');
 }
 
 function renderProj(list) {
-  $('projList').innerHTML = list.map((p) => `
-    <article class="proj-card">
-      <div class="proj-top">
-        <h3 class="proj-title">${esc(p.t)}</h3>
-        ${p.tech ? `<div class="proj-tech">${esc(p.tech)}</div>` : ''}
+  // La captura ocupa todo el ancho y lleva directamente al repositorio del proyecto.
+  $('projList').innerHTML = list.map((p) => {
+    const main = p.links[0]?.[1];
+    const code = (p.links.find(([l]) => l === 'Código' || l === 'Code') || p.links[0])[1];
+    return `
+    <li class="project">
+      <a class="shot" href="${esc(code)}" target="_blank" rel="noopener" aria-label="${esc(p.t)}">
+        <img src="${esc(p.img)}" alt="${esc(p.alt)}" width="880" height="495" loading="lazy" decoding="async">
+      </a>
+      <div class="project-body">
+        <h3>${main ? `<a href="${esc(main)}"${external(main)}>${esc(p.t)}</a>` : esc(p.t)}</h3>
+        <p>${esc(p.d)}</p>
+        <p class="links">${p.links.map(([l, u]) => `<a href="${esc(u)}"${external(u)}>${esc(l)}</a>`).join('')}</p>
       </div>
-      <p class="proj-desc">${esc(p.d)}</p>
-      <div class="proj-actions">
-        ${p.repo ? `<a href="${esc(p.repo)}" target="_blank" rel="noopener" class="proj-btn" aria-label="Ver repositorio de ${esc(p.t)}">
-          <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          <span>${esc(T[lang].proj_code || 'Código')}</span>
-        </a>` : ''}
-        ${p.demo ? `<a href="${esc(p.demo)}" target="_blank" rel="noopener" class="proj-btn" aria-label="Ver demo web de ${esc(p.t)}">
-          <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
-          <span>${esc(T[lang].proj_demo || 'Web')}</span>
-        </a>` : ''}
-      </div>
-    </article>`).join('');
+    </li>`;
+  }).join('');
 }
 
-function renderEdu(list) {
-  $('eduList').innerHTML = list.map((e) => `
-    <div class="edu">
-      <div><b>${esc(e.t)}</b><div class="job-c">${esc(e.d)}</div></div>
-      <div class="job-d">${esc(e.y)}</div>
-    </div>`).join('');
-}
 
 function applyLang() {
-  localStorage.setItem('lang', lang);
+  try { localStorage.setItem('lang', lang); } catch (_e) {}
   document.documentElement.lang = lang;
   const t = T[lang];
 
@@ -428,68 +408,122 @@ function applyLang() {
   });
 
   $('langBtn').textContent = lang === 'es' ? 'EN' : 'ES';
+  $('langBtn').setAttribute('aria-label', t.lang_label);
+  $('themeBtn').setAttribute('aria-label', t.theme_label);
+  renderAbout(t.about, t.now);
+  $('roleLine').innerHTML = linkOrgs(esc(t.role));
   renderExp(t.exp);
   renderProj(t.proj);
-  renderEdu(t.edu);
   renderSuggestions(t.chat_suggestions);
   restoreChat();
 }
 
-function startClock() {
-  const el = document.getElementById('clock');
-  if (!el) return;
-  const fmt = new Intl.DateTimeFormat('es-ES', {
-    timeZone: 'Europe/Madrid', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
-  });
-  const tick = () => {
-    const ahora = new Date();
-    el.textContent = fmt.format(ahora);
-    el.setAttribute('datetime', ahora.toISOString());
-  };
-  tick();
-  setInterval(tick, 1000);
+// Marca en el índice lateral la sección que se está leyendo. Solo reacciona al scroll.
+function trackSections() {
+  // Índice lateral en escritorio y barra superior en móvil y tableta: los dos marcan la misma sección.
+  const links = [...document.querySelectorAll('.toc a, .topnav-links a')];
+  const ids = [...new Set(links.map((a) => a.getAttribute('href').slice(1)))];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      links.forEach((a) => {
+        const on = a.getAttribute('href') === `#${entry.target.id}`;
+        a.classList.toggle('active', on);
+        // En la barra móvil solo se desplaza la fila de enlaces, nunca la página
+        const row = a.closest('.topnav-links');
+        if (on && row) row.scrollTo({ left: a.offsetLeft - row.offsetLeft - 16, behavior: motion() });
+      });
+    });
+  }, { rootMargin: '-35% 0px -60% 0px' });
+  ids.forEach((id) => { const el = $(id); if (el) observer.observe(el); });
 }
 
-// Halo ambiental suave reactivo al cursor (sin rastro residual)
-function startAmbientSpotlight() {
-  const root = document.documentElement;
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) return;
-
-  let scheduled = false;
-  let clientX = window.innerWidth / 2;
-  let clientY = window.innerHeight / 3;
-
-  function update() {
-    root.style.setProperty('--mouse-x', `${clientX}px`);
-    root.style.setProperty('--mouse-y', `${clientY}px`);
-    root.style.setProperty('--spotlight-opacity', '1');
-    scheduled = false;
-  }
-
-  window.addEventListener('pointermove', (e) => {
-    clientX = e.clientX;
-    clientY = e.clientY;
-    if (!scheduled) {
-      scheduled = true;
-      requestAnimationFrame(update);
+// --- Fondo: ondas desde puntos invisibles ---
+// Seis emisores en posiciones al azar lanzan anillos ondulados cada 2,5 a 6 s, al azar.
+// Cada anillo tiene su velocidad, alcance y deformación propios, y su contorno ondula
+// mientras crece. El bucle se para solo con la pestaña oculta (requestAnimationFrame)
+// y con reduced motion se dibuja un único fotograma quieto.
+function startWaves() {
+  const canvas = $('waves');
+  const ctx = canvas.getContext('2d');
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w = 0; let h = 0; let color = '';
+  const readColor = () => { color = getComputedStyle(document.documentElement).getPropertyValue('--wave').trim(); };
+  // Resolución 1:1 aunque la pantalla sea de alta densidad: son líneas finas y tenues de fondo,
+  // y un lienzo retina de 2560x1440 bajaba a 25 fps con la CPU lenta.
+  const resize = () => {
+    const dpr = 1;
+    w = innerWidth; h = innerHeight;
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  };
+  const emitters = Array.from({ length: 6 }, () => ({ x: Math.random(), y: Math.random(), next: rand(0, 6) }));
+  const rings = [];
+  const spawn = (e, t, age = 0) => {
+    const max = rand(260, 820);
+    rings.push({
+      x: e.x, y: e.y, born: t - age, speed: rand(28, 70), max,
+      waves: Array.from({ length: 3 }, () => ({ f: Math.round(rand(3, 11)), a: rand(0.012, 0.05), p: rand(0, 6.28), s: rand(-1.4, 1.4) })),
+    });
+  };
+  const draw = (t) => {
+    ctx.clearRect(0, 0, w, h);
+    ctx.strokeStyle = color; ctx.lineWidth = 1;
+    for (let i = rings.length - 1; i >= 0; i -= 1) {
+      const r = rings[i];
+      const radius = (t - r.born) * r.speed;
+      if (radius > r.max) { rings.splice(i, 1); continue; }
+      const life = radius / r.max;
+      ctx.globalAlpha = Math.min(1, life * 8) * (1 - life) * 0.9;
+      const cx = r.x * w; const cy = r.y * h;
+      ctx.beginPath();
+      for (let k = 0; k <= 96; k += 1) {
+        const a = (k / 96) * Math.PI * 2;
+        let d = 1;
+        for (const wv of r.waves) d += wv.a * Math.sin(wv.f * a + wv.p + wv.s * t);
+        const rr = radius * d;
+        if (k === 0) ctx.moveTo(cx + rr * Math.cos(a), cy + rr * Math.sin(a));
+        else ctx.lineTo(cx + rr * Math.cos(a), cy + rr * Math.sin(a));
+      }
+      ctx.stroke();
     }
-  }, { passive: true });
-
-  document.addEventListener('pointerleave', () => {
-    root.style.setProperty('--spotlight-opacity', '0');
-  });
+    ctx.globalAlpha = 1;
+  };
+  readColor(); resize();
+  new MutationObserver(() => { readColor(); if (still) draw(0); }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  addEventListener('resize', () => { resize(); if (still) draw(0); });
+  if (still) {
+    emitters.forEach((e) => { for (let n = 0; n < 3; n += 1) spawn(e, 0, rand(1, 10)); });
+    draw(0);
+    return;
+  }
+  // Arranca con ondas ya en marcha para que el fondo no aparezca vacío
+  emitters.forEach((e) => { for (let n = 0; n < 2; n += 1) spawn(e, 0, rand(0, 12)); });
+  // Se redibuja a unos 30 fps: las ondas crecen despacio y así el scroll se queda casi todo el tiempo.
+  let last = null; let clock = 0;
+  const frame = (now) => {
+    requestAnimationFrame(frame);
+    if (last !== null && now - last < 30) return;
+    const dt = last === null ? 0 : Math.min((now - last) / 1000, 0.1);
+    last = now; clock += dt;
+    for (const e of emitters) {
+      e.next -= dt;
+      if (e.next <= 0) { spawn(e, clock); e.next = rand(2.5, 6); }
+    }
+    draw(clock);
+  };
+  requestAnimationFrame(frame);
 }
 
 function init() {
+  applyDark(document.documentElement.classList.contains('dark'));
   loadChatHistory();
-  startClock();
-  applyDark();
-  applyPalette(currentPalette);
   applyLang();
-  startAmbientSpotlight();
+  trackSections();
+  startWaves();
 
-  $('themeBtn').addEventListener('click', () => { dark = !dark; applyDark(); });
+  $('themeBtn').addEventListener('click', toggleDark);
   $('langBtn').addEventListener('click', () => { lang = lang === 'es' ? 'en' : 'es'; applyLang(); });
   $('chatForm').addEventListener('submit', (e) => { e.preventDefault(); sendMsg(); });
   $('chatClear').addEventListener('click', clearChat);

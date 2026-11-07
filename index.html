@@ -3,18 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IDV Portfolio</title>
-<meta name="description" content="Ignacio Diago Valeta, AI &amp; Back-End Engineer. Sistemas LLM en producción: RAG, agentes conversacionales y arquitectura back end. AI Engineer en Inditex.">
+<title>Ignacio Diago Valeta</title>
+<meta name="description" content="Ignacio Diago Valeta, AI Engineer en Inditex. Sistemas de IA y NLP en producción. Pregúntale a su CV.">
 <meta name="author" content="Ignacio Diago Valeta">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://portfolio-chat-aouj.onrender.com/">
-<meta name="theme-color" content="#f3f0f8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#150f23" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#221a10">
 
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="Ignacio Diago Valeta">
-<meta property="og:title" content="Ignacio Diago Valeta | AI &amp; Back-End Engineer">
-<meta property="og:description" content="Sistemas LLM en producción. RAG, agentes conversacionales y arquitectura back end.">
+<meta property="og:title" content="Ignacio Diago Valeta, AI Engineer">
+<meta property="og:description" content="Sistemas de IA y NLP en producción. Pregúntale a su CV.">
 <meta property="og:url" content="https://portfolio-chat-aouj.onrender.com/">
 <meta property="og:locale" content="es_ES">
 <meta property="og:locale:alternate" content="en_US">
@@ -23,14 +22,21 @@
 <meta property="profile:first_name" content="Ignacio">
 <meta property="profile:last_name" content="Diago Valeta">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ignacio Diago Valeta | AI &amp; Back-End Engineer">
-<meta name="twitter:description" content="Sistemas LLM en producción. RAG, agentes conversacionales y arquitectura back end.">
+<meta name="twitter:title" content="Ignacio Diago Valeta, AI Engineer">
+<meta name="twitter:description" content="Sistemas de IA y NLP en producción. Pregúntale a su CV.">
 <meta name="twitter:image" content="https://portfolio-chat-aouj.onrender.com/images/ignacio-diago-valeta.jpg">
 
-<link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/plus-jakarta-sans.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/jetbrains-mono.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=95">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css?v=135">
+<script>
+  // Tema antes del primer pintado: el guardado o, si no hay, oscuro (la estética base del sitio).
+  try {
+    var saved = localStorage.getItem('dark');
+    var dark = saved !== null ? saved === 'true' : true;
+    document.documentElement.classList.add(dark ? 'dark' : 'light');
+  } catch (e) {}
+</script>
 
 <script type="application/ld+json">
 {
@@ -44,121 +50,112 @@
   "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universitat Politècnica de València" },
   "worksFor": { "@type": "Organization", "name": "Inditex" },
   "sameAs": ["https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/", "https://github.com/iDiagoValeta", "https://huggingface.co/nadiva1243"],
-  "knowsAbout": ["Large Language Models", "RAG", "Back-end architecture", "Machine Learning", "Python", "TypeScript"]
+  "knowsAbout": ["Large Language Models", "RAG", "AI agents", "Back-end architecture", "Machine Learning", "Python", "TypeScript"]
 }
 </script>
 </head>
 <body>
 
-<div class="lava" aria-hidden="true">
-  <span class="lava-blob lava-a"></span>
-  <span class="lava-blob lava-b"></span>
-</div>
-<div id="ambientSpotlight" class="ambient-spotlight" aria-hidden="true"></div>
-
 <a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
 
-<header class="hdr">
-  <div class="hdr-in">
-    <a class="brand" href="#top">
-      <span>IDV</span>
-    </a>
-    <nav class="nav" aria-label="Principal">
-      <a href="#experiencia" data-i18n="nav_exp">Experiencia</a>
-      <a href="#proyectos" data-i18n="nav_proj">Proyectos</a>
-      <a href="#chat" data-i18n="nav_chat">Chat</a>
-      <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+<canvas class="waves" id="waves" aria-hidden="true"></canvas>
+
+<nav class="topnav" aria-label="Secciones">
+  <a href="#top" class="topnav-name">IDV</a>
+  <div class="topnav-links">
+    <a href="#sobre-mi" data-i18n="nav_about">Sobre mí</a>
+    <a href="#chat" data-i18n="nav_chat_short">Pregúntale</a>
+    <a href="#experiencia" data-i18n="nav_exp">Experiencia</a>
+    <a href="#proyectos" data-i18n="nav_proj">Proyectos</a>
+    <a href="#contacto" data-i18n="nav_contact">Contacto</a>
+  </div>
+</nav>
+
+<div class="shell">
+
+<header class="side" id="top">
+  <div class="side-top">
+    <img class="avatar" src="images/ignacio-diago-valeta.jpg" alt="Ignacio Diago Valeta" width="1086" height="1448" fetchpriority="high">
+    <h1><a href="#top">Ignacio<br>Diago Valeta</a></h1>
+    <p class="role" id="roleLine">AI Engineer en <a class="org-link" href="https://www.inditex.com/" target="_blank" rel="noopener">Inditex</a></p>
+    <nav class="toc" aria-label="Secciones">
+      <a href="#sobre-mi"><span data-i18n="nav_about">Sobre mí</span></a>
+      <a href="#chat"><span data-i18n="nav_chat">Pregúntale a mi CV</span></a>
+      <a href="#experiencia"><span data-i18n="nav_exp">Experiencia</span></a>
+      <a href="#proyectos"><span data-i18n="nav_proj">Proyectos</span></a>
+      <a href="#contacto"><span data-i18n="nav_contact">Contacto</span></a>
     </nav>
-    <div class="hdr-act">
-      <div id="palettePicker" class="palette-picker" role="group" aria-label="Selector de paleta de color"></div>
-      <button id="langBtn" class="ico" type="button" aria-label="Cambiar idioma">EN</button>
-      <button id="themeBtn" class="ico ico-theme" type="button" aria-label="Cambiar tema">
-        <svg class="theme-svg theme-svg-sun" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        <svg class="theme-svg theme-svg-moon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+  </div>
+  <div class="side-foot">
+    <ul class="social">
+      <li><a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 16 16" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></li>
+      <li><a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener" aria-label="Hugging Face"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M1.4446 11.5059c0 1.1021.1673 2.1585.4847 3.1563-.0378-.0028-.0691-.0058-.1058-.0058-.4209 0-.8015.16-1.0704.4512-.3454.3737-.4984.8335-.4316 1.293a1.576 1.576 0 0 0 .2148.5978c-.2319.1864-.4018.4456-.4844.7578-.0646.2448-.131.7543.2149 1.2794a1.4552 1.4552 0 0 0-.0625.1055c-.208.3923-.2207.8372-.0371 1.25.2783.6258.9696 1.1175 2.3126 1.6467.8356.3292 1.5988.5411 1.6056.543 1.1046.2847 2.104.4277 2.969.4277 1.4173 0 2.4754-.3849 3.1525-1.1446 1.538.2651 2.791.1403 3.592.006.6773.7555 1.7332 1.1387 3.1467 1.1387.8649 0 1.8643-.143 2.969-.4278.0068-.0019.77-.2138 1.6056-.543 1.343-.5292 2.0343-1.0208 2.3126-1.6466.1836-.4129.171-.8577-.037-1.25a1.4685 1.4685 0 0 0-.0626-.1056c.346-.525.2795-1.0346.2149-1.2793-.0826-.3122-.2525-.5714-.4844-.7579.11-.1816.1831-.3788.2148-.5977.0669-.4595-.0862-.9193-.4316-1.293-.2688-.2913-.6495-.4513-1.0704-.4513-.0209 0-.0376.0008-.0588.0018.3162-.9966.4846-2.0518.4846-3.1523 0-5.807-4.7362-10.5144-10.5789-10.5144-5.8426 0-10.5788 4.7073-10.5788 10.5144Zm10.5788-9.4831c5.2727 0 9.5476 4.246 9.5476 9.483a9.4201 9.4201 0 0 1-.2696 2.2365c-.0039-.0047-.0079-.011-.0117-.0156-.274-.3255-.6679-.5059-1.1075-.5059-.352 0-.714.1155-1.0763.3438-.2403.1517-.5058.422-.7793.7598-.2534-.3492-.608-.5832-1.0137-.6465a1.5174 1.5174 0 0 0-.2344-.0176c-.9263 0-1.4828.7993-1.6935 1.5177-.1046.2426-.6065 1.3482-1.3614 2.0978-1.1681 1.1601-1.4458 2.3534-.8396 3.6382-.843.1029-1.5836.0927-2.365-.006.5906-1.212.3626-2.4388-.8426-3.6322-.755-.7496-1.2568-1.8552-1.3614-2.0978-.2107-.7184-.7673-1.5177-1.6935-1.5177-.078 0-.1568.0054-.2344.0176-.4057.0633-.7604.2973-1.0137.6465-.2735-.3379-.539-.6081-.7794-.7598-.3622-.2283-.7243-.3438-1.0762-.3438-.4266 0-.8094.171-1.0821.4786a9.4208 9.4208 0 0 1-.2598-2.1936c0-5.237 4.2749-9.483 9.5475-9.483zM8.6443 7.0036c-.4838.0043-.9503.2667-1.1934.7227-.3536.6633-.1006 1.4873.5645 1.84.351.1862.4883-.5261.836-.6485.3107-.1095.841.399 1.0078.086.3536-.6634.1025-1.4874-.5625-1.84a1.3659 1.3659 0 0 0-.6524-.1602Zm6.8403 0c-.2199-.002-.4426.05-.6504.1602-.665.3526-.9181 1.1766-.5645 1.84.1669.313.6971-.1955 1.0079-.086.3476.1224.4867.8347.838.6485.6649-.3527.916-1.1767.5624-1.84-.243-.456-.7096-.7184-1.1934-.7227Zm-9.7565 1.418a.8768.8768 0 0 0-.877.877c0 .4846.3925.877.877.877a.8768.8768 0 0 0 .877-.877.8768.8768 0 0 0-.877-.877zm12.6434 0c-.4845 0-.879.3925-.879.877 0 .4846.3945.877.879.877a.8768.8768 0 0 0 .877-.877.8768.8768 0 0 0-.877-.877zM8.7927 11.459c-.179-.003-.2793.1107-.2793.416 0 .8097.3874 2.125 1.4279 2.924.207-.7123 1.3453-1.2832 1.5079-1.2012.2315.1167.2191.4417.6074.7266.3884-.285.374-.6098.6056-.7266.1627-.082 1.3009.4889 1.5079 1.2012 1.0404-.799 1.4278-2.1144 1.4278-2.924 0-1.2212-1.583.6402-3.5413.6485-1.4686-.0061-2.7266-1.0558-3.2639-1.0645zM4.312 14.4768c.5792.365 1.6964 2.2751 2.1056 3.0177.1371.2488.371.3536.582.3536.4188 0 .7465-.4138.0391-.9395-1.0636-.791-.6914-2.0846-.1836-2.1642a.4302.4302 0 0 1 .0664-.004c.4616 0 .666.7892.666.7892s.5959 1.4898 1.6213 2.508c.942.9356 1.062 1.703.4961 2.6661-.0164-.004-.0159.0236-.1484.2149-.1853.2673-.4322.4688-.7188.6152-.5062.2269-1.1397.2696-1.7833.2696-1.037 0-2.1017-.1824-2.6975-.336-.0293-.0075-3.6505-.9567-3.1916-1.8224.0771-.1454.2033-.2031.3633-.2031.6463 0 1.823.9551 2.3283.9551.113 0 .196-.0865.2285-.2031.2249-.8045-3.2787-1.0522-2.9846-2.1642.0519-.1967.193-.2757.3907-.2754.854 0 2.7704 1.4923 3.172 1.4923.0307 0 .0525-.0085.0645-.0274.2012-.3227.1096-.5865-1.3087-1.4395-1.4182-.8533-2.4315-1.329-1.8653-1.9416.0651-.0707.1574-.1015.2695-.1015.8611.0002 2.8948 1.84 2.8948 1.84s.5487.5683.8809.5683c.0762 0 .1416-.0315.1855-.1054.2355-.3946-2.1858-2.2183-2.3224-2.971-.0926-.51.0641-.7676.3555-.7676-.0006.008.1701-.0285.4942.1759zm16.2257.5918c-.1366.7526-2.5579 2.5764-2.3224 2.9709.044.074.1092.1055.1855.1055.3321 0 .881-.5684.881-.5684s2.0336-1.8397 2.8947-1.84c.1121 0 .2044.0308.2695.1016.5662.6125-.447 1.0882-1.8653 1.9415-1.4183.853-1.51 1.1168-1.3087 1.4396.012.0188.0337.0273.0644.0273.4016 0 2.3181-1.4923 3.1721-1.4923.1977-.0002.3388.0787.3907.2754.294 1.112-3.2095 1.3597-2.9846 2.1642.0325.1166.1156.2032.2285.2032.5054 0 1.682-.9552 2.3283-.9552.16 0 .2862.0577.3633.2032.459.8656-3.1623 1.8149-3.1916 1.8224-.5958.1535-1.6605.336-2.6975.336-.6351 0-1.261-.0409-1.7638-.2599-.2949-.1472-.5488-.3516-.7383-.625-.0411-.0682-.1026-.1476-.1426-.205-.5726-.9679-.455-1.7371.4903-2.676 1.0254-1.0182 1.6212-2.508 1.6212-2.508s.2044-.7891.666-.7891a.4318.4318 0 0 1 .0665.0039c.5078.0796.88 1.3732-.1836 2.1642-.7074.5257-.3797.9395.039.9395.211 0 .445-.1047.5821-.3535.4092-.7426 1.5264-2.6527 2.1056-3.0178.5588-.3524.99-.1816.8497.5918z"/></svg></a></li>
+      <li><a href="mailto:nadiva1243@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 7 9-7"/></svg></a></li>
+    </ul>
+    <div class="tools">
+      <a class="btn-cv" href="resume.pdf" target="_blank" rel="noopener" data-i18n="cv">Descargar CV</a>
+      <button id="langBtn" class="tool" type="button" aria-label="Switch to English">EN</button>
+      <button id="themeBtn" class="tool" type="button" aria-label="Cambiar tema">
+        <svg class="ico-sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v2.5M12 20v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M1.5 12H4M20 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+        <svg class="ico-moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
       </button>
-      <a class="ico" href="resume.pdf" target="_blank" rel="noopener" data-i18n="cv">CV</a>
     </div>
   </div>
 </header>
 
 <main id="main">
 
-<section class="hero" id="top">
-  <img class="portrait" src="images/ignacio-diago-valeta.jpg" alt="Ignacio Diago Valeta" width="1086" height="1448">
-  <div class="hero-main">
-    <h1>Ignacio<br>Diago Valeta</h1>
-    <p class="hero-role" data-i18n="role">AI &amp; Back-End Engineer</p>
-    <div class="links">
-      <a href="https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/iDiagoValeta" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://huggingface.co/nadiva1243" target="_blank" rel="noopener">Hugging Face</a>
-      <a href="mailto:nadiva1243@gmail.com">Email</a>
-      <a href="https://idiagovaleta.github.io/automated-news/" target="_blank" rel="noopener" data-i18n="news_link">La Terminal</a>
-    </div>
-  </div>
-  <div class="hero-side">
-    <aside class="about-card">
-      <div class="about-k" data-i18n="about_k">SOBRE MÍ</div>
-      <p class="about-v" data-i18n="about_v">AI &amp; Back-End Engineer especializado en la orquestación de sistemas LLM, arquitecturas RAG y back ends escalables en producción. Graduado en Ingeniería Informática por la UPV.</p>
-    </aside>
-    <div class="clock" aria-live="off">
-      <span class="clock-k" data-i18n="clock_k">HORA LOCAL</span>
-      <time id="clock" datetime="">--:--:--</time>
-      <span class="clock-z">A Coruña</span>
-    </div>
-  </div>
-</section>
+  <section id="sobre-mi" aria-labelledby="about-h">
+    <h2 id="about-h" data-i18n="nav_about">Sobre mí</h2>
+    <p class="lede" data-i18n="lede">Llevo sistemas de IA y NLP del prototipo a producción.</p>
+    <div class="about" id="aboutText"></div>
+    <dl class="now" id="nowList"></dl>
+  </section>
 
-<section id="experiencia">
-  <h2 data-i18n="exp_title">Experiencia</h2>
-  <div id="expList"></div>
-</section>
-
-<section id="proyectos">
-  <h2 data-i18n="proj_title">Proyectos</h2>
-  <div id="projList" class="grid"></div>
-</section>
-
-<section id="formacion">
-  <h2 data-i18n="edu_title">Formación</h2>
-  <div class="box" id="eduList"></div>
-</section>
-
-<section id="chat">
-  <h2 data-i18n="chat_title">Pregunta a la IA</h2>
-  <p class="lead" data-i18n="chat_lead">Asistente con el contexto completo del perfil. Responde con los datos reales del CV.</p>
-  <div class="box chat">
-    <div class="chat-head">
-      <div class="chat-head-title">
-        <span class="chat-dot"></span>
-        <span data-i18n="chat_head">Asistente</span>
+  <section id="chat" aria-labelledby="chat-h">
+    <h2 id="chat-h" data-i18n="nav_chat">Pregúntale a mi CV</h2>
+    <div class="chat">
+      <div class="chat-head">
+        <div>
+          <p class="chat-title" data-i18n="chat_title">Asistente con el contexto de mi CV</p>
+          <p class="chat-lead" data-i18n="chat_lead">Responde únicamente con información real de mi trayectoria, en el idioma en que le escribas.</p>
+        </div>
+        <button id="chatClear" class="tool tool-text" type="button" data-i18n="chat_clear">Limpiar</button>
       </div>
-      <button id="chatClear" class="chat-clear" type="button" data-i18n="chat_clear">Limpiar</button>
+      <div id="chatMsgs" class="msgs" aria-live="polite"></div>
+      <div id="chatSuggestions" class="sugg"></div>
+      <form id="chatForm" class="ask">
+        <label class="sr-only" for="chatInput" data-i18n="chat_ph">Escribe tu pregunta</label>
+        <input id="chatInput" type="text" autocomplete="off" maxlength="2000" placeholder="Escribe tu pregunta" data-i18n-ph="chat_ph">
+        <button id="chatSend" type="submit" data-i18n="chat_send">Enviar</button>
+      </form>
+      <p class="chat-note" data-i18n="chat_note">Máximo 6 preguntas por minuto y 40 al día.</p>
     </div>
-    <div id="chatMsgs" class="chat-msgs" aria-live="polite"></div>
-    <div id="chatSuggestions" class="chat-sugg"></div>
-    <form id="chatForm" class="chat-form">
-      <input id="chatInput" type="text" autocomplete="off" placeholder="Escribe tu pregunta..." data-i18n-ph="chat_ph">
-      <button id="chatSend" type="submit" data-i18n="chat_send">Enviar</button>
-    </form>
-  </div>
-</section>
+  </section>
 
-<section id="contacto">
-  <h2 data-i18n="contact_title">Contacto</h2>
-  <div class="box contact">
-    <p data-i18n="contact_lead">Disponible para hablar de proyectos con impacto real.</p>
+  <section id="experiencia" aria-labelledby="exp-h">
+    <h2 id="exp-h" data-i18n="nav_exp">Experiencia</h2>
+    <ol class="items" id="expList"></ol>
+    <a class="more" href="resume.pdf" target="_blank" rel="noopener"><span data-i18n="cv_full">Ver el CV completo</span> <svg class="arrow" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+  </section>
+
+  <section id="proyectos" aria-labelledby="proj-h">
+    <h2 id="proj-h" data-i18n="nav_proj">Proyectos</h2>
+    <ol class="projects" id="projList"></ol>
+    <a class="more" href="https://github.com/iDiagoValeta?tab=repositories" target="_blank" rel="noopener"><span data-i18n="more_proj">Más proyectos en GitHub</span> <svg class="arrow" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+  </section>
+
+  <section id="contacto" aria-labelledby="contact-h">
+    <h2 id="contact-h" class="contact-big" data-i18n="contact_big">¿Hablamos?</h2>
+    <p class="contact-lead" data-i18n="contact_lead">Abierto a conversar sobre proyectos interesantes.</p>
     <a class="btn" href="mailto:nadiva1243@gmail.com">nadiva1243@gmail.com</a>
-  </div>
-</section>
+  </section>
+
 
 </main>
+</div>
 
-<footer>
-  <span data-i18n="foot">A Coruña, España</span>
-  <span class="mono">2026</span>
-</footer>
-
-<script type="module" src="app.js?v=55"></script>
+<script type="module" src="app.js?v=88"></script>
 </body>
 </html>
