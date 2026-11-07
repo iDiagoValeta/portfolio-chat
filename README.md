@@ -1,70 +1,76 @@
-# Ignacio Diago Valeta Portfolio
+# Ignacio Diago Valeta, portfolio
 
-Interactive portfolio for Ignacio Diago Valeta, AI Engineer focused on LLM orchestration, RAG pipelines, computer vision, and intelligent information processing.
+Personal portfolio of Ignacio Diago Valeta, AI Engineer at Inditex, with an assistant that answers recruiters' questions straight from his CV.
 
-Live site: [portfolio-chat-aouj.onrender.com](https://portfolio-chat-aouj.onrender.com/)
+- **Live site:** [portfolio-chat-aouj.onrender.com](https://portfolio-chat-aouj.onrender.com/)
+- **CV:** [resume.pdf](resume.pdf)
+- **LinkedIn:** [Ignacio Diago Valeta](https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/)
+- **Hugging Face:** [nadiva1243](https://huggingface.co/nadiva1243)
 
-## Why This Portfolio Exists
+![Portfolio home page in the dark theme](docs/images/portfolio.jpg)
 
-The idea came from looking at the hiring process from an interviewer's perspective. If I were reviewing a candidate, I would want to ask questions directly to their CV and quickly understand how their experience fits the role.
+## Why it exists
 
-This portfolio turns that idea into a practical interface: a professional website with an integrated AI chat that can answer questions about my background, projects, skills, and experience.
-
-## Tech Stack
-
-- Frontend: HTML, CSS, and vanilla JavaScript. No bundler, no npm dependencies
-- Backend: Python proxy server (standard library only)
-- AI: DeepSeek V4 Flash API, streamed over SSE
-- Deployment: Render
+Reviewing a candidate usually means skimming a PDF and guessing how their experience maps to the role. This site lets a reviewer ask the CV directly: an assistant grounded only in Ignacio's real experience answers fit, seniority and project questions in the visitor's language, and says so when something is not in his profile.
 
 ## Features
 
-- **AI Chat**: Ask anything about Ignacio's background, projects, and skills. The
-  assistant answers strictly from the data in the CV
-- **Bilingual**: Full ES / EN support, switchable at any point
-- **Dark and light**: Dark by default, with a manual toggle that persists
-- **Selected projects**: Four projects with previews and a link to the rest on GitHub
-- **Responsive**: One centered column with a sticky section bar on tablets and phones, checked from 320 px to 1920 px with no horizontal scroll
-- **No dependencies**: No npm, no build step, no external fonts or CDNs. Everything is
-  served from the repository
+- **Ask my CV**: a streaming chat grounded in `config.js`. It maps experience to job requirements, answers behavioural questions with real cases and declines to guess salary, availability or anything it does not know.
+- **Selected work**: four projects whose previews link straight to their repositories.
+- **Bilingual**: Spanish and English, switchable at any time.
+- **Dark and light themes**: dark by default, with a persisted toggle.
+- **Responsive**: checked from 320 px to 1920 px with no horizontal overflow.
+- **Fast in every browser**: 60 fps idle, scrolling and with pointer movement in Chromium, also with the CPU slowed 4x.
+- **No dependencies**: no npm, no build step, no CDNs. Fonts and assets are served from the repository.
 
-## Run Locally
-
-Set the DeepSeek API key and start the Python server:
-
-```bash
-export DEEPSEEK_API_KEY="your_api_key"
-python server.py
-```
-
-On Windows PowerShell:
-
-```powershell
-$env:DEEPSEEK_API_KEY="your_api_key"
-python server.py
-```
-
-Then open:
+## How it works
 
 ```text
-http://localhost:8000
+Browser (app.js)
+  -> POST /api/gemini  { messages: [...] }        only the conversation
+     server.py
+       validates roles, length and size (100 KB)
+       rate limits: 6/min and 40/day per visitor, 600/day in total
+       adds model, parameters and the system prompt from config.js
+       -> DeepSeek Chat Completions (stream)
+     <- Server-Sent Events, forwarded as they arrive
+  <- renders delta.content, ignores reasoning tokens, sanitizes the HTML
 ```
 
-## Project Structure
-
-- `index.html` defines the page shell, sections and metadata (SEO, Open Graph, JSON-LD).
-- `styles.css` contains the full visual design. No preprocessor.
-- `app.js` holds the bilingual content, renders every section and drives the chat.
-- `config.js` is the single source of truth for the assistant context. The server reads it
-  at startup and sends it as the system prompt; restart the server after editing it.
-- `server.py` serves the static files and proxies DeepSeek requests without exposing the
-  API key.
-- `resume.pdf` is the CV linked from the page.
+| Path | Role |
+| --- | --- |
+| `index.html` | Page shell, SEO metadata, Open Graph and JSON-LD |
+| `styles.css` | The whole visual system: tokens, layout and responsive rules |
+| `app.js` | Bilingual copy, rendering, the chat client and the wave background |
+| `config.js` | The assistant's knowledge and answering rules (the system prompt) |
+| `server.py` | Static file server and DeepSeek proxy, Python standard library only |
+| `PRODUCT.md`, `DESIGN.md` | Product context and the design system |
+| `AGENTS.md` | Working rules for coding agents |
 
 ## Security
 
-The DeepSeek API key is never exposed to the browser. Requests go through the Python server, which reads the key from the `DEEPSEEK_API_KEY` environment variable. The server fixes the model, parameters and system prompt, accepts only the conversation from the browser, and rate limits the chat to 6 messages per minute and 40 per day per visitor, with a global cap of 600 per day.
+- The DeepSeek key never reaches the browser; the server reads it from `DEEPSEEK_API_KEY`.
+- The server owns the model, the generation parameters and the system prompt. The browser can send user and assistant turns only, so the endpoint cannot be used as open access to the API.
+- Visitors are identified by `True-Client-IP` (set by Cloudflare in front of Render). Limits are kept in memory and reset when the service restarts.
+- Assistant output is rendered through a tag allow list; user text is inserted as plain text.
+
+## Run locally
+
+```bash
+export DEEPSEEK_API_KEY="your_api_key"   # or put it in a local .env file
+python3 server.py                        # PORT=8001 python3 server.py to change the port
+```
+
+Then open <http://localhost:8000>. Without a key the site works and the chat answers with an error.
+
+## Deployment
+
+[Render](https://render.com) runs `python server.py` (see `Procfile`) and redeploys on every push to `main`. `DEEPSEEK_API_KEY` is set in the Render dashboard.
+
+## Contributing
+
+Trunk-based: short branches off `main`, one topic per pull request, [Conventional Commits](https://www.conventionalcommits.org/) titles. The pull request template lists what to check before merging.
 
 ## License
 
-MIT
+[MIT](LICENSE)
