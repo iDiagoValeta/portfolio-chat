@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-07T18:41:19.257Z",
+        "reason": "Claude: rendered sizes measured in Chromium at 1440px are h1 96px, project titles 34px, current role 28px, body 16px; section h2 at 15px is the datasheet section head, carried by uppercase, tracking, rule and number box"
+      },
+      {
+        "rule": "pulsing-dot",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-07T19:00:25.200Z",
+        "reason": "Claude: the only pulsing dots are the chat typing indicator, rendered only while a request to the model is pending and removed on the first token; AGENTS.md requires it"
+      }
+    ]
+  }
+}

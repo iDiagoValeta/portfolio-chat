@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-07T21:02:45+00:00",
+  "title": "Design System: Ignacio Diago Valeta",
+  "extensions": {
+    "colorMeta": {
+      "white-highlight": {
+        "role": "primary",
+        "displayName": "White Highlight",
+        "canonical": "oklch(100.0% 0.000 90)",
+        "cssVar": "--accent / --ink",
+        "light": "#221a10",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ],
+        "note": "In the light theme --ink and --accent are espresso (#221a10) and --accent-ink is white."
+      },
+      "tan": {
+        "role": "secondary",
+        "displayName": "Tan",
+        "canonical": "oklch(63.4% 0.086 57)",
+        "cssVar": "--earth",
+        "light": "#864a20",
+        "tonalRamp": [
+          "#120904",
+          "#332013",
+          "#593a23",
+          "#825634",
+          "#a57754",
+          "#c19d83",
+          "#dcc4b2",
+          "#faebe1"
+        ]
+      },
+      "ochre": {
+        "role": "tertiary",
+        "displayName": "Ochre",
+        "canonical": "oklch(56.8% 0.105 76)",
+        "cssVar": "--ochre",
+        "light": "#9a6d22",
+        "tonalRamp": [
+          "#110901",
+          "#322209",
+          "#573c10",
+          "#7f5917",
+          "#a27a3d",
+          "#bea074",
+          "#dbc6a9",
+          "#f9eddc"
+        ],
+        "note": "Small decorative marks only: the 1px portrait outline and the 2px active top bar underline."
+      },
+      "espresso-ground": {
+        "role": "neutral",
+        "displayName": "Espresso Ground",
+        "canonical": "oklch(22.4% 0.022 73)",
+        "cssVar": "--bg / --accent-ink",
+        "light": "#f1e9dd",
+        "tonalRamp": [
+          "#0d0b09",
+          "#282420",
+          "#47413a",
+          "#686055",
+          "#8a8176",
+          "#aba49b",
+          "#cdc8c3",
+          "#f1eeea"
+        ],
+        "note": "Also --accent-ink in dark. Light theme ground is sand (#f1e9dd) and --accent-ink is #ffffff."
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "oklch(25.2% 0.025 69)",
+        "cssVar": "--surface",
+        "light": "#f8f3ea",
+        "tonalRamp": [
+          "#0d0b08",
+          "#292420",
+          "#484139",
+          "#6a5f54",
+          "#8b8075",
+          "#aca39a",
+          "#cec8c2",
+          "#f1eeea"
+        ]
+      },
+      "surface-hover": {
+        "role": "neutral",
+        "displayName": "Surface Hover",
+        "canonical": "oklch(28.3% 0.029 68)",
+        "cssVar": "--surface-hover",
+        "light": "#e9dfd0",
+        "tonalRamp": [
+          "#0d0b08",
+          "#29241f",
+          "#494037",
+          "#6b5f52",
+          "#8d8072",
+          "#ada399",
+          "#cfc8c1",
+          "#f2eee9"
+        ]
+      },
+      "warm-beige": {
+        "role": "neutral",
+        "displayName": "Warm Beige",
+        "canonical": "oklch(83.6% 0.033 76)",
+        "cssVar": "--ink-2",
+        "light": "#4a3529",
+        "tonalRamp": [
+          "#0d0b07",
+          "#29241d",
+          "#494135",
+          "#6b5f4f",
+          "#8d806f",
+          "#ada496",
+          "#cec8bf",
+          "#f2eee8"
+        ]
+      },
+      "dust": {
+        "role": "neutral",
+        "displayName": "Dust",
+        "canonical": "oklch(68.7% 0.039 78)",
+        "cssVar": "--ink-3",
+        "light": "#6b5853",
+        "tonalRamp": [
+          "#0d0b07",
+          "#2a241c",
+          "#4a4133",
+          "#6c5f4b",
+          "#8e806c",
+          "#aea394",
+          "#cfc8bd",
+          "#f2eee7"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "oklch(31.6% 0.035 71)",
+        "cssVar": "--line",
+        "light": "#ddd0be",
+        "tonalRamp": [
+          "#0d0b07",
+          "#2a241d",
+          "#4a4035",
+          "#6c5f4e",
+          "#8e806f",
+          "#aea396",
+          "#cfc8bf",
+          "#f2eee8"
+        ]
+      },
+      "wave": {
+        "role": "neutral",
+        "displayName": "Wave",
+        "canonical": "oklch(35.4% 0.045 73)",
+        "cssVar": "--wave",
+        "light": "#cdbba2",
+        "tonalRamp": [
+          "#110a02",
+          "#2d2214",
+          "#4b3d2b",
+          "#6c5a44",
+          "#8d7a61",
+          "#ad9b86",
+          "#d0c2af",
+          "#f8edde"
+        ],
+        "note": "1px stroke of the background canvas rings only, read from --wave on each theme change. About 1.53:1 on the dark ground, 1.55:1 on sand in light; rings peak near 79% opacity."
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The name, in two lines, wide and heavy. clamp(40px, 6vh, 50px) on desktop; clamp(34px, 9vw, 52px) below 1100px."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The contact heading only. clamp(30px, 9vw, 44px) below 640px."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Opening statement of About, max 24ch. clamp(23px, 5.6vw, 34px) and no measure limit below 1100px."
+      },
+      "title-lg": {
+        "displayName": "Title Large",
+        "purpose": "Project titles. 21px below 640px."
+      },
+      "role": {
+        "displayName": "Role",
+        "purpose": "Role line in tan under the name."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Experience row titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "About and project descriptions, 66 to 68ch. 16px below 640px."
+      },
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "Row descriptions, chat messages and input."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase section headings with a trailing hairline; index (0.12em), Now terms (0.1em) and top bar links (12px, 0.1em) are variants."
+      },
+      "meta": {
+        "displayName": "Meta",
+        "purpose": "Uppercase dates in experience rows."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Inline code in chat answers only."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "wave-rings",
+        "value": "canvas#waves, startWaves() in app.js; 6 random emitters, a ring every 2.5 to 6 s, speed 28 to 70 px/s, reach 260 to 820 px, 3 drifting sine deformations, alpha min(1, 8 life) x (1 - life) x 0.9; 1:1 resolution, about 30 fps",
+        "purpose": "Background ring field, the one scripted drawing. requestAnimationFrame stops with the tab hidden; recoloured from --wave on theme class change; one still frame under reduced motion."
+      },
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Project preview zoom."
+      },
+      {
+        "name": "preview-zoom",
+        "value": "scale(1.025), 0.6s",
+        "purpose": "Project preview image on hover, without reduced motion."
+      },
+      {
+        "name": "state",
+        "value": "0.15s",
+        "purpose": "Colour, border and background transitions on hover and focus."
+      },
+      {
+        "name": "typing",
+        "value": "1.2s ease-in-out infinite, 0.15s stagger, opacity .3 to 1",
+        "purpose": "Chat typing dots, only while an answer is pending; static under reduced motion."
+      },
+      {
+        "name": "topnav-follow",
+        "value": "scrollTo left, behavior smooth",
+        "purpose": "Top bar link row scrolls sideways to keep the active link in view; the page itself never scrolls."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "single-column",
+        "value": "max-width: 1099px",
+        "purpose": "One centred column (max 760px, 32px padding), sticky top bar, side index hidden."
+      },
+      {
+        "name": "compact",
+        "value": "max-width: 640px",
+        "purpose": "20px padding, stacked rows, tighter chat insets, smaller display sizes."
+      }
+    ],
+    "themes": {
+      "default": "dark",
+      "storage": "localStorage.dark",
+      "mechanism": "class dark or light on html set before first paint"
+    },
+    "layout": {
+      "shell": "max 1360px, 56px padding, 360px identity column + fluid reading column (max 880px), 96px gap",
+      "identityColumn": "sticky, top-grouped, gaps clamp on vh (portrait 64px to 112px, top padding 24px to 88px), max-height 100vh with its own hidden-scrollbar scroll only if it cannot fit",
+      "narrowColumn": "max 760px below 1100px"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The email action in Contact; the chat send button uses the same treatment.",
+      "html": "<a class=\"ds-btn\" href=\"#\">nadiva1243@gmail.com</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;background:var(--accent,#ffffff);color:var(--accent-ink,#221a10);font-family:Archivo,system-ui,sans-serif;font-weight:600;text-decoration:none;border-radius:0;transition:background-color .15s,color .15s}.ds-btn:hover{background:var(--earth,#b27d55)}.ds-btn:focus-visible{outline:2px solid var(--accent,#ffffff);outline-offset:3px}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Download CV in the identity column.",
+      "html": "<a class=\"ds-btn-cv\" href=\"#\">Descargar CV</a>",
+      "css": ".ds-btn-cv{display:inline-flex;align-items:center;min-height:38px;padding:0 16px;border:1px solid var(--accent,#ffffff);color:var(--accent,#ffffff);font-family:Archivo,system-ui,sans-serif;font-size:14px;font-weight:600;text-decoration:none;transition:background-color .15s,color .15s}.ds-btn-cv:hover{background:var(--accent,#ffffff);color:var(--accent-ink,#221a10)}.ds-btn-cv:focus-visible{outline:2px solid var(--accent,#ffffff);outline-offset:3px}"
+    },
+    {
+      "name": "Tool Button",
+      "kind": "button",
+      "refersTo": "tool-button",
+      "description": "Language, theme and clear chat controls.",
+      "html": "<button class=\"ds-tool\" type=\"button\">EN</button>",
+      "css": ".ds-tool{display:inline-flex;align-items:center;justify-content:center;min-width:38px;min-height:38px;padding:0 10px;background:none;border:1px solid var(--line,#3d2f1e);color:var(--ink-2,#d6c7b2);font-family:Archivo,system-ui,sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:border-color .15s,color .15s}.ds-tool:hover{border-color:var(--ink-3,#a89880);color:var(--ink,#ffffff)}.ds-tool:focus-visible{outline:2px solid var(--accent,#ffffff);outline-offset:3px}"
+    },
+    {
+      "name": "Section Index",
+      "kind": "nav",
+      "refersTo": "section-index",
+      "description": "Desktop sticky text-only index; the section being read turns to the highlight.",
+      "html": "<nav class=\"ds-toc\"><a href=\"#\" class=\"active\">Sobre mí</a><a href=\"#\">Experiencia</a><a href=\"#\">Proyectos</a></nav>",
+      "css": ".ds-toc{display:flex;flex-direction:column;border-top:1px solid var(--line,#3d2f1e);font-family:Archivo,system-ui,sans-serif}.ds-toc a{display:flex;align-items:center;padding:11px 0;border-bottom:1px solid var(--line,#3d2f1e);font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3,#a89880);text-decoration:none;transition:color .15s}.ds-toc a:hover,.ds-toc a.active{color:var(--ink,#ffffff)}.ds-toc a:focus-visible{outline:2px solid var(--accent,#ffffff);outline-offset:3px}"
+    },
+    {
+      "name": "Top Bar",
+      "kind": "nav",
+      "refersTo": "top-bar",
+      "description": "Sticky section bar below 1100px; monogram left, links right, active link with a 2px ochre underline.",
+      "html": "<nav class=\"ds-topnav\"><a href=\"#\" class=\"ds-topnav-name\">IDV</a><div class=\"ds-topnav-links\"><a href=\"#\" class=\"active\">Sobre mí</a><a href=\"#\">Pregúntale</a><a href=\"#\">Experiencia</a><a href=\"#\">Proyectos</a></div></nav>",
+      "css": ".ds-topnav{display:flex;align-items:center;gap:20px;padding:0 20px;background:var(--bg,#221a10);border-bottom:1px solid var(--line,#3d2f1e);font-family:Archivo,system-ui,sans-serif}.ds-topnav a{text-decoration:none}.ds-topnav-name{font-weight:800;font-stretch:108%;color:var(--ink,#ffffff);padding:14px 0;flex:none}.ds-topnav-links{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;margin-left:auto;min-width:0}.ds-topnav-links a{padding:15px 0 13px;border-bottom:2px solid transparent;white-space:nowrap;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3,#a89880);transition:color .15s}.ds-topnav-links a:hover,.ds-topnav-links a.active{color:var(--ink,#ffffff)}.ds-topnav-links a.active{border-color:var(--ochre,#9a6d22)}.ds-topnav a:focus-visible{outline:2px solid var(--accent,#ffffff);outline-offset:3px}"
+    },
+    {
+      "name": "Experience Row",
+      "kind": "card",
+      "refersTo": "list-row",
+      "description": "Flat row between hairlines with dates in a 140px column. No hover state.",
+      "html": "<ol class=\"ds-items\"><li class=\"ds-item\"><div class=\"ds-item-side\">2026</div><div><h3>Ingeniero de IA<span>, Inditex</span></h3><p>Programa de graduados de tecnología.</p></div></li></ol>",
+      "css": ".ds-items{list-style:none;margin:0;padding:0;border-top:1px solid var(--line,#3d2f1e);font-family:Archivo,system-ui,sans-serif;color:var(--ink-2,#d6c7b2)}.ds-item{display:grid;grid-template-columns:140px minmax(0,1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--line,#3d2f1e)}.ds-item-side{font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3,#a89880);padding-top:4px}.ds-item h3{margin:0;font-size:18px;font-weight:600;line-height:1.35;color:var(--ink,#ffffff)}.ds-item h3 span{color:var(--ink-2,#d6c7b2);font-weight:500}.ds-item p{margin:8px 0 0;font-size:15.5px;line-height:1.65}"
+    },
+    {
+      "name": "Project Preview",
+      "kind": "custom",
+      "refersTo": "project-preview",
+      "description": "Full-column 16:9 preview linking straight to the repository, with the text below.",
+      "html": "<article class=\"ds-project\"><a class=\"ds-shot\" href=\"#\"><span></span></a><h3>MonkeyGrab</h3><p>Sistema RAG que funciona en tu propio equipo.</p></article>",
+      "css": ".ds-project{font-family:Archivo,system-ui,sans-serif;color:var(--ink-2,#d6c7b2)}.ds-shot{display:block;overflow:hidden;border:1px solid var(--line,#3d2f1e);background:var(--surface,#2a2015);transition:border-color .2s}.ds-shot span{display:block;aspect-ratio:16/9;background:var(--surface-hover,#33271a);transition:transform .6s cubic-bezier(.16,1,.3,1)}.ds-shot:hover{border-color:var(--earth,#b27d55)}.ds-shot:hover span{transform:scale(1.025)}.ds-project h3{margin:20px 0 0;font-size:24px;font-weight:700;letter-spacing:-.01em;font-stretch:104%;color:var(--ink,#ffffff)}.ds-project p{margin:8px 0 0;font-size:17px;line-height:1.65}"
+    },
+    {
+      "name": "Chat Input",
+      "kind": "input",
+      "refersTo": "input-chat",
+      "description": "Ask row of the CV chat with input and send button.",
+      "html": "<form class=\"ds-ask\"><input placeholder=\"Escribe tu pregunta\"><button type=\"submit\">Enviar</button></form>",
+      "css": ".ds-ask{display:flex;gap:10px;padding:14px 22px;border-top:1px solid var(--line,#3d2f1e);background:var(--surface,#2a2015);font-family:Archivo,system-ui,sans-serif}.ds-ask input{flex:1;min-width:0;border:1px solid var(--line,#3d2f1e);background:var(--bg,#221a10);color:var(--ink,#ffffff);padding:12px 14px;font:inherit;font-size:15.5px;outline:none;transition:border-color .15s}.ds-ask input::placeholder{color:var(--ink-3,#a89880)}.ds-ask input:focus{border-color:var(--accent,#ffffff)}.ds-ask button{border:0;background:var(--accent,#ffffff);color:var(--accent-ink,#221a10);font:inherit;font-weight:600;font-size:15px;padding:0 20px;cursor:pointer;transition:background-color .15s,opacity .15s}.ds-ask button:hover{background:var(--earth,#b27d55)}.ds-ask button:disabled{opacity:.45}"
+    },
+    {
+      "name": "Chat Bubbles",
+      "kind": "custom",
+      "refersTo": "bubble-user",
+      "description": "Visitor and assistant messages in the Ask my CV panel.",
+      "html": "<div class=\"ds-msgs\"><div class=\"ds-msg ds-user\">¿Qué hizo en Auro AI?</div><div class=\"ds-msg ds-bot\">Fue jefe técnico del servidor de un asistente por WhatsApp.</div></div>",
+      "css": ".ds-msgs{display:flex;flex-direction:column;gap:14px;padding:20px 22px;background:var(--surface,#2a2015);border:1px solid var(--line,#3d2f1e);font-family:Archivo,system-ui,sans-serif}.ds-msg{max-width:86%;font-size:15.5px;line-height:1.6}.ds-user{align-self:flex-end;background:var(--accent,#ffffff);color:var(--accent-ink,#221a10);padding:9px 14px}.ds-bot{background:var(--bg,#221a10);border:1px solid var(--line,#3d2f1e);color:var(--ink,#ffffff);padding:10px 14px}"
+    },
+    {
+      "name": "Wave Field",
+      "kind": "custom",
+      "refersTo": "wave-field",
+      "description": "Background signature: irregular 1px rings rising from invisible points, drawn live on a fixed canvas by startWaves(); this snippet is a still frame of the same geometry.",
+      "html": "<svg class=\"ds-waves\" viewBox=\"0 0 600 240\" aria-hidden=\"true\"><path d=\"M190.3 110.0 L189.9 112.6 L189.2 115.2 L188.5 117.6 L187.6 120.1 L186.8 122.5 L186.0 124.9 L185.2 127.3 L184.2 129.8 L183.1 132.1 L181.8 134.4 L180.2 136.5 L178.4 138.4 L176.4 140.1 L174.2 141.6 L172.0 143.0 L169.8 144.3 L167.5 145.6 L165.3 146.9 L162.9 148.1 L160.5 149.2 L158.0 150.1 L155.4 150.8 L152.7 151.1 L150.0 151.0 L147.3 150.7 L144.7 150.0 L142.2 149.3 L139.7 148.4 L137.3 147.5 L134.8 146.6 L132.4 145.7 L130.0 144.6 L127.7 143.4 L125.5 141.9 L123.5 140.2 L121.8 138.2 L120.2 136.1 L118.8 133.9 L117.5 131.7 L116.3 129.4 L115.1 127.2 L113.9 125.0 L112.7 122.7 L111.6 120.3 L110.6 117.8 L109.9 115.3 L109.5 112.7 L109.4 110.0 L109.6 107.4 L110.1 104.7 L110.7 102.2 L111.4 99.7 L112.1 97.1 L112.9 94.6 L113.8 92.1 L114.8 89.7 L116.0 87.3 L117.5 85.0 L119.2 83.0 L121.2 81.2 L123.4 79.6 L125.6 78.3 L128.0 77.1 L130.3 75.9 L132.7 74.8 L135.0 73.8 L137.3 72.7 L139.8 71.8 L142.2 71.0 L144.8 70.4 L147.4 70.1 L150.0 70.1 L152.6 70.4 L155.1 70.9 L157.7 71.5 L160.1 72.2 L162.6 72.9 L165.1 73.5 L167.6 74.3 L170.1 75.2 L172.6 76.2 L174.9 77.6 L177.0 79.2 L179.0 81.0 L180.6 83.1 L182.1 85.4 L183.4 87.7 L184.7 90.0 L185.8 92.3 L187.0 94.7 L188.1 97.1 L189.0 99.5 L189.8 102.1 L190.3 104.7 L190.5 107.3 L190.3 110.0Z\" opacity=\"0.75\"/><path d=\"M247.8 110.0 L247.1 116.4 L246.0 122.6 L244.5 128.8 L242.7 134.8 L240.7 140.8 L238.4 146.6 L236.0 152.4 L233.2 158.0 L230.1 163.5 L226.7 168.8 L222.8 173.8 L218.5 178.5 L213.7 182.6 L208.5 186.3 L203.0 189.4 L197.3 191.9 L191.4 194.0 L185.5 195.6 L179.5 196.9 L173.6 197.9 L167.7 198.8 L161.8 199.6 L155.9 200.3 L150.0 200.9 L144.0 201.4 L137.9 201.6 L131.8 201.5 L125.6 201.0 L119.4 200.0 L113.3 198.5 L107.3 196.6 L101.5 194.1 L95.8 191.1 L90.4 187.7 L85.2 183.9 L80.3 179.7 L75.7 175.2 L71.4 170.3 L67.4 165.2 L63.9 159.7 L60.9 153.9 L58.6 147.9 L56.8 141.6 L55.8 135.2 L55.4 128.8 L55.8 122.4 L56.7 116.1 L58.0 110.0 L59.7 104.1 L61.5 98.4 L63.4 92.8 L65.2 87.3 L67.0 81.8 L68.6 76.3 L70.2 70.7 L71.9 64.9 L73.7 59.0 L75.9 53.1 L78.5 47.3 L81.6 41.6 L85.3 36.2 L89.6 31.3 L94.5 26.9 L99.8 23.1 L105.6 19.9 L111.6 17.4 L117.9 15.5 L124.3 14.1 L130.7 13.2 L137.2 12.8 L143.6 12.8 L150.0 13.2 L156.3 14.0 L162.5 15.3 L168.5 16.9 L174.4 19.0 L180.1 21.5 L185.5 24.3 L190.7 27.5 L195.6 30.9 L200.4 34.6 L205.0 38.3 L209.5 42.2 L213.9 46.1 L218.2 50.1 L222.6 54.3 L226.8 58.7 L231.0 63.2 L234.9 68.1 L238.5 73.4 L241.6 78.9 L244.1 84.8 L246.1 90.9 L247.3 97.2 L247.9 103.6 L247.8 110.0Z\" opacity=\"0.45\"/><path d=\"M308.7 110.0 L306.4 120.3 L304.3 130.3 L302.3 140.3 L300.4 150.3 L298.3 160.4 L295.9 170.4 L292.8 180.4 L288.8 190.1 L283.6 199.3 L277.4 207.7 L270.0 215.3 L261.9 221.9 L253.2 227.6 L244.1 232.7 L235.1 237.3 L226.1 241.8 L217.2 246.3 L208.5 251.2 L199.7 256.4 L190.7 261.8 L181.2 267.1 L171.3 272.0 L160.9 276.1 L150.0 278.9 L138.8 280.1 L127.7 279.6 L116.7 277.2 L106.3 273.2 L96.4 267.9 L87.2 261.5 L78.7 254.6 L70.6 247.5 L62.9 240.4 L55.3 233.4 L47.6 226.7 L39.9 220.1 L32.2 213.3 L24.7 206.2 L17.6 198.5 L11.2 190.1 L5.8 181.1 L1.7 171.4 L-1.2 161.3 L-2.8 151.0 L-3.4 140.5 L-3.3 130.2 L-2.8 120.0 L-2.1 110.0 L-1.7 100.1 L-1.5 90.1 L-1.6 79.8 L-1.8 69.3 L-1.7 58.5 L-1.0 47.5 L0.7 36.4 L3.7 25.6 L8.2 15.3 L14.3 5.9 L21.8 -2.4 L30.5 -9.5 L40.1 -15.3 L50.2 -20.1 L60.4 -24.1 L70.6 -27.5 L80.7 -30.6 L90.5 -33.8 L100.1 -37.0 L109.7 -40.4 L119.4 -43.6 L129.4 -46.6 L139.6 -48.9 L150.0 -50.3 L160.5 -50.4 L171.0 -49.2 L181.1 -46.6 L191.0 -42.8 L200.3 -38.2 L209.2 -32.9 L217.7 -27.3 L226.1 -21.8 L234.5 -16.4 L243.0 -11.2 L251.9 -6.2 L261.1 -1.1 L270.4 4.4 L279.6 10.5 L288.4 17.5 L296.3 25.6 L302.9 34.6 L308.0 44.5 L311.5 55.2 L313.2 66.3 L313.5 77.5 L312.6 88.6 L310.9 99.5 L308.7 110.0Z\" opacity=\"0.2\"/><path d=\"M526.2 190.0 L524.9 193.6 L524.2 197.1 L524.1 200.8 L524.4 204.6 L524.9 208.6 L525.3 212.9 L525.2 217.2 L524.4 221.4 L522.8 225.3 L520.3 228.6 L517.2 231.4 L513.6 233.6 L509.9 235.5 L506.2 237.2 L502.7 238.9 L499.3 240.8 L496.1 243.0 L492.9 245.3 L489.6 247.7 L486.0 249.8 L482.2 251.3 L478.2 252.0 L474.1 251.9 L470.0 250.9 L466.1 249.2 L462.5 247.2 L459.0 245.2 L455.7 243.4 L452.3 242.1 L448.7 241.3 L444.9 241.0 L440.7 240.8 L436.3 240.4 L431.9 239.7 L427.8 238.2 L424.1 235.9 L421.2 232.8 L419.1 229.1 L417.8 224.9 L417.0 220.6 L416.5 216.4 L416.1 212.3 L415.5 208.5 L414.5 204.9 L413.3 201.3 L411.8 197.7 L410.4 193.9 L409.3 190.0 L408.9 186.0 L409.2 182.0 L410.4 178.1 L412.2 174.5 L414.4 171.1 L416.8 168.0 L419.1 164.9 L421.1 161.8 L422.7 158.4 L424.0 154.7 L425.2 150.7 L426.6 146.6 L428.3 142.5 L430.7 138.8 L433.7 135.7 L437.4 133.6 L441.6 132.4 L446.0 132.0 L450.5 132.4 L454.8 133.2 L458.9 133.9 L462.7 134.4 L466.4 134.5 L470.0 134.0 L473.7 133.2 L477.6 132.2 L481.6 131.5 L485.8 131.2 L489.8 131.6 L493.7 132.9 L497.2 134.9 L500.3 137.5 L503.2 140.4 L505.8 143.4 L508.4 146.2 L511.2 148.8 L514.2 151.2 L517.5 153.6 L520.9 156.0 L524.2 158.7 L527.2 161.8 L529.4 165.4 L530.8 169.4 L531.2 173.6 L530.6 177.9 L529.4 182.2 L527.8 186.2 L526.2 190.0Z\" opacity=\"0.65\"/><path d=\"M611.6 190.0 L608.5 199.1 L604.5 207.7 L600.9 216.0 L598.7 224.5 L597.8 233.4 L597.1 242.7 L595.5 251.9 L591.7 260.2 L585.5 267.2 L577.7 272.6 L569.6 277.3 L562.3 282.3 L556.6 288.7 L551.9 296.7 L547.3 305.7 L541.8 314.4 L534.7 321.3 L526.1 325.5 L516.6 327.3 L506.9 327.7 L497.5 328.0 L488.3 329.3 L479.3 331.7 L470.0 334.4 L460.4 336.0 L450.8 335.7 L441.5 333.0 L432.8 328.8 L424.5 323.9 L416.4 319.5 L408.0 315.8 L399.4 312.2 L391.2 308.0 L383.9 302.2 L378.2 294.7 L373.9 286.1 L370.4 277.4 L366.5 269.4 L361.3 262.6 L354.6 256.6 L347.1 250.6 L340.4 243.7 L335.7 235.6 L333.8 226.5 L334.3 217.0 L335.8 207.7 L336.7 198.7 L335.9 190.0 L333.3 181.0 L329.9 171.6 L327.3 161.6 L327.1 151.7 L329.6 142.4 L334.5 133.9 L340.6 126.2 L346.5 118.7 L351.8 111.0 L356.5 102.9 L361.4 94.8 L367.4 87.4 L374.7 81.4 L383.3 77.0 L392.4 73.8 L401.2 70.9 L409.5 67.3 L417.4 62.9 L425.2 58.2 L433.6 54.3 L442.6 52.4 L452.0 52.9 L461.2 55.5 L470.0 58.7 L478.5 60.9 L487.0 61.1 L496.0 59.4 L505.6 57.1 L515.6 55.8 L525.1 56.9 L533.7 60.9 L540.9 67.1 L547.3 74.3 L553.6 81.0 L560.7 86.6 L568.9 91.1 L577.7 95.5 L586.2 100.8 L593.2 107.7 L598.1 116.0 L601.1 125.3 L603.0 134.9 L604.8 144.2 L607.2 153.2 L609.9 162.2 L612.2 171.3 L612.9 180.6 L611.6 190.0Z\" opacity=\"0.3\"/></svg>",
+      "css": ".ds-waves{display:block;width:100%;height:240px;background:var(--bg,#221a10)}.ds-waves path{fill:none;stroke:var(--wave,#4a3820);stroke-width:1;vector-effect:non-scaling-stroke}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Survey Map",
+    "overview": "The site is the category-standard developer portfolio played straight: a sticky identity column on the left, a single reading column on the right, and a ground of earth browns under it like an old survey sheet. The only atmosphere is a quiet field of signals: six invisible points scattered across the page keep sending out thin, slightly wavering brown rings that widen and fade behind everything, like soundings on the sheet. It is deliberately familiar; the system's job is to execute the convention well, not to reinvent it.\n\nDensity is moderate and editorial. Every section opens with a small tracked label followed by a hairline, then prose, a definition list or a stack of flat rows divided by 1px lines. About opens with a large statement and closes with a short Now list. Experience rows put dates in a narrow left column. Projects invert that: each of the four previews spans the full reading column and links straight to its repository, with the title, description and links below it. The \"Ask my CV\" chat sits directly after About so a visitor can ask before they scroll. The work speaks, not the stack: there are no technology tags or technology lists anywhere.\n\nDark is the default: espresso ground, warm beige reading text and white kept for what must stand out. The light theme swaps roles: sand ground, espresso ink, and espresso takes the highlight role that white plays in dark. The choice persists. The world is square, flat and quiet: no gradients, no rounded corners, no shadows, and nothing animates in on load.",
+    "keyCharacteristics": [
+      "Earth browns only, with one highlight (white in dark, espresso in light).",
+      "A background canvas of irregular 1px rings rising from six invisible points, each ring with its own speed, reach and drifting outline.",
+      "Archivo for all text; the name and the contact heading set wide (108%) and heavy (800).",
+      "Flat rows divided by 1px hairlines; no cards at rest.",
+      "Square corners everywhere, including the portrait, chips and chat bubbles.",
+      "Content is static on arrival: no entrance animations."
+    ],
+    "rules": [
+      {
+        "name": "The Earth and White Rule",
+        "body": "Everything is brown. Only the highlight (white in dark, espresso in light) marks what must stand out: the name, headings, strong text, primary actions, active and focused states. No third hue, no loud colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ochre Mark Rule",
+        "body": "Ochre is for small decorative marks only (the 1px portrait outline and the 2px active top bar underline), never for text; at 3.75:1 it is not a reading colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Fill Rule",
+        "body": "There are no gradients anywhere. Colour is a flat fill or a thin line.",
+        "section": "colors"
+      },
+      {
+        "name": "The Wide Heavy Rule",
+        "body": "Width 108% at weight 800 is reserved for the name, its monogram in the top bar and the contact heading. Nothing else goes that wide or that heavy.",
+        "section": "typography"
+      },
+      {
+        "name": "The Label Is the Heading Rule",
+        "body": "The tracked uppercase label is used as the section heading itself, as navigation entries and as data labels (dates, Now terms), never as a tagline above another heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The Top-Grouped Column Rule",
+        "body": "The identity column never distributes its content to fill the viewport height; it reads as one block from the top, with gaps that scale but never stretch into a void.",
+        "section": "layout"
+      },
+      {
+        "name": "The Hairline Depth Rule",
+        "body": "Separation is a 1px line or a one-step tone change, never a shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Moving Ground Rule",
+        "body": "The ring field is the only motion at rest, drawn by script on one canvas rather than animated in CSS. Six invisible emitters sit at random positions chosen on each load; each launches a ring every 2.5 to 6 s, so they never fall into step. Every ring has its own speed (28 to 70 px/s), reach (260 to 820 px) and three sine deformations of its outline (1.2% to 5% each) that drift over time, so no two rings match and none is a true circle. Each is a 1px Wave stroke whose opacity rises over the first eighth of its life and fades to nothing at its reach. The canvas draws at 1:1 pixel resolution at about 30 fps, starts with rings already in flight so the ground is never empty, stops while the tab is hidden, rereads the Wave colour when the theme changes, and uses no filters, shadows or blend modes. Under reduced motion it draws one still frame of rings at scattered sizes and never animates.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the palette to the earth browns in the tokens, with white (dark) or espresso (light) as the only highlight.",
+      "Do use tan for the role line, Now labels and hover states, and ochre only for the portrait outline and the active top bar underline.",
+      "Do define every new colour in both themes in the same change, with dark as the default.",
+      "Do separate content with 1px hairlines and flat rows; keep every corner square.",
+      "Do show each project preview at full column width, linking to its repository, with its text below it.",
+      "Do keep the identity column grouped at the top, scaling its gaps with viewport height.",
+      "Do keep the side index and the top bar driven by the same IntersectionObserver.",
+      "Do animate interface elements only through transform and opacity, and guard every motion behind reduced motion; the ring canvas is the one scripted drawing."
+    ],
+    "donts": [
+      "Don't use gradients of any kind.",
+      "Don't add a hue outside the brown family, a second highlight or a visitor-selectable palette.",
+      "Don't round corners, including chips, bubbles and the portrait; the background rings are the one curved form.",
+      "Don't add drop shadows, blur, backdrop filters or blend modes; the rings stay flat 1px strokes.",
+      "Don't add a second ambient animation, a visible mark at the emitters, or make the rings stronger than a quiet line near the ground tone.",
+      "Don't animate sections or content in on load or on scroll.",
+      "Don't add technology tags or stack lists (suggestion chips in the chat are the only chips); the work speaks, not the stack.",
+      "Don't wrap rows in bordered cards at rest.",
+      "Don't set anything other than the name, its monogram and the contact heading at width 108% and weight 800.",
+      "Don't put a small tracked label above a larger heading as a tagline.",
+      "Don't use ochre for text."
+    ]
+  }
+}

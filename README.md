@@ -22,9 +22,9 @@ This portfolio turns that idea into a practical interface: a professional websit
 - **AI Chat**: Ask anything about Ignacio's background, projects, and skills. The
   assistant answers strictly from the data in the CV
 - **Bilingual**: Full ES / EN support, switchable at any point
-- **Light and dark**: Follows the system preference by default, with a manual toggle
-  that persists
-- **Responsive**: Single-column layout below 760 px, no horizontal scroll
+- **Dark and light**: Dark by default, with a manual toggle that persists
+- **Selected projects**: Four projects with previews and a link to the rest on GitHub
+- **Responsive**: One centered column with a sticky section bar on tablets and phones, checked from 320 px to 1920 px with no horizontal scroll
 - **No dependencies**: No npm, no build step, no external fonts or CDNs. Everything is
   served from the repository
 
@@ -55,15 +55,15 @@ http://localhost:8000
 - `index.html` defines the page shell, sections and metadata (SEO, Open Graph, JSON-LD).
 - `styles.css` contains the full visual design. No preprocessor.
 - `app.js` holds the bilingual content, renders every section and drives the chat.
-- `config.js` is the single source of truth for the assistant context. Editing it changes
-  how the assistant answers.
+- `config.js` is the single source of truth for the assistant context. The server reads it
+  at startup and sends it as the system prompt; restart the server after editing it.
 - `server.py` serves the static files and proxies DeepSeek requests without exposing the
   API key.
 - `resume.pdf` is the CV linked from the page.
 
 ## Security
 
-The DeepSeek API key is never exposed to the browser. Requests go through the Python server, which reads the key from the `DEEPSEEK_API_KEY` environment variable and applies basic rate limiting.
+The DeepSeek API key is never exposed to the browser. Requests go through the Python server, which reads the key from the `DEEPSEEK_API_KEY` environment variable. The server fixes the model, parameters and system prompt, accepts only the conversation from the browser, and rate limits the chat to 6 messages per minute and 40 per day per visitor, with a global cap of 600 per day.
 
 ## License
 
