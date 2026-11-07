@@ -22,7 +22,6 @@ const T = {
     chat_ph: 'Escribe tu pregunta', chat_send: 'Enviar', chat_clear: 'Limpiar',
     chat_note: 'Máximo 6 preguntas por minuto y 40 al día.',
     chat_welcome: 'Hola. Pregúntame por la experiencia, los proyectos o la formación de Ignacio.',
-    chat_suggestions: ['¿Qué hizo en Auro AI?', '¿Qué experiencia tiene en NLP?', '¿Qué es mouseketool?', '¿Qué ha llevado a producción?'],
     chat_limit: 'Has alcanzado el límite de preguntas por ahora. Vuelve a intentarlo más tarde o escribe a nadiva1243@gmail.com.',
     chat_fail: 'No he podido responder ahora mismo. Inténtalo de nuevo en unos segundos.',
     exp: [
@@ -76,7 +75,6 @@ const T = {
     chat_ph: 'Type your question', chat_send: 'Send', chat_clear: 'Clear',
     chat_note: 'Up to 6 questions per minute and 40 per day.',
     chat_welcome: 'Hi. Ask me about Ignacio’s experience, projects or education.',
-    chat_suggestions: ['What did he do at Auro AI?', 'What NLP experience does he have?', 'What is mouseketool?', 'What has he shipped to production?'],
     chat_limit: 'You have reached the question limit for now. Try again later or write to nadiva1243@gmail.com.',
     chat_fail: 'I could not answer right now. Try again in a few seconds.',
     exp: [
@@ -111,7 +109,9 @@ const T = {
   },
 };
 
-const STORAGE_KEY = 'portfolio_chat_history_v3';
+// Se cambia la clave cuando el contexto del asistente cambia: un historial antiguo guardado en el
+// navegador se reenvía al modelo y le hace repetir respuestas desactualizadas.
+const STORAGE_KEY = 'portfolio_chat_history_v4';
 const CHAT_TIMEOUT = 60000;
 
 let lang = localStorage.getItem('lang') === 'en' ? 'en' : 'es';
@@ -201,14 +201,6 @@ function appendMsg(role, content, smooth = false) {
   if (smooth) msgs.scrollTo({ top: msgs.scrollHeight, behavior: motion() });
   else msgs.scrollTop = msgs.scrollHeight;
   return div;
-}
-
-function renderSuggestions(list) {
-  const wrap = $('chatSuggestions');
-  wrap.innerHTML = list.map((s) => `<button type="button" class="sugg-cell" data-text="${esc(s)}">${esc(s)}</button>`).join('');
-  wrap.querySelectorAll('.sugg-cell').forEach((btn) => {
-    btn.addEventListener('click', () => sendMsg(btn.dataset.text || ''));
-  });
 }
 
 function clearChat() {
@@ -414,7 +406,6 @@ function applyLang() {
   $('roleLine').innerHTML = linkOrgs(esc(t.role));
   renderExp(t.exp);
   renderProj(t.proj);
-  renderSuggestions(t.chat_suggestions);
   restoreChat();
 }
 
