@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # GitHub Actions is on by default: it is cheap and avoids keeping
+  # unpatched actions around. To add an ecosystem, copy the block and change
+  # package-ecosystem and directory: npm "/", pip "/", docker "/", cargo "/", etc.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "kind/dependency"
+    commit-message:
+      # ci(deps): ... does not trigger a release on its own.
+      prefix: "ci"
+    open-pull-requests-limit: 5

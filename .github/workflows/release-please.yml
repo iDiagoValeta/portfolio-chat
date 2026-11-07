@@ -1,0 +1,23 @@
+name: release-please
+
+on:
+  push:
+    # In Gitflow this is still main: develop does not release.
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v5
+        with:
+          # simple keeps version.txt and CHANGELOG.md at the root, without an
+          # ecosystem. Alternatives: node, python, rust, go, java...
+          release-type: simple
+          # If the repo grows several packages, use the manifest:
+          # config-file: release-please-config.json
+          # manifest-file: .release-please-manifest.json
