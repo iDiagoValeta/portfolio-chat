@@ -8,14 +8,12 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  actions: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: googleapis/release-please-action@v5
-        id: release
         with:
           # simple keeps version.txt and CHANGELOG.md at the root, without an
           # ecosystem. Alternatives: node, python, rust, go, java...
@@ -23,10 +21,3 @@ jobs:
           # If the repo grows several packages, use the manifest:
           # config-file: release-please-config.json
           # manifest-file: .release-please-manifest.json
-      # A pull request opened with GITHUB_TOKEN starts no workflows, so the
-      # check the ruleset requires would never arrive. Run CI on its branch.
-      - if: ${{ steps.release.outputs.pr }}
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BRANCH: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
-        run: gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$BRANCH"
