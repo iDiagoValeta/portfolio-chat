@@ -4,6 +4,8 @@ on:
   pull_request:
   push:
     branches: [main]
+  # release-please dispatches it on its branch: workflows never start for its pull request
+  workflow_dispatch:
 
 permissions:
   contents: read
