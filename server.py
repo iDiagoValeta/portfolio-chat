@@ -7,13 +7,15 @@ Evita problemas de CORS y mantiene la API key segura en el servidor
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 import json
 import socket
+import urllib.error
 import urllib.request
-import urllib.parse
 import os
+import re
+import threading
 from pathlib import Path
 import time
-from collections import defaultdict
-from datetime import datetime
+from collections import defaultdict, deque
+from datetime import datetime, timezone
 
 # Cargar variables desde un archivo .env local si existe (sin dependencias externas)
 def load_dotenv():
@@ -42,28 +44,86 @@ DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"
 # Configuración de seguridad
 REQUEST_TIMEOUT = 30  # segundos
 MAX_REQUEST_SIZE = 100000  # 100KB
-RATE_LIMIT_REQUESTS = 60  # requests por ventana
-RATE_LIMIT_WINDOW = 60  # segundos
 
-# Rate limiting: {ip: [(timestamp1, timestamp2, ...)]}
-rate_limit_store = defaultdict(list)
+# Límites del chat. Protegen el saldo de la API: el tope global aguanta aunque
+# alguien rote IPs. Viven en memoria, así que un reinicio de Render los pone a cero.
+IP_LIMIT_PER_MINUTE = 6
+IP_LIMIT_PER_DAY = 40
+GLOBAL_LIMIT_PER_DAY = 600
 
-def is_rate_limited(client_ip):
-    """Verifica si una IP ha excedido el límite de requests"""
+# El servidor fija el modelo y los parámetros: el cliente solo aporta la conversación,
+# para que el proxy no sirva de acceso libre a la API con cualquier modelo o prompt.
+MODEL = 'deepseek-v4-flash'
+MAX_MESSAGES = 20
+MAX_USER_CHARS = 2000  # las respuestas del asistente solo las acota MAX_REQUEST_SIZE
+
+def load_system_prompt():
+    """Lee PORTFOLIO_INFO de config.js, que sigue siendo la única fuente del contexto."""
+    source = (Path(__file__).parent / 'config.js').read_text(encoding='utf-8')
+    match = re.search(r'PORTFOLIO_INFO\s*=\s*`(.*?)`', source, re.S)
+    if not match:
+        raise RuntimeError('PORTFOLIO_INFO no encontrado en config.js')
+    return match.group(1)
+
+SYSTEM_PROMPT = load_system_prompt()
+
+rate_lock = threading.Lock()
+ip_requests = defaultdict(deque)  # {ip: deque[timestamp]} de las últimas 24 h
+global_day = {'date': None, 'count': 0}
+
+def check_rate_limit(client_ip):
+    """Devuelve los segundos a esperar si se supera algún límite, o None si se admite."""
     now = time.time()
-    # Limpiar timestamps antiguos
-    rate_limit_store[client_ip] = [
-        ts for ts in rate_limit_store[client_ip]
-        if now - ts < RATE_LIMIT_WINDOW
-    ]
-    
-    # Verificar límite
-    if len(rate_limit_store[client_ip]) >= RATE_LIMIT_REQUESTS:
-        return True
-    
-    # Agregar timestamp actual
-    rate_limit_store[client_ip].append(now)
-    return False
+    today = datetime.now(timezone.utc).date()
+    with rate_lock:
+        if global_day['date'] != today:
+            global_day['date'] = today
+            global_day['count'] = 0
+            # Una vez al día, olvidar IPs sin actividad reciente
+            for ip in [ip for ip, q in ip_requests.items() if not q or now - q[-1] > 86400]:
+                del ip_requests[ip]
+        if global_day['count'] >= GLOBAL_LIMIT_PER_DAY:
+            tomorrow = datetime.combine(today, datetime.min.time(), timezone.utc).timestamp() + 86400
+            return int(tomorrow - now) + 1
+
+        q = ip_requests[client_ip]
+        while q and now - q[0] >= 86400:
+            q.popleft()
+        if len(q) >= IP_LIMIT_PER_DAY:
+            return int(q[0] + 86400 - now) + 1
+        last_minute = [ts for ts in q if now - ts < 60]
+        if len(last_minute) >= IP_LIMIT_PER_MINUTE:
+            return int(last_minute[0] + 60 - now) + 1
+
+        q.append(now)
+        global_day['count'] += 1
+        return None
+
+def build_upstream_request(request_data):
+    """Construye la petición a DeepSeek con la conversación validada del cliente."""
+    messages = request_data.get('messages')
+    if not isinstance(messages, list) or not messages:
+        raise ValueError('Falta la conversación')
+    clean = []
+    for msg in messages[-MAX_MESSAGES:]:
+        if not isinstance(msg, dict) or msg.get('role') not in ('user', 'assistant'):
+            raise ValueError('Mensaje con formato no válido')
+        content = msg.get('content')
+        if not isinstance(content, str) or not content.strip():
+            raise ValueError('Mensaje vacío')
+        if msg['role'] == 'user' and len(content) > MAX_USER_CHARS:
+            raise ValueError('Mensaje demasiado largo')
+        clean.append({'role': msg['role'], 'content': content})
+    if clean[-1]['role'] != 'user':
+        raise ValueError('El último mensaje debe ser del usuario')
+    return {
+        'model': MODEL,
+        'messages': [{'role': 'system', 'content': SYSTEM_PROMPT}, *clean],
+        'temperature': 0.7,
+        'max_tokens': 8192,
+        'reasoning_effort': 'low',
+        'stream': True,
+    }
 
 class CORSRequestHandler(SimpleHTTPRequestHandler):
     extensions_map = {
@@ -124,141 +184,86 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
         else:
             super().do_POST()
 
+    def send_json_error(self, status, message, retry_after=None):
+        self.send_response(status)
+        self.send_header('Content-Type', 'application/json')
+        if retry_after is not None:
+            self.send_header('Retry-After', str(retry_after))
+        self.end_headers()
+        self.wfile.write(json.dumps({"error": {"message": message, "code": status}}).encode('utf-8'))
+
+    def client_ip(self):
+        """IP real del visitante. En Render, Cloudflare la pone en True-Client-IP;
+        X-Forwarded-For solo como respaldo porque el cliente puede falsificarla."""
+        for header in ('True-Client-IP', 'CF-Connecting-IP'):
+            value = (self.headers.get(header) or '').strip()
+            if value:
+                return value
+        forwarded = (self.headers.get('X-Forwarded-For') or '').split(',')[0].strip()
+        return forwarded or self.client_address[0]
+
     def handle_gemini_request(self):
         if not API_KEY:
-            self.send_error(500, "API Key no configurada")
+            self.send_json_error(500, "API Key no configurada")
             return
 
-        # Obtener IP del cliente
-        client_ip = self.client_address[0]
-        
-        # Verificar rate limiting
-        if is_rate_limited(client_ip):
-            self.send_response(429)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            error_response = json.dumps({
-                "error": {
-                    "message": "Demasiadas solicitudes. Por favor, intenta más tarde.",
-                    "code": 429
-                }
-            })
-            self.wfile.write(error_response.encode('utf-8'))
+        client_ip = self.client_ip()
+
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+        except ValueError:
+            content_length = 0
+        if content_length > MAX_REQUEST_SIZE:
+            self.send_json_error(413, f"Request demasiado grande. Máximo: {MAX_REQUEST_SIZE} bytes")
+            return
+        if content_length <= 0:
+            self.send_json_error(400, "Request body vacío")
             return
 
         try:
-            # Leer el cuerpo de la solicitud
-            content_length = int(self.headers.get('Content-Length', 0))
-            
-            # Validar tamaño del request
-            if content_length > MAX_REQUEST_SIZE:
-                self.send_response(413)
-                self.send_header('Content-Type', 'application/json')
-                self.end_headers()
-                error_response = json.dumps({
-                    "error": {
-                        "message": f"Request demasiado grande. Máximo: {MAX_REQUEST_SIZE} bytes",
-                        "code": 413
-                    }
-                })
-                self.wfile.write(error_response.encode('utf-8'))
-                return
-            
-            if content_length == 0:
-                self.send_response(400)
-                self.send_header('Content-Type', 'application/json')
-                self.end_headers()
-                error_response = json.dumps({
-                    "error": {
-                        "message": "Request body vacío",
-                        "code": 400
-                    }
-                })
-                self.wfile.write(error_response.encode('utf-8'))
-                return
-            
-            post_data = self.rfile.read(content_length)
-            
-            # Validar JSON
-            try:
-                request_data = json.loads(post_data.decode('utf-8'))
-            except json.JSONDecodeError as e:
-                self.send_response(400)
-                self.send_header('Content-Type', 'application/json')
-                self.end_headers()
-                error_response = json.dumps({
-                    "error": {
-                        "message": f"JSON inválido: {str(e)}",
-                        "code": 400
-                    }
-                })
-                self.wfile.write(error_response.encode('utf-8'))
-                return
+            request_data = json.loads(self.rfile.read(content_length).decode('utf-8'))
+            if not isinstance(request_data, dict):
+                raise ValueError('Se esperaba un objeto JSON')
+            upstream_body = build_upstream_request(request_data)
+        except (ValueError, UnicodeDecodeError) as e:
+            self.send_json_error(400, f"Petición no válida: {e}")
+            return
 
-            is_stream = bool(request_data.get('stream'))
-            req = urllib.request.Request(DEEPSEEK_API_URL, data=json.dumps(request_data).encode('utf-8'))
-            req.add_header('Content-Type', 'application/json')
-            req.add_header('Authorization', f'Bearer {API_KEY}')
+        retry_after = check_rate_limit(client_ip)
+        if retry_after is not None:
+            self.send_json_error(429, "Demasiadas solicitudes. Por favor, intenta más tarde.", retry_after)
+            return
 
-            try:
-                with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as response:
-                    if is_stream:
-                        # Pass-through del SSE: reenviar los chunks al cliente conforme llegan
-                        self.send_response(200)
-                        self.send_header('Content-Type', 'text/event-stream')
-                        self.send_header('Cache-Control', 'no-cache')
-                        self.send_header('X-Accel-Buffering', 'no')
-                        self.end_headers()
-                        while True:
-                            chunk = response.read(1024)
-                            if not chunk:
-                                break
-                            self.wfile.write(chunk)
-                            self.wfile.flush()
-                    else:
-                        response_data = response.read()
-                        self.send_response(200)
-                        self.send_header('Content-Type', 'application/json')
-                        self.end_headers()
-                        self.wfile.write(response_data)
-            except urllib.error.URLError as e:
-                if 'timeout' in str(e).lower() or 'timed out' in str(e).lower():
-                    self.send_response(504)
-                    self.send_header('Content-Type', 'application/json')
-                    self.end_headers()
-                    error_response = json.dumps({
-                        "error": {
-                            "message": "Timeout al conectar con la API de DeepSeek",
-                            "code": 504
-                        }
-                    })
-                    self.wfile.write(error_response.encode('utf-8'))
-                else:
-                    raise
+        req = urllib.request.Request(DEEPSEEK_API_URL, data=json.dumps(upstream_body).encode('utf-8'))
+        req.add_header('Content-Type', 'application/json')
+        req.add_header('Authorization', f'Bearer {API_KEY}')
 
+        try:
+            with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as response:
+                # Pass-through del SSE: reenviar los chunks al cliente conforme llegan
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/event-stream')
+                self.send_header('Cache-Control', 'no-cache')
+                self.send_header('X-Accel-Buffering', 'no')
+                self.end_headers()
+                while True:
+                    chunk = response.read1(1024)
+                    if not chunk:
+                        break
+                    self.wfile.write(chunk)
+                    self.wfile.flush()
         except urllib.error.HTTPError as e:
-            try:
-                error_body = e.read().decode('utf-8')
-            except:
-                error_body = json.dumps({"error": {"message": str(e), "code": e.code}})
-            self.send_response(e.code)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(error_body.encode('utf-8'))
+            # No reenviar el cuerpo de DeepSeek: puede describir la cuenta o la clave
+            print(f"[ERROR] {datetime.now().isoformat()} - IP: {client_ip} - DeepSeek HTTP {e.code}")
+            self.send_json_error(502, "El servicio de IA no está disponible ahora mismo")
+        except urllib.error.URLError as e:
+            print(f"[ERROR] {datetime.now().isoformat()} - IP: {client_ip} - {e}")
+            self.send_json_error(504, "No se pudo conectar con la API de DeepSeek")
+        except (BrokenPipeError, ConnectionResetError):
+            pass  # El visitante cerró la pestaña a mitad de respuesta
         except Exception as e:
-            # Log del error (sin exponer detalles sensibles)
-            error_msg = str(e)
-            print(f"[ERROR] {datetime.now().isoformat()} - IP: {client_ip} - {error_msg}")
-            self.send_response(500)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            error_response = json.dumps({
-                "error": {
-                    "message": "Error interno del servidor",
-                    "code": 500
-                }
-            })
-            self.wfile.write(error_response.encode('utf-8'))
+            print(f"[ERROR] {datetime.now().isoformat()} - IP: {client_ip} - {e}")
+            self.send_json_error(500, "Error interno del servidor")
 
     def log_message(self, format, *args):
         # Personalizar los logs - evitar errores cuando args[0] no es una cadena
