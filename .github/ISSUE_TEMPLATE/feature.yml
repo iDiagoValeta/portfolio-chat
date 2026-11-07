@@ -1,0 +1,33 @@
+name: Feature
+description: Proposal for functionality or improvement
+title: "[feature] "
+labels: ["kind/feature"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is missing or hurts today. Without proposing the solution yet.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What you want the system to do and how it would be used.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Other options you have considered and why not.
+    validations:
+      required: false
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What is in and what is out. If there is a migration or a break, say so.
+    validations:
+      required: false
