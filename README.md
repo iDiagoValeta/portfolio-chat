@@ -27,11 +27,12 @@ Reviewing a candidate usually means skimming a PDF and guessing how their experi
 
 ```text
 Browser (app.js)
-  -> POST /api/gemini  { messages: [...] }        only the conversation
-     server.py
-       validates roles, length and size (100 KB)
-       rate limits: 6/min and 40/day per visitor, 600/day in total
-       adds model, parameters and the system prompt from config.js
+  -> POST /api/chat  { messages: [...] }          only the conversation
+     portfolio/web.py      HTTP adapter: size cap (100 KB), status codes, SSE pass-through
+     portfolio/chat.py     core: validates roles and length, rate limits
+                           (6/min and 40/day per visitor, 600/day in total)
+     portfolio/ports.py    ChatModel port
+     portfolio/deepseek.py adapter: fixes model and parameters
        -> DeepSeek Chat Completions (stream)
      <- Server-Sent Events, forwarded as they arrive
   <- renders delta.content, ignores reasoning tokens, sanitizes the HTML
@@ -43,7 +44,9 @@ Browser (app.js)
 | `styles.css` | The whole visual system: tokens, layout and responsive rules |
 | `app.js` | Bilingual copy, rendering, the chat client and the wave background |
 | `config.js` | The assistant's knowledge and answering rules (the system prompt) |
-| `server.py` | Static file server and DeepSeek proxy, Python standard library only |
+| `server.py` | Composition root: reads the key and `config.js`, wires the pieces and starts the server |
+| `portfolio/` | Chat backend in ports and adapters: core (`chat.py`), port (`ports.py`), HTTP adapter (`web.py`), DeepSeek adapter (`deepseek.py`). Python standard library only |
+| `tests/` | Core, adapter and architecture-contract tests, with an in-memory chat model |
 | `PRODUCT.md`, `DESIGN.md` | Product context and the design system |
 | `AGENTS.md` | Working rules for coding agents |
 
@@ -52,6 +55,7 @@ Browser (app.js)
 - The DeepSeek key never reaches the browser; the server reads it from `DEEPSEEK_API_KEY`.
 - The server owns the model, the generation parameters and the system prompt. The browser can send user and assistant turns only, so the endpoint cannot be used as open access to the API.
 - Visitors are identified by `True-Client-IP` (set by Cloudflare in front of Render). Limits are kept in memory and reset when the service restarts.
+- Only the site's own files are served (an allow list in `portfolio/web.py`); source code, documentation and `.git` answer 404.
 - Assistant output is rendered through a tag allow list; user text is inserted as plain text.
 
 ## Run locally
@@ -62,6 +66,14 @@ python3 server.py                        # PORT=8001 python3 server.py to change
 ```
 
 Then open <http://localhost:8000>. Without a key the site works and the chat answers with an error.
+
+## Tests
+
+```bash
+python3 -m unittest discover -s tests -t .
+```
+
+They need no key and no network: the chat model is replaced by an in-memory double and DeepSeek by a local fake server. `tests/test_architecture.py` reads `.hexagonal.json` and fails if the core or the port import network, HTTP or adapter code. CI runs them on every pull request.
 
 ## Deployment
 
