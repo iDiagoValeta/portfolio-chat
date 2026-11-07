@@ -11,16 +11,18 @@ A zero-dependency, ultra-fast web portfolio featuring an integrated streaming AI
 
 ### Tech Stack
 - **Frontend**: Semantic HTML5, Vanilla CSS3 (custom property tokens), ES6+ Vanilla JavaScript. No npm packages, no bundlers, no external CDNs.
-- **Backend**: Python 3 standard library proxy HTTP server (`server.py`).
-- **AI Integration**: DeepSeek V4 Flash API (via `/api/gemini` proxy route with SSE streaming).
+- **Backend**: Python 3 standard library, ports and adapters: `server.py` wires the `portfolio/` package.
+- **AI Integration**: DeepSeek V4 Flash API (via the `/api/chat` route with SSE streaming).
 - **Deployment**: Render (`Procfile`).
 
 ### Chat Request Flow
 ```
 Browser (app.js)
-  → POST /api/gemini (Python local server / proxy)
-    → server.py (Validates the conversation, rate-limits, fixes model + params, injects the
-                 system prompt from config.js and DEEPSEEK_API_KEY, 30s timeout)
+  → POST /api/chat
+    → portfolio/web.py (HTTP adapter: 100 KB cap, status codes, SSE pass-through)
+      → portfolio/chat.py (core: validates the conversation, rate-limits, prepends the
+                           system prompt from config.js)
+      → ChatModel port → portfolio/deepseek.py (fixes model + params, DEEPSEEK_API_KEY, 30s timeout)
       → DeepSeek Chat Completions API
         ← text/event-stream (SSE)
     ← Forward SSE chunks transparently
@@ -49,8 +51,11 @@ export DEEPSEEK_API_KEY="your_api_key"
 python3 server.py
 # Example with custom port:
 PORT=8001 python3 server.py
+
+# Tests (no key, no network)
+python3 -m unittest discover -s tests -t .
 ```
-The server serves all static files and handles the API proxy under `http://localhost:<PORT>/`.
+The server serves only the site's own files (allow list in `portfolio/web.py`) and handles the API proxy under `http://localhost:<PORT>/`.
 
 ### Production Deployment
 - Deployed on **Render.com** using the `Procfile`:
@@ -65,7 +70,12 @@ The server serves all static files and handles the API proxy under `http://local
 
 | Path | Purpose & Agent Responsibilities |
 |---|---|
-| `server.py` | Dual-stack HTTP server and DeepSeek proxy. Validates conversations, enforces per-IP and global rate limits, 100 KB request cap and timeouts. Standard library only. |
+| `server.py` | Composition root: loads `.env` and `config.js`, builds the adapters and starts the server. The only place adapters are instantiated. |
+| `portfolio/chat.py` | Core: conversation validation and rate limits. No network, HTTP or adapter imports (enforced by `tests/test_architecture.py` and `.hexagonal.json`). |
+| `portfolio/ports.py` | `ChatModel` port and its errors. |
+| `portfolio/web.py` | Driving adapter: static allow list, `/api/chat`, status codes, dual-stack server. |
+| `portfolio/deepseek.py` | Driven adapter for DeepSeek: fixed model and parameters. |
+| `tests/` | `unittest` suite with in-memory doubles (`tests/fakes.py`); run by `.github/workflows/ci.yml`. |
 | `app.js` | Bilingual text dictionary (`T`), DOM rendering for all sections, theme switching, language toggle, and SSE chat streaming logic. |
 | `config.js` | **Single Source of Truth for AI Context (`PORTFOLIO_INFO`)**. Read by `server.py` at startup and injected as the system prompt (restart the server after editing). Only facts from the CV or from Ignacio's public repositories may enter this file. |
 | `images/projects/` | Project previews: frames captured from each repository's own demo and a screenshot of La Terminal. |

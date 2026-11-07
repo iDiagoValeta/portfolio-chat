@@ -235,7 +235,7 @@ async function requestGemini(userMessage, onToken) {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), CHAT_TIMEOUT);
     try {
-      response = await fetch('/api/gemini', {
+      response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(requestBody),
