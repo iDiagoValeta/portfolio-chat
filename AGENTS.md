@@ -19,12 +19,22 @@ A zero-dependency, ultra-fast web portfolio featuring an integrated streaming AI
 ```
 Browser (app.js)
   → POST /api/gemini (Python local server / proxy)
-    → server.py (Validates, rate-limits 60 req/min/IP, 30s timeout, injects DEEPSEEK_API_KEY)
+    → server.py (Validates the conversation, rate-limits, fixes model + params, injects the
+                 system prompt from config.js and DEEPSEEK_API_KEY, 30s timeout)
       → DeepSeek Chat Completions API
         ← text/event-stream (SSE)
     ← Forward SSE chunks transparently
   ← Client accumulates delta.content (discards delta.reasoning_content)
 ```
+
+The client sends only `{ "messages": [...] }` (user and assistant turns). The server owns the
+model (`deepseek-v4-flash`), the generation parameters and the system prompt, so the proxy can
+never be used as open access to the API.
+
+Rate limits (in memory, reset on restart): 6 messages/min and 40/day per visitor IP, 600/day in
+total. The visitor IP comes from `True-Client-IP` (set by Cloudflare in front of Render), then
+`CF-Connecting-IP`, then the first `X-Forwarded-For` entry. A 429 carries `Retry-After`.
+
 
 ---
 
@@ -55,9 +65,10 @@ The server serves all static files and handles the API proxy under `http://local
 
 | Path | Purpose & Agent Responsibilities |
 |---|---|
-| `server.py` | Dual-stack HTTP server + proxy to DeepSeek API. Enforces rate limiting (60 req/min/IP), request size validation (100 KB), and timeouts. Uses standard library only. |
+| `server.py` | Dual-stack HTTP server and DeepSeek proxy. Validates conversations, enforces per-IP and global rate limits, 100 KB request cap and timeouts. Standard library only. |
 | `app.js` | Bilingual text dictionary (`T`), DOM rendering for all sections, theme switching, language toggle, and SSE chat streaming logic. |
-| `config.js` | **Single Source of Truth for AI Context (`PORTFOLIO_INFO`)**. System prompt sent to DeepSeek. Strict constraint: no information not present in the CV may enter this file. |
+| `config.js` | **Single Source of Truth for AI Context (`PORTFOLIO_INFO`)**. Read by `server.py` at startup and injected as the system prompt (restart the server after editing). Only facts from the CV or from Ignacio's public repositories may enter this file. |
+| `images/projects/` | Project previews: frames captured from each repository's own demo and a screenshot of La Terminal. |
 | `styles.css` | All styling. Pure vanilla CSS tokens, media queries, dark/light definitions. Must increment cache-busting version `?v=N` in `index.html` on change. |
 | `index.html` | Semantic HTML shell, SEO meta tags, Open Graph, Twitter cards, and JSON-LD schema. Section contents are rendered dynamically by `app.js`. |
 | `resume.pdf` | Linked CV document. Syncs with `iDiagoValeta/resume`. |
@@ -67,17 +78,19 @@ The server serves all static files and handles the API proxy under `http://local
 
 ## 4. Universal Agent Guidelines & Invariants
 
-### 1. Zero External Dependencies & No Idle Animation Loops
+### 1. Zero External Dependencies & One Animation Loop
 - **Never add npm dependencies**, package managers, or external CDN scripts/stylesheets/fonts.
-- All fonts are served locally from `fonts/` (`Fira Code`, `Inter`, `Instrument Serif`).
-- **Never introduce continuous `requestAnimationFrame` loops** or permanent canvas rendering cycles for idle elements. All transitions must be event-driven CSS transitions (`:hover`, `:active`, `:focus-visible`).
+- All fonts are served locally from `fonts/`: `Archivo` (variable weight and width) for text and titles, `JetBrains Mono` only for code inside chat answers.
+- No full-viewport `filter: blur()`, `mix-blend-mode`, `backdrop-filter` or fixed overlay layers: they dropped Chrome to ~26 fps on this site.
+- **One animation loop only:** the wave background (`startWaves()` in `app.js`, drawn on `canvas#waves`). It renders at 1:1 resolution and about 30 fps, pauses with the tab hidden and draws a single still frame under `prefers-reduced-motion`. No other `requestAnimationFrame` loops or canvas cycles. Any change to it must keep Chrome at 60 fps with the CPU slowed 4x, including a 2560x1440 retina screen (measure it: a retina-resolution canvas fell to 25 fps there).
+- No gradients, no rounded corners, no loud colours. Flat surfaces and 1px hairlines.
 - Always respect `@media (prefers-reduced-motion: reduce)`.
 
 ### 2. Theme Harmony (Light / Dark)
-- Respect system preference by default (`prefers-color-scheme: dark`) with manual override persisted in `localStorage.dark`.
+- Dark by default (the site's base look); the visitor can switch to light, persisted in `localStorage.dark`.
 - The theme applies via class `.dark` or `.light` on `<html>`.
-- Tokens are declared in `:root` (light), `@media (prefers-color-scheme: dark)` guarded by `:root:not(.light)`, and overridden by `html.dark` and `html.light`.
-- Avatar switches image source dynamically in `applyDark()`.
+- Tokens are declared in `:root` and `html.dark` (dark) and overridden by `html.light`.
+- An inline script in `<head>` applies the class before first paint; `PRODUCT.md` and `DESIGN.md` record the product and the visual system (a component datasheet: one identity, no palette switcher).
 
 ### 3. Bilingual Integrity (ES / EN)
 - All copy lives in the `T` dictionary in `app.js` with `es` and `en` keys.
@@ -85,14 +98,14 @@ The server serves all static files and handles the API proxy under `http://local
 - Adding any text requires updating **both** languages in `T` and adding the corresponding `data-i18n` attribute.
 
 ### 4. Assistant Context & Hallucination Prevention
-- When modifying `config.js`, **never invent skills, companies, dates, or experiences**. All data must match Ignacio's real CV (`resume.pdf`).
+- When modifying `config.js`, **never invent skills, companies, dates, or experiences**. All data must match Ignacio's real CV (`resume.pdf`) or his public repositories.
 - The assistant answers strictly from the CV data and reflects a professional AI Engineer persona.
 
 ### 5. Chat Streaming & SSE
 - The client reads Server-Sent Events (`text/event-stream`).
 - Only `delta.content` is appended to the message bubble.
 - `delta.reasoning_content` (internal thinking tokens) is strictly discarded and never rendered to the user.
-- Typing dots indicator remains visible while `reasoning_content` is being streamed and vanishes once `content` arrives.
+- Typing dots indicator remains visible while `reasoning_content` is being streamed and vanishes once `content` arrives; the amber lamp stays lit until the answer finishes.
 - Rate limit handling: automatic retry with backoff on 429 errors.
 
 ### 6. XSS Sanitization & DOM Safety
