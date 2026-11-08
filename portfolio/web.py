@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import socket
 from datetime import datetime
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -17,7 +18,8 @@ MAX_BODY = 100_000  # 100 KB
 # Solo se sirve lo que forma parte de la web. El resto del repositorio (código, documentación,
 # .git, configuración de agentes) no es público aunque esté en la misma carpeta.
 PUBLIC_FILES = {'/index.html', '/styles.css', '/app.js', '/favicon.svg', '/resume.pdf', '/robots.txt', '/sitemap.txt'}
-PUBLIC_DIRS = ('/fonts/', '/images/')
+PUBLIC_DIRS = ('/fonts/', '/images/', '/videos/')
+RANGE = re.compile(r'bytes=(\d*)-(\d*)')
 
 
 def is_public(path: str) -> bool:
@@ -59,7 +61,46 @@ def make_handler(root: Path, chat_model: ChatModel | None, limiter: RateLimiter,
                 self.send_error(404)
                 return
             self.path = path
+            if self.headers.get('Range'):
+                self.send_range(root / path.lstrip('/'))
+                return
             super().do_GET()
+
+        def send_range(self, file: Path):
+            """Responde 206 con el tramo pedido: Safari no reproduce un MP4 sin esto.
+
+            Solo un tramo por petición; si la cabecera no se entiende se sirve el fichero entero.
+            """
+            match = RANGE.fullmatch(self.headers['Range'].strip())
+            if not match or not file.is_file() or match.groups() == ('', ''):
+                super().do_GET()
+                return
+            size = file.stat().st_size
+            first, last = match.groups()
+            if first:
+                start, end = int(first), min(int(last) if last else size - 1, size - 1)
+            else:
+                start, end = max(size - int(last), 0), size - 1
+            if start > end:
+                self.send_response(416)
+                self.send_header('Content-Range', f'bytes */{size}')
+                self.end_headers()
+                return
+            self.send_response(206)
+            self.send_header('Content-Type', self.guess_type(str(file)))
+            self.send_header('Content-Range', f'bytes {start}-{end}/{size}')
+            self.send_header('Content-Length', str(end - start + 1))
+            self.send_header('Accept-Ranges', 'bytes')
+            self.end_headers()
+            with file.open('rb') as f:
+                f.seek(start)
+                remaining = end - start + 1
+                try:
+                    while remaining and (chunk := f.read(min(65536, remaining))):
+                        self.wfile.write(chunk)
+                        remaining -= len(chunk)
+                except (BrokenPipeError, ConnectionResetError):
+                    pass  # el navegador corta los tramos que ya no necesita
 
         def do_HEAD(self):
             path = self.public_path()

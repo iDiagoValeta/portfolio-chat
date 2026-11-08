@@ -37,16 +37,16 @@ const T = {
         desc: 'Formación personalizada en matemáticas, física y dibujo técnico para secundaria y bachillerato.' },
     ],
     proj: [
-      { t: 'MonkeyGrab', img: 'images/projects/monkeygrab.jpg', alt: 'Respuesta de MonkeyGrab citando el documento y la página de origen',
+      { t: 'MonkeyGrab', img: 'images/projects/monkeygrab.jpg', video: 'videos/monkeygrab.mp4', alt: 'Respuesta de MonkeyGrab citando el documento y la página de origen',
         d: 'Un NotebookLM de código abierto que funciona en local: consulta tus documentos con modelos abiertos sin que ningún dato salga de tu equipo. Genera resúmenes, esquemas y tests, entiende texto e imágenes en castellano, inglés y valenciano, y combina hybrid search con reranking. Trabajo de fin de grado.',
         links: [['Código', 'https://github.com/iDiagoValeta/localOllamaRAG'], ['Memoria del TFG', 'https://github.com/iDiagoValeta/academic-monkeygrab']] },
-      { t: 'mouseketool', img: 'images/projects/mouseketool.jpg', alt: 'Veredicto de mouseketool con ventajas e inconvenientes de cada candidato',
+      { t: 'mouseketool', img: 'images/projects/mouseketool.jpg', video: 'videos/mouseketool.mp4', alt: 'Veredicto de mouseketool con ventajas e inconvenientes de cada candidato',
         d: 'Antes de construir, comprueba si ya existe. Un MCP server y una Agent Skill que localizan proyectos open source en GitHub, revisan su código y emiten un veredicto: reutilizar, adaptar, partir de uno o construir desde cero.',
         links: [['Código', 'https://github.com/iDiagoValeta/mouseketool']] },
-      { t: 'La Terminal', img: 'images/projects/la-terminal.jpg', alt: 'Portada de La Terminal',
+      { t: 'La Terminal', img: 'images/projects/la-terminal.jpg', video: 'videos/la-terminal.mp4', alt: 'Portada de La Terminal',
         d: 'Publicación tecnológica en español generada de forma autónoma cada día: un pipeline de LLMs recopila fuentes, elimina duplicados, selecciona y redacta las noticias, y las publica sin servidor ni base de datos.',
         links: [['Web', 'https://idiagovaleta.github.io/automated-news/'], ['Código', 'https://github.com/iDiagoValeta/automated-news']] },
-      { t: 'jev-decision-gate', img: 'images/projects/jev-decision-gate.jpg', alt: 'jev-decision-gate bloqueando una acción irreversible',
+      { t: 'jev-decision-gate', img: 'images/projects/jev-decision-gate.jpg', video: 'videos/jev-decision-gate.mp4', alt: 'jev-decision-gate bloqueando una acción irreversible',
         d: 'Permission gate para coding agents: bloquea acciones irreversibles antes de su ejecución, aprueba automáticamente el trabajo rutinario y solo escala a una persona cuando es necesario. Incluye una variante que decide con un modelo local.',
         links: [['Código', 'https://github.com/iDiagoValeta/jev-decision-gate'], ['Variante local', 'https://github.com/iDiagoValeta/ollaya-decision-gate']] },
     ],
@@ -90,16 +90,16 @@ const T = {
         desc: 'Personalised tuition in mathematics, physics and technical drawing for secondary and pre-university students.' },
     ],
     proj: [
-      { t: 'MonkeyGrab', img: 'images/projects/monkeygrab.jpg', alt: 'A MonkeyGrab answer citing the source document and page',
+      { t: 'MonkeyGrab', img: 'images/projects/monkeygrab.jpg', video: 'videos/monkeygrab.mp4', alt: 'A MonkeyGrab answer citing the source document and page',
         d: 'An open source, local NotebookLM: query your documents with open models without any data leaving your machine. It generates summaries, outlines and quizzes, understands text and images in Spanish, English and Valencian, and combines hybrid search with reranking. Final degree project.',
         links: [['Code', 'https://github.com/iDiagoValeta/localOllamaRAG'], ['Thesis', 'https://github.com/iDiagoValeta/academic-monkeygrab']] },
-      { t: 'mouseketool', img: 'images/projects/mouseketool.jpg', alt: 'A mouseketool verdict with pros and cons per candidate',
+      { t: 'mouseketool', img: 'images/projects/mouseketool.jpg', video: 'videos/mouseketool.mp4', alt: 'A mouseketool verdict with pros and cons per candidate',
         d: 'Before you build it, check it exists. An MCP server and Agent Skill that find open source projects on GitHub, review their code and deliver a verdict: reuse, adapt, use as a base or build from scratch.',
         links: [['Code', 'https://github.com/iDiagoValeta/mouseketool']] },
-      { t: 'La Terminal', img: 'images/projects/la-terminal.jpg', alt: 'La Terminal front page',
+      { t: 'La Terminal', img: 'images/projects/la-terminal.jpg', video: 'videos/la-terminal.mp4', alt: 'La Terminal front page',
         d: 'A Spanish tech publication generated autonomously every day: an LLM pipeline collects sources, removes duplicates, curates and writes the stories, and publishes them with no server or database.',
         links: [['Website', 'https://idiagovaleta.github.io/automated-news/'], ['Code', 'https://github.com/iDiagoValeta/automated-news']] },
-      { t: 'jev-decision-gate', img: 'images/projects/jev-decision-gate.jpg', alt: 'jev-decision-gate blocking an irreversible action',
+      { t: 'jev-decision-gate', img: 'images/projects/jev-decision-gate.jpg', video: 'videos/jev-decision-gate.mp4', alt: 'jev-decision-gate blocking an irreversible action',
         d: 'A permission gate for coding agents: blocks irreversible actions before they run, auto-approves routine work and only escalates to a human when it matters. Includes a variant that decides with a local model.',
         links: [['Code', 'https://github.com/iDiagoValeta/jev-decision-gate'], ['Local variant', 'https://github.com/iDiagoValeta/ollaya-decision-gate']] },
     ],
@@ -365,15 +365,26 @@ function renderExp(list) {
     </li>`).join('');
 }
 
+// Los vídeos de los proyectos solo se descargan y reproducen mientras se ven, y solo el más
+// visible: dos a la vez bajaban Chrome a 30 fps en pantallas retina. Con reduced motion se
+// queda el fotograma fijo (poster) y no se descarga nada.
+const videoRatios = new Map();
+const videoObserver = 'IntersectionObserver' in window && new IntersectionObserver((entries) => {
+  entries.forEach(({ target, intersectionRatio }) => videoRatios.set(target, intersectionRatio));
+  const [top] = [...videoRatios].filter(([v, r]) => v.isConnected && r >= 0.25).sort((a, b) => b[1] - a[1]);
+  videoRatios.forEach((_r, v) => { if (v !== top?.[0]) v.pause(); });
+  top?.[0].play().catch(() => {});
+}, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+
 function renderProj(list) {
-  // La captura ocupa todo el ancho y lleva directamente al repositorio del proyecto.
+  // El vídeo ocupa todo el ancho y lleva directamente al repositorio del proyecto.
   $('projList').innerHTML = list.map((p) => {
     const main = p.links[0]?.[1];
     const code = (p.links.find(([l]) => l === 'Código' || l === 'Code') || p.links[0])[1];
     return `
     <li class="project">
       <a class="shot" href="${esc(code)}" target="_blank" rel="noopener" aria-label="${esc(p.t)}">
-        <img src="${esc(p.img)}" alt="${esc(p.alt)}" width="880" height="495" loading="lazy" decoding="async">
+        <video src="${esc(p.video)}" poster="${esc(p.img)}" aria-label="${esc(p.alt)}" width="880" height="495" muted loop playsinline preload="none"></video>
       </a>
       <div class="project-body">
         <h3>${main ? `<a href="${esc(main)}"${external(main)}>${esc(p.t)}</a>` : esc(p.t)}</h3>
@@ -382,6 +393,10 @@ function renderProj(list) {
       </div>
     </li>`;
   }).join('');
+  if (!videoObserver || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  videoObserver.disconnect();
+  videoRatios.clear();
+  $('projList').querySelectorAll('video').forEach((v) => { v.muted = true; videoObserver.observe(v); });
 }
 
 

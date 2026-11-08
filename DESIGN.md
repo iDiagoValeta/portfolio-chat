@@ -262,7 +262,7 @@ In the chat only: warm beige 13.5px text with a Line border, 7px by 13px, 8px ap
 - **Continuation links:** text in the highlight colour at weight 600 with a Line underline and a small square-capped arrow, after experience (full CV) and projects (GitHub). Hover turns text and underline tan. Inline project links follow the same treatment at 14.5px.
 
 ### Project preview
-A full-column 16:9 screenshot aligned top left inside a 1px Line frame on the surface colour. The preview links straight to the project's repository. Hover turns the frame tan and zooms the image to 1.025 over 0.6s (only without reduced motion). Title, description and links follow below; the preview always comes first.
+A full-column 16:9 muted video loop of the project's own demo, aligned top left inside a 1px Line frame on the surface colour. Only the most visible preview plays; the rest wait on a still frame (the poster), which is also all a reduced-motion visitor sees. The preview links straight to the project's repository. Hover turns the frame tan and zooms the video to 1.025 over 0.6s (only without reduced motion). Title, description and links follow below; the preview always comes first.
 
 ### Inputs / Fields
 - **Style:** the chat input sits on the ground colour with a Line border, 12px by 14px padding, 15.5px text, dust placeholder.
