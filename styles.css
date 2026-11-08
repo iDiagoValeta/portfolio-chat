@@ -209,7 +209,7 @@ h2.contact-big::after{content:none}
 .chat-title{font-weight:600;color:var(--ink)}
 .chat-lead{font-size:14.5px;color:var(--ink-3);margin-top:2px}
 
-.msgs{height:clamp(380px,56vh,600px);overflow-y:auto;padding:20px 22px;display:flex;flex-direction:column;gap:14px;scrollbar-width:thin;overscroll-behavior:contain}
+.msgs{height:clamp(380px,56vh,600px);overflow-y:auto;padding:20px 22px;display:flex;flex-direction:column;gap:14px;scrollbar-width:thin}
 .msg{max-width:86%}
 .msg-user{align-self:flex-end}
 .msg-body{font-size:15.5px;line-height:1.6;overflow-wrap:anywhere}
