@@ -78,7 +78,8 @@ The server serves only the site's own files (allow list in `portfolio/web.py`) a
 | `tests/` | `unittest` suite with in-memory doubles (`tests/fakes.py`); run by `.github/workflows/ci.yml`. |
 | `app.js` | Bilingual text dictionary (`T`), DOM rendering for all sections, theme switching, language toggle, and SSE chat streaming logic. |
 | `config.js` | **Single Source of Truth for AI Context (`PORTFOLIO_INFO`)**. Read by `server.py` at startup and injected as the system prompt (restart the server after editing). Only facts from the CV or from Ignacio's public repositories may enter this file. |
-| `images/projects/` | Project previews: frames captured from each repository's own demo and a screenshot of La Terminal. |
+| `videos/` | Project previews: short muted H.264 loops cut from each repository's own demo and a recorded tour of La Terminal (under 1.5 MB each, `+faststart`). |
+| `images/projects/` | Still frame of each project, used as the video poster and as the whole preview under reduced motion. |
 | `styles.css` | All styling. Pure vanilla CSS tokens, media queries, dark/light definitions. Must increment cache-busting version `?v=N` in `index.html` on change. |
 | `index.html` | Semantic HTML shell, SEO meta tags, Open Graph, Twitter cards, and JSON-LD schema. Section contents are rendered dynamically by `app.js`. |
 | `resume.pdf` | Linked CV document. Syncs with `iDiagoValeta/resume`. |
@@ -93,6 +94,7 @@ The server serves only the site's own files (allow list in `portfolio/web.py`) a
 - All fonts are served locally from `fonts/`: `Archivo` (variable weight and width) for text and titles, `JetBrains Mono` only for code inside chat answers.
 - No full-viewport `filter: blur()`, `mix-blend-mode`, `backdrop-filter` or fixed overlay layers: they dropped Chrome to ~26 fps on this site.
 - **One animation loop only:** the wave background (`startWaves()` in `app.js`, drawn on `canvas#waves`). It renders at 1:1 resolution and about 30 fps, pauses with the tab hidden and draws a single still frame under `prefers-reduced-motion`. No other `requestAnimationFrame` loops or canvas cycles. Any change to it must keep Chrome at 60 fps with the CPU slowed 4x, including a 2560x1440 retina screen (measure it: a retina-resolution canvas fell to 25 fps there).
+- **Project videos** are not loops of ours: they load (`preload="none"`) and play only while visible, one at a time (the most visible card), and never under reduced motion, where the poster stays. Two playing at once dropped Chrome to 30 fps on a retina screen with the CPU slowed 4x. The server answers `Range` requests with 206, which Safari needs to play MP4.
 - No gradients, no rounded corners, no loud colours. Flat surfaces and 1px hairlines.
 - Always respect `@media (prefers-reduced-motion: reduce)`.
 

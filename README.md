@@ -16,7 +16,7 @@ Reviewing a candidate usually means skimming a PDF and guessing how their experi
 ## Features
 
 - **Ask my CV**: a streaming chat grounded in `config.js`. It maps experience to job requirements, answers behavioural questions with real cases and declines to guess salary, availability or anything it does not know.
-- **Selected work**: four projects whose previews link straight to their repositories.
+- **Selected work**: four projects shown as short video loops of their own demos, each linking straight to its repository.
 - **Bilingual**: Spanish and English, switchable at any time.
 - **Dark and light themes**: dark by default, with a persisted toggle.
 - **Responsive**: checked from 320 px to 1920 px with no horizontal overflow.

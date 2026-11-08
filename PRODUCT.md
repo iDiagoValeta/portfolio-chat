@@ -47,7 +47,7 @@ The CV is something you talk to. The assistant answers only from the real CV dat
 - Portrait: `images/ignacio-diago-valeta.jpg`.
 - CV: `resume.pdf`.
 - Experience, projects and education copy in the `T` dictionary in `app.js`, mirrored in `config.js`.
-- Real projects with public repositories; the site features MonkeyGrab, mouseketool, La Terminal (with a live site) and jev-decision-gate, with previews in `images/projects/`.
+- Real projects with public repositories; the site features MonkeyGrab, mouseketool, La Terminal (with a live site) and jev-decision-gate, with video previews in `videos/` and still posters in `images/projects/`.
 - No testimonials, metrics dashboards or client logos exist; none may be invented.
 
 ## Product Principles
