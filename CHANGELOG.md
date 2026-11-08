@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/iDiagoValeta/portfolio-chat/compare/v1.0.0...v1.1.0) (2026-11-08)
+
+
+### Features
+
+* **projects:** show each project as a short video of its demo ([#14](https://github.com/iDiagoValeta/portfolio-chat/issues/14)) ([c1557a4](https://github.com/iDiagoValeta/portfolio-chat/commit/c1557a49a585b6771ccbd272898313c0a9359fa5))
+
+
+### Bug Fixes
+
+* **chat:** let the page scroll past the chat ([#17](https://github.com/iDiagoValeta/portfolio-chat/issues/17)) ([999e015](https://github.com/iDiagoValeta/portfolio-chat/commit/999e01511e4309f42101307c9d87fba66870ab13))
+
 ## 1.0.0 (2026-11-07)
 
 
