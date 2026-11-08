@@ -48,9 +48,31 @@ class WebTest(unittest.TestCase):
 
     def test_serves_the_site(self):
         self.start(FakeChatModel())
-        for path in ('/', '/index.html', '/styles.css', '/app.js', '/images/ignacio-diago-valeta.jpg', '/fonts/archivo.woff2'):
+        for path in ('/', '/index.html', '/styles.css', '/app.js', '/images/ignacio-diago-valeta.jpg', '/fonts/archivo.woff2', '/videos/la-terminal.mp4'):
             with self.subTest(path=path):
                 self.assertEqual(self.get(path)[0], 200)
+
+    def test_serves_byte_ranges_for_videos(self):
+        # Safari only plays MP4 when the server answers Range requests with 206
+        self.start(FakeChatModel())
+        video = ROOT / 'videos' / 'monkeygrab.mp4'
+        size = video.stat().st_size
+        cases = [('bytes=0-1', 0, 1), ('bytes=100-', 100, size - 1), ('bytes=-50', size - 50, size - 1), (f'bytes=10-{size + 99}', 10, size - 1)]
+        for header, start, end in cases:
+            with self.subTest(header=header):
+                request = urllib.request.Request(self.base + '/videos/monkeygrab.mp4', headers={'Range': header})
+                with urllib.request.urlopen(request) as response:
+                    self.assertEqual(response.status, 206)
+                    self.assertEqual(response.headers['Content-Range'], f'bytes {start}-{end}/{size}')
+                    self.assertEqual(response.headers['Content-Type'], 'video/mp4')
+                    self.assertEqual(response.read(), video.read_bytes()[start:end + 1])
+
+    def test_rejects_unsatisfiable_ranges(self):
+        self.start(FakeChatModel())
+        request = urllib.request.Request(self.base + '/videos/monkeygrab.mp4', headers={'Range': 'bytes=999999999-'})
+        with self.assertRaises(urllib.error.HTTPError) as ctx:
+            urllib.request.urlopen(request)
+        self.assertEqual(ctx.exception.code, 416)
 
     def test_does_not_serve_the_rest_of_the_repository(self):
         self.start(FakeChatModel())
