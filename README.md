@@ -2,6 +2,8 @@
 
 Personal portfolio of Ignacio Diago Valeta, AI Engineer at Inditex, with an assistant that answers recruiters' questions straight from his CV.
 
+> **Context.** Started in November 2025 as a personal project, when I was working at Grupo CEU while finishing my degree, and kept alive since: it was rebuilt in 2026 into a dependency-free site with a ports and adapters Python backend, tests, CI and releases, the way I build tools now with coding agents (Claude Code, opencode).
+
 - **Live site:** [portfolio-chat-aouj.onrender.com](https://portfolio-chat-aouj.onrender.com/)
 - **CV:** [resume.pdf](resume.pdf)
 - **LinkedIn:** [Ignacio Diago Valeta](https://www.linkedin.com/in/ignacio-diago-valeta-1234567891011121314/)
